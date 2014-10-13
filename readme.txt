@@ -1,4 +1,4 @@
-=== Postmatic ===
+=== Postmatic - WordPress Subscriptions & Commenting by Email ===
 Contributors: vernalcreative
 Tags: email, subscription, comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, fantasticallyamazing
 Requires at least: 3.9
