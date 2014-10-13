@@ -1,0 +1,124 @@
+.add-on-group {
+  overflow: hidden; }
+  .add-on-group .add-on {
+    float: left;
+    width: 250px;
+    margin: 20px;
+    padding: 20px;
+    background: white; }
+    .add-on-group .add-on .ui-icon {
+      float: left; }
+
+.ui-widget-header, .ui-widget-content {
+  padding: 10px;
+  border: none;
+  color: #fff;
+  font-weight: normal; }
+
+#prompt-sidebar .ui-widget-header {
+  background: #f3f3f3 !important;
+  font-weight: normal;
+  border: none;
+  border-bottom: 1px solid #ddd !important; }
+
+.ui-widget-content {
+  border: none !important;
+  margin-bottom: 30px !important; }
+
+#prompt-sidebar {
+  width: 20%;
+  min-width: 200px;
+  margin-top: 36px;
+  float: right;
+  margin-left: 10px; }
+  #prompt-sidebar .ui-widget {
+    margin-bottom: 10px; }
+
+.ui-tabs-nav > .ui-state-default a {
+  border-color: #35bfc6 !important;
+  background: #35bfc6 !important; }
+
+.ui-tabs-nav > .ui-state-hover a {
+  border-color: #35bfc6 !important;
+  background: #35bfc6 !important; }
+
+.prompt-news small {
+  display: block; }
+
+#prompt-tabs {
+  overflow: hidden;
+  margin-right: 21%;
+  min-width: 400px; }
+
+#adminmenuback {
+  z-index: auto; }
+
+#prompt-settings-invite textarea {
+  width: 90%; }
+#prompt-settings-invite tr.recipient-type label {
+  display: block; }
+
+.recipient-count {
+  font-weight: bold; }
+
+h2#prompt-settings-header {
+  background: white url(../media/postmatic.png) no-repeat top left;
+  background-size: 210px;
+  height: 65px;
+  margin-bottom: 10px;
+  margin-top: 30px; }
+
+h2#prompt-settings-header span {
+  display: none; }
+
+.opt-in {
+  margin: 90px -25px -97px -25px;
+  padding: 10px 15px 90px 22px;
+  border-left: 5px solid #ddd;
+  border-right: 5px solid #ddd;
+  background: white;
+  background: -moz-linear-gradient(90deg, white 41%, #dbe9e9 93%);
+  background: -webkit-linear-gradient(90deg, white 41%, #dbe9e9 93%);
+  background: -o-linear-gradient(90deg, white 41%, #dbe9e9 93%);
+  background: -ms-linear-gradient(90deg, white 41%, #dbe9e9 93%);
+  background: linear-gradient(180deg, white 41%, #dbe9e9 93%); }
+
+.opt-in h3 {
+  color: #4783b3;
+  font-weight: normal;
+  font-size: 200%; }
+
+.wrap.signup {
+  background: #29bfc7 url(../media/background.png) no-repeat bottom;
+  background-width: 100%; }
+  .wrap.signup a {
+    color: #fff; }
+  .wrap.signup table, .wrap.signup .description {
+    color: #fff; }
+  .wrap.signup h2 {
+    border-bottom: 1px solid #fff; }
+  .wrap.signup h2, .wrap.signup label, .wrap.signup th {
+    color: #fff; }
+  .wrap.signup th {
+    width: 75px;
+    display: block;
+    float: left; }
+  .wrap.signup .form-table tr {
+    display: block;
+    float: left;
+    width: 38%;
+    margin-right: 3%; }
+  .wrap.signup .form-table td {
+    width: 100%; }
+
+.get-prompt-key {
+  padding: 25px 50px; }
+
+input.regular-text {
+  width: 100%; }
+
+.initialize-key {
+  padding: 0 50px 40px 50px; }
+
+.initialize-key td, .initialize-key tr {
+  width: 100% !important; }
