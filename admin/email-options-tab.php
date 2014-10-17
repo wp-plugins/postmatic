@@ -117,6 +117,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 						array(
 							'type' => 'text',
 							'name' => 'test_email_address',
+							'value' => wp_get_current_user()->user_email,
 						),
 						$_POST
 					),

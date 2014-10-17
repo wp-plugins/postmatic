@@ -62,7 +62,7 @@ class Prompt_Core {
 		add_action( 'personal_options_update', array( 'Prompt_User_Handling', 'update_profile_options' ) );
 
 		add_action( 'comment_form', array( 'Prompt_Comment_Form_Handling', 'form_content' ) );
-		add_action( 'comment_post', array( 'Prompt_Comment_Form_Handling', 'handle_form' ) );
+		add_action( 'comment_post', array( 'Prompt_Comment_Form_Handling', 'handle_form' ), 10, 2 );
 		add_action( 'comment_form_after', array( 'Prompt_Comment_Form_Handling', 'after_form' ) );
 
 		add_image_size( 'prompt-post-featured', 1480, 600, true );
@@ -83,7 +83,7 @@ class Prompt_Core {
 			'send_login_info' => false,
 			'email_header_type' => 'text',
 			'email_header_image' => 0,
-			'email_header_text' => '',
+			'email_header_text' => get_option( 'blogname' ),
 			'plan' => '',
 			'email_transport' => Prompt_Enum_Email_Transports::API,
 			'messages' => array( 'welcome' => __( 'Welcome!', 'Prompt_Core' ) ),

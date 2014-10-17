@@ -209,7 +209,7 @@
 
     blockquote { background:#eee;border:1px solid #ddd;padding:5%;font-style: italic;}
 
-    .alert {color: #C20E0E; background: #FFFEBA; padding: 2px;}
+    .alert {color: green; background: #FFFEBA; padding: 2px;}
     /* ---------------------------------------------------
         RESPONSIVENESS
         Nuke it from orbit. It's the only way to be sure.
@@ -354,11 +354,13 @@
             <td class="credit">
               <p>Sent from <unsubscribe><a href="<?php bloginfo( 'url' ); ?>"><?php bloginfo( 'name' ); ?></a></unsubscribe>.
               <?php if ( '' == Prompt_Core::$options->get( 'plan' ) ) : ?>
-              Delivered by <a href="http://gopostmatic.com">Postmatic</a>.
+              Delivered by <a href="http://gopostmatic.com/?utm_source=footer&utm_medium=email&utm_campaign=pluginfooter
+">Postmatic</a>.
               <?php endif; ?>
                 <h3>About Postmatic (Beta)</h3>
               <p style="margin-bottom: 15px;">Postmatic sends your posts to your readers where they’re comfortable: their inbox. They can send comments back by hitting the reply button. Just like you can  with this very email.
-              We’re currently in public beta. <a href="http://gopostmatic.com">Sign Up</a> Thanks for being a willing test pilot! <a href="https://vernal.typeform.com/to/lehwGc">Share your thoughts in this short survey.</a></p>
+              We’re currently in public beta. <a href="http://gopostmatic.com/?utm_source=footer&utm_medium=email&utm_campaign=pluginfooter
+">Sign Up</a> Thanks for being a willing test pilot! <a href="https://vernal.typeform.com/to/lehwGc">Share your thoughts in this short survey.</a></p>
 
               </p>
             </td>

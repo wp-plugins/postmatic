@@ -17,7 +17,7 @@ class Prompt_Admin_Core_Options_Tab extends Prompt_Admin_Options_Tab {
 				'title' => __( 'Author Subscriptions', 'Prompt_Core' ),
 				'type' => 'checkbox',
 				'name' => 'auto_subscribe_authors',
-				'desc' => __( 'Subscribe authors to comments on their own posts.', 'Prompt_Core' ),
+				'desc' => __( 'Subscribe authors to comments on their own posts.<small>(Recommended)</small>', 'Prompt_Core' ),
 			),
 			array(
 				'title' => __( 'User Accounts', 'Prompt_Core' ),

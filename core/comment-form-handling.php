@@ -13,11 +13,12 @@ class Prompt_Comment_Form_Handling {
 	 *
 	 * Called by the comment_post action.
 	 *
-	 * @param $comment_id
+	 * @param int $comment_id
+	 * @param string $status
 	 */
-	public static function handle_form( $comment_id ) {
+	public static function handle_form( $comment_id, $status ) {
 
-		if ( !Prompt_Core::$options->get( 'augment_comment_form' ) )
+		if ( !Prompt_Core::$options->get( 'augment_comment_form' ) or '1' != $status )
 			return;
 
 		$comment = get_comment( $comment_id );
@@ -69,7 +70,7 @@ class Prompt_Comment_Form_Handling {
 	 */
 	public static function form_content( $post_id ) {
 
-		if ( !Prompt_Core::$options->get( 'augment_comment_form' ) )
+		if ( !Prompt_Core::$options->get( 'prompt_key' ) or !Prompt_Core::$options->get( 'augment_comment_form' ) )
 			return;
 
 		$script = new Prompt_Script( array(

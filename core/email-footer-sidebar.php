@@ -6,7 +6,7 @@ class Prompt_Email_Footer_Sidebar {
 
 	public static function register() {
 		register_sidebar( array(
-			'name' => 'Email Footer',
+			'name' => 'Postmatic Emails Footer',
 			'id' => self::SIDEBAR_ID,
 			'description' => __(
 				'These widgets will be included in the footer of Postmatic subscription emails. Need inspiration? ' .
