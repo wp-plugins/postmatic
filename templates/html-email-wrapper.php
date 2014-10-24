@@ -281,7 +281,7 @@
     .body-wrap { padding: 10px !imporant;}
     .container { padding: 15px !imporant;}
     #content img {float: none !important; margin: 10px auto !important;}
-    #content img.avatar {float: left !important; margin: 0 10px 0 0 !important;}
+    #content img.avatar, #content img.reply-icon {float: left !important; margin: 0 10px 0 0 !important;}
     .gallery br {display:none !important; clear: none !important;}
     .gallery-item {margin: 5px auto !important; float: none !important; display: block !important; width: 100% !important; text-align: center !important;}
     .gallery-item img {margin: 0 auto !important; display: block !important;}
