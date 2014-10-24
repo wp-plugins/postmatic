@@ -1,4 +1,4 @@
-=== Postmatic - WordPress Subscriptions & Commenting by Email ===
+=== Postmatic - WordPress Subscriptions & Comments by Email ===
 Contributors: vernalcreative
 Tags: email, subscription, comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, fantasticallyamazing
 Requires at least: 3.9
@@ -7,7 +7,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
-Postmatic lets your readers subscribe to comments or new posts by email. And leave a comment by simply hitting reply. No forms. No browsers. Email.
+Postmatic lets your readers subscribe to comments or new posts by email. And leave a comment by simply hitting reply. No forms. No browsers. Easy.
 
 == Description ==
 [vimeo http://vimeo.com/108515948]
@@ -69,3 +69,15 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 7. The invitation system is fantastic. Postmatic will send invitations to an imported list or let you choose from your existing community. Users can reply to the invitation to subscribe to your site.
 8. A closeup of the invitation system. You can choose to send invites to an imported list, people who have commented recently, commented the most, or anyone that has ever commented.
 9. Using the invitation system to send invites to the most active commenters.
+
+== Changelog ==
+
+= 1.0 beta 3 =
+- Toned down the opt-in text colors
+- Awesome new comments template with support for gravatars as well as conversation recaps
+- Added support for html and wpautop in invitation emails
+- Internationalization support. Translations coming soon. Get in touch if you want to help: @gopostmatic
+- We've added an option to disable widgets in the footer and instead display definable text
+- Moved the advanced options to their own tab in the settings screen
+- Lots of little bugs squashed
+

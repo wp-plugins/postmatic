@@ -26,6 +26,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$this->add_tab( new Prompt_Admin_Core_Options_Tab( $options, $overrides ) );
 		$this->add_tab( new Prompt_Admin_Email_Options_Tab( $options, $overrides ) );
 		$this->add_tab( new Prompt_Admin_Invite_Options_Tab( $options, $overrides ) );
+		$this->add_tab( new Prompt_Admin_Options_Options_Tab( $options, $overrides ) );
 	}
 
 	public function add_tab( Prompt_Admin_Options_Tab $tab ) {

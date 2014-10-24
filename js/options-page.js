@@ -17,6 +17,9 @@
 		var $email_header_types = $( 'input[name="email_header_type"]' ).on( 'change', show_email_header_type );
 		show_email_header_type();
 
+		var $email_footer_types = $( 'input[name="email_footer_type"]' ).on( 'change', show_email_footer_type );
+		show_email_footer_type();
+
 		function show_email_header_type() {
 			var $radio_button = $email_header_types.filter(':checked' ),
 				$image_row = $( 'tr.email-header-image' ),
@@ -27,6 +30,20 @@
 				$text_row.hide();
 			} else {
 				$image_row.hide();
+				$text_row.show();
+			}
+		}
+
+		function show_email_footer_type() {
+			var $radio_button = $email_footer_types.filter(':checked' ),
+				$widgets_row = $( 'tr.email-footer-widgets' ),
+				$text_row = $( 'tr.email-footer-text' );
+
+			if ( 'widgets' === $radio_button.val() ) {
+				$widgets_row.show();
+				$text_row.hide();
+			} else {
+				$widgets_row.hide();
 				$text_row.show();
 			}
 		}

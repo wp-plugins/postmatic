@@ -50,8 +50,8 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 						'type' => 'radio',
 						'name' => 'email_header_type',
 						'choices' => array(
-							'image' => __( 'Image', 'Prompt_Core' ),
-							'text' => __( 'Text', 'Prompt_Core' )
+							Prompt_Enum_Email_Header_Types::IMAGE => __( 'Image', 'Prompt_Core' ),
+							Prompt_Enum_Email_Header_Types::TEXT => __( 'Text', 'Prompt_Core' ),
 						),
 					),
 					$this->options->get()
@@ -95,8 +95,22 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 					)
 				)
 			),
+			$this->row_wrap(
+				__( 'Email footer type', 'Prompt_Core' ),
+				$this->input(
+					array(
+						'type' => 'radio',
+						'name' => 'email_footer_type',
+						'choices' => array(
+							Prompt_Enum_Email_Footer_Types::WIDGETS => __( 'Widgets', 'Prompt_Core' ),
+							Prompt_Enum_Email_Header_Types::TEXT => __( 'Text', 'Prompt_Core' )
+						),
+					),
+					$this->options->get()
+				)
+			),
 			html(
-				'tr',
+				'tr class="email-footer-widgets"',
 				html( 'th scope="row"', __( 'Footer Widgets', 'Prompt_Core' ) ),
 				html(
 					'td',
@@ -105,6 +119,17 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 						'a',
 						array( 'href' => admin_url( 'widgets.php' ) ),
 						__( 'Appearance > Widgets', 'Prompt_Core' )
+					)
+				)
+			),
+			html(
+				'tr class="email-footer-text"',
+				html( 'th scope="row"', __( 'Email footer text', 'Prompt_Core' ) ),
+				html(
+					'td',
+					$this->input(
+						array( 'name' => 'email_footer_text', 'type' => 'text' ),
+						$this->options->get()
 					)
 				)
 			),
@@ -135,7 +160,10 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 	function validate( $new_data, $old_data ) {
 		$valid_data = $old_data;
 
-		if ( isset( $new_data['email_header_type'] ) and in_array( $new_data['email_header_type'], array( 'text', 'image' ) ) )  {
+		$header_type_reflect = new ReflectionClass( 'Prompt_Enum_Email_Header_Types' );
+		$header_types = array_values( $header_type_reflect->getConstants() );
+
+		if ( isset( $new_data['email_header_type'] ) and in_array( $new_data['email_header_type'], $header_types ) )  {
 			$valid_data['email_header_type'] = $new_data['email_header_type'];
 		}
 
@@ -145,6 +173,17 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 
 		if ( isset( $new_data['email_header_image'] ) ) {
 			$valid_data['email_header_image'] = absint( $new_data['email_header_image'] );
+		}
+
+		$footer_type_reflect = new ReflectionClass( 'Prompt_Enum_Email_Footer_Types' );
+		$footer_types = array_values( $footer_type_reflect->getConstants() );
+
+		if ( isset( $new_data['email_footer_type'] ) and in_array( $new_data['email_footer_type'], $footer_types ) )  {
+			$valid_data['email_footer_type'] = $new_data['email_footer_type'];
+		}
+
+		if ( isset( $new_data['email_footer_text'] ) ) {
+			$valid_data['email_footer_text'] = sanitize_text_field( $new_data['email_footer_text'] );
 		}
 
 		return $valid_data;

@@ -15,6 +15,8 @@ class Prompt_Comment_Mailing {
 
 		$comment = get_comment( $comment_id_or_object );
 
+		self::handle_new_subscriber( $comment );
+
 		if ( 0 == $comment->comment_parent )
 			self::send_post_subscriber_notifications( $comment, $chunk );
 		else
@@ -127,6 +129,8 @@ class Prompt_Comment_Mailing {
 		// Turn off native comment notifications
 		add_filter( 'pre_option_comments_notify', create_function( '$a', 'return null;' ) );
 
+		$previous_comments = self::get_previous_comments( $comment );
+
 		$comment_author = get_userdata( $comment->user_id );
 
 		// TODO: adjust from_name and template data for add-on post types
@@ -147,6 +151,7 @@ class Prompt_Comment_Mailing {
 				'subscriber' => $subscriber,
 				'comment' => $comment,
 				'subscribed_post' => $prompt_post,
+				'previous_comments' => $previous_comments,
 			);
 			/**
 			 * Filter comment email template data.
@@ -264,4 +269,65 @@ class Prompt_Comment_Mailing {
 		update_comment_meta( $comment->comment_ID, self::$sent_meta_key, $sent_ids );
 	}
 
+	/**
+	 * Handle the situation when a moderated comment subscribe request has not yet been fulfilled.
+	 * @param $comment
+	 */
+	protected static function handle_new_subscriber( $comment ) {
+
+		if ( ! Prompt_Comment_Form_Handling::subscription_requested( $comment ) )
+			return;
+
+		Prompt_Comment_Form_Handling::subscribe_commenter( $comment );
+	}
+
+	/**
+	 * Get top level approved comments on a post prior to and including the given one.
+	 *
+	 * Adds an 'excerpt' property with a 100 word text excerpt.
+	 *
+	 * @param object $comment
+	 * @param int $number
+	 * @return array
+	 */
+	protected static function get_previous_comments( $comment, $number = 4 ) {
+
+		$comments = get_comments( array(
+			'post_id' => $comment->comment_post_ID,
+			'parent' => 0,
+			'status' => 'approve',
+			'number' => $number,
+
+			'date_query' => array(
+				array(
+					'before' => $comment->comment_date,
+					'inclusive' => true,
+				)
+			)
+		) );
+
+		foreach ( $comments as $comment ) {
+			$comment->excerpt = self::excerpt( $comment );
+		}
+
+		return array_reverse( $comments );
+	}
+
+	/**
+	 * Make a 100 word excerpt of a comment.
+	 * @param object $comment
+	 * @param int $word_count
+	 * @return string
+	 */
+	protected static function excerpt( $comment, $word_count = 100 ) {
+
+		$comment_text = strip_tags( $comment->comment_content );
+
+		$words = explode( ' ', $comment_text );
+
+		$elipsis = count( $words ) > $word_count ? ' &hellip;' : '';
+
+		return implode( ' ', array_slice( $words, 0, $word_count ) ) . $elipsis;
+
+	}
 }

@@ -9,7 +9,7 @@ class Prompt_Comment_Form_Handling {
 	protected static $prompt_post;
 
 	/**
-	 * Subscribe or unsubscribe a commenter.
+	 * Handle comment form submissions.
 	 *
 	 * Called by the comment_post action.
 	 *
@@ -18,7 +18,7 @@ class Prompt_Comment_Form_Handling {
 	 */
 	public static function handle_form( $comment_id, $status ) {
 
-		if ( !Prompt_Core::$options->get( 'augment_comment_form' ) or '1' != $status )
+		if ( !Prompt_Core::$options->get( 'augment_comment_form' )  or 'spam' === $status )
 			return;
 
 		$comment = get_comment( $comment_id );
@@ -26,17 +26,42 @@ class Prompt_Comment_Form_Handling {
 		if ( empty( $comment->user_id ) and empty( $comment->comment_author_email ) )
 			return;
 
+		$checked = isset( $_POST[self::SUBSCRIBE_CHECKBOX_NAME] );
+
+		if ( !$checked )
+			return;
+
+		if ( 0 == $status ) {
+			self::record_subscription_request( $comment_id );
+			return;
+		}
+
+		self::subscribe_commenter( $comment );
+	}
+
+	/**
+	 * Determine whether a subscription was requested on a moderated comment.
+	 *
+	 * @param object $comment
+	 * @return boolean
+	 */
+	public static function subscription_requested( $comment ) {
+		return get_comment_meta( $comment->comment_ID, self::SUBSCRIBE_CHECKBOX_NAME, true );
+	}
+
+	/**
+	 * Subscribe a commenter.
+	 *
+	 * @param object $comment
+	 */
+	public static function subscribe_commenter( $comment ) {
+
 		$user_id = $comment->user_id;
 
 		if ( !$user_id ) {
 			$user = get_user_by( 'email', $comment->comment_author_email );
 			$user_id = $user ? $user->ID : null;
 		}
-
-		$checked = isset( $_POST[self::SUBSCRIBE_CHECKBOX_NAME] );
-
-		if ( !$checked )
-			return;
 
 		$prompt_post = new Prompt_Post( $comment->comment_post_ID );
 
@@ -139,4 +164,7 @@ class Prompt_Comment_Form_Handling {
 
 	}
 
+	protected static function record_subscription_request( $comment_id ) {
+		return add_comment_meta( $comment_id, self::SUBSCRIBE_CHECKBOX_NAME, 1 );
+	}
 }

@@ -18,7 +18,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 			$recipients = explode( "\n", $recipients );
 
 			$subject = sanitize_text_field( wp_unslash( $_POST['invite_subject'] ) );
-			$message = wp_unslash( $_POST['invite_introduction'] );
+			$message = wpautop( wp_unslash( $_POST['invite_introduction'] ) );
 
 			$this->schedule_invites( $recipients, $subject, $message );
 		}
@@ -65,7 +65,6 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 				'prompt/subscription_mailing/send_agreements',
 				array( $prompt_site, $users_data, $message_data )
 			);
-			spawn_cron();
 
 			$confirmation_format = _n( 'Success. %d invite sent.', 'Success. %d invites sent.', count( $users_data ), 'Prompt_Core' );
 			$this->add_notice( sprintf( $confirmation_format, count( $users_data ) ) );

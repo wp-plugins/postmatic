@@ -10,6 +10,8 @@
 * @var int     $brand_image_height
 * @var int     $brand_image_width
 * @var string  $footer_widgets
+* @var string  $footer_type
+* @var string  $footer_text
 */
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
@@ -137,9 +139,11 @@
         FOOTER
     ------------------------------------- */
     table.footer-wrap {
-        width: 100%;
+      width: 100%;
       clear: both!important;
+      margin-top: 35px !important;
     }
+
     .footer-wrap .container * {
       font-size: 12px;
       
@@ -207,9 +211,9 @@
 
     ol li {list-style-type: decimal;}
 
-    blockquote { background:#eee;border:1px solid #ddd;padding:5%;font-style: italic;}
+    blockquote { background:#f9f9f9;border:1px solid #eee;padding:5%;font-style: italic;}
 
-    .alert {color: green; background: #FFFEBA; padding: 2px;}
+    .alert {background: #FFFEBA; padding: 2px; font-weight: normal;}
     /* ---------------------------------------------------
         RESPONSIVENESS
         Nuke it from orbit. It's the only way to be sure.
@@ -277,6 +281,7 @@
     .body-wrap { padding: 10px !imporant;}
     .container { padding: 15px !imporant;}
     #content img {float: none !important; margin: 10px auto !important;}
+    #content img.avatar {float: left !important; margin: 0 10px 0 0 !important;}
     .gallery br {display:none !important; clear: none !important;}
     .gallery-item {margin: 5px auto !important; float: none !important; display: block !important; width: 100% !important; text-align: center !important;}
     .gallery-item img {margin: 0 auto !important; display: block !important;}
@@ -313,6 +318,22 @@
     margin: 2px 10px;
 }
 
+/*Comments Template*/
+img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !important;float: left; margin-right: 10px; padding-bottom: 15px; border-radius: 5px;}
+
+#inreply {font-weight: normal; font-size: 150%; color: #737373; margin-bottom: 15px;}
+
+.author-name {color: #DF623B; font-style: italic; font-family: serif; line-height: normal;}
+.comment {margin-bottom: 55px; font-size: 110%;}
+.comment-date {color: gray; font-size: 90%;}
+.comment-header {padding-bottom: 15px; font-size: 110%;}
+.comment-body {clear: left; color: #000;}
+.reply {padding-bottom: 35px; border-bottom: 1px solid #ddd;}
+.reply-icon {float: left; margin-right: 10px; width: 30px; height: 30px;}
+.previous-comment-3 {opacity: .4;}
+.previous-comment-2 {opacity: .6;}
+.previous-comment-1 {opacity: .8;}
+
     </style>
     <!-- body -->
     <table class="body-wrap"><tr>
@@ -322,7 +343,7 @@
         <table>
           <tr>
             <td class="brand">
-              <?php if ( 'image' === $brand_type ) : ?>
+              <?php if ( Prompt_Enum_Email_Header_Types::IMAGE === $brand_type ) : ?>
               <img width="<?php echo intval( $brand_image_width ); ?>" height="<?php echo intval( $brand_image_height ); ?>" src="<?php echo esc_attr( $brand_image_url ); ?>" align="middle" class="logo" />
               <?php else : ?>
               <h1><?php echo $brand_text; ?></h1>
@@ -347,7 +368,11 @@
       <!-- content -->
       <div class="content widgets">
         <table><tr>
-          <?php if ( empty( $exclude_widgets ) ) Prompt_Email_Footer_Sidebar::render(); ?>
+          <?php if ( Prompt_Enum_Email_Footer_Types::WIDGETS === $footer_type ) : ?>
+              <?php Prompt_Email_Footer_Sidebar::render(); ?>
+          <?php else : ?>
+              <?php echo $footer_text; ?>
+          <?php endif; ?>
         </tr></table>
         <table>
           <tr>

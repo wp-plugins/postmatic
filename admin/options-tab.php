@@ -116,4 +116,17 @@ class Prompt_Admin_Options_Tab extends scbAdminPage {
 		}
 	}
 
+	protected function validate_checkbox_fields( $new_data, $old_data, $field_names ) {
+		$valid_data = $old_data;
+
+		$field_names = array_diff( $field_names, array_keys( $this->overridden_options ) );
+		foreach ( $field_names as $field ) {
+			if ( isset( $new_data[$field] ) )
+				$valid_data[$field] = true;
+			else
+				$valid_data[$field] = false;
+		}
+
+		return $valid_data;
+	}
 }
