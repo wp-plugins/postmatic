@@ -170,7 +170,7 @@ class Prompt_Ajax_Handling {
 
 		$post = get_post( $post_id );
 
-		if ( Prompt_Admin_Delivery_Metabox::suppress_featured_image() ) {
+		if ( Prompt_Admin_Delivery_Metabox::suppress_featured_image( $post_id ) ) {
 			$featured_image_src = false;
 		} else {
 			$featured_image = image_get_intermediate_size( get_post_thumbnail_id( $post_id ), 'prompt-post-featured' );

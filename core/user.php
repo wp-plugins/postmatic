@@ -29,7 +29,7 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 		}
 	}
 
-	/**
+	/**x
 	 * Get the WordPress user ID.
 	 * @return int
 	 */
@@ -53,7 +53,7 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 	 */
 	public function profile_options() {
 		return html( 'div class="prompt-profile-options"',
-			html( 'h2', __( 'Prompt Subscription Information', 'Prompt_Core' ) ),
+			html( 'h2', __( 'Postmatic Subscription Information', 'Prompt_Core' ) ),
 			$this->profile_subscribers(),
 			$this->profile_site_subscription(),
 			$this->profile_author_subscriptions(),
@@ -118,7 +118,7 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 
 		return html(
 			'div class="prompt-author-subscriptions"',
-			html( 'h4', __( 'Your Subscribers', 'Prompt_Core' ) ),
+			html( 'h4', __( 'People that subscribe to you:', 'Prompt_Core' ) ),
 			html( 'ul', $subscriber_items )
 		);
 	}
@@ -126,8 +126,8 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 	protected function profile_site_subscription() {
 		$site = new Prompt_Site;
 		return html(
-			'div class="prompt-site-subscription"',
-			html( 'h4', __( 'Site Subscription', 'Prompt_Core' ) ),
+			'div id="prompt-site-subscription"',
+			html( 'h4', __( 'Site Subscriptions:', 'Prompt_Core' ) ),
 			scbForms::input(
 				array(
 					'name' => 'prompt_site_subscribed',
@@ -156,9 +156,8 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 		}
 
 		return html(
-			'div class="prompt-author-subscriptions"',
-			html( 'h4', __( 'Author Subscriptions', 'Prompt_Core' ) ),
-			html( 'p', __( 'You are subscribed to the following authors:')),
+			'div id="prompt-author-subscriptions"',
+			html( 'h4', __( 'Authors you subscribe to:', 'Prompt_Core' ) ),
 			html( 'ul', $author_items )
 		);
 	}
@@ -179,9 +178,9 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 		}
 
 		return html(
-			'div class="prompt-post-subscriptions"',
-			html( 'h4', __( 'Post Subscriptions', 'Prompt_Core' ) ),
-			html( 'p', __( 'You are subscribed to comments on the following posts:')),
+			'div id="prompt-post-subscriptions"',
+			html( 'h4', __( 'Discussions you are subscribed to:', 'Prompt_Core' ) ),
+
 			html( 'ul', $post_items )
 		);
 	}

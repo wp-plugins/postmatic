@@ -47,7 +47,7 @@ class Prompt_Post_Mailing {
 
 		$featured_image_src = wp_get_attachment_image_src( get_post_thumbnail_id(), 'prompt-post-featured' );
 
-		if ( Prompt_Admin_Delivery_Metabox::suppress_featured_image() )
+		if ( Prompt_Admin_Delivery_Metabox::suppress_featured_image( $post->ID ) )
 			$featured_image_src = false;
 
 		remove_filter( 'the_content', 'do_shortcode', 11 );

@@ -65,6 +65,9 @@ class Prompt_Core {
 		add_action( 'comment_post', array( 'Prompt_Comment_Form_Handling', 'handle_form' ), 10, 2 );
 		add_action( 'comment_form_after', array( 'Prompt_Comment_Form_Handling', 'after_form' ) );
 
+		add_filter( 'manage_users_columns', array( 'Prompt_Admin_Users_Handling', 'manage_users_columns' ) );
+		add_filter( 'manage_users_custom_column', array( 'Prompt_Admin_Users_Handling', 'subscriptions_column' ), 10, 3 );
+
 		add_image_size( 'prompt-post-featured', 1480, 600, true );
 	}
 

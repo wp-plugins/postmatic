@@ -25,7 +25,7 @@ class Prompt_Outbound_Handling {
 		if ( $post->post_author and Prompt_Core::$options->get( 'auto_subscribe_authors' ) )
 			$prompt_post->subscribe( $post->post_author );
 
-		if ( ! $prompt_post->unsent_recipient_ids() or Prompt_Admin_Delivery_Metabox::suppress_email() )
+		if ( ! $prompt_post->unsent_recipient_ids() or Prompt_Admin_Delivery_Metabox::suppress_email( $post->ID ) )
 			return;
 
 		wp_schedule_single_event(

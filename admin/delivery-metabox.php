@@ -17,19 +17,37 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 	protected $sent_recipient_ids;
 
 	/**
-	 * Find out if the "no email" metabox checkbox was checked.
+	 * Find out if the "no email" metabox checkbox was checked for a post.
+	 * @param int $post_id
 	 * @return bool
 	 */
-	public static function suppress_email() {
-		return isset( $_POST[self::$no_email_name] );
+	public static function suppress_email( $post_id ) {
+
+		if ( isset( $_POST[self::$no_email_name] ) and isset( $_POST['post_ID'] ) and $_POST['post_ID'] == $post_id )
+			return true; // Meta hasn't been saved yet but will be
+
+		return (bool)get_post_meta( $post_id, self::$no_email_name, true );
 	}
 
 	/**
 	 * Find out if the "no featured image" metabox checkbox was checked.
+	 * @param int $post_id
 	 * @return bool
 	 */
-	public static function suppress_featured_image() {
-		return isset( $_POST[self::$no_featured_image_name] ) or isset( $_GET[self::$no_featured_image_name] );
+	public static function suppress_featured_image( $post_id ) {
+
+		if ( isset( $_GET['action'] ) and 'prompt_post_delivery_preview' == $_GET['action'] )
+			return intval( $_GET['post_id'] ) == $post_id and !empty( $_GET[self::$no_featured_image_name] );
+
+		if (
+			isset( $_POST['post_ID'] ) and
+			intval( $_POST['post_ID'] ) == $post_id and
+			isset( $_POST[self::$no_featured_image_name] )
+		) {
+			return true; // Meta hasn't been saved yet but will be
+		}
+
+		return (bool)get_post_meta( $post_id, self::$no_featured_image_name, true );
 	}
 
 	public function admin_enqueue_scripts() {
@@ -69,6 +87,7 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 					'type' => 'checkbox',
 					'name' => self::$no_email_name,
 					'desc' => __( 'Do not deliver this post via email.', 'Prompt_Core' ),
+					'checked' => self::suppress_email( $this->post->ID ),
 				)
 			)
 		);
@@ -79,6 +98,7 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 					'type' => 'checkbox',
 					'name' => self::$no_featured_image_name,
 					'desc' => __( 'Do not use the featured image in email.', 'Prompt_Core' ),
+					'checked' => self::suppress_featured_image( $this->post->ID ),
 				)
 			)
 		);
@@ -95,6 +115,17 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 		);
 
 		return $form_html;
+	}
+
+	protected function before_save( $post_data, $post_id ) {
+		return array(
+			self::$no_email_name => isset( $_POST[self::$no_email_name] ),
+			self::$no_featured_image_name => isset( $_POST[self::$no_featured_image_name] ),
+		);
+	}
+
+	protected function validate_post_data( $post_data, $post_id ) {
+		return !array_diff_key( $post_data, array( self::$no_email_name => true, self::$no_featured_image_name => true ) );
 	}
 
 	protected function set_post( $post ) {

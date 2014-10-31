@@ -72,6 +72,14 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.0 beta 4 =
+- User management - see who is subscribed to what directly via the wp-admin users screen. Export coming soon.
+- Support for custom post types! Choose which post types you want sent to your users.
+- Fixed a bug in which the featured image would be placed in the email template even if you had asked it not to be.
+- Fixed a bug wherein Postmatic would try to include the latest post in a subscription confirmation notification for subscribing to comments. 
+- Revised the language shown in profile.php to make subscription settings easier to understand and change.
+
+
 = 1.0 beta 3 =
 - Toned down the opt-in text colors
 - Awesome new comments template with support for gravatars as well as conversation recaps

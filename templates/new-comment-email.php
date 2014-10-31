@@ -16,7 +16,7 @@ $previous_index = count( $previous_comments );
 ?>
 
 <h1><span class="capitalize"><?php echo $commenter_name; ?></span> added a comment.</h1>
-<h4 id="inreply">In reply to <em><?php echo get_the_title( $comment->comment_post_ID  ); ?></em>.</h4>
+<h4 id="inreply">In reply to: <?php echo get_the_title( $comment->comment_post_ID  ); ?>.</h4>
 
 <div class="primary-comment comment">
 	<div class="comment-header">
@@ -36,7 +36,7 @@ $previous_index = count( $previous_comments );
 
 	<img class="reply-icon" src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <h3 class="reply">Reply to this email to add a comment.</h3>
 
-	<h3>Recently in this conversation:</h3>
+	<h3>Recently in this conversation...</h3>
 
 	<div class="previous-comments">
 		<?php foreach( $previous_comments as $previous_comment ) : $previous_index--; ?>

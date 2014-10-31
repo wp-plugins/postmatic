@@ -98,4 +98,25 @@ abstract class Prompt_Meta_Subscribable_Object implements Prompt_Interface_Subsc
 
 		return $wpdb->get_col( $query );
 	}
+
+	protected function _subscribed_counts( $users = null ) {
+		global $wpdb;
+
+		$id_field = $this->meta_type . '_id';
+		$table_property = $this->meta_type . 'meta';
+		$table = $wpdb->$table_property;
+
+		$sql_format = "SELECT {$wpdb->users}.id, COUNT(*) " .
+			"FROM {$wpdb->users} " .
+			"JOIN {$table} ON meta_key=%s AND meta_value LIKE %s " .
+			"GROUP BY {$wpdb->users}.id";
+
+		$query = $wpdb->prepare(
+			$sql_format,
+			self::SUBSCRIBED_META_KEY,
+			'%i:' . $user_id . ';%'
+		);
+
+		return $wpdb->get_col( $query );
+	}
 }

@@ -9,7 +9,14 @@
 <h1>Welcome, <span class="capitalize"><?php echo $subscriber->display_name; ?></span>.</h1>
 <p><?php echo $object->subscription_description(); ?></p>
 <h3>What's next?</h3>
-<p>Keep an eye on your inbox for posts from <?php echo $object->subscription_object_label(); ?>. We've inluded the latest, <em><?php the_title(); ?></em> from <?php the_date(); ?>, below. Reply to this email to leave a comment!</p>
+<p>Keep an eye on your inbox for content from <?php echo $object->subscription_object_label(); ?>.
+
+	<?php if ( $latest_post ) : ?>
+		We've inluded the latest, <em><?php the_title(); ?></em> from <?php the_date(); ?>, below.
+		Reply to this email to leave a comment!
+	<?php endif; ?>
+
+</p>
 
 <?php if ( $latest_post ) : ?>
 	<hr />

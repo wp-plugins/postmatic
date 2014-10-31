@@ -86,12 +86,12 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 			$prompt_site = new Prompt_Site;
 			$recipient_ids = $prompt_site->subscriber_ids();
 
-		}
+			$prompt_author = new Prompt_User( $post->post_author );
+			$recipient_ids = array_unique(
+				array_merge( $recipient_ids, $prompt_author->subscriber_ids() )
+			);
 
-		$prompt_author = new Prompt_User( $post->post_author );
-		$recipient_ids = array_unique(
-			array_merge( $recipient_ids, $prompt_author->subscriber_ids() )
-		);
+		}
 
 		/**
 		 * Filter the recipient ids of notifications for a post.
