@@ -72,6 +72,11 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.0 beta 5 =
+Just a quick fix to address a couple of outstanding issues.
+- Improved support for full sized images aligned center. They will now be displayed responsively on mobile.
+- Changed default FROM name to reflect the blog name.
+
 = 1.0 beta 4 =
 - User management - see who is subscribed to what directly via the wp-admin users screen. Export coming soon.
 - Support for custom post types! Choose which post types you want sent to your users.

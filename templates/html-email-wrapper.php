@@ -110,7 +110,7 @@
 
     .alignright {float: right !important; margin: 0 0 20px 20px !important;}
     .alignleft {float: left; margin: 0 20px 20px 0;}
-    .aligncenter {margin: 20px auto; display: block !important; float: none;}
+    .aligncenter {margin: 20px auto; display: block !important; float: none; width: 100% !important;}
 
     .gallery {
       margin: 10px 0; padding: 15px 5px 0 5px; border: 1px solid #ddd; background: #eee; width: 100%; float: left;

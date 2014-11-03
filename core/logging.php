@@ -38,9 +38,10 @@ class Prompt_Logging {
 	/**
 	 * Get saved error log entries.
 	 * @param int $since Include only entries more recent than this timestamp.
+	 * @param string $data_format Specify ARRAY_A to convert data to array format.
 	 * @return array
 	 */
-	public static function get_log( $since = 0 ) {
+	public static function get_log( $since = 0, $data_format = OBJECT ) {
 		$log = get_option( self::OPTION_NAME );
 
 		if ( !is_array( $log ) )
@@ -55,6 +56,10 @@ class Prompt_Logging {
 
 		foreach ( $log as $entry ) {
 			$entry = (array) $entry;
+
+			if ( $data_format == ARRAY_A )
+				$entry['data'] = (array) $entry['data'];
+
 			if ( $entry['time'] >= $since )
 				$filtered_log[] = $entry;
 		}

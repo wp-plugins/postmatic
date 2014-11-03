@@ -70,7 +70,7 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 
 		if ( empty( $options['prompt_site_subscribed'] ) )
 			$site->unsubscribe( $this->id );
-		else
+		elseif ( $this->is_current_user() )
 			$site->subscribe( $this->id );
 	}
 
@@ -133,6 +133,7 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 					'name' => 'prompt_site_subscribed',
 					'type' => 'checkbox',
 					'desc' => __( 'Notify me by email when new site content is published.', 'Prompt_Core' ),
+					'extra' => array( 'disabled' => !$site->is_subscribed( $this->id ) and !$this->is_current_user() )
 				),
 				array( 'prompt_site_subscribed' => $site->is_subscribed( $this->id ) )
 			)
@@ -183,6 +184,14 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 
 			html( 'ul', $post_items )
 		);
+	}
+
+	/**
+	 * Determine whether this user is currently logged in.
+	 * @return bool
+	 */
+	protected function is_current_user() {
+		return $this->id == get_current_user_id();
 	}
 
 	/**

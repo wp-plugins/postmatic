@@ -200,7 +200,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	protected function log_alert() {
 		$dismiss_time = absint( get_user_meta( get_current_user_id(), self::DISMISS_ERRORS_META_KEY, true ) );
 
-		$log = Prompt_Logging::get_log( $dismiss_time );
+		$log = Prompt_Logging::get_log( $dismiss_time, ARRAY_A );
 
 		if ( empty( $log ) )
 			return '';
@@ -506,13 +506,15 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		$last_submit_time = absint( get_option( self::BUG_REPORT_OPTION_NAME ) );
 
+		update_option( self::BUG_REPORT_OPTION_NAME, time() );
+
 		$options = array_diff_key( Prompt_Core::$options->get(), array( 'prompt_key' => '' ) );
 
 		$message = array(
 			'url' => get_option( 'siteurl' ),
 			'options' => $options,
 			'version' => Prompt_Core::version( $full = true ),
-			'error_log' => Prompt_Logging::get_log( $last_submit_time ),
+			'error_log' => Prompt_Logging::get_log( $last_submit_time, ARRAY_A ),
 		);
 
 		$environment = new Prompt_Environment();
@@ -521,9 +523,19 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		$email->set_message( json_encode( $message ) );
 
-		Prompt_Factory::make_mailer()->send_one( $email );
+		$sent = Prompt_Factory::make_mailer( Prompt_Enum_Email_Transports::LOCAL )->send_one( $email );
 
-		update_option( self::BUG_REPORT_OPTION_NAME, time() );
+		if ( is_wp_error( $sent ) and Prompt_Core::$options->get( 'prompt_key' ) )
+			$sent = Prompt_Factory::make_mailer( Prompt_Enum_Email_Transports::API )->send_one( $email );
+
+		if ( is_wp_error( $sent ) ) {
+			Prompt_Logging::add_error(
+				'bug_submission_error',
+				__( 'We\'re even having trouble sending a bug report. Please copy the data to the right and send to support@gopostmatic.com.', 'Prompt_Core' ),
+				$sent
+			);
+			return;
+		}
 
 		add_action( 'admin_notices', array( $this, 'submitted_errors_admin_msg' ) );
 	}
