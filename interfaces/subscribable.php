@@ -42,7 +42,13 @@ interface Prompt_Interface_Subscribable extends Prompt_Interface_Identifiable {
 	/**
 	 * Get the IDs of all objects a user is subscribed to.
 	 * @param $user_id
-	 * @return mixed
+	 * @return array
 	 */
 	static function subscribed_object_ids( $user_id );
+
+	/**
+	 * Get the IDs of all users with subscriptions to this type of object.
+	 * @return array
+	 */
+	static function all_subscriber_ids();
 }

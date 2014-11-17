@@ -35,7 +35,7 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 		if ( !$comment ) {
 			Prompt_Logging::add_error(
 				'register_subscribe_comment_invalid',
-				__( 'Couldn\'t find the original registration information for a new user.', 'Prompt_Core' ),
+				__( 'Couldn\'t find the original registration information for a new user.', 'Postmatic' ),
 				array( 'keys' => $this->keys, 'message' => $this->message )
 			);
 			return;
@@ -45,7 +45,7 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 		if ( !class_exists( $subscribable_object_class ) ) {
 			Prompt_Logging::add_error(
 				'register_subscribe_object_invalid',
-				__( 'Couldn\'t find the original object subscribed to for a new user.', 'Prompt_Core' ),
+				__( 'Couldn\'t find the original object subscribed to for a new user.', 'Postmatic' ),
 				array( 'keys' => $this->keys, 'message' => $this->message )
 			);
 			return;
@@ -77,15 +77,28 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 		if ( is_wp_error( $subscriber_id ) ) {
 			Prompt_Logging::add_error(
 				'register_subscribe_user_creation_failure',
-				__( 'Failed to create a new user from an agreement reply email.', 'Prompt_Core' ),
+				__( 'Failed to create a new user from an agreement reply email.', 'Postmatic' ),
 				array( 'keys' => $this->keys, 'message' => $this->message, 'error' => $subscriber_id )
 			);
 			return;
 		}
 
 		if ( !$subscriber and $user_data ) {
+
 			$user_data['ID'] = $subscriber_id;
+
 			wp_update_user( $user_data );
+
+			$origin = new Prompt_Subscriber_Origin( array(
+				'source_label' => $subscribable_object->subscription_object_label(),
+				'source_url' => $subscribable_object->subscription_url(),
+				'agreement' => $this->message,
+			) );
+
+			$prompt_user = new Prompt_User( $subscriber_id );
+
+			$prompt_user->set_subscriber_origin( $origin );
+
 		}
 
 		if ( !$subscribable_object->is_subscribed( $subscriber_id ) ){
@@ -122,7 +135,7 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 		if ( !is_array( $this->keys ) or count( $this->keys ) != 1 ) {
 			Prompt_Logging::add_error(
 				'register_subscribe_keys_invalid',
-				__( 'Received invalid metadata with a subscription agreement.', 'Prompt_Core' ),
+				__( 'Received invalid metadata with a subscription agreement.', 'Postmatic' ),
 				array( 'keys' => $this->keys, 'message' => $this->message )
 			);
 			return false;
@@ -133,7 +146,7 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 		if ( $int_keys != $this->keys ) {
 			Prompt_Logging::add_error(
 				'register_subscribe_keys_invalid',
-				__( 'Received invalid metadata with a subscription agreement.', 'Prompt_Core' ),
+				__( 'Received invalid metadata with a subscription agreement.', 'Postmatic' ),
 				array( 'keys' => $this->keys, 'message' => $this->message )
 			);
 			return false;
@@ -142,7 +155,7 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 		if ( empty( $this->message ) ) {
 			Prompt_Logging::add_error(
 				'register_subscribe_message_invalid',
-				__( 'Received no message with a subscription agreement.', 'Prompt_Core' ),
+				__( 'Received no message with a subscription agreement.', 'Postmatic' ),
 				array( 'keys' => $this->keys, 'message' => $this->message )
 			);
 			return false;

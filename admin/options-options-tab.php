@@ -3,30 +3,23 @@
 class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 
 	public function name() {
-		return __( 'Options', 'Prompt_Core' );
+		return __( 'Options', 'Postmatic' );
 	}
 
 	public function render() {
 
 		$table_entries = array(
 			array(
-				'title' => __( 'Supported Post Types', 'Prompt_Core' ),
-				'type' => 'checkbox',
-				'name' => 'site_subscription_post_types',
-				'choices' => $this->post_type_choices(),
-				'desc' => '<br/>' . __( 'Choose which post types you would like to have sent to subscribers.', 'Prompt_Core' ),
-			),
-			array(
-				'title' => __( 'Author Subscriptions', 'Prompt_Core' ),
+				'title' => __( 'Author Subscriptions', 'Postmatic' ),
 				'type' => 'checkbox',
 				'name' => 'auto_subscribe_authors',
-				'desc' => __( 'Subscribe authors to comments on their own posts.<small>(Recommended)</small><p>This will automatically subscribe post authors to new comment notifications on their posts. This works well to keep the author up to date with the latest comments and discussion.</p>', 'Prompt_Core' ),
+				'desc' => __( 'Subscribe authors to comments on their own posts.<small>(Recommended)</small><p>This will automatically subscribe post authors to new comment notifications on their posts. This works well to keep the author up to date with the latest comments and discussion.</p>', 'Postmatic' ),
 			),
 			array(
-				'title' => __( 'User Accounts', 'Prompt_Core' ),
+				'title' => __( 'User Accounts', 'Postmatic' ),
 				'type' => 'checkbox',
 				'name' => 'send_login_info',
-				'desc' => __( 'Email subscribers WordPress account credentials when they subscribe. <p>Only necessary in some situations as all user commands are otherwise possible via email. If enabled we recommend using a good front end login plugin.</p>', 'Prompt_Core' ),
+				'desc' => __( 'Email subscribers WordPress account credentials when they subscribe. <p>Only necessary in some situations as all user commands are otherwise possible via email. If enabled we recommend using a good front end login plugin.</p>', 'Postmatic' ),
 			)
 		);
 
@@ -58,23 +51,7 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 			array( 'send_login_info', 'auto_subscribe_authors' )
 		);
 
-		if ( isset( $new_data['site_subscription_post_types'] ) )
-			$valid_data['site_subscription_post_types'] = array_intersect(
-				$new_data['site_subscription_post_types'],
-				array_keys( $this->post_type_choices() )
-			);
-
 		return $valid_data;
 	}
 
-	protected function post_type_choices() {
-
-		$choices = array();
-
-		foreach( get_post_types( array( 'show_ui' => true ), 'objects' ) as $post_type) {
-			$choices[$post_type->name] = $post_type->labels->name;
-		}
-
-		return $choices;
-	}
 }

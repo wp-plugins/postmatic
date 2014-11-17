@@ -22,13 +22,15 @@ $previous_index = count( $previous_comments );
 	<div class="comment-header">
 		<?php echo get_avatar( $comment ); ?>
 		<div class="author-name"><?php echo $commenter_name; ?></div>
-		<div class="comment-date">
-			<?php comment_date( '', $comment->comment_ID ); ?> at
-			<?php echo mysql2date( get_option( 'time_format' ), $comment->comment_date ); ?>
+			<div class="comment-date">
+				<?php comment_date( '', $comment->comment_ID ); ?> at
+				<?php echo mysql2date( get_option( 'time_format' ), $comment->comment_date ); ?>
+			</div>
 		</div>
-	</div>
-	<div class="comment-body">
-		<?php echo wpautop( $comment->comment_content ); ?>
+		
+		<div class="comment-body">
+			<?php echo wpautop( $comment->comment_content ); ?>
+		</div>
 	</div>
 </div>
 
@@ -58,7 +60,7 @@ $previous_index = count( $previous_comments );
 
 <?php endif; ?>
 
-	<img class="reply-icon" src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <h3 class="reply">Reply to this email to add a comment.</h3>
+<img class="reply-icon" src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <h3 class="reply">Reply to this email to add a comment.</h3>
 <p>To <strong>add your own comment</strong> reply to this email.<br /><strong>Please note</strong>: Your comment will be published publicly and immediately on <?php bloginfo( 'name' ); ?></p>
 
 <h4>Leave this conversation</h4>

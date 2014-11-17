@@ -66,7 +66,7 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 		if ( !$sent )
 			Prompt_Logging::add_error(
 				'prompt_wp_mail',
-				__( 'WordPress failed sending an email. Did you know Postmatic can deliver email for you?', 'Prompt_Core' ),
+				__( 'WordPress failed sending an email. Did you know Postmatic can deliver email for you?', 'Postmatic' ),
 				array( 'email' => $email, 'error_info' => $GLOBALS['phpmailer']->ErrorInfo )
 			);
 

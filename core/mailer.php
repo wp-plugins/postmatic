@@ -74,7 +74,7 @@ class Prompt_Mailer {
 		if ( is_wp_error( $response ) or 200 != $response['response']['code'] )
 			return Prompt_Logging::add_error(
 				'outbound_error',
-				__( 'An email sending operation encountered a problem.', 'Prompt_Core' ),
+				__( 'An email sending operation encountered a problem.', 'Postmatic' ),
 				compact( 'response', 'email_data' )
 			);
 
@@ -83,7 +83,7 @@ class Prompt_Mailer {
 		if ( !isset( $results->outboundMessages ) or count( $results->outboundMessages ) != count( $emails ) )
 			return Prompt_Logging::add_error(
 				'invalid_outbound_results',
-				__( 'An email sending operation behaved erratically and may have failed.', 'Prompt_Core' ),
+				__( 'An email sending operation behaved erratically and may have failed.', 'Postmatic' ),
 				compact( 'email_data', 'results' )
 			);
 

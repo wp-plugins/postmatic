@@ -55,14 +55,14 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 
 	public function subscription_object_label() {
 		return sprintf(
-			__( 'discussion of <em>%s</em>', 'Prompt_Core' ),
+			__( 'discussion of <em>%s</em>', 'Postmatic' ),
 			$this->get_wp_post()->post_title
 		);
 	}
 
 	public function subscription_description() {
 		return sprintf(
-			__( 'You have successfully subscribed and will receive an email when there is a new comment on <em>%s</em>.', 'Prompt_Core' ),
+			__( 'You have successfully subscribed and will receive an email when there is a new comment on <em>%s</em>.', 'Postmatic' ),
 			$this->get_wp_post()->post_title
 		);
 	}
@@ -150,4 +150,15 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 		return $post->_subscribed_object_ids( $user_id );
 	}
 
+	/**
+	 * Get the IDs of all users subscribed to at least one post.
+	 * @return array
+	 */
+	public static function all_subscriber_ids() {
+
+		// Using a "fake" object for PHP 5.2, which doesn't have static method inheritance
+		$prompt_post = new Prompt_Post( 0 );
+
+		return $prompt_post->_all_subscriber_ids();
+	}
 }

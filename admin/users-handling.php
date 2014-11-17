@@ -4,6 +4,28 @@ class Prompt_Admin_Users_Handling {
 
 	protected static $subscriptions_column_name = 'prompt_subscriptions';
 
+	public static function enqueue_scripts( $page ) {
+
+		if ( 'users.php' != $page )
+			return;
+
+		$script = new Prompt_Script( array(
+			'handle' => 'prompt-admin-users',
+			'path' => 'js/admin-users.js',
+			'dependencies' => array( 'jquery' ),
+		) );
+
+		$script->enqueue();
+
+		$script->localize(
+			'prompt_admin_users_env',
+			array(
+				'export_url' => admin_url( 'admin-post.php?action=prompt_subscribers_export_csv' ),
+				'export_label' => __( 'Export Postmatic Subscribers', 'Postmatic' ),
+			)
+		);
+	}
+
 	/**
 	 * Add columns to the users table.
 	 *
@@ -13,7 +35,7 @@ class Prompt_Admin_Users_Handling {
 	 * @return mixed
 	 */
 	public static function manage_users_columns( $columns ) {
-		$columns[self::$subscriptions_column_name] = __( 'Postmatic Subscriptions', 'Prompt_Core' );
+		$columns[self::$subscriptions_column_name] = __( 'Postmatic Subscriptions', 'Postmatic' );
 		return $columns;
 	}
 
@@ -45,7 +67,7 @@ class Prompt_Admin_Users_Handling {
 		if ( $prompt_site->is_subscribed( $user_id ) )
 			$column_content .= html( 'a',
 				array( 'href' => $edit_url . '#prompt-site-subscription' ),
-				__( 'New Posts', 'Prompt_Core' ),
+				__( 'New Posts', 'Postmatic' ),
 				'<br/>'
 			);
 
@@ -73,4 +95,5 @@ class Prompt_Admin_Users_Handling {
 
 		return $column_content;
 	}
+
 }

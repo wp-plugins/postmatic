@@ -19,15 +19,15 @@ class Prompt_Add_On_Manager {
 		$default_add_ons = array(
 			'Prompt_Response_Core' => array(
 				'Name' => 'Prompt Response',
-				'Description' => __( 'Send questions and threads to a refined audience based on terms that reflect their knowledge and skills.', 'Prompt_Core' ),
+				'Description' => __( 'Send questions and threads to a refined audience based on terms that reflect their knowledge and skills.', 'Postmatic' ),
 			),
 			'Prompt_Conversations_Core' => array(
 				'Name' => 'Prompt Conversations',
-				'Description' => __( 'Allow users to form groups and share topics.', 'Prompt_Core' ),
+				'Description' => __( 'Allow users to form groups and share topics.', 'Postmatic' ),
 			),
 			'Prompt_SMS_Core' => array(
 				'Name' => 'Prompt SMS',
-				'Description' => __( 'Enable users to subscribe for SMS messages as well as email.', 'Prompt_Core' ),
+				'Description' => __( 'Enable users to subscribe for SMS messages as well as email.', 'Postmatic' ),
 			),
 		);
 

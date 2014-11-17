@@ -3,7 +3,7 @@
 class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 
 	public function name() {
-		return __( 'Email Template', 'Prompt_Core' );
+		return __( 'Email Template', 'Postmatic' );
 	}
 
 	public function form_handler() {
@@ -14,7 +14,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 
 			if ( !is_email( $to_address ) ) {
 				$this->add_notice(
-					__( 'Test email was <strong>not sent</strong> to an invalid address.', 'Prompt_Core' ),
+					__( 'Test email was <strong>not sent</strong> to an invalid address.', 'Postmatic' ),
 					'error'
 				);
 				return;
@@ -27,7 +27,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 			) );
 
 			if ( Prompt_Factory::make_mailer()->send_one( $email ) ) {
-				$this->add_notice( __( 'Test email <strong>sent</strong>.', 'Prompt_Core' ) );
+				$this->add_notice( __( 'Test email <strong>sent</strong>.', 'Postmatic' ) );
 				return;
 			}
 
@@ -44,14 +44,14 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 		}
 		$rows = array(
 			$this->row_wrap(
-				__( 'Email header type', 'Prompt_Core' ),
+				__( 'Email header type', 'Postmatic' ),
 				$this->input(
 					array(
 						'type' => 'radio',
 						'name' => 'email_header_type',
 						'choices' => array(
-							Prompt_Enum_Email_Header_Types::IMAGE => __( 'Image', 'Prompt_Core' ),
-							Prompt_Enum_Email_Header_Types::TEXT => __( 'Text', 'Prompt_Core' ),
+							Prompt_Enum_Email_Header_Types::IMAGE => __( 'Image', 'Postmatic' ),
+							Prompt_Enum_Email_Header_Types::TEXT => __( 'Text', 'Postmatic' ),
 						),
 					),
 					$this->options->get()
@@ -59,7 +59,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 			),
 			html(
 				'tr class="email-header-image"',
-				html( 'th scope="row"', __( 'Email header image <br/><small>Will be displayed at half the size of your uploaded image to support retina displays. The ideal width to fill the full header area is 1440px wide.</small>', 'Prompt_Core' ) ),
+				html( 'th scope="row"', __( 'Email header image <br/><small>Will be displayed at half the size of your uploaded image to support retina displays. The ideal width to fill the full header area is 1440px wide.</small>', 'Postmatic' ) ),
 				html(
 					'td',
 					html(
@@ -79,14 +79,14 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 						),
 						html(
 							'input class="button" type="button" name="email_header_image_button"',
-							array( 'value' => __( 'Change', 'Prompt_Core' ) )
+							array( 'value' => __( 'Change', 'Postmatic' ) )
 						)
 					)
 				)
 			),
 			html(
 				'tr class="email-header-text"',
-				html( 'th scope="row"', __( 'Email header text', 'Prompt_Core' ) ),
+				html( 'th scope="row"', __( 'Email header text', 'Postmatic' ) ),
 				html(
 					'td',
 					$this->input(
@@ -96,14 +96,14 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 				)
 			),
 			$this->row_wrap(
-				__( 'Email footer type', 'Prompt_Core' ),
+				__( 'Email footer type', 'Postmatic' ),
 				$this->input(
 					array(
 						'type' => 'radio',
 						'name' => 'email_footer_type',
 						'choices' => array(
-							Prompt_Enum_Email_Footer_Types::WIDGETS => __( 'Widgets', 'Prompt_Core' ),
-							Prompt_Enum_Email_Header_Types::TEXT => __( 'Text', 'Prompt_Core' )
+							Prompt_Enum_Email_Footer_Types::WIDGETS => __( 'Widgets', 'Postmatic' ),
+							Prompt_Enum_Email_Header_Types::TEXT => __( 'Text', 'Postmatic' )
 						),
 					),
 					$this->options->get()
@@ -111,20 +111,20 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 			),
 			html(
 				'tr class="email-footer-widgets"',
-				html( 'th scope="row"', __( 'Footer Widgets', 'Prompt_Core' ) ),
+				html( 'th scope="row"', __( 'Footer Widgets', 'Postmatic' ) ),
 				html(
 					'td',
-					__( 'You can define widgets for your footer at ', 'Prompt_Core' ),
+					__( 'You can define widgets for your footer at ', 'Postmatic' ),
 					html(
 						'a',
 						array( 'href' => admin_url( 'widgets.php' ) ),
-						__( 'Appearance > Widgets', 'Prompt_Core' )
+						__( 'Appearance > Widgets', 'Postmatic' )
 					)
 				)
 			),
 			html(
 				'tr class="email-footer-text"',
-				html( 'th scope="row"', __( 'Email footer text', 'Prompt_Core' ) ),
+				html( 'th scope="row"', __( 'Email footer text', 'Postmatic' ) ),
 				html(
 					'td',
 					$this->input(
@@ -135,7 +135,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 			),
 			html(
 				'tr',
-				html( 'th scope="row"',  __( 'Send a test HTML email to', 'Prompt_Core' ) ),
+				html( 'th scope="row"',  __( 'Send a test HTML email to', 'Postmatic' ) ),
 				html(
 					'td',
 					$this->input(
@@ -148,7 +148,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 					),
 					html(
 						'input class="button" type="submit" name="send_test_email_button"',
-						array( 'value' => __( 'Send', 'Prompt_Core' ) )
+						array( 'value' => __( 'Send', 'Postmatic' ) )
 					)
 				)
 			)

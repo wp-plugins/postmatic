@@ -58,7 +58,7 @@ class Prompt_Logging {
 			$entry = (array) $entry;
 
 			if ( $data_format == ARRAY_A )
-				$entry['data'] = (array) $entry['data'];
+				$entry['data'] = self::object_to_array( $entry['data'] );
 
 			if ( $entry['time'] >= $since )
 				$filtered_log[] = $entry;
@@ -71,4 +71,18 @@ class Prompt_Logging {
 		delete_option( self::OPTION_NAME );
 	}
 
+	protected static function object_to_array( $obj ) {
+		if ( is_object( $obj ) ) {
+			$obj = (array)$obj;
+		}
+		if ( is_array( $obj ) ) {
+			$new = array();
+			foreach ( $obj as $key => $val ) {
+				$new[$key] = self::object_to_array( $val );
+			}
+		} else {
+			$new = $obj;
+		}
+		return $new;
+	}
 }

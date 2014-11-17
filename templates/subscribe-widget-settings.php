@@ -6,8 +6,8 @@
 ?>
 <p>
 	<label for="<?php echo $widget->get_field_id( 'title' ); ?>"
-		 title="<?php _e( 'Widget heading, leave blank to omit.', 'Prompt_Core' ); ?>">
-		 <?php _e( 'Title:', 'Prompt_Core' ); ?>
+		 title="<?php _e( 'Widget heading, leave blank to omit.', 'Postmatic' ); ?>">
+		 <?php _e( 'Title:', 'Postmatic' ); ?>
 		<span class="help-tip">?</span>
 		<input class="widefat"
 			 id="<?php echo $widget->get_field_id( 'title' ); ?>"
@@ -22,6 +22,6 @@
 			 type="checkbox"
 			 <?php checked( $widget->get_default_value( $instance, 'collect_name', true ) ); ?>
 			 value="true" />
-		<?php _e( 'Collect name (in addition to email)', 'Prompt_Core' ); ?>
+		<?php _e( 'Collect name (in addition to email)', 'Postmatic' ); ?>
 	</label>
 </p>

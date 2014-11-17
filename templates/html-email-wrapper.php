@@ -41,7 +41,7 @@
     width: auto;
     max-width: 100%;
     clear: both;
-    height: auto;
+    height: auto !important;
     display: block;
     }
     
@@ -77,14 +77,14 @@
       color: #FFF;
       background-color: #aaa;
       border: solid #aaa;
-      border-width: 10px 20px;
+      border-width: 5px 10px;
       line-height: 2;
-      font-weight: bold;
+      font-weight: normal;
       margin-right: 10px;
       text-align: center;
       cursor: pointer;
       display: inline-block;
-      border-radius: 25px;
+      border-radius: 15px;
       margin-top: 10px;
     }
     .capitalize {text-transform: capitalize;}
@@ -110,13 +110,13 @@
 
     .alignright {float: right !important; margin: 0 0 20px 20px !important;}
     .alignleft {float: left; margin: 0 20px 20px 0;}
-    .aligncenter {margin: 20px auto; display: block !important; float: none; width: 100% !important;}
+    .aligncenter {margin: 20px auto; display: block !important; float: none;}
 
-    .gallery {
+    .gallery, .ngg-galleryoverview {
       margin: 10px 0; padding: 15px 5px 0 5px; border: 1px solid #ddd; background: #eee; width: 100%; float: left;
     }
 
-    .gallery-item {float: left !important; margin: 5px;}
+    .gallery-item, .ngg-gallery-thumbnail-box {float: left !important; margin: 5px;}
     .gallery-caption {margin 0;}
     .wp-caption-text.gallery-caption {width: 110px; font-size: 10px;}
     .wp-caption {max-width: 100% !important; height: auto !important;}
@@ -135,6 +135,7 @@
       margin-bottom: 20px;
 
     }
+    #web {clear: both; padding-top: 20px;}
     /* -------------------------------------
         FOOTER
     ------------------------------------- */
@@ -214,6 +215,8 @@
     blockquote { background:#f9f9f9;border:1px solid #eee;padding:5%;font-style: italic;}
 
     .alert {background: #FFFEBA; padding: 2px; font-weight: normal;}
+   .slideshowlink {margin: 15px 0; text-align: center;} 
+   .addtoany_list a {float: left;}
     /* ---------------------------------------------------
         RESPONSIVENESS
         Nuke it from orbit. It's the only way to be sure.
@@ -283,8 +286,8 @@
     #content img {float: none !important; margin: 10px auto !important;}
     #content img.avatar, #content img.reply-icon {float: left !important; margin: 0 10px 0 0 !important;}
     .gallery br {display:none !important; clear: none !important;}
-    .gallery-item {margin: 5px auto !important; float: none !important; display: block !important; width: 100% !important; text-align: center !important;}
-    .gallery-item img {margin: 0 auto !important; display: block !important;}
+    .gallery-item, .ngg-gallery-thumbnail-box {margin: 5px auto !important; float: none !important; display: block !important; width: 100% !important; text-align: center !important;}
+    .gallery-item img, .ngg-gallery-thumbnail-box img {margin: 0 auto !important; display: block !important;}
     .gallery-caption {width: auto !important; text-align: center;}
     #demo { float: none; width: auto; padding: 20px; margin: 20px 0;}
     #demo p, #demo h3, #demo h4 { margin: 5px 0;}
@@ -329,7 +332,8 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .comment-header {padding-bottom: 15px; font-size: 110%;}
 .comment-body {clear: left; color: #000;}
 .reply {padding-bottom: 35px; border-bottom: 1px solid #ddd;}
-.reply-icon {float: left; margin-right: 10px; width: 30px; height: 30px;}
+.newpost {border-bottom: none;  margin-top: 25px; padding-bottom: 15px;}
+.reply-icon {float: left !important; margin-right: 10px; width: 30px; height: 30px;}
 .previous-comment-3 {opacity: .4;}
 .previous-comment-2 {opacity: .6;}
 .previous-comment-1 {opacity: .8;}
@@ -344,7 +348,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
           <tr>
             <td class="brand">
               <?php if ( Prompt_Enum_Email_Header_Types::IMAGE === $brand_type ) : ?>
-              <img width="<?php echo intval( $brand_image_width ); ?>" height="<?php echo intval( $brand_image_height ); ?>" src="<?php echo esc_attr( $brand_image_url ); ?>" align="middle" class="logo" />
+              <img width="<?php echo intval( $brand_image_width ); ?>" src="<?php echo esc_attr( $brand_image_url ); ?>" align="middle" class="logo" />
               <?php else : ?>
               <h1><?php echo $brand_text; ?></h1>
               <?php endif; ?>

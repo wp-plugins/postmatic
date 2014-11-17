@@ -11,6 +11,10 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 	protected $id;
 	/** @var WP_User user object */
 	protected $wp_user;
+	/** @var Prompt_Subscriber_Origin */
+	protected $origin;
+	/** @var string */
+	protected $origin_meta_key = 'prompt_subscriber_origin';
 
 	/**
 	 * Create an Prompt_Core user.
@@ -48,12 +52,33 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 	}
 
 	/**
+	 * @return null|Prompt_Subscriber_Origin
+	 */
+	public function get_subscriber_origin() {
+		if ( !isset( $this->origin ) ) {
+			$origin = get_user_meta( $this->id, $this->origin_meta_key, true );
+			$this->origin = $origin ? $origin : null;
+		}
+		return $this->origin;
+	}
+
+	/**
+	 * @param Prompt_Subscriber_Origin $origin
+	 * @return Prompt_User $this
+	 */
+	public function set_subscriber_origin( Prompt_Subscriber_Origin $origin ) {
+		$this->origin = $origin;
+		update_user_meta( $this->id, $this->origin_meta_key, $this->origin );
+		return $this;
+	}
+
+	/**
 	 * Get option form elements for a user.
 	 * @return string User options HTML.
 	 */
 	public function profile_options() {
 		return html( 'div class="prompt-profile-options"',
-			html( 'h2', __( 'Postmatic Subscription Information', 'Prompt_Core' ) ),
+			html( 'h2', __( 'Postmatic Subscription Information', 'Postmatic' ) ),
 			$this->profile_subscribers(),
 			$this->profile_site_subscription(),
 			$this->profile_author_subscriptions(),
@@ -80,14 +105,14 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 
 	public function subscription_object_label() {
 		return sprintf(
-			__( 'posts by %s', 'Prompt_Core' ),
+			__( 'posts by %s', 'Postmatic' ),
 			$this->get_wp_user()->display_name
 		);
 	}
 
 	public function subscription_description() {
 		return sprintf(
-			__( 'You have successfully subscribed and will receive posts by %s directly in your inbox.', 'Prompt_Core' ),
+			__( 'You have successfully subscribed and will receive posts by %s directly in your inbox.', 'Postmatic' ),
 			$this->get_wp_user()->display_name
 		);
 	}
@@ -118,7 +143,7 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 
 		return html(
 			'div class="prompt-author-subscriptions"',
-			html( 'h4', __( 'People that subscribe to you:', 'Prompt_Core' ) ),
+			html( 'h4', __( 'People that subscribe to you:', 'Postmatic' ) ),
 			html( 'ul', $subscriber_items )
 		);
 	}
@@ -127,12 +152,12 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 		$site = new Prompt_Site;
 		return html(
 			'div id="prompt-site-subscription"',
-			html( 'h4', __( 'Site Subscriptions:', 'Prompt_Core' ) ),
+			html( 'h4', __( 'Site Subscriptions:', 'Postmatic' ) ),
 			scbForms::input(
 				array(
 					'name' => 'prompt_site_subscribed',
 					'type' => 'checkbox',
-					'desc' => __( 'Notify me by email when new site content is published.', 'Prompt_Core' ),
+					'desc' => __( 'Notify me by email when new site content is published.', 'Postmatic' ),
 					'extra' => array( 'disabled' => !$site->is_subscribed( $this->id ) and !$this->is_current_user() )
 				),
 				array( 'prompt_site_subscribed' => $site->is_subscribed( $this->id ) )
@@ -158,7 +183,7 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 
 		return html(
 			'div id="prompt-author-subscriptions"',
-			html( 'h4', __( 'Authors you subscribe to:', 'Prompt_Core' ) ),
+			html( 'h4', __( 'Authors you subscribe to:', 'Postmatic' ) ),
 			html( 'ul', $author_items )
 		);
 	}
@@ -180,7 +205,7 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 
 		return html(
 			'div id="prompt-post-subscriptions"',
-			html( 'h4', __( 'Discussions you are subscribed to:', 'Prompt_Core' ) ),
+			html( 'h4', __( 'Discussions you are subscribed to:', 'Postmatic' ) ),
 
 			html( 'ul', $post_items )
 		);
@@ -202,10 +227,18 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 	 */
 	public static function subscribed_object_ids( $user_id ) {
 
-		// Using a "fake" post object for PHP 5.2, which doesn't have static method inheritance
+		// Using a "fake" object for PHP 5.2, which doesn't have static method inheritance
 		$user = new Prompt_User( 0 );
 
 		return $user->_subscribed_object_ids( $user_id );
+	}
+
+	public static function all_subscriber_ids() {
+
+		// Using a "fake" object for PHP 5.2, which doesn't have static method inheritance
+		$user = new Prompt_User( 0 );
+
+		return $user->_all_subscriber_ids();
 	}
 
 }

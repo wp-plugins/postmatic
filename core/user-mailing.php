@@ -23,7 +23,7 @@ class Prompt_User_Mailing {
 		 */
 		$template_data = apply_filters( 'prompt/new_user_email/template_data', $template_data );
 
-		$subject = sprintf( __( 'Welcome to %s', 'Prompt_Core' ), get_option( 'blogname' ) );
+		$subject = sprintf( __( 'Welcome to %s', 'Postmatic' ), get_option( 'blogname' ) );
 		$email = new Prompt_Email( array(
 			'to_address' => $user->user_email,
 			'subject' => $subject,

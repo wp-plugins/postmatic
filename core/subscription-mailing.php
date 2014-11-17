@@ -78,7 +78,7 @@ class Prompt_Subscription_Mailing {
 		if ( !empty( $message_data['subject'] ) )
 			$subject = $message_data['subject'];
 		else
-			$subject = sprintf( __( 'Please verify your subscription to %s', 'Prompt_Core' ), $object->subscription_object_label() );
+			$subject = sprintf( __( 'Please verify your subscription to %s', 'Postmatic' ), $object->subscription_object_label() );
 
 		$email = new Prompt_Email( array(
 			'to_address' => $email_address,
@@ -131,7 +131,7 @@ class Prompt_Subscription_Mailing {
 		if ( $un ) {
 
 			$email->set_subject(
-				sprintf( __( 'You\'re unsubscribed from %s', 'Prompt_Core' ), $object->subscription_object_label() )
+				sprintf( __( 'You\'re unsubscribed from %s', 'Postmatic' ), $object->subscription_object_label() )
 			);
 			$template = "unsubscribed-email.php";
 			$filter = 'prompt/unsubscribed_email';
@@ -140,7 +140,7 @@ class Prompt_Subscription_Mailing {
 		} else {
 
 			$email->set_subject(
-				sprintf( __( 'You\'re subscribed to %s', 'Prompt_Core' ), $object->subscription_object_label() )
+				sprintf( __( 'You\'re subscribed to %s', 'Postmatic' ), $object->subscription_object_label() )
 			);
 			$template = "subscribed-email.php";
 			$filter = 'prompt/subscribed_email';

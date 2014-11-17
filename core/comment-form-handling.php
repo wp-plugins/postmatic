@@ -132,7 +132,7 @@ class Prompt_Comment_Form_Handling {
 				)
 			),
 			'&nbsp;',
-			__( 'Participate in this conversation via e-mail', 'Prompt_Core' )
+			__( 'Participate in this conversation via e-mail', 'Postmatic' )
 		);
 
 	}
@@ -153,12 +153,12 @@ class Prompt_Comment_Form_Handling {
 				html( 'img', array( 'src' => path_join( Prompt_Core::$url_path, 'media/ajax-loader.gif' ) ) )
 			),
 			html( 'p',
-				__( 'You are subscribed to new comments on this post.', 'Prompt_Core' )
+				__( 'You are subscribed to new comments on this post.', 'Postmatic' )
 			),
 			scbForms::input( array(
 				'type' => 'submit',
 				'name' => self::UNSUBSCRIBE_ACTION,
-				'value' => __( 'Unsubscribe', 'Prompt_Core' ),
+				'value' => __( 'Unsubscribe', 'Postmatic' ),
 			) )
 		);
 

@@ -16,22 +16,18 @@
 <?php endif; ?>
 <div>
   <?php the_content(); ?>
-    <p class="aligncenter"><a href="<?php the_permalink(); ?>" class="btn-secondary">View this post online</a></p>
 </div>
+
+
+<p class="reply newpost"><img class="reply-icon" src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> Reply to this email to add a comment. <br /><small><strong>Please note</strong>: Your comment will be published publicly and immediately on <?php bloginfo( 'name' ); ?></small></p>
+
+
 
 <div class="footnote">
 
-  <h1>Leave a Comment</h1>
-  <ul>
-    <li>To <strong>leave a comment</strong> simply reply to this email.</li>
-    <li><strong>Please note</strong>: Your comment will be published publicly and immediately on <?php bloginfo( 'name' ); ?></li>
-  </ul>
   <h3>Stay in the Loop</h3>
-  <ul>
-    <li>To receive comments on this post directly in your inbox reply with the word <strong>subscribe</strong>.</li>
-  </ul>
+    <p>To receive comments on this post directly in your inbox reply with the word <strong>subscribe</strong>.</p>
+
   <h4>Manage your subscription</h4>
-  <ul>
-    <li>To <strong>unsubscribe</strong> to <?php echo $subscribed_object->subscription_object_label(); ?> reply with the word 'unsubscribe'.</li>
-  </ul>
+    <p>To <strong>unsubscribe</strong> to <?php echo $subscribed_object->subscription_object_label(); ?> reply with the word 'unsubscribe'.</p>
 </div>

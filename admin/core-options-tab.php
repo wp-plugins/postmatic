@@ -3,13 +3,13 @@
 class Prompt_Admin_Core_Options_Tab extends Prompt_Admin_Options_Tab {
 
 	public function name() {
-		return __( 'General', 'Prompt_Core' );
+		return __( 'General', 'Postmatic' );
 	}
 
 	public function render() {
 		$table_entries = array(
 			array(
-				'title' => __( 'Postmatic Api Key', 'Prompt_Core' ),
+				'title' => __( 'Postmatic Api Key', 'Postmatic' ),
 				'type' => 'text',
 				'name' => 'prompt_key',
 			),
@@ -19,12 +19,12 @@ class Prompt_Admin_Core_Options_Tab extends Prompt_Admin_Options_Tab {
 
 		$output = $this->table( $table_entries, $this->options->get() ) .
 			html( 'div class="opt-in"',
-				html( 'div', __( '<h3>Improve your site by making Postmatic even better</h3><p>We rely on users like you to help shape our development roadmap. By checking the box below you will be helping us know more about your site and how we can make Postmatic even better.</p>', 'Prompt_Core' ) ),
+				html( 'div', __( '<h3>Improve your site by making Postmatic even better</h3><p>We rely on users like you to help shape our development roadmap. By checking the box below you will be helping us know more about your site and how we can make Postmatic even better.</p>', 'Postmatic' ) ),
 				scbForms::input(
 					array(
 						'type' => 'checkbox',
 						'name' => 'enable_collection',
-						'desc' => __( 'Yes, send periodic usage statistics to Postmatic.', 'Prompt_Core' ),
+						'desc' => __( 'Yes, send periodic usage statistics to Postmatic.', 'Postmatic' ),
 					),
 					$this->options->get()
 				)

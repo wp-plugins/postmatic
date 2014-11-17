@@ -24,7 +24,7 @@ class Prompt_Site implements Prompt_Interface_Subscribable {
 		$user_id = intval( $user_id );
 
 		if ( $user_id <= 0 ) {
-			trigger_error( __( 'Refusing to subscribe an invalid user ID.', 'Prompt_Core' ), E_USER_NOTICE );
+			trigger_error( __( 'Refusing to subscribe an invalid user ID.', 'Postmatic' ), E_USER_NOTICE );
 			return $this;
 		}
 
@@ -73,7 +73,7 @@ class Prompt_Site implements Prompt_Interface_Subscribable {
 
 	public function subscription_description() {
 		return sprintf(
-			__( 'You have successfully subscribed to %s and will receive new posts as soon as they are published.', 'Prompt_Core' ),
+			__( 'You have successfully subscribed to %s and will receive new posts as soon as they are published.', 'Postmatic' ),
 			get_option( 'blogname' )
 		);
 	}
@@ -84,5 +84,11 @@ class Prompt_Site implements Prompt_Interface_Subscribable {
 		if ( $site->is_subscribed( $user_id ) )
 			$ids[] = $site->id();
 		return $ids;
+	}
+
+	public static function all_subscriber_ids() {
+		// Currently just the default site subscribers
+		$site = new Prompt_Site;
+		return $site->subscriber_ids();
 	}
 }

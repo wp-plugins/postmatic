@@ -24,7 +24,7 @@ class Prompt_Core {
 		self::$basename = plugin_basename( self::$dir_path . '/postmatic.php' );
 		self::$url_path = plugins_url( '', dirname( __FILE__ ) );
 
-		load_plugin_textdomain( 'Prompt_Core', '', path_join( dirname( self::$basename ), 'lang' ) );
+		load_plugin_textdomain( 'Postmatic', '', path_join( dirname( self::$basename ), 'lang' ) );
 
 		register_deactivation_hook( self::$basename, array( 'Prompt_Event_Handling', 'record_deactivation' ) );
 		register_activation_hook( self::$basename, array( 'Prompt_Event_Handling', 'record_reactivation' ) );
@@ -49,6 +49,8 @@ class Prompt_Core {
 
 		add_action( 'wp_ajax_prompt_subscribe', array( 'Prompt_Ajax_Handling', 'action_wp_ajax_prompt_subscribe' ) );
 		add_action( 'wp_ajax_nopriv_prompt_subscribe', array( 'Prompt_Ajax_Handling', 'action_wp_ajax_prompt_subscribe' ) );
+		add_action( 'wp_ajax_prompt_subscribe_widget_content', array( 'Prompt_Ajax_Handling', 'action_wp_ajax_prompt_subscribe_widget_content' ) );
+		add_action( 'wp_ajax_nopriv_prompt_subscribe_widget_content', array( 'Prompt_Ajax_Handling', 'action_wp_ajax_prompt_subscribe_widget_content' ) );
 		add_action( 'wp_ajax_prompt_get_commenters', array( 'Prompt_Ajax_Handling', 'action_wp_ajax_prompt_get_commenters' ) );
 		add_action( 'wp_ajax_prompt_comment_unsubscribe', array( 'Prompt_Ajax_Handling', 'action_wp_ajax_prompt_comment_unsubscribe' ) );
 		add_action( 'wp_ajax_nopriv_prompt_comment_unsubscribe', array( 'Prompt_Ajax_Handling', 'action_wp_ajax_prompt_comment_unsubscribe' ) );
@@ -65,8 +67,11 @@ class Prompt_Core {
 		add_action( 'comment_post', array( 'Prompt_Comment_Form_Handling', 'handle_form' ), 10, 2 );
 		add_action( 'comment_form_after', array( 'Prompt_Comment_Form_Handling', 'after_form' ) );
 
+		add_action( 'admin_enqueue_scripts', array( 'Prompt_Admin_Users_Handling', 'enqueue_scripts' ) );
 		add_filter( 'manage_users_columns', array( 'Prompt_Admin_Users_Handling', 'manage_users_columns' ) );
 		add_filter( 'manage_users_custom_column', array( 'Prompt_Admin_Users_Handling', 'subscriptions_column' ), 10, 3 );
+
+		add_action( 'admin_post_prompt_subscribers_export_csv', array( 'Prompt_Admin_Subscribers_Export', 'export_subscribers_csv' ) );
 
 		add_image_size( 'prompt-post-featured', 1480, 600, true );
 	}
@@ -75,7 +80,7 @@ class Prompt_Core {
 	 * Instantiate SCB framework classes.
 	 */
 	public static function action_plugins_loaded() {
-		$invite_intro = __( 'This is an invitation to subscribe to email updates from this website. We hope it is welcome, but we promise we won\'t contact you again unless you respond.', 'Prompt_Core' );
+		$invite_intro = __( 'This is an invitation to subscribe to email updates from this website. We hope it is welcome, but we promise we won\'t contact you again unless you respond.', 'Postmatic' );
 		$default_options = array(
 			'auto_subscribe_authors' => true,
 			'prompt_key' => '',
@@ -91,7 +96,7 @@ class Prompt_Core {
 			'email_footer_text' => '',
 			'plan' => '',
 			'email_transport' => Prompt_Enum_Email_Transports::API,
-			'messages' => array( 'welcome' => __( 'Welcome!', 'Prompt_Core' ) ),
+			'messages' => array( 'welcome' => __( 'Welcome!', 'Postmatic' ) ),
 			'invite_introduction' => $invite_intro,
 			'last_version' => 0,
 			'enable_collection' => false,
@@ -201,7 +206,7 @@ class Prompt_Core {
 
 			self::$delivery_metabox = new Prompt_Admin_Delivery_Metabox(
 				'prompt_delivery',
-				__( 'Postmatic Delivery', 'Prompt_Core' ),
+				__( 'Postmatic Delivery', 'Postmatic' ),
 				array(
 					'post_type' => self::$options->get( 'site_subscription_post_types' ),
 					'context' => 'side',

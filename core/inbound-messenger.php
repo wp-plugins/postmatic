@@ -19,7 +19,7 @@ class Prompt_Inbound_Messenger {
 		if ( is_wp_error( $response ) or 200 != $response['response']['code'] )
 			return Prompt_Logging::add_error(
 				'pull_updates_http',
-				__( 'A request for inbound messages failed.', 'Prompt_Core' ),
+				__( 'A request for inbound messages failed.', 'Postmatic' ),
 				$response
 			);
 
@@ -28,7 +28,7 @@ class Prompt_Inbound_Messenger {
 		if ( !isset( $data->updates ) )
 			return Prompt_Logging::add_error(
 				'pull_updates_empty',
-				__( 'Inbound messages arrived in an unrecognized format.', 'Prompt_Core' ),
+				__( 'Inbound messages arrived in an unrecognized format.', 'Postmatic' ),
 				$data
 			);
 
@@ -54,7 +54,7 @@ class Prompt_Inbound_Messenger {
 			//TODO: schedule a retry
 			return Prompt_Logging::add_error(
 				'updates_put_http',
-				__( 'Failed to acknowledge receipt of messages - they may arrive again.', 'Prompt_Core' ),
+				__( 'Failed to acknowledge receipt of messages - they may arrive again.', 'Postmatic' ),
 				compact( 'response', 'results' )
 			);
 		}
@@ -74,7 +74,7 @@ class Prompt_Inbound_Messenger {
 
 		Prompt_Logging::add_error(
 			'unknown_update_type',
-			__( 'Unable to deliver a message of unknown type.', 'Prompt_Core' ),
+			__( 'Unable to deliver a message of unknown type.', 'Postmatic' ),
 			$update
 		);
 

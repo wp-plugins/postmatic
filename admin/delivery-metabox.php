@@ -86,7 +86,7 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 				array(
 					'type' => 'checkbox',
 					'name' => self::$no_email_name,
-					'desc' => __( 'Do not deliver this post via email.', 'Prompt_Core' ),
+					'desc' => __( 'Do not deliver this post via email.', 'Postmatic' ),
 					'checked' => self::suppress_email( $this->post->ID ),
 				)
 			)
@@ -97,7 +97,7 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 				array(
 					'type' => 'checkbox',
 					'name' => self::$no_featured_image_name,
-					'desc' => __( 'Do not use the featured image in email.', 'Prompt_Core' ),
+					'desc' => __( 'Do not use the featured image in email.', 'Postmatic' ),
 					'checked' => self::suppress_featured_image( $this->post->ID ),
 				)
 			)
@@ -108,7 +108,7 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 				array(
 					'type' => 'submit',
 					'name' => self::$preview_email_name,
-					'value' => __( 'Send me a preview email', 'Prompt_Core' ),
+					'value' => __( 'Send me a preview email', 'Postmatic' ),
 					'class' => 'button',
 				)
 			)

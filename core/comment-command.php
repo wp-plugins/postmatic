@@ -54,12 +54,12 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 	protected function validate() {
 
 		if ( !is_array( $this->keys ) or count( $this->keys ) != 2 ) {
-			trigger_error( __( 'Invalid comment keys', 'Prompt_Core' ), E_USER_WARNING );
+			trigger_error( __( 'Invalid comment keys', 'Postmatic' ), E_USER_WARNING );
 			return false;
 		}
 
 		if ( empty( $this->message ) ) {
-			trigger_error( __( 'Invalid message', 'Prompt_Core' ), E_USER_WARNING );
+			trigger_error( __( 'Invalid message', 'Postmatic' ), E_USER_WARNING );
 			return false;
 		}
 
@@ -142,7 +142,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 
 		if ( !$post or 'publish' != $post->post_status or !comments_open( $this->post_id ) ) {
 			trigger_error(
-				sprintf( __( 'rejected comment on unqualified post %s', 'Prompt_Core' ), $this->post_id ),
+				sprintf( __( 'rejected comment on unqualified post %s', 'Postmatic' ), $this->post_id ),
 				E_USER_NOTICE
 			);
 			Prompt_Comment_Mailing::send_rejected_notification( $this->user_id, $this->post_id );
@@ -151,7 +151,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 
 		if ( $this->comment_exists( $text ) ) {
 			trigger_error(
-				sprintf( __( 'rejected duplicate comment on %s', 'Prompt_Core' ), $this->post_id ),
+				sprintf( __( 'rejected duplicate comment on %s', 'Postmatic' ), $this->post_id ),
 				E_USER_NOTICE
 			);
 			return;

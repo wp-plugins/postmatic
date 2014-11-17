@@ -3,7 +3,7 @@
 class Prompt_Post_Mailing {
 
 	/** @var array */
-	protected static $shortcode_whitelist = array( 'gallery', 'caption' );
+	protected static $shortcode_whitelist = array( 'gallery', 'caption', 'wpv-post-body', 'types' );
 
 	/**
 	 * Send email notifications for a post.
@@ -180,10 +180,10 @@ class Prompt_Post_Mailing {
 			return do_shortcode_tag( $m );
 
 		$link = html( 'div class="incompatible"',
-			__( 'This content is not compatible with your email client.', 'Prompt_Core' ),
+			__( 'This content is not compatible with your email client.', 'Postmatic' ),
 			html( 'a',
 				array( 'href' => get_permalink() ),
-			__( 'Click here to view this post in your browser.', 'Prompt_Core' )
+			__( 'Click here to view this post in your browser.', 'Postmatic' )
 			)
 		);
 
@@ -217,16 +217,16 @@ class Prompt_Post_Mailing {
 		$email = new Prompt_Email();
 		$email->set_to_address( $recipient->user_email );
 		$email->set_from_address( $recipient->display_name );
-		$email->set_subject( sprintf( __( 'Prompt delivery issue for %s', 'Prompt_Core' ), get_option( 'blogname' ) ) );
+		$email->set_subject( sprintf( __( 'Delivery issue for %s', 'Postmatic' ), get_option( 'blogname' ) ) );
 		$email->set_message(
 			sprintf(
-				__( 'Delivery of subscription notifications for the post "%s" may have failed.', 'Prompt_Core' ),
+				__( 'Delivery of subscription notifications for the post "%s" may have failed.', 'Postmatic' ),
 				get_the_title( $post )
 			) .
 			' ' .
-			__( 'A site administrator can report this event to the development team from the Prompt settings.', 'Prompt_Core' ) .
+			__( 'A site administrator can report this event to the development team from the Postmatic settings.', 'Postmatic' ) .
 			' ' .
-			__( 'The error message was: ', 'Prompt_Core' ) . $error->get_error_message()
+			__( 'The error message was: ', 'Postmatic' ) . $error->get_error_message()
 		);
 
 		$email->set_content_type( Prompt_Enum_Content_Types::TEXT );

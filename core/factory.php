@@ -46,4 +46,12 @@ class Prompt_Factory {
 	public static function make_configurator( Prompt_Api_Client $client = null ) {
 		return apply_filters( 'prompt/make_configurator', new Prompt_Configurator( $client ) );
 	}
+
+
+	/**
+	 * @return Prompt_Admin_Jetpack_Import
+	 */
+	public static function make_jetpack_import() {
+		return apply_filters( 'prompt/make_jetpack_import', Prompt_Admin_Jetpack_Import::make() );
+	}
 }

@@ -1,35 +1,66 @@
 var prompt_subscribe_form_env;
 
 jQuery( function( $ ) {
-	var $form = $( 'form.prompt-subscribe' ),
-		$message = $form.find( '.message' ),
-		$inputs = $form.find( '.inputs' ),
-		$expand_list = $form.find( '.expand-list' ),
-		$subscriber_list = $form.find( '.subscriber-list' ),
-		$loading_indicator = $form.find( '.loading-indicator' ),
-		$nonce_input = $form.find( 'input[name=subscribe_nonce]' ),
-		$prompts = $form.find( '.prompt' ).hide(),
-		$show_unsubscribe_link = $form.find( 'a.show-unsubscribe' ),
-		$submit_input = $form.find( 'input[name=subscribe_submit]' ),
-		$cancel_link = $form.find( 'a.cancel' ),
+	var $widget = $( '.widget_prompt_subscribe_widget' ),
+		$form,
+		$message,
+		$inputs,
+		$expand_list,
+		$subscriber_list,
+		$loading_indicator,
+		$nonce_input,
+		$prompts,
+		$show_unsubscribe_link,
+		$submit_input,
+		$cancel_link,
 		$confirm_unsubscribe_input = $( '<input name="confirm_unsubscribe" type="hidden" value="1" />' );
 
-	$nonce_input.val( prompt_subscribe_form_env.nonce );
-
-	$cancel_link.hide();
-	$prompts.filter( '.' + $submit_input.val() ).show();
-
-	$show_unsubscribe_link.click( switch_to_unsubscribe );
-
-	$cancel_link.click( switch_to_subscribe );
-
-	enable_placeholders();
-
-	$expand_list.click( function() {
-		$subscriber_list.slideToggle();
+	$.ajax( {
+		url: prompt_subscribe_form_env.ajaxurl,
+		method: 'GET',
+		data: {
+			action: 'prompt_subscribe_widget_content',
+			widget_id: $widget.attr( 'id' ),
+			collect_name: $widget.find( '.dynamic-content' ).data( 'collectName' ),
+			object_type: prompt_subscribe_form_env.object_type,
+			object_id: prompt_subscribe_form_env.object_id
+		},
+		success: load_form
 	} );
 
-	$form.submit( submit_form );
+	function load_form( content ) {
+
+		$widget.find( '.dynamic-content' ).html( content );
+		$form = $widget.find( 'form.prompt-subscribe' );
+		$message = $form.find( '.message' );
+		$inputs = $form.find( '.inputs' );
+		$expand_list = $form.find( '.expand-list' );
+		$subscriber_list = $form.find( '.subscriber-list' );
+		$loading_indicator = $form.find( '.loading-indicator' );
+		$nonce_input = $form.find( 'input[name=subscribe_nonce]' );
+		$prompts = $form.find( '.prompt' ).hide();
+		$show_unsubscribe_link = $form.find( 'a.show-unsubscribe' );
+		$submit_input = $form.find( 'input[name=subscribe_submit]' );
+		$cancel_link = $form.find( 'a.cancel' );
+
+		$nonce_input.val( prompt_subscribe_form_env.nonce );
+
+		$cancel_link.hide();
+		$prompts.filter( '.' + $submit_input.val() ).show();
+
+		$show_unsubscribe_link.click( switch_to_unsubscribe );
+
+		$cancel_link.click( switch_to_subscribe );
+
+		enable_placeholders();
+
+		$expand_list.click( function() {
+			$subscriber_list.slideToggle();
+		} );
+
+		$form.submit( submit_form );
+
+	}
 
 	function switch_to_unsubscribe( e ) {
 		e.preventDefault();

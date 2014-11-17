@@ -27,6 +27,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$this->add_tab( new Prompt_Admin_Email_Options_Tab( $options, $overrides ) );
 		$this->add_tab( new Prompt_Admin_Invite_Options_Tab( $options, $overrides ) );
 		$this->add_tab( new Prompt_Admin_Options_Options_Tab( $options, $overrides ) );
+		$this->add_tab( new Prompt_Admin_Import_Options_Tab( $options, $overrides ) );
 	}
 
 	public function add_tab( Prompt_Admin_Options_Tab $tab ) {
@@ -75,17 +76,17 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			return;
 
 		if ( empty( $msg ) )
-			$msg = __( 'Settings <strong>saved</strong>.', 'Prompt_Core' );
+			$msg = __( 'Settings <strong>saved</strong>.', 'Postmatic' );
 
 		echo scb_admin_notice( $msg, $class );
 	}
 
 	public function submitted_errors_admin_msg() {
-		$this->admin_msg( __( 'Report sent! Our bug munchers thank you for the meal.', 'Prompt_Core' ) );
+		$this->admin_msg( __( 'Report sent! Our bug munchers thank you for the meal.', 'Postmatic' ) );
 	}
 
 	public function beta_request_sent_admin_msg() {
-		$this->admin_msg( __( 'Request sent. We are currently sending a few hundred tokens per week. Expect to receive yours within 1-2 days. You can safely leave Postmatic activated but it is not necessary to do so.', 'Prompt_Core' ) );
+		$this->admin_msg( __( 'Request sent. We are currently sending a few hundred tokens per week. Expect to receive yours within 1-2 days. You can safely leave Postmatic activated but it is not necessary to do so.', 'Postmatic' ) );
 	}
 
 	/**
@@ -120,7 +121,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 	public function setup() {
 		$this->args = array(
-			'page_title' => __( 'Postmatic', 'Prompt_Core' ),
+			'page_title' => __( 'Postmatic', 'Postmatic' ),
 		);
 
 		if (
@@ -161,17 +162,17 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			self::render_key_form();
 
 			echo html( 'div class="initialize-key"',
-				html( 'h2', __( 'Have a key?', 'Prompt_Core' ) ),
+				html( 'h2', __( 'Have a key?', 'Postmatic' ) ),
 				$this->form_table( array(
 					array(
-						'title' => __( 'Postmatic Key', 'Prompt_Core' ),
+						'title' => __( 'Postmatic Key', 'Postmatic' ),
 						'type' => 'text',
 						'name' => 'prompt_key',
 						'desc' => sprintf(
 							'%s<br/>%s <a href="http://gopostmatic.com/tos" target="_blank">%s</a>.',
-							__( 'Once you have your key, enter it here to blast off!', 'Prompt_Core' ),
-							__( 'By entering a valid api key and activating Postmatic you agree to the', 'Prompt_Core' ),
-							__( 'terms of service', 'Prompt_Core' )
+							__( 'Once you have your key, enter it here to blast off!', 'Postmatic' ),
+							__( 'By entering a valid api key and activating Postmatic you agree to the', 'Postmatic' ),
+							__( 'terms of service', 'Postmatic' )
 						)
 					),
 				) )
@@ -195,6 +196,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			),
 			$panels
 		);
+
 	}
 
 	protected function log_alert() {
@@ -228,8 +230,8 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 					implode( '', $rows )
 				),
 				html( 'input', array( 'type' => 'hidden', 'name' => 'error_alert',  'value' => '1' ) ),
-				get_submit_button( __( 'Dismiss', 'Prompt_Core' ), 'primary large', 'dismiss_errors' ),
-				get_submit_button( __( 'Submit A Bug Report', 'Prompt_Core' ), 'left', 'submit_errors' )
+				get_submit_button( __( 'Dismiss', 'Postmatic' ), 'primary large', 'dismiss_errors' ),
+				get_submit_button( __( 'Submit A Bug Report', 'Postmatic' ), 'left', 'submit_errors' )
 			)
 		);
 	}
@@ -242,7 +244,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		if ( empty( $sidebars ) ) {
 			$content = html(
 				'p',
-				__( 'Your current theme has no widget areas. This means you\'ll have to use the template tag to display the Postmatic Subscription widget.', 'Prompt_Core' ),
+				__( 'Your current theme has no widget areas. This means you\'ll have to use the template tag to display the Postmatic Subscription widget.', 'Postmatic' ),
 				html( 'pre class="code"', htmlentities( '<?php the_widget( \'Prompt_Subscribe_Widget\', array( \'title\' => \'Subscribe by email\', \'collect_name\' => false ) ); ?>' ) ),
 				'&nbsp;',
 				$dismiss_link
@@ -250,7 +252,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		} else {
 			$content = html(
 				'p',
-				__( 'To get started now, place the Postmatic Subscribe widget where people can use it to subscribe!', 'Prompt_Core' ),
+				__( 'To get started now, place the Postmatic Subscribe widget where people can use it to subscribe!', 'Postmatic' ),
 				'&nbsp;',
 				html( 'a', array( 'href' => admin_url( 'widgets.php' ), 'class' => 'button' ), __( 'Visit Your Widgets' ) ),
 				'&nbsp;',
@@ -302,13 +304,13 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	protected function support_content() {
 		return html(
 			'div class="ui-widget"',
-			html( 'div class="ui-widget-header ui-corner-top"', __( 'Get Support', 'Prompt_Core' ) ),
+			html( 'div class="ui-widget-header ui-corner-top"', __( 'Get Support', 'Postmatic' ) ),
 			html(
 				'div class="ui-widget-content ui-corner-bottom"',
 				html(
 					'a',
 					array( 'href' => self::SUPPORT_URL ),
-					__( 'View the FAQ and submit support requests at gopostmatic.com.', 'Prompt_Core' )
+					__( 'View the FAQ and submit support requests at gopostmatic.com.', 'Postmatic' )
 				)
 			)
 		);
@@ -322,7 +324,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$feed = fetch_feed( 'http://gopostmatic.com/feed' );
 
 		if ( is_wp_error( $feed ) )
-			return __( 'No news available at the moment.', 'Prompt_Core' );
+			return __( 'No news available at the moment.', 'Postmatic' );
 
 		$item_count = $feed->get_item_quantity( 3 );
 
@@ -340,7 +342,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		return html(
 			'div class="ui-widget"',
-			html( 'div class="ui-widget-header ui-corner-top"', __( 'Postmatic News', 'Prompt_Core' ) ),
+			html( 'div class="ui-widget-header ui-corner-top"', __( 'Postmatic News', 'Postmatic' ) ),
 			html(
 				'div class="ui-widget-content ui-corner-bottom"',
 				html( 'ul class="prompt-news"', $news_items )
@@ -355,16 +357,16 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$lead = html(
 			'div',
 			array( 'class' => 'description' ),
-			html( 'h1', __( 'Welcome to Postmatic. Let\'s get started.', 'Prompt_Core' ) ),
-			html( 'p', __( 'Postmatic is in limited-access beta and requires an activation key.', 'Prompt_Core' ) ),
-			html( 'h2', __( 'Need a key?', 'Prompt_Core' ) )
+			html( 'h1', __( 'Welcome to Postmatic. Let\'s get started.', 'Postmatic' ) ),
+			html( 'p', __( 'Postmatic is in limited-access beta and requires an activation key.', 'Postmatic' ) ),
+			html( 'h2', __( 'Need a key?', 'Postmatic' ) )
 		);
 
 		$key_url = self::KEY_URL . '/sites/link?ajax_url=' . urlencode( admin_url( 'admin-ajax.php' ) );
 
 		$rows = array(
 			$this->row_wrap(
-				__( 'First Name', 'Prompt_Core' ),
+				__( 'First Name', 'Postmatic' ),
 				$this->input(
 					array(
 						'type' => 'text',
@@ -375,7 +377,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 				)
 			),
 			$this->row_wrap(
-				__( 'Last Name', 'Prompt_Core' ),
+				__( 'Last Name', 'Postmatic' ),
 				$this->input(
 					array(
 						'type' => 'text',
@@ -386,7 +388,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 				)
 			),
 			$this->row_wrap(
-				__( 'Email', 'Prompt_Core' ),
+				__( 'Email', 'Postmatic' ),
 				$this->input(
 					array(
 						'type' => 'text',
@@ -406,7 +408,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 				html( 'div', $this->table_wrap( implode( '', $rows ) ) ),
 				array(
 					'action' => 'send_beta_request',
-					'value' => __( 'Request a free Postmatic Api Key', 'Prompt_Core' ),
+					'value' => __( 'Request a free Postmatic Api Key', 'Postmatic' ),
 					'class' => 'button-primary',
 				)
 			)
@@ -425,13 +427,13 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 				$status = html(
 					'p class="ui-state-highlight"',
 					html( 'span', array( 'class' => 'ui-icon ui-icon-check' ) ),
-					__( 'Installed and Active', 'Prompt_Core' )
+					__( 'Installed and Active', 'Postmatic' )
 				);
 			} else {
 				$status = html(
 					'a',
 					array( 'href' => $add_on['PluginURI'], 'class' => 'button', 'target' => '_blank' ),
-					__( 'Purchase', 'Prompt_Core' )
+					__( 'Purchase', 'Postmatic' )
 				);
 			}
 
@@ -473,14 +475,14 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		if ( is_wp_error( $response ) or !in_array( $response['response']['code'], array( 200, 401 ) ) ) {
 			return Prompt_Logging::add_error(
 				'key_http_error',
-				__( 'There\'s a problem verifying your key. Please try later or report this error.', 'Prompt_Core' ),
+				__( 'There\'s a problem verifying your key. Please try later or report this error.', 'Postmatic' ),
 				$response
 			);
 		}
 
 		if ( 401 == $response['response']['code'] ) {
 			$message = sprintf(
-				__( 'We didn\'t recognize the key "%s". Please make sure it matches the one we gave you.', 'Prompt_Core' ),
+				__( 'We didn\'t recognize the key "%s". Please make sure it matches the one we gave you.', 'Postmatic' ),
 				$key
 			);
 			return new WP_Error( 'invalid_key', $message );
@@ -531,7 +533,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		if ( is_wp_error( $sent ) ) {
 			Prompt_Logging::add_error(
 				'bug_submission_error',
-				__( 'We\'re even having trouble sending a bug report. Please copy the data to the right and send to support@gopostmatic.com.', 'Prompt_Core' ),
+				__( 'We\'re even having trouble sending a bug report. Please copy the data to the right and send to support@gopostmatic.com.', 'Postmatic' ),
 				$sent
 			);
 			return;
@@ -546,7 +548,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			add_settings_error(
 				'send_beta_request',
 				'invalid_email',
-				__( 'Please enter a valid email address.', 'Prompt_Core' )
+				__( 'Please enter a valid email address.', 'Postmatic' )
 			);
 			return;
 		}

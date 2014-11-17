@@ -3,7 +3,7 @@
 class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 
 	public function name() {
-		return __( 'Invite Subscribers', 'Prompt_Core' );
+		return __( 'Invite Subscribers', 'Postmatic' );
 	}
 
 	public function slug() {
@@ -35,13 +35,13 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 			$to_address = Prompt_Email::address( $recipient );
 
 			if ( !is_email( $to_address ) ) {
-				$failures[] = __( 'Invalid email address', 'Prompt_Core' ) . ': ' . $recipient;
+				$failures[] = __( 'Invalid email address', 'Postmatic' ) . ': ' . $recipient;
 				continue;
 			}
 
 			$user = get_user_by( 'email', $to_address );
 			if ( $user and $prompt_site->is_subscribed( $user->ID ) ) {
-				$failures[] = __( 'Already subscribed', 'Prompt_Core' ) . ': ' . $recipient;
+				$failures[] = __( 'Already subscribed', 'Postmatic' ) . ': ' . $recipient;
 				continue;
 			}
 
@@ -66,12 +66,12 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 				array( $prompt_site, $users_data, $message_data )
 			);
 
-			$confirmation_format = _n( 'Success. %d invite sent.', 'Success. %d invites sent.', count( $users_data ), 'Prompt_Core' );
+			$confirmation_format = _n( 'Success. %d invite sent.', 'Success. %d invites sent.', count( $users_data ), 'Postmatic' );
 			$this->add_notice( sprintf( $confirmation_format, count( $users_data ) ) );
 		}
 
 		if ( !empty( $failures ) ) {
-			$failure_notice = __( 'Something went wrong and these invites were not sent: ', 'Prompt_Core' ) . '<br/>' . implode( '<br/>', $failures );
+			$failure_notice = __( 'Something went wrong and these invites were not sent: ', 'Postmatic' ) . '<br/>' . implode( '<br/>', $failures );
 			$this->add_notice( $failure_notice, 'error' );
 		}
 
@@ -79,21 +79,21 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 
 	public function render() {
 
-		$introduction = __( '<h2>Send email invitations to subscribe to your site</h2><p>Use this tool to reach out to your community of past or current commenters. Be sure to check the subject and introductory text below.<p>', 'Prompt_Core' );
+		$introduction = __( '<h2>Send email invitations to subscribe to your site</h2><p>Use this tool to reach out to your community of past or current commenters. Be sure to check the subject and introductory text below.<p>', 'Postmatic' );
 
 		$rows = array(
 			$this->row_wrap(
-				__( 'Email Subject', 'Prompt_Core' ),
+				__( 'Email Subject', 'Postmatic' ),
 				$this->input(
 					array(
 						'type' => 'text',
 						'name' => 'invite_subject',
-						'value' => sprintf( __( 'You\'re invited to subscribe to %s', 'Prompt_Core' ), get_option( 'blogname' ) ),
+						'value' => sprintf( __( 'You\'re invited to subscribe to %s', 'Postmatic' ), get_option( 'blogname' ) ),
 					)
 				)
 			),
 			$this->row_wrap(
-				__( 'Email Introduction<br /><small>This text will be placed at the top of invitation message. Make it as friendly and personalized as you can.', 'Prompt_Core' ),
+				__( 'Email Introduction<br /><small>This text will be placed at the top of invitation message. Make it as friendly and personalized as you can.', 'Postmatic' ),
 				$this->input(
 					array(
 						'type' => 'textarea',
@@ -104,17 +104,17 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 				)
 			),
 			html( 'tr class="recipient-type"',
-				html( 'th', __( 'Who should we send this invite to?', 'Prompt_Core' ) ),
+				html( 'th', __( 'Who should we send this invite to?', 'Postmatic' ) ),
 				html( 'td',
 					$this->input(
 						array(
 							'type' => 'radio',
 							'name' => 'recipient_type',
 							'choices' => array(
-								'manual' => __( 'A list of email addresses', 'Prompt_Core' ),
-								'recent' => __( 'People who have recently commented', 'Prompt_Core' ),
-								'count' => __( 'People who comment the most', 'Prompt_Core' ),
-								'all' => __( 'Anyone that has ever commented', 'Prompt_Core' ),
+								'manual' => __( 'A list of email addresses', 'Postmatic' ),
+								'recent' => __( 'People who have recently commented', 'Postmatic' ),
+								'count' => __( 'People who comment the most', 'Postmatic' ),
+								'all' => __( 'Anyone that has ever commented', 'Postmatic' ),
 							),
 						),
 						$_POST
@@ -129,7 +129,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 						array(
 							'type' => 'textarea',
 							'name' => 'manual_addresses',
-							'desc' => __( '<br />Please separate addresses with commas.', 'Prompt_Core' ),
+							'desc' => __( '<br />Please separate addresses with commas.', 'Postmatic' ),
 						)
 					)
 				)
@@ -142,13 +142,13 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 						array(
 							'type' => 'select',
 							'name' => 'activity_months',
-							'desc' => __( 'Send this invitation to people who have had an approved comment within the last', 'Prompt_Core' ),
+							'desc' => __( 'Send this invitation to people who have had an approved comment within the last', 'Postmatic' ),
 							'desc_pos' => 'before',
 							'choices' => range( 1, 48 ),
 						),
 						$_POST
 					),
-					html( 'label', __( 'months.', 'Prompt_Core' ) )
+					html( 'label', __( 'months.', 'Postmatic' ) )
 				)
 			),
 			html(
@@ -159,34 +159,34 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 						array(
 							'type' => 'select',
 							'name' => 'minimum_count',
-							'desc' => __( 'Send this invitation to people who have at least', 'Prompt_Core' ),
+							'desc' => __( 'Send this invitation to people who have at least', 'Postmatic' ),
 							'desc_pos' => 'before',
 							'choices' => range( 2, 10 ),
 							'selected' => 5,
 						),
 						$_POST
 					),
-					html( 'label', __( 'approved comments.', 'Prompt_Core' ) )
+					html( 'label', __( 'approved comments.', 'Postmatic' ) )
 				)
 			),
 			html(
 				'tr class="recipient-list"',
-				html( 'th', __( 'Recipients', 'Prompt_Core' ) ),
+				html( 'th', __( 'Recipients', 'Postmatic' ) ),
 				html( 'td',
 					html( 'div class="loading-indicator" style="display: none;"',
 						html( 'img',
 							array(
 								'src' => path_join( Prompt_Core::$url_path, 'media/ajax-loader.gif' ),
-								'alt' => __( 'Loading...', 'Prompt_Core' ),
+								'alt' => __( 'Loading...', 'Postmatic' ),
 							)
 						)
 					),
 					html( 'p',
-						__( 'Based on the above your invite will be sent to', 'Prompt_Core' ),
+						__( 'Based on the above your invite will be sent to', 'Postmatic' ),
 						' ',
 						html( 'span class="recipient-count"', '0' ),
 						' ',
-						__( 'people.', 'Prompt_Core' )
+						__( 'people.', 'Postmatic' )
 					),
 					$this->input(
 						array(
@@ -201,7 +201,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 
 		return
 			$introduction .
-			$this->form_table_wrap( implode( '', $rows ), array( 'value' => __( 'Send Invites', 'Prompt_Core' ) ) );
+			$this->form_table_wrap( implode( '', $rows ), array( 'value' => __( 'Send Invites', 'Postmatic' ) ) );
 	}
 
 }

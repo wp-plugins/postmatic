@@ -72,8 +72,21 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.0 beta 6 =
+- Attempted to fix a caching error on some hosts which led to *invalid email address* errors when trying to subscribe. Let us know if you still see it.
+- Jetpack importing!
+- Added ability to export your active Postmatic users (from users.php)
+- Finally nailed a responsive image bug in some versions of gmail. Happy all the images!
+- Revised new post notification to make it even more obvious to reply to the email to leave a comment.
+- Added support for Nextgen Gallery images in emails.
+- Added support for displaying content from wp-types and views.
+- Removed support for custom post types. Temporarily. Sorry! We need to figure out a few things first.
+- Internationalization: Spanish translation. French and Dutch coming soon.
+
+
 = 1.0 beta 5 =
 Just a quick fix to address a couple of outstanding issues.
+
 - Improved support for full sized images aligned center. They will now be displayed responsively on mobile.
 - Changed default FROM name to reflect the blog name.
 

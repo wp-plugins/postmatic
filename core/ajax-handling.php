@@ -35,7 +35,7 @@ class Prompt_Ajax_Handling {
 		}
 
 		if ( !$subscriber and !$found_by_email and $confirm_unsubscribe ) {
-			printf( __( '%s is not subscribed to %s.', 'Prompt_Core' ), $email, $object->subscription_object_label() );
+			printf( __( '%s is not subscribed to %s.', 'Postmatic' ), $email, $object->subscription_object_label() );
 			wp_die();
 		}
 
@@ -55,7 +55,7 @@ class Prompt_Ajax_Handling {
 		}
 
 		if ( $confirm_unsubscribe ) {
-			printf( __( '%s is not subscribed to %s.', 'Prompt_Core' ), $email, $object->subscription_object_label() );
+			printf( __( '%s is not subscribed to %s.', 'Postmatic' ), $email, $object->subscription_object_label() );
 			wp_die();
 		}
 
@@ -112,7 +112,7 @@ class Prompt_Ajax_Handling {
 
 		$prompt_post->unsubscribe( $current_user->ID );
 
-		_e( 'You have unsubscribed.', 'Prompt_Core' );
+		_e( 'You have unsubscribed.', 'Postmatic' );
 
 		wp_die();
 	}
@@ -134,23 +134,23 @@ class Prompt_Ajax_Handling {
 
 		if ( $recipient_count == 0 ) {
 
-			$description = __( 'No emails will be sent for this post.', 'Prompt_Core' );
+			$description = __( 'No emails will be sent for this post.', 'Postmatic' );
 
 		} else if ( $sent_count == 0 and 'publish' != $prompt_post->get_wp_post()->post_status ) {
 
 			$description = sprintf(
-				__( 'This post will be sent to %d subscribers.', 'Prompt_Core' ),
+				__( 'This post will be sent to %d subscribers.', 'Postmatic' ),
 				$recipient_count
 			);
 
 		} else if ( $sent_count == 0 ) {
 
-			$description = __( 'No emails have been sent for this post.', 'Prompt_Core' );
+			$description = __( 'No emails have been sent for this post.', 'Postmatic' );
 
 		} else {
 
 			$description = sprintf(
-				__( 'This post has been sent to %d subscribers.', 'Prompt_Core' ),
+				__( 'This post has been sent to %d subscribers.', 'Postmatic' ),
 				$sent_count
 			);
 
@@ -191,7 +191,26 @@ class Prompt_Ajax_Handling {
 
 		Prompt_Factory::make_mailer()->send_one( $email );
 
-		wp_send_json( array( 'message' => __( 'Preview email sent.', 'Prompt_Core' ) ) );
+		wp_send_json( array( 'message' => __( 'Preview email sent.', 'Postmatic' ) ) );
+	}
+
+	/**
+	 * Handle dynamic widget content requests.
+	 */
+	public static function action_wp_ajax_prompt_subscribe_widget_content() {
+
+		$widget_id = sanitize_title( $_GET['widget_id'] );
+
+		$instance = array( 'collect_name' => !empty( $_GET['collect_name'] ) );
+
+		$object = new Prompt_Site();
+
+		if ( isset( $_GET['object_type'] ) and isset( $_GET['object_id'] ) )
+			$object = new $_GET['object_type']( $_GET['object_id'] );
+
+		Prompt_Subscribe_Widget::render_dynamic_content( $widget_id, $instance, $object );
+
+		wp_die();
 	}
 
 	/**
@@ -235,7 +254,7 @@ class Prompt_Ajax_Handling {
 		}
 
 		if ( isset( $_POST['subscribe_email'] ) and is_email( $_POST['subscribe_email'] ) === false ) {
-			return html( 'div class="error"', __( 'Sorry, that email address is not valid.', 'Prompt_Core' ) );
+			return html( 'div class="error"', __( 'Sorry, that email address is not valid.', 'Postmatic' ) );
 		}
 
 		return true;
@@ -259,7 +278,7 @@ class Prompt_Ajax_Handling {
 		Prompt_Subscription_Mailing::send_agreement( $object, $email, $user_data );
 
 		$message = html( 'strong',
-			__( 'Almost done - you\'ll receive an email with instructions to complete your subscription.', 'Prompt_Core' ),
+			__( 'Almost done - you\'ll receive an email with instructions to complete your subscription.', 'Postmatic' ),
 			' '
 		)  ;
 
@@ -274,11 +293,11 @@ class Prompt_Ajax_Handling {
 	}
 
 	protected static function confirm_unsubscribe( $email ) {
-		return sprintf( __( 'Are you sure you want to unsubscribe %s?', 'Prompt_Core' ), $email ) .
+		return sprintf( __( 'Are you sure you want to unsubscribe %s?', 'Postmatic' ), $email ) .
 			'<br />' .
-			html( 'a href="."', html( 'small', __( 'Not you? Click here to start over', 'Prompt_Core' ) ) ) .
+			html( 'a href="."', html( 'small', __( 'Not you? Click here to start over', 'Postmatic' ) ) ) .
 			html( 'input', array( 'type' => 'hidden', 'name' => 'confirm_unsubscribe', 'value' => 'Unsubscribe', ) ) .
-			html( 'input', array( 'type' => 'submit', 'value' => __( 'Unsubscribe', 'Prompt_Core' ) ) );
+			html( 'input', array( 'type' => 'submit', 'value' => __( 'Unsubscribe', 'Postmatic' ) ) );
 	}
 
 	/**
@@ -293,7 +312,7 @@ class Prompt_Ajax_Handling {
 
 		Prompt_Subscription_Mailing::send_unsubscription_notification( $subscriber->ID, $object );
 
-		return __( 'You have unsubscribed.', 'Prompt_Core' );
+		return __( 'You have unsubscribed.', 'Postmatic' );
 	}
 
 	/**
@@ -307,7 +326,7 @@ class Prompt_Ajax_Handling {
 
 		Prompt_Subscription_Mailing::send_subscription_notification( $subscriber->ID, $object );
 
-		return __( '<strong>Confirmation email sent. Please check your email for further instructions.</strong>', 'Prompt_Core' );
+		return __( '<strong>Confirmation email sent. Please check your email for further instructions.</strong>', 'Postmatic' );
 	}
 
 }

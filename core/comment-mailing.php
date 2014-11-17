@@ -66,8 +66,8 @@ class Prompt_Comment_Mailing {
 		$template_data = apply_filters( 'prompt/comment_reply_email/template_data', $template_data );
 
 		$subject = sprintf(
-			__( '%s replied to your comment on "%s"', 'Prompt_Core' ),
-			$from_name ? $from_name : __( 'Someone', 'Prompt_Core' ),
+			__( '%s replied to your comment on "%s"', 'Postmatic' ),
+			$from_name ? $from_name : __( 'Someone', 'Postmatic' ),
 			$prompt_post->get_wp_post()->post_title
 		);
 
@@ -165,7 +165,7 @@ class Prompt_Comment_Mailing {
 			 */
 			$template_data = apply_filters( 'prompt/comment_email/template_data', $template_data );
 
-			$subject = sprintf( __( 'New reply to "%s"', 'Prompt_Core' ), $prompt_post->get_wp_post()->post_title );
+			$subject = sprintf( __( 'New reply to "%s"', 'Postmatic' ), $prompt_post->get_wp_post()->post_title );
 			$template = Prompt_Template::locate( "new-comment-email.php" );
 			$command = new Prompt_Comment_Command();
 			$command->set_post_id( $prompt_post->id() );
@@ -217,7 +217,7 @@ class Prompt_Comment_Mailing {
 
 		$comment_author = get_userdata( $user_id );
 		$post = get_post( $post_id );
-		$post_title = $post ? $post->post_title : __( 'a deleted post', 'Prompt_Core' );
+		$post_title = $post ? $post->post_title : __( 'a deleted post', 'Postmatic' );
 
 		$template_data = compact( 'comment_author', 'post', 'post_title' );
 		/**
@@ -231,7 +231,7 @@ class Prompt_Comment_Mailing {
 		 */
 		$template_data = apply_filters( 'prompt/comment_rejected_email/template_data', $template_data );
 
-		$subject = sprintf( __( 'Unable to publish your reply to "%s"', 'Prompt_Core' ), $post_title );
+		$subject = sprintf( __( 'Unable to publish your reply to "%s"', 'Postmatic' ), $post_title );
 		$template = Prompt_Template::locate( 'comment-rejected-email.php' );
 		$email = new Prompt_Email( array(
 			'to_address' => $comment_author->user_email,

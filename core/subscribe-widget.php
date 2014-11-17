@@ -5,9 +5,9 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 	// Construct Widget
 	public function __construct() {
 		$default_options = array(
-			'description' => __( 'Get visitors subscribed to a user, post, or site with minimal fuss.', 'Prompt_Core' )
+			'description' => __( 'Get visitors subscribed to a user, post, or site with minimal fuss.', 'Postmatic' )
 		);
-		parent::__construct( false, __( 'Postmatic Subscribe', 'Prompt_Core' ), $default_options );
+		parent::__construct( false, __( 'Postmatic Subscribe', 'Postmatic' ), $default_options );
 	}
 
 	// Display Widget
@@ -15,51 +15,14 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 		$this->enqueue_widget_assets();
 
-		$commenter = wp_get_current_commenter();
-		$defaults = array(
-			'subscribe_name' => $commenter['comment_author'] ? $commenter['comment_author'] : '',
-			'subscribe_email' => $commenter['comment_author_email'] ? $commenter['comment_author_email'] : '',
-		);
-
-		$user = wp_get_current_user();
-		if ( !$user->exists() )
-			$user = get_user_by( 'email', $defaults['subscribe_email'] );
-
-		$default_object = get_queried_object();
-
-		// The widget will offer site subscriptions on single posts
-		$default_object = is_a( $default_object, 'WP_Post' ) ? null : $default_object;
-
-		$object = isset( $instance['object'] ) ? $instance['object'] : $default_object;
-		/**
-		 * Filter the target object for the subscription widget.
-		 *
-		 * @param object $object The post, user, etc.
-		 * @param Prompt_Subscribe_Widget $widget
-		 * @param array $instance The widget instance data.
-		 */
-		$object = apply_filters( 'prompt/subscribe_widget_object', $object, $this, $instance );
-
-		$object = Prompt_Subscribing::make_subscribable( $object );
-
-		if ( $user and $object->is_subscribed( $user->ID ) ) {
-			//TODO: Add readable submit address for groups?
-			$action = $this->unsubscribe_action();
-		} else {
-			$action = $this->subscribe_action();
-		}
-
-		$widget = $this;
-		$template_data = compact( 'widget', 'instance', 'user', 'object', 'action', 'defaults' );
-
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		echo $args['before_widget'] . $args['before_title'] . $title . $args['after_title'];
 
-		$template = Prompt_Template::locate( 'subscribe-form.php' );
-		Prompt_Template::render( $template, $template_data );
+		echo html( 'div', array( 'class' => 'dynamic-content', 'data-collect-name' => $instance['collect_name'] ) );
 
 		echo $args['after_widget'];
 	}
+
 
 	// Update Widget
 	public function update( $new_instance, $old_instance ) {
@@ -91,12 +54,47 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 		return $value;
 	}
 
-	public function subscribe_action() {
-		return __( 'subscribe', 'Prompt_Core' );
+	public static function subscribe_action() {
+		return __( 'subscribe', 'Postmatic' );
 	}
 
-	public function unsubscribe_action() {
-		return __( 'unsubscribe', 'Prompt_Core' );
+	public static function unsubscribe_action() {
+		return __( 'unsubscribe', 'Postmatic' );
+	}
+
+	/**
+	 * Emit markup for the dynamic portion of the widget content.
+	 *
+	 * @param string $widget_id
+	 * @param array $instance {
+	 *      Widget options
+	 *      @type boolean $collect_name
+	 * }
+	 * @param Prompt_Interface_Subscribable $object Target object for subscriptions
+	 */
+	public static function render_dynamic_content( $widget_id, $instance, $object ) {
+
+		$commenter = wp_get_current_commenter();
+		$defaults = array(
+			'subscribe_name' => $commenter['comment_author'] ? $commenter['comment_author'] : '',
+			'subscribe_email' => $commenter['comment_author_email'] ? $commenter['comment_author_email'] : '',
+		);
+
+		$user = wp_get_current_user();
+		if ( !$user->exists() )
+			$user = get_user_by( 'email', $defaults['subscribe_email'] );
+
+		if ( $user and $object->is_subscribed( $user->ID ) ) {
+			$action = self::unsubscribe_action();
+		} else {
+			$action = self::subscribe_action();
+		}
+
+		$template_data = compact( 'widget_id', 'instance', 'user', 'object', 'action', 'defaults' );
+
+		$template = Prompt_Template::locate( 'subscribe-form.php' );
+		Prompt_Template::render( $template, $template_data );
+
 	}
 
 	protected function enqueue_widget_assets() {
@@ -116,18 +114,43 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 		$script->enqueue();
 
+		$target_object = $this->get_target_object();
+
 		$script->localize(
 			'prompt_subscribe_form_env',
 			array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'spinner_url' => path_join( Prompt_Core::$url_path, 'media/ajax-loader.gif' ),
 				'nonce' => wp_create_nonce( Prompt_Ajax_Handling::AJAX_NONCE ),
-				'subscribe_action' => $this->subscribe_action(),
-				'unsubscribe_action' => $this->unsubscribe_action(),
-				'ajax_error_message' => __( 'Sorry, there was a problem reaching the server', 'Prompt_Core' ),
+				'subscribe_action' => self::subscribe_action(),
+				'unsubscribe_action' => self::unsubscribe_action(),
+				'ajax_error_message' => __( 'Sorry, there was a problem reaching the server', 'Postmatic' ),
+				'object_type' => get_class( $target_object ),
+				'object_id' => $target_object->id(),
 			)
 		);
 
 	}
 
+	/**
+	 * @return Prompt_Interface_Subscribable
+	 */
+	protected function get_target_object() {
+
+		$default_object = get_queried_object();
+
+		// The widget will offer site subscriptions on single posts
+		$object = is_a( $default_object, 'WP_Post' ) ? null : $default_object;
+
+		/**
+		 * Filter the target object for the subscription widget.
+		 *
+		 * @param object $object The post, user, etc.
+		 * @param Prompt_Subscribe_Widget $widget
+		 * @param array $instance The widget instance data.
+		 */
+		$object = apply_filters( 'prompt/subscribe_widget_object', $object, $this );
+
+		return Prompt_Subscribing::make_subscribable( $object );
+	}
  }

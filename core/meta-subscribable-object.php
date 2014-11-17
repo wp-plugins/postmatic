@@ -30,7 +30,7 @@ abstract class Prompt_Meta_Subscribable_Object implements Prompt_Interface_Subsc
 		if ( $user_id <= 0 ) {
 			Prompt_Logging::add_error(
 				'subscribe_user_invalid',
-				__( 'Refused an attempt to subscribe an invalid user ID.', 'Prompt_Core' ),
+				__( 'Refused an attempt to subscribe an invalid user ID.', 'Postmatic' ),
 				array( 'meta_type' => $this->meta_type, 'object_id' => $this->id, 'user_id' => $user_id )
 			);
 			return $this;
@@ -99,23 +99,17 @@ abstract class Prompt_Meta_Subscribable_Object implements Prompt_Interface_Subsc
 		return $wpdb->get_col( $query );
 	}
 
-	protected function _subscribed_counts( $users = null ) {
+	protected function _all_subscriber_ids() {
 		global $wpdb;
 
-		$id_field = $this->meta_type . '_id';
 		$table_property = $this->meta_type . 'meta';
 		$table = $wpdb->$table_property;
 
-		$sql_format = "SELECT {$wpdb->users}.id, COUNT(*) " .
+		$sql_format = "SELECT DISTINCT {$wpdb->users}.id " .
 			"FROM {$wpdb->users} " .
-			"JOIN {$table} ON meta_key=%s AND meta_value LIKE %s " .
-			"GROUP BY {$wpdb->users}.id";
+			"JOIN {$table} ON meta_key=%s AND meta_value LIKE CONCAT( '%%i:', {$wpdb->users}.id, ';%%' )";
 
-		$query = $wpdb->prepare(
-			$sql_format,
-			self::SUBSCRIBED_META_KEY,
-			'%i:' . $user_id . ';%'
-		);
+		$query = $wpdb->prepare( $sql_format, self::SUBSCRIBED_META_KEY );
 
 		return $wpdb->get_col( $query );
 	}

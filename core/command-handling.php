@@ -27,7 +27,7 @@ class Prompt_Command_Handling {
 		if ( !isset( self::$class_map[$class_id] ) ) {
 			Prompt_Logging::add_error(
 				'invalid_command_id',
-				__( 'Received a reply with invalid command data.', 'Prompt_Core' ),
+				__( 'Received a reply with invalid command data.', 'Postmatic' ),
 				$update
 			);
 			return null;
@@ -50,7 +50,7 @@ class Prompt_Command_Handling {
 		if ( !isset( $class_to_ids[$class] ) ) {
 			Prompt_Logging::add_error(
 				'invalid_command_id',
-				__( 'Tried to create an email with an unrecognized reply command.', 'Prompt_Core' ),
+				__( 'Tried to create an email with an unrecognized reply command.', 'Postmatic' ),
 				compact( 'command', 'email' )
 			);
 			return '';

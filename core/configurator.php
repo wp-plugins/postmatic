@@ -19,7 +19,7 @@ class Prompt_Configurator {
 		if ( is_wp_error( $response ) or 200 != $response['response']['code'] )
 			return Prompt_Logging::add_error(
 				'pull_configuration_http',
-				__( 'A request for site configuration failed.', 'Prompt_Core' ),
+				__( 'A request for site configuration failed.', 'Postmatic' ),
 				$response
 			);
 
@@ -28,7 +28,7 @@ class Prompt_Configurator {
 		if ( !isset( $data->site ) )
 			return Prompt_Logging::add_error(
 				'pull_configuration_site_missing',
-				__( 'Configuration data arrived in an unrecognized format.', 'Prompt_Core' ),
+				__( 'Configuration data arrived in an unrecognized format.', 'Postmatic' ),
 				$data
 			);
 

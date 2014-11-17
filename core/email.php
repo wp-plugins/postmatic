@@ -106,7 +106,7 @@ class Prompt_Email {
 		$defaults = array(
 			'to_address' => '',
 			'to_name' => '',
-			'subject' => __( 'This is a test email. By Postmatic.', 'Prompt_Core' ),
+			'subject' => __( 'This is a test email. By Postmatic.', 'Postmatic' ),
 			'message' => '',
 			'from_name' => get_option( 'blogname' ),
 			'from_address' =>  self::default_from_email(),
