@@ -1,7 +1,7 @@
 var prompt_subscribe_form_env;
 
 jQuery( function( $ ) {
-	var $widget = $( '.widget_prompt_subscribe_widget' ),
+	var $widget = $( '.prompt-subscribe-widget-content' ),
 		$form,
 		$message,
 		$inputs,
@@ -20,8 +20,8 @@ jQuery( function( $ ) {
 		method: 'GET',
 		data: {
 			action: 'prompt_subscribe_widget_content',
-			widget_id: $widget.attr( 'id' ),
-			collect_name: $widget.find( '.dynamic-content' ).data( 'collectName' ),
+			widget_id: $widget.data( 'widgetId' ),
+			collect_name: $widget.data( 'collectName' ),
 			object_type: prompt_subscribe_form_env.object_type,
 			object_id: prompt_subscribe_form_env.object_id
 		},
@@ -30,7 +30,7 @@ jQuery( function( $ ) {
 
 	function load_form( content ) {
 
-		$widget.find( '.dynamic-content' ).html( content );
+		$widget.html( content );
 		$form = $widget.find( 'form.prompt-subscribe' );
 		$message = $form.find( '.message' );
 		$inputs = $form.find( '.inputs' );

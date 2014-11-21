@@ -127,9 +127,8 @@ class Prompt_Post_Mailing {
 		$command->set_post_id( $template_data['prompt_post']->id() );
 		$command->set_user_id( $template_data['recipient']->ID );
 
-		// TODO: adjust from_name for add-on post types
 		$from_name = get_option( 'blogname' );
-		if ( $template_data['prompt_author']->id() )
+		if ( is_a( $template_data['subscribed_object'], 'Prompt_User' ) and $template_data['prompt_author']->id() )
 			$from_name .= ' [' . $template_data['prompt_author']->get_wp_user()->display_name . ']';
 
 		$email = new Prompt_Email( array(

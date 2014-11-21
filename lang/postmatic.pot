@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.0.0-beta6\n"
+"Email 1.0.0-beta7\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/1.0.0-"
-"beta6-20141117-1504\n"
-"POT-Creation-Date: 2014-11-17 23:04:41+00:00\n"
+"beta7-20141121-1012\n"
+"POT-Creation-Date: 2014-11-21 18:12:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -129,31 +129,25 @@ msgstr ""
 msgid "Jetpack Import"
 msgstr ""
 
-#: admin/import-options-tab.php:37
-msgid ""
-"Before you can import Jetpack subscribers, the Jetpack plugin and its Stats "
-"module must be active."
-msgstr ""
-
-#: admin/import-options-tab.php:48
+#: admin/import-options-tab.php:39
 msgid "We are ready to import email-only subscribers from Jetpack."
 msgstr ""
 
-#: admin/import-options-tab.php:53
+#: admin/import-options-tab.php:44
 msgid "Important:"
 msgstr ""
 
-#: admin/import-options-tab.php:69
+#: admin/import-options-tab.php:60
 msgid "Import from Jetpack"
 msgstr ""
 
-#: admin/import-options-tab.php:77
+#: admin/import-options-tab.php:70
 msgid "Imported one subscriber."
 msgid_plural "Imported %1$s subscribers."
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/import-options-tab.php:85
+#: admin/import-options-tab.php:78
 msgid "One user was already subscribed."
 msgid_plural "%2$s users were already subscribed."
 msgstr[0] ""
@@ -264,6 +258,22 @@ msgstr ""
 msgid "Send Invites"
 msgstr ""
 
+#: admin/jetpack-import.php:44
+msgid ""
+"The Jetpack import requires a common PHP extension called \"libxml\" that is "
+"not present."
+msgstr ""
+
+#: admin/jetpack-import.php:50
+msgid ""
+"Before you can import Jetpack subscribers, the Jetpack plugin and its Stats "
+"module must be active."
+msgstr ""
+
+#: admin/jetpack-import.php:183
+msgid "A request to the Jetpack servers failed."
+msgstr ""
+
 #: admin/options-options-tab.php:6
 msgid "Options"
 msgstr ""
@@ -306,7 +316,7 @@ msgid ""
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta6)  #-#-#-#-#
+#. #-#-#-#-#  postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta7)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:124
 msgid "Postmatic"
@@ -386,52 +396,56 @@ msgstr ""
 msgid "Postmatic is in limited-access beta and requires an activation key."
 msgstr ""
 
-#: admin/options-page.php:362
-msgid "Need a key?"
+#: admin/options-page.php:373
+msgid "You requested a key %s ago."
 msgstr ""
 
-#: admin/options-page.php:369
+#: admin/options-page.php:383
 msgid "First Name"
 msgstr ""
 
-#: admin/options-page.php:380
+#: admin/options-page.php:394
 msgid "Last Name"
 msgstr ""
 
-#: admin/options-page.php:391 templates/subscribe-form.php:78
+#: admin/options-page.php:405 templates/subscribe-form.php:78
 msgid "Email"
 msgstr ""
 
-#: admin/options-page.php:411
+#: admin/options-page.php:421
+msgid "Need a key?"
+msgstr ""
+
+#: admin/options-page.php:426
 msgid "Request a free Postmatic Api Key"
 msgstr ""
 
-#: admin/options-page.php:430
+#: admin/options-page.php:445
 msgid "Installed and Active"
 msgstr ""
 
-#: admin/options-page.php:436
+#: admin/options-page.php:451
 msgid "Purchase"
 msgstr ""
 
-#: admin/options-page.php:478
+#: admin/options-page.php:493
 msgid ""
 "There's a problem verifying your key. Please try later or report this error."
 msgstr ""
 
-#: admin/options-page.php:485
+#: admin/options-page.php:500
 msgid ""
 "We didn't recognize the key \"%s\". Please make sure it matches the one we "
 "gave you."
 msgstr ""
 
-#: admin/options-page.php:536
+#: admin/options-page.php:551
 msgid ""
 "We're even having trouble sending a bug report. Please copy the data to the "
 "right and send to support@gopostmatic.com."
 msgstr ""
 
-#: admin/options-page.php:551
+#: admin/options-page.php:566
 msgid "Please enter a valid email address."
 msgstr ""
 
@@ -636,30 +650,30 @@ msgstr ""
 msgid "Refused an attempt to subscribe an invalid user ID."
 msgstr ""
 
-#: core/post-mailing.php:183
+#: core/post-mailing.php:182
 msgid "This content is not compatible with your email client."
 msgstr ""
 
-#: core/post-mailing.php:186
+#: core/post-mailing.php:185
 msgid "Click here to view this post in your browser."
 msgstr ""
 
-#: core/post-mailing.php:220
+#: core/post-mailing.php:219
 msgid "Delivery issue for %s"
 msgstr ""
 
-#: core/post-mailing.php:223
+#: core/post-mailing.php:222
 msgid ""
 "Delivery of subscription notifications for the post \"%s\" may have failed."
 msgstr ""
 
-#: core/post-mailing.php:227
+#: core/post-mailing.php:226
 msgid ""
 "A site administrator can report this event to the development team from the "
 "Postmatic settings."
 msgstr ""
 
-#: core/post-mailing.php:229
+#: core/post-mailing.php:228
 msgid "The error message was: "
 msgstr ""
 
@@ -712,15 +726,15 @@ msgstr ""
 msgid "Postmatic Subscribe"
 msgstr ""
 
-#: core/subscribe-widget.php:58
+#: core/subscribe-widget.php:70
 msgid "subscribe"
 msgstr ""
 
-#: core/subscribe-widget.php:62
+#: core/subscribe-widget.php:74
 msgid "unsubscribe"
 msgstr ""
 
-#: core/subscribe-widget.php:127
+#: core/subscribe-widget.php:139
 msgid "Sorry, there was a problem reaching the server"
 msgstr ""
 

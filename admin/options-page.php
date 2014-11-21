@@ -4,11 +4,11 @@
  * Handle Prompt options and those of active add-ons.
  */
 class Prompt_Admin_Options_Page extends scbAdminPage {
-	const KEY_URL = 'https://app.gopostmatic.com';
-	const SUPPORT_URL = 'https://support.gopostmatic.com';
+	const SUPPORT_URL = 'http://gopostmatic.com/support';
 	const SUPPORT_EMAIL = 'support@gopostmatic.com';
 	const DISMISS_ERRORS_META_KEY = 'prompt_error_dismiss_time';
 	const BUG_REPORT_OPTION_NAME = 'prompt_error_submit_time';
+	const BETA_REQUEST_OPTION_NAME = 'prompt_beta_submit_time';
 
 	protected $_overridden_options;
 
@@ -358,11 +358,25 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			'div',
 			array( 'class' => 'description' ),
 			html( 'h1', __( 'Welcome to Postmatic. Let\'s get started.', 'Postmatic' ) ),
-			html( 'p', __( 'Postmatic is in limited-access beta and requires an activation key.', 'Postmatic' ) ),
-			html( 'h2', __( 'Need a key?', 'Postmatic' ) )
+			html( 'p', __( 'Postmatic is in limited-access beta and requires an activation key.', 'Postmatic' ) )
 		);
 
-		$key_url = self::KEY_URL . '/sites/link?ajax_url=' . urlencode( admin_url( 'admin-ajax.php' ) );
+		$beta_request_time = intval( get_option( self::BETA_REQUEST_OPTION_NAME ) );
+
+		if ( $beta_request_time ) {
+			echo html(
+				'div',
+				array( 'class' => 'get-prompt-key' ),
+				$lead,
+				html( 'p',
+					sprintf(
+						__( 'You requested a key %s ago.', 'Postmatic' ),
+						human_time_diff( $beta_request_time, time() )
+					)
+				)
+			);
+			return;
+		}
 
 		$rows = array(
 			$this->row_wrap(
@@ -404,6 +418,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			'div',
 			array( 'class' => 'get-prompt-key' ),
 			$lead,
+			html( 'h2', __( 'Need a key?', 'Postmatic' ) ),
 			$this->form_wrap(
 				html( 'div', $this->table_wrap( implode( '', $rows ) ) ),
 				array(
@@ -567,6 +582,8 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 				'Cc: jason@gopostmatic.com',
 			)
 		);
+
+		update_option( self::BETA_REQUEST_OPTION_NAME, time() );
 
 		add_action( 'admin_notices', array( $this, 'beta_request_sent_admin_msg' ) );
 	}

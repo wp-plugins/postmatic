@@ -13,12 +13,24 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 	// Display Widget
 	public function widget( $args, $instance ) {
 
+		$instance_defaults = array(
+			'title' => '',
+			'collect_name' => false,
+		);
+
+		$instance = wp_parse_args( $instance, $instance_defaults );
 		$this->enqueue_widget_assets();
 
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		echo $args['before_widget'] . $args['before_title'] . $title . $args['after_title'];
 
-		echo html( 'div', array( 'class' => 'dynamic-content', 'data-collect-name' => $instance['collect_name'] ) );
+		echo html( 'div',
+			array(
+				'class' => 'prompt-subscribe-widget-content',
+				'data-collect-name' => $instance['collect_name'],
+				'data-widget-id' => $this->id,
+			)
+		);
 
 		echo $args['after_widget'];
 	}

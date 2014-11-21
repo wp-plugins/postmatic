@@ -63,6 +63,9 @@ class Prompt_Admin_Subscribers_Export {
 
 		$origin = $prompt_user->get_subscriber_origin();
 
+		if ( !$origin )
+			$origin = new Prompt_Subscriber_Origin( array( 'timestamp' => strtotime( $user->user_registered ) ) );
+
 		$fields = array(
 			$user->user_email,
 			$user->first_name,

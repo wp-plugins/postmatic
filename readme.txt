@@ -2,7 +2,7 @@
 Contributors: vernalcreative
 Tags: email, subscription, comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, fantasticallyamazing
 Requires at least: 3.9
-Tested up to: 4.0
+Tested up to: 4.0.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -72,8 +72,18 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.0 beta 7 =
+
+This is mostly an under-the-hood release to take care of a few bugs and improve language support.
+
+- Fixed a few bugs with the user exporter throwing a 404.
+- Added support for Jetpack sharing (sharedaddy) buttons in the email template. Much better.
+- Added official French translation by beta user http://www.languagesbylaura.com. Thanks, Laura!
+- Added official Spanish translation by beta user http://www.languagesbylaura.com. Thanks again, Laura!
+- Added some host-specific preflight checks and better error reporting for Jetpack imports
+
 = 1.0 beta 6 =
-- Attempted to fix a caching error on some hosts which led to *invalid email address* errors when trying to subscribe. Let us know if you still see it.
+- Started loading subscription form via an ajax request, which should improve page load times and cooperate well with caching systems.
 - Jetpack importing!
 - Added ability to export your active Postmatic users (from users.php)
 - Finally nailed a responsive image bug in some versions of gmail. Happy all the images!

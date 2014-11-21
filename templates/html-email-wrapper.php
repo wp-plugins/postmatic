@@ -250,6 +250,25 @@
     .widgets li, .widgets ul {list-style: none !important; margin-left: 0 !important; padding-left: 0 !important;}
     .alignright {float: right !important; margin: 0 0 10px 10px !important;}
 
+/*Sharedaddy Support*/
+.sd-content ul li {
+  list-style: none;
+  display: inline;
+}
+
+.content .sd-content ul li a {
+  color: #555;
+  font-size: 12px;
+  padding: 5px 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  background: #F8F8F8;
+  text-decoration: none;
+
+}
+
 /*Beta styles*/
 
 .inverse td {padding: 4%;}

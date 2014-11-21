@@ -26,14 +26,38 @@ class Prompt_Admin_Jetpack_Import {
 	protected $imported_count = 0;
 	/** @var int */
 	protected $already_subscribed_count = 0;
+	/** @var WP_Error */
+	protected $error = null;
 
-	public static function is_jetpack_ready() {
-		return defined( 'STATS_VERSION' ) and function_exists( 'stats_get_option' );
+	/**
+	 * @return bool
+	 */
+	public static function is_usable() {
+		return !self::not_usable_message();
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function not_usable_message() {
+		if ( !class_exists( 'DOMDocument' ) or !function_exists( 'simplexml_import_dom' ) )
+			return __(
+				'The Jetpack import requires a common PHP extension called "libxml" that is not present.',
+				'Postmatic'
+			);
+
+		if ( !defined( 'STATS_VERSION' ) or !function_exists( 'stats_get_option' ) )
+			return __(
+				'Before you can import Jetpack subscribers, the Jetpack plugin and its Stats module must be active.',
+				'Postmatic'
+			);
+
+		return '';
 	}
 
 	public static function make() {
 
-		if ( !self::is_jetpack_ready() )
+		if ( !self::is_usable() )
 			return null;
 
 		return new Prompt_Admin_Jetpack_Import(
@@ -77,12 +101,19 @@ class Prompt_Admin_Jetpack_Import {
 	public function get_already_subscribed_count() {
 		return $this->already_subscribed_count;
 	}
-	
+
+	/**
+	 * @return WP_Error null if no error
+	 */
+	public function get_error() {
+		return $this->error;
+	}
+
 	public function execute() {
 		
 		do {
 			$this->fetch_next_page();
-		} while( $this->page_index <= $this->page_count );
+		} while( !$this->error and $this->page_index <= $this->page_count );
 
 		foreach ( $this->subscribers as $subscriber ) {
 			$this->import( $subscriber );
@@ -120,6 +151,7 @@ class Prompt_Admin_Jetpack_Import {
 		$this->imported_count++;
 
 	}
+
 	protected function fetch_next_page() {
 
 		$this->page_index++;
@@ -144,6 +176,15 @@ class Prompt_Admin_Jetpack_Import {
 		$user_id = $this->master_user;
 
 		$get = call_user_func( $this->remote_request, compact( 'url', 'method', 'timeout', 'user_id' ) );
+
+		if ( is_wp_error( $get ) or 200 != $get['response']['code'] ) {
+			$this->error = Prompt_Logging::add_error(
+				'prompt_jetpack_import_http',
+				__( 'A request to the Jetpack servers failed.', 'Postmatic' ),
+				compact( 'get' )
+			);
+			return;
+		}
 
 		$dom = new DOMDocument();
 		$dom->loadHTML( $get['body'] );

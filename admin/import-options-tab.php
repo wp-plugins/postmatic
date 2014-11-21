@@ -21,9 +21,8 @@ class Prompt_Admin_Import_Options_Tab extends Prompt_Admin_Options_Tab {
 	public function render() {
 		$content = html( 'h2', __( 'Jetpack Import', 'Postmatic' ) );
 
-		if ( ! Prompt_Admin_Jetpack_Import::is_jetpack_ready() )
-			return $content . $this->jetpack_unavailable_content();
-
+		if ( ! Prompt_Admin_Jetpack_Import::is_usable() )
+			return $content . $this->jetpack_not_usable_content( Prompt_Admin_Jetpack_Import::not_usable_message() );
 
 		if ( isset( $_POST['import_type'] ) and $this->jetpack_import_type == $_POST['import_type'] )
 			return $content . $this->jetpack_import_content();
@@ -31,16 +30,8 @@ class Prompt_Admin_Import_Options_Tab extends Prompt_Admin_Options_Tab {
 		return $content . $this->jetpack_ready_content();
 	}
 
-	protected function jetpack_unavailable_content() {
-		$content = html( 'div id="jetpack-unavailable"',
-			html( 'p',
-				__(
-					'Before you can import Jetpack subscribers, the Jetpack plugin and its Stats module must be active.',
-					'Postmatic'
-				)
-			)
-		);
-		return $content;
+	protected function jetpack_not_usable_content( $message ) {
+		return html( 'div id="jetpack-not-ready"', html( 'p', $message ) );
 	}
 
 	protected function jetpack_ready_content() {
@@ -74,6 +65,8 @@ class Prompt_Admin_Import_Options_Tab extends Prompt_Admin_Options_Tab {
 
 		$jetpack_import->execute();
 
+		$content = $jetpack_import->get_error() ? $jetpack_import->get_error()->get_error_message() : '';
+
 		$results_format = _n(
 			'Imported one subscriber.',
 			'Imported %1$s subscribers.',
@@ -90,7 +83,7 @@ class Prompt_Admin_Import_Options_Tab extends Prompt_Admin_Options_Tab {
 			);
 		}
 
-		$content = sprintf(
+		$content .= ' ' . sprintf(
 			$results_format,
 			$jetpack_import->get_imported_count(),
 			$jetpack_import->get_already_subscribed_count()
