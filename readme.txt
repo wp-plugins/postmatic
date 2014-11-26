@@ -72,7 +72,7 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
-= 1.0 beta 8a =
+= 1.0 beta 9 =
 - Fixed a bug that was removing images from post emails.
 
 = 1.0 beta 8 =

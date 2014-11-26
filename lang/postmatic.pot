@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.0.0-beta8a\n"
+"Email 1.0.0-beta9\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/1.0.0-"
-"beta8a-20141126-1018\n"
-"POT-Creation-Date: 2014-11-26 18:18:40+00:00\n"
+"beta9-20141126-1038\n"
+"POT-Creation-Date: 2014-11-26 18:38:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -430,7 +430,7 @@ msgid ""
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta8a)  #-#-#-#-#
+#. #-#-#-#-#  postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta9)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:124
 msgid "Postmatic"
