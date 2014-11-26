@@ -179,7 +179,7 @@
     /* -------------------------------------
         TYPOGRAPHY
     ------------------------------------- */
-    h1, h2, h3 {
+    h1, h2, h3 , h4 {
       font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
       line-height: 1.1;
       margin-bottom: 15px;
@@ -196,6 +196,9 @@
     }
     h3 {
       font-size: 22px;
+    }
+    h4 {
+      font-weight: bold;
     }
     p, ul, ol {
       margin-bottom: 10px;
@@ -285,7 +288,7 @@
     }
     .container {padding: 0 !important; border: 0 !important;}
     .credit {
-    text-align: center !important;
+    text-align: left !important;
     }
     .left,.right {width: 100% !important;float: none !important;}
     .padding img {
@@ -303,7 +306,7 @@
     .body-wrap { padding: 10px !imporant;}
     .container { padding: 15px !imporant;}
     #content img {float: none !important; margin: 10px auto !important;}
-    #content img.avatar, #content img.reply-icon {float: left !important; margin: 0 10px 0 0 !important;}
+    #content img.avatar, #content img.reply-icon {float: left !important; clear: left !important; margin: 0 10px 0 0 !important;}
     .gallery br {display:none !important; clear: none !important;}
     .gallery-item, .ngg-gallery-thumbnail-box {margin: 5px auto !important; float: none !important; display: block !important; width: 100% !important; text-align: center !important;}
     .gallery-item img, .ngg-gallery-thumbnail-box img {margin: 0 auto !important; display: block !important;}
@@ -343,7 +346,8 @@
 /*Comments Template*/
 img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !important;float: left; margin-right: 10px; padding-bottom: 15px; border-radius: 5px;}
 
-#inreply {font-weight: normal; font-size: 150%; color: #737373; margin-bottom: 15px;}
+.inreply {font-weight: normal; font-size: 120%; color: #737373; margin-bottom: 15px;}
+.inreply a {color: black; text-decoration: none !important; font-style: italic;}
 
 .author-name {color: #DF623B; font-style: italic; font-family: serif; line-height: normal;}
 .comment {margin-bottom: 55px; font-size: 110%;}
@@ -352,10 +356,14 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .comment-body {clear: left; color: #000;}
 .reply {padding-bottom: 35px; border-bottom: 1px solid #ddd;}
 .newpost {border-bottom: none;  margin-top: 25px; padding-bottom: 15px;}
-.reply-icon {float: left !important; margin-right: 10px; width: 30px; height: 30px;}
+.reply-prompt {clear: both;}
+.reply-prompt img {float: left !important; margin-right: 10px; width: 30px; height: 30px;}
 .previous-comment-3 {opacity: .4;}
 .previous-comment-2 {opacity: .6;}
 .previous-comment-1 {opacity: .8;}
+.new-reply {margin-left: 55px; margin-bottom: 55px; font-size: 115%;}
+.the-reply, {margin-bottom: 25px;}
+.reply-content {margin-left: 60px;}
 
     </style>
     <!-- body -->

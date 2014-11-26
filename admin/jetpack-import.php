@@ -42,7 +42,7 @@ class Prompt_Admin_Jetpack_Import {
 	public static function not_usable_message() {
 		if ( !class_exists( 'DOMDocument' ) or !function_exists( 'simplexml_import_dom' ) )
 			return __(
-				'The Jetpack import requires a common PHP extension called "libxml" that is not present.',
+				'The Jetpack import requires a common PHP extension called "libxml" that is not present. Please check with your hosting provider.',
 				'Postmatic'
 			);
 
@@ -206,7 +206,11 @@ class Prompt_Admin_Jetpack_Import {
 
 	protected function set_counts( SimpleXMLElement $xml ) {
 
-		$email_followers = $xml->xpath( "//ul[contains(concat(' ',normalize-space(@class),' '), ' subsubsub ')]/li[2]" );
+		$email_followers = $xml->xpath( "//ul[contains(@class,'subsubsub')]/li[a[contains(@class,'current')]]" );
+
+		if ( empty( $email_followers ) )
+			return;
+
 		preg_match( '/\((\d+)\)$/', $email_followers[0]->__toString(), $user_count_matches );
 		$this->subscriber_count = intval( $user_count_matches[1] );
 

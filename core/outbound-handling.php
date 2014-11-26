@@ -48,11 +48,6 @@ class Prompt_Outbound_Handling {
 		if ( defined( 'WP_IMPORTING' ) and WP_IMPORTING )
 			return;
 
-		if ( $comment->comment_parent ) {
-			Prompt_Comment_Mailing::send_reply_notification( $comment );
-			return;
-		}
-
 		$prompt_post = new Prompt_Post( $comment->comment_post_ID );
 
 		if ( ! $prompt_post->subscriber_ids() )

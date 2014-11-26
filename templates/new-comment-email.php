@@ -16,7 +16,8 @@ $previous_index = count( $previous_comments );
 ?>
 
 <h1><span class="capitalize"><?php echo $commenter_name; ?></span> added a comment.</h1>
-<h4 id="inreply">In reply to: <?php echo get_the_title( $comment->comment_post_ID  ); ?>.</h4>
+
+<h4 class="inreply">In reply to: <?php echo get_the_title( $comment->comment_post_ID  ); ?>.</h4>
 
 <div class="primary-comment comment">
 	<div class="comment-header">
@@ -36,7 +37,8 @@ $previous_index = count( $previous_comments );
 
 <?php if ( count( $previous_comments ) > 1 ) : ?>
 
-	<img class="reply-icon" src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <h3 class="reply">Reply to this email to add a comment.</h3>
+<div class="reply-prompt"><img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <h3 class="reply">Reply to this email to reply to <?php echo $commenter_name; ?>.</h3>
+<p><strong>Please note</strong>: Your reply will be published publicly and immediately on <?php bloginfo( 'name' ); ?>.</p></div>
 
 	<h3>Recently in this conversation...</h3>
 
@@ -60,8 +62,9 @@ $previous_index = count( $previous_comments );
 
 <?php endif; ?>
 
-<img class="reply-icon" src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <h3 class="reply">Reply to this email to add a comment.</h3>
-<p>To <strong>add your own comment</strong> reply to this email.<br /><strong>Please note</strong>: Your comment will be published publicly and immediately on <?php bloginfo( 'name' ); ?></p>
+<div class="reply-prompt"><img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <h3 class="reply">Reply to this email to reply to <?php echo $commenter_name; ?>.</h3>
+<p><strong>Please note</strong>: Your reply will be published publicly and immediately on <?php bloginfo( 'name' ); ?>.</p></div>
+
 
 <h4>Leave this conversation</h4>
 <p>To no longer receive other comments on this thread to reply with the word 'unsubscribe'.</p>

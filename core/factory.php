@@ -47,7 +47,6 @@ class Prompt_Factory {
 		return apply_filters( 'prompt/make_configurator', new Prompt_Configurator( $client ) );
 	}
 
-
 	/**
 	 * @return Prompt_Admin_Jetpack_Import
 	 */

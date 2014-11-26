@@ -52,6 +52,7 @@ class Prompt_Post_Mailing {
 
 		remove_filter( 'the_content', 'do_shortcode', 11 );
 		add_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
+		add_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
 
 		$emails = array();
 		foreach ( $chunk_ids as $user_id ) {
@@ -94,6 +95,7 @@ class Prompt_Post_Mailing {
 
 		wp_reset_postdata();
 
+		remove_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
 		remove_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
 		add_filter( 'the_content', 'do_shortcode', 11 );
 
@@ -141,6 +143,14 @@ class Prompt_Post_Mailing {
 		Prompt_Command_Handling::add_command_metadata( $command, $email );
 
 		return $email;
+	}
+
+	/**
+	 * @param string $content
+	 * @return string
+	 */
+	public static function strip_image_height_attributes( $content ) {
+		return preg_replace( '/(<img[^>]*?) height=["\']\d*["\']([^>]*?>)/', '', $content );
 	}
 
 	/**

@@ -16,20 +16,7 @@ class Prompt_Add_On_Manager {
 			'AuthorURI' =>  self::URL,
 		);
 
-		$default_add_ons = array(
-			'Prompt_Response_Core' => array(
-				'Name' => 'Prompt Response',
-				'Description' => __( 'Send questions and threads to a refined audience based on terms that reflect their knowledge and skills.', 'Postmatic' ),
-			),
-			'Prompt_Conversations_Core' => array(
-				'Name' => 'Prompt Conversations',
-				'Description' => __( 'Allow users to form groups and share topics.', 'Postmatic' ),
-			),
-			'Prompt_SMS_Core' => array(
-				'Name' => 'Prompt SMS',
-				'Description' => __( 'Enable users to subscribe for SMS messages as well as email.', 'Postmatic' ),
-			),
-		);
+		$default_add_ons = array();
 
 		foreach( $default_add_ons as $class => $add_on ) {
 			$default_add_ons[$class] = array_merge( $add_on_defaults, $add_on );

@@ -17,79 +17,7 @@ class Prompt_Comment_Mailing {
 
 		self::handle_new_subscriber( $comment );
 
-		if ( 0 == $comment->comment_parent )
-			self::send_post_subscriber_notifications( $comment, $chunk );
-		else
-			self::send_reply_notification( $comment );
-	}
-
-	/**
-	 * Send a reply comment to the parent comment author if subscribed to the post.
-	 *
-	 * @param object $comment
-	 */
-	public static function send_reply_notification( $comment ) {
-
-		$parent_comment = get_comment( $comment->comment_parent );
-
-		$prompt_post = new Prompt_Post( $parent_comment->comment_post_ID );
-		if ( empty( $parent_comment->user_id ) or !$prompt_post->is_subscribed( $parent_comment->user_id ) )
-			return;
-
-		$sent_ids = self::sent_recipient_ids( $comment );
-		if ( in_array( $parent_comment->user_id, $sent_ids ) )
-			return;
-
-		self::add_sent_recipient_ids( $comment, array( $parent_comment->user_id ) );
-
-		$comment_author = get_userdata( $comment->user_id );
-		$from_name = $comment_author ? $comment_author->display_name : $comment->comment_author;
-
-		$parent_author = get_userdata( $parent_comment->user_id );
-
-		$template_data = array(
-			'comment_author' => $comment_author,
-			'parent_author' => $parent_author,
-			'comment' => $comment,
-			'subscribed_post' => $prompt_post,
-		);
-		/**
-		 * Filter comment email template data.
-		 *
-		 * @param array $template_data {
-		 * @type WP_User $comment_author
-		 * @type WP_User $parent_author
-		 * @type object $comment
-		 * @type Prompt_Post $subscribed_post
-		 * }
-		 */
-		$template_data = apply_filters( 'prompt/comment_reply_email/template_data', $template_data );
-
-		$subject = sprintf(
-			__( '%s replied to your comment on "%s"', 'Postmatic' ),
-			$from_name ? $from_name : __( 'Someone', 'Postmatic' ),
-			$prompt_post->get_wp_post()->post_title
-		);
-
-		$template = Prompt_Template::locate( "comment-reply-email.php" );
-
-		$email = new Prompt_Email( array(
-			'to_address' => $parent_author->user_email,
-			'from_name' => $from_name,
-			'subject' => $subject,
-			'message' => Prompt_Template::render( $template, $template_data, false ),
-		) );
-
-		/**
-		 * Filter comment notification email.
-		 *
-		 * @param Prompt_Email $email
-		 * @param array $template_data see prompt/comment_reply_email/template_data
-		 */
-		$email = apply_filters( 'prompt/comment_reply_email', $email, $template_data );
-
-		$mailer = Prompt_Factory::make_mailer();
-		$mailer->send_one( $email );
+		self::send_post_subscriber_notifications( $comment, $chunk );
 	}
 
 	/**
@@ -132,9 +60,16 @@ class Prompt_Comment_Mailing {
 		$previous_comments = self::get_previous_comments( $comment );
 
 		$comment_author = get_userdata( $comment->user_id );
-
-		// TODO: adjust from_name and template data for add-on post types
 		$from_name = $comment_author ? $comment_author->display_name : $comment->comment_author;
+
+		$parent_comment = $parent_author = null;
+		$template_file = 'new-comment-email.php';
+
+		if ( $comment->comment_parent ) {
+			$parent_comment = get_comment( $comment->comment_parent );
+			$parent_author = get_userdata( $parent_comment->user_id );
+			$template_file = 'comment-reply-email.php';
+		}
 
 		$emails = array();
 		foreach ( $chunk_ids as $subscriber_id ) {
@@ -152,6 +87,8 @@ class Prompt_Comment_Mailing {
 				'comment' => $comment,
 				'subscribed_post' => $prompt_post,
 				'previous_comments' => $previous_comments,
+				'parent_author' => $parent_author,
+				'parent_comment' => $parent_comment,
 			);
 			/**
 			 * Filter comment email template data.
@@ -166,16 +103,20 @@ class Prompt_Comment_Mailing {
 			$template_data = apply_filters( 'prompt/comment_email/template_data', $template_data );
 
 			$subject = sprintf( __( 'New reply to "%s"', 'Postmatic' ), $prompt_post->get_wp_post()->post_title );
-			$template = Prompt_Template::locate( "new-comment-email.php" );
-			$command = new Prompt_Comment_Command();
-			$command->set_post_id( $prompt_post->id() );
-			$command->set_user_id( $subscriber_id );
+
+			$template = Prompt_Template::locate( $template_file );
+
 			$email = new Prompt_Email( array(
 				'to_address' => $subscriber->user_email,
 				'from_name' => $from_name,
 				'subject' => $subject,
 				'message' => Prompt_Template::render( $template, $template_data, false ),
 			) );
+
+			$command = new Prompt_Comment_Command();
+			$command->set_post_id( $prompt_post->id() );
+			$command->set_user_id( $subscriber_id );
+			$command->set_parent_comment_id( $comment->comment_ID );
 
 			Prompt_Command_Handling::add_command_metadata( $command, $email );
 
@@ -282,7 +223,11 @@ class Prompt_Comment_Mailing {
 	}
 
 	/**
-	 * Get top level approved comments on a post prior to and including the given one.
+	 * Get previous approved comments, including the given one.
+	 *
+	 * If the comment is a reply, gets ancestor comments.
+	 *
+	 * If the comment is top level, gets previous top level comments.
 	 *
 	 * Adds an 'excerpt' property with a 100 word text excerpt.
 	 *
@@ -290,27 +235,56 @@ class Prompt_Comment_Mailing {
 	 * @param int $number
 	 * @return array
 	 */
-	protected static function get_previous_comments( $comment, $number = 4 ) {
+	protected static function get_previous_comments( $comment, $number = 3 ) {
 
-		$comments = get_comments( array(
-			'post_id' => $comment->comment_post_ID,
-			'parent' => 0,
-			'status' => 'approve',
-			'number' => $number,
+		if ( $comment->comment_parent )
+			return array();
 
-			'date_query' => array(
-				array(
-					'before' => $comment->comment_date,
-					'inclusive' => true,
-				)
-			)
-		) );
+		$comments = self::get_previous_top_level_comments( $comment, $number );
 
 		foreach ( $comments as $comment ) {
 			$comment->excerpt = self::excerpt( $comment );
 		}
 
 		return array_reverse( $comments );
+	}
+
+	/**
+	 * @param object $comment
+	 * @param int $number
+	 * @return array
+	 */
+	protected static function get_previous_top_level_comments( $comment, $number = 3 ) {
+		$query = array(
+			'post_id' => $comment->comment_post_ID,
+			'parent' => 0,
+			'status' => 'approve',
+			'number' => $number,
+			'date_query' => array(
+				array(
+					'before' => $comment->comment_date,
+					'inclusive' => true,
+				)
+			)
+		);
+		return get_comments( $query );
+	}
+
+	/**
+	 * @param object $comment
+	 * @param int $number
+	 * @return array
+	 */
+	protected static function get_comment_thread( $comment, $number = 3 ) {
+
+		$comments = array( $comment );
+
+		while ( $comment->comment_parent and count( $comments ) <= $number ) {
+			$comment = get_comment( $comment->comment_parent );
+			$comments[] = $comment;
+		}
+
+		return $comments;
 	}
 
 	/**

@@ -59,7 +59,7 @@ class Prompt_Admin_Options_Tab extends scbAdminPage {
 	 * @return string form HTML
 	 */
 	public function render() {
-		return 'This add-on has no settings.';
+		return 'This tab has no settings.';
 	}
 
 	/**

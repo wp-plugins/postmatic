@@ -361,19 +361,12 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			html( 'p', __( 'Postmatic is in limited-access beta and requires an activation key.', 'Postmatic' ) )
 		);
 
-		$beta_request_time = intval( get_option( self::BETA_REQUEST_OPTION_NAME ) );
-
-		if ( $beta_request_time ) {
+		if ( isset( $_POST['send_beta_request'] ) ) {
 			echo html(
 				'div',
 				array( 'class' => 'get-prompt-key' ),
 				$lead,
-				html( 'p',
-					sprintf(
-						__( 'You requested a key %s ago.', 'Postmatic' ),
-						human_time_diff( $beta_request_time, time() )
-					)
-				)
+				html( 'p', __( 'Key request sent.', 'Postmatic' ) )
 			);
 			return;
 		}

@@ -10,6 +10,8 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 	protected $user_id;
 	/** @var  object */
 	protected $message;
+	/** @var  int */
+	protected $parent_comment_id;
 
 	public function set_keys( $keys ) {
 		$this->keys = $keys;
@@ -51,12 +53,21 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		$this->keys[1] = $this->user_id;
 	}
 
+	public function set_parent_comment_id( $id ) {
+		$this->parent_comment_id = intval( $id );
+		$this->keys[2] = $this->parent_comment_id;
+	}
+
 	protected function validate() {
 
-		if ( !is_array( $this->keys ) or count( $this->keys ) != 2 ) {
+		if ( !is_array( $this->keys ) or count( $this->keys ) < 2 ) {
 			trigger_error( __( 'Invalid comment keys', 'Postmatic' ), E_USER_WARNING );
 			return false;
 		}
+
+		// Ensure back compatibility with beta versions that did not include parent comment ID
+		if ( count( $this->keys ) == 2 )
+			$this->keys[2] = 0;
 
 		if ( empty( $this->message ) ) {
 			trigger_error( __( 'Invalid message', 'Postmatic' ), E_USER_WARNING );
@@ -65,6 +76,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 
 		$this->post_id = $this->keys[0];
 		$this->user_id = $this->keys[1];
+		$this->parent_comment_id = $this->keys[2];
 
 		return true;
 	}
@@ -169,6 +181,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 			'comment_author_IP' => '',
 			'comment_author_url' => $user->user_url,
 			'comment_author_email' => $user->user_email,
+			'comment_parent' => $this->parent_comment_id,
 		);
 
 		if ( 1 == get_option( 'comment_moderation' ) )

@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.0.0-beta7\n"
+"Email 1.0.0-beta8\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/1.0.0-"
-"beta7-20141121-1012\n"
-"POT-Creation-Date: 2014-11-21 18:12:32+00:00\n"
+"beta8-20141125-1811\n"
+"POT-Creation-Date: 2014-11-26 02:11:53+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -117,41 +117,155 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: admin/import-options-tab.php:8
+#: admin/import-options-tab.php:9
 msgid "Import Users"
 msgstr ""
 
-#: admin/import-options-tab.php:17
+#: admin/import-options-tab.php:18
 msgid "Import results are below."
 msgstr ""
 
-#: admin/import-options-tab.php:22
+#: admin/import-options-tab.php:27
 msgid "Jetpack Import"
 msgstr ""
 
-#: admin/import-options-tab.php:39
-msgid "We are ready to import email-only subscribers from Jetpack."
-msgstr ""
-
 #: admin/import-options-tab.php:44
-msgid "Important:"
+msgid ""
+"<p>Migrating your users from Jetpack to Postmatic takes only seconds. We’ve "
+"built a safe and secure importer which will copy over all of your new post "
+"notification Jetpack subscribers with a single click. Once the import has "
+"completed you can safely disable Jetpack Subscriptions and continue on doing "
+"what you do best. Your Jetpack subscribers will be left in tact should you "
+"ever need to access them again.<p>\n"
+"\t\t\t\t<div>\n"
+"\t\t\t\t<h3>Jetpack Import FAQ</h3>\n"
+"\t\t\t\t<h4>Will my subscribers be alerted to the change?</h4>\n"
+"\t\t\t\t<p>No. The import process is invisible to subscribers. They will not "
+"be alerted nor will they need to opt-in again.</p>\n"
+"\t\t\t\t<h4>What kind of subscribers are imported?</h4>\n"
+"\t\t\t\t<p>People who have subscribed to new posts on your site will be "
+"imported. At this time it's not going to be in the cards to import people "
+"that have subscribed only to comments on individual posts.</p>\n"
+"\t\t\t\t<h4>Who isn't imported?</h4>\n"
+"\t\t\t\t<p>Jetpack supports two kinds of users: people that subscribe to "
+"your site with their email address, and people that subscribe to your site "
+"with their wordpress.com user identity. At this time we can't access the "
+"email address of a user which subscribed with their wordpress.com identity. "
+"This will in most cases be a very small percentage of your audience.</p>\n"
+"\t\t\t\t<h4>What happens if something goes wrong? Will my Jetpack "
+"subscribers be safe?</h4>\n"
+"\t\t\t\t<p>If something goes wrong with the import you will be notified of "
+"the error. Your Jetpack subscribers list lives on wordpress.com and will "
+"always be there in case you need it again.</p>\n"
+"\t\t\t\t</div>\n"
+"\t\t\t\t"
 msgstr ""
 
 #: admin/import-options-tab.php:60
+msgid ""
+"Everything on your server looks good. We are ready to import your Jetpack "
+"subscribers."
+msgstr ""
+
+#: admin/import-options-tab.php:69
 msgid "Import from Jetpack"
 msgstr ""
 
-#: admin/import-options-tab.php:70
+#: admin/import-options-tab.php:79
+msgid ""
+"We have imported one subscriber. It is now safe to disable Jetpack "
+"commenting and subscriptions."
+msgid_plural ""
+"Imported %1$s subscribers. It is now safe to disable Jetpack commenting and "
+"subscriptions."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/import-options-tab.php:87 admin/import-options-tab.php:164
+msgid "The one user we found was already subscribed."
+msgid_plural "The %2$s users we found were already subscribed."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/import-options-tab.php:109
+msgid "Important:"
+msgstr ""
+
+#: admin/import-options-tab.php:122
+msgid "Mailpoet Import"
+msgstr ""
+
+#: admin/import-options-tab.php:137
+msgid ""
+"If you would like to import Mailpoet users please activate the Mailpoet "
+"plugin."
+msgstr ""
+
+#: admin/import-options-tab.php:156
 msgid "Imported one subscriber."
 msgid_plural "Imported %1$s subscribers."
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/import-options-tab.php:78
-msgid "One user was already subscribed."
-msgid_plural "%2$s users were already subscribed."
-msgstr[0] ""
-msgstr[1] ""
+#: admin/import-options-tab.php:187
+msgid ""
+"There are no lists available from MailPoet. Are you sure it is activated?"
+msgstr ""
+
+#: admin/import-options-tab.php:190
+msgid ""
+"Mailpoet is detected. We are ready to import active subscribers from "
+"Mailpoet."
+msgstr ""
+
+#: admin/import-options-tab.php:207
+msgid ""
+"<div> \n"
+"\t\t\t\t<h3>Mailpoet Import FAQ</h3>\n"
+"\t\t\t\t<h4>Will my subscribers be sent a notification?</h4>\n"
+"\t\t\t\t<p>No. The import process is invisible to subscribers.</p>\n"
+"\t\t\t\t<h4>Which of my subscribers will be imported?</h4>\n"
+"\t\t\t\t<p>We have a very strict policy regarding user imports: <em>we will "
+"never allow anyone to be subscribed to a blog running Posmatic without them "
+"having opted in</em> (such as subscriber lists bought and imported in bulk "
+"for spamming). Because of this we will not import any Mailpoet subscribers "
+"unless the following two conditions are true:</p>\n"
+"\t\t\t\t<ol>\n"
+"\t\t\t\t<li>The user has opened an email you sent through Mailpoet</li>\n"
+"\t\t\t\t<li>The user has clicked a link within an email you sent through "
+"Mailpoet</li>\n"
+"\t\t\t\t</ol>\n"
+"\t\t\t\t<h5>Why so strict?</h5>\n"
+"\t\t\t\t<p>Bulk importing unwilling users and marking them as opted-in is "
+"easy in Mailpoet. If we did not hold our import to a higher standard the "
+"magic button below would allow those unwilling users to be imported into "
+"Postmatic. And then they would spam your grandmother. Nobody wants that. "
+"Plus, if a subscriber does not open or interact with your emails maybe they "
+"aren't all that good of a match anyway, right? Think of it as spring "
+"cleaning :)</p>\n"
+"\t\t\t\t<h4>Can I import multiple lists?</h4>\n"
+"\t\t\t\t<p>Yes. Re-run this importer with as many lists as you like. "
+"Postmatic will not create duplicate subscribers.</p>\n"
+"\t\t\t\t<h4>Does Postmatic have lists like Mailpoet does? Is there any way "
+"to organize subscribers?</h4>\n"
+"\t\t\t\t<p>No, we do not have a concept of multiple lists. All users are the "
+"same in Postmatic. If list segmentation is important to you please let us "
+"know by visiting our support site. You'll find the link to the right.</p>\n"
+"\t\t\t\t<h4>What will happen to my Mailpoet subscribers?</h4>\n"
+"\t\t\t\t<p>Mailpoet and Postmatic store subscribers in different places "
+"within your WordPress database. Your Mailpoet subscribers will always be "
+"available to you provided you have Mailpoet activated.</p>\n"
+"\t\t\t\t</div>\n"
+"\t\t\t\t"
+msgstr ""
+
+#: admin/import-options-tab.php:234
+msgid "List to import: "
+msgstr ""
+
+#: admin/import-options-tab.php:245
+msgid "Import from Mailpoet"
+msgstr ""
 
 #: admin/invite-options-tab.php:6
 msgid "Invite Subscribers"
@@ -261,7 +375,7 @@ msgstr ""
 #: admin/jetpack-import.php:44
 msgid ""
 "The Jetpack import requires a common PHP extension called \"libxml\" that is "
-"not present."
+"not present. Please check with your hosting provider."
 msgstr ""
 
 #: admin/jetpack-import.php:50
@@ -316,7 +430,7 @@ msgid ""
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta7)  #-#-#-#-#
+#. #-#-#-#-#  postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta8)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:124
 msgid "Postmatic"
@@ -396,56 +510,56 @@ msgstr ""
 msgid "Postmatic is in limited-access beta and requires an activation key."
 msgstr ""
 
-#: admin/options-page.php:373
-msgid "You requested a key %s ago."
+#: admin/options-page.php:369
+msgid "Key request sent."
 msgstr ""
 
-#: admin/options-page.php:383
+#: admin/options-page.php:376
 msgid "First Name"
 msgstr ""
 
-#: admin/options-page.php:394
+#: admin/options-page.php:387
 msgid "Last Name"
 msgstr ""
 
-#: admin/options-page.php:405 templates/subscribe-form.php:78
+#: admin/options-page.php:398 templates/subscribe-form.php:78
 msgid "Email"
 msgstr ""
 
-#: admin/options-page.php:421
+#: admin/options-page.php:414
 msgid "Need a key?"
 msgstr ""
 
-#: admin/options-page.php:426
+#: admin/options-page.php:419
 msgid "Request a free Postmatic Api Key"
 msgstr ""
 
-#: admin/options-page.php:445
+#: admin/options-page.php:438
 msgid "Installed and Active"
 msgstr ""
 
-#: admin/options-page.php:451
+#: admin/options-page.php:444
 msgid "Purchase"
 msgstr ""
 
-#: admin/options-page.php:493
+#: admin/options-page.php:486
 msgid ""
 "There's a problem verifying your key. Please try later or report this error."
 msgstr ""
 
-#: admin/options-page.php:500
+#: admin/options-page.php:493
 msgid ""
 "We didn't recognize the key \"%s\". Please make sure it matches the one we "
 "gave you."
 msgstr ""
 
-#: admin/options-page.php:551
+#: admin/options-page.php:544
 msgid ""
 "We're even having trouble sending a bug report. Please copy the data to the "
 "right and send to support@gopostmatic.com."
 msgstr ""
 
-#: admin/options-page.php:566
+#: admin/options-page.php:559
 msgid "Please enter a valid email address."
 msgstr ""
 
@@ -472,20 +586,6 @@ msgid "%d Conversations"
 msgid_plural "%d Conversations"
 msgstr[0] ""
 msgstr[1] ""
-
-#: core/add-on-manager.php:22
-msgid ""
-"Send questions and threads to a refined audience based on terms that reflect "
-"their knowledge and skills."
-msgstr ""
-
-#: core/add-on-manager.php:26
-msgid "Allow users to form groups and share topics."
-msgstr ""
-
-#: core/add-on-manager.php:30
-msgid "Enable users to subscribe for SMS messages as well as email."
-msgstr ""
 
 #: core/ajax-handling.php:38 core/ajax-handling.php:58
 msgid "%s is not subscribed to %s."
@@ -551,19 +651,19 @@ msgstr ""
 msgid "Tried to create an email with an unrecognized reply command."
 msgstr ""
 
-#: core/comment-command.php:57
+#: core/comment-command.php:64
 msgid "Invalid comment keys"
 msgstr ""
 
-#: core/comment-command.php:62
+#: core/comment-command.php:73
 msgid "Invalid message"
 msgstr ""
 
-#: core/comment-command.php:145
+#: core/comment-command.php:157
 msgid "rejected comment on unqualified post %s"
 msgstr ""
 
-#: core/comment-command.php:154
+#: core/comment-command.php:166
 msgid "rejected duplicate comment on %s"
 msgstr ""
 
@@ -575,23 +675,15 @@ msgstr ""
 msgid "You are subscribed to new comments on this post."
 msgstr ""
 
-#: core/comment-mailing.php:69
-msgid "%s replied to your comment on \"%s\""
-msgstr ""
-
-#: core/comment-mailing.php:70
-msgid "Someone"
-msgstr ""
-
-#: core/comment-mailing.php:168
+#: core/comment-mailing.php:105
 msgid "New reply to \"%s\""
 msgstr ""
 
-#: core/comment-mailing.php:220
+#: core/comment-mailing.php:161
 msgid "a deleted post"
 msgstr ""
 
-#: core/comment-mailing.php:234
+#: core/comment-mailing.php:175
 msgid "Unable to publish your reply to \"%s\""
 msgstr ""
 
@@ -650,30 +742,30 @@ msgstr ""
 msgid "Refused an attempt to subscribe an invalid user ID."
 msgstr ""
 
-#: core/post-mailing.php:182
+#: core/post-mailing.php:192
 msgid "This content is not compatible with your email client."
 msgstr ""
 
-#: core/post-mailing.php:185
+#: core/post-mailing.php:195
 msgid "Click here to view this post in your browser."
 msgstr ""
 
-#: core/post-mailing.php:219
+#: core/post-mailing.php:229
 msgid "Delivery issue for %s"
 msgstr ""
 
-#: core/post-mailing.php:222
+#: core/post-mailing.php:232
 msgid ""
 "Delivery of subscription notifications for the post \"%s\" may have failed."
 msgstr ""
 
-#: core/post-mailing.php:226
+#: core/post-mailing.php:236
 msgid ""
 "A site administrator can report this event to the development team from the "
 "Postmatic settings."
 msgstr ""
 
-#: core/post-mailing.php:228
+#: core/post-mailing.php:238
 msgid "The error message was: "
 msgstr ""
 
@@ -813,7 +905,8 @@ msgid ""
 "for you?"
 msgstr ""
 
-#: templates/comment-reply-email.php:11 templates/new-comment-email.php:13
+#: templates/comment-reply-email.php:14 templates/comment-reply-email.php:17
+#: templates/new-comment-email.php:13
 msgid "Anonymous"
 msgstr ""
 
