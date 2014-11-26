@@ -150,7 +150,7 @@ class Prompt_Post_Mailing {
 	 * @return string
 	 */
 	public static function strip_image_height_attributes( $content ) {
-		return preg_replace( '/(<img[^>]*?) height=["\']\d*["\']([^>]*?>)/', '', $content );
+		return preg_replace( '/(<img[^>]*?) height=["\']\d*["\']([^>]*?>)/', '$1$2', $content );
 	}
 
 	/**

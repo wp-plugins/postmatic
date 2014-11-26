@@ -72,12 +72,14 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.0 beta 8a =
+- Fixed a bug that was removing images from post emails.
+
 = 1.0 beta 8 =
 
-Big news on this release: Mailpoet importing as well as support for threaded commenting _by email_. Check out our blog post for more info http://gopostmatic.com/2014/11/beta8/.
+Big news on this release: support for threaded commenting _by email_. Check out our blog post for more info http://gopostmatic.com/2014/11/beta8/.
 
 - Added support for threaded commenting. From here on out replies to new post notifications will leave a top-level comment. Replies to comment notificiations (Shirley left a comment) will leave a child comment (in response to Shirley). And on and on and on. We now offer 100% email based commenting.
-- Added some experimental Mailpoet importing features. Move your Mailpoet subscribers over to Postmatic.
 - Better debugging info for failed Jetpack imports
 
 
