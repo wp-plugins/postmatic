@@ -16,10 +16,11 @@
 <?php endif; ?>
 <div>
   <?php the_content(); ?>
+  <p><a href="<?php the_permalink(); ?>" class="btn-secondary">View this post online</a></p>
 </div>
 
 
-<p class="reply newpost"><img class="reply-icon" src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> Reply to this email to add a comment. <br /><small><strong>Please note</strong>: Your comment will be published publicly and immediately on <?php bloginfo( 'name' ); ?></small></p>
+<div class="reply-prompt"><img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <p class="reply">Reply to this email to add a comment. <br /><small><strong>Please note</strong>: Your comment will be published publicly and immediately on <?php bloginfo( 'name' ); ?></small></p>
 
 
 

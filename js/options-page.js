@@ -6,6 +6,7 @@
 
 		init_email_tab();
 		init_invite_tab();
+		init_import_tab();
 
 	} );
 
@@ -241,6 +242,22 @@
 
 		}
 
+	}
+
+	function init_import_tab() {
+		var $rejected_addresses_input = $( 'input[name="rejected_addresses"]');
+
+		$rejected_addresses_input.click( invite_rejected_addresses );
+
+		function invite_rejected_addresses( e ) {
+			e.preventDefault();
+
+			$( 'textarea[name="manual_addresses"]' )
+				.val( $rejected_addresses_input.data( 'addresses' ) )
+				.trigger( 'keyup' );
+
+			$( 'a[href="#prompt-settings-invite"' ).click();
+		}
 	}
 
 

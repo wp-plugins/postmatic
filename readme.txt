@@ -72,6 +72,12 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.0 beta 10 =
+- Put the _view this post online_ button back on new post notifications. By request. From many of you :)
+- Added links to view the post online in comment notification emails.
+- Improved styling of _this content not available online_ notifications.
+- Added some experimental Mailpoet importing features. Move your Mailpoet subscribers over to Postmatic.
+
 = 1.0 beta 9 =
 - Fixed a bug that was removing images from post emails.
 

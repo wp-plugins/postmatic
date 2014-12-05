@@ -17,7 +17,7 @@ $previous_index = count( $previous_comments );
 
 <h1><span class="capitalize"><?php echo $commenter_name; ?></span> added a comment.</h1>
 
-<h4 class="inreply">In reply to: <?php echo get_the_title( $comment->comment_post_ID  ); ?>.</h4>
+<h4 class="inreply">In reply to: <a href="<?php echo get_permalink( $comment->comment_post_ID ); ?>"><?php echo get_the_title( $comment->comment_post_ID  ); ?></a>.</h4>
 
 <div class="primary-comment comment">
 	<div class="comment-header">
@@ -38,7 +38,7 @@ $previous_index = count( $previous_comments );
 <?php if ( count( $previous_comments ) > 1 ) : ?>
 
 <div class="reply-prompt"><img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <h3 class="reply">Reply to this email to reply to <?php echo $commenter_name; ?>.</h3>
-<p><strong>Please note</strong>: Your reply will be published publicly and immediately on <?php bloginfo( 'name' ); ?>.</p></div>
+<p><strong>Please note</strong>: Your reply will be published publicly and immediately on <a href="<?php echo get_permalink( $comment->comment_post_ID ); ?>"><?php echo get_the_title( $comment->comment_post_ID  ); ?></a>.</p></div>
 
 	<h3>Recently in this conversation...</h3>
 
@@ -63,7 +63,7 @@ $previous_index = count( $previous_comments );
 <?php endif; ?>
 
 <div class="reply-prompt"><img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <h3 class="reply">Reply to this email to reply to <?php echo $commenter_name; ?>.</h3>
-<p><strong>Please note</strong>: Your reply will be published publicly and immediately on <?php bloginfo( 'name' ); ?>.</p></div>
+<p><strong>Please note</strong>: Your reply will be published publicly and immediately on <a href="<?php echo get_permalink( $comment->comment_post_ID ); ?>"><?php echo get_the_title( $comment->comment_post_ID  ); ?></a>.</p></div>
 
 
 <h4>Leave this conversation</h4>

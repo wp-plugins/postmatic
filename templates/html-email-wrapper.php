@@ -112,10 +112,7 @@
     .alignleft {float: left; margin: 0 20px 20px 0;}
     .aligncenter {margin: 20px auto; display: block !important; float: none;}
 
-    .gallery, .ngg-galleryoverview {
-      margin: 10px 0; padding: 15px 5px 0 5px; border: 1px solid #ddd; background: #eee; width: 100%; float: left;
-    }
-
+ 
     .gallery-item, .ngg-gallery-thumbnail-box {float: left !important; margin: 5px;}
     .gallery-caption {margin 0;}
     .wp-caption-text.gallery-caption {width: 110px; font-size: 10px;}
@@ -172,7 +169,6 @@
     }
     .footnote {
       font-size: 85% !important;
-      border-top: 1px solid #ddd;
       clear: both;
       margin-top: 20px;
     }
@@ -280,6 +276,18 @@
 .left {float: left;margin:0; width: 45%}
 .right {margin-left:50%; width:45%;}
 
+/*Plugin and shortcode specific*/
+   .gallery, .ngg-galleryoverview {
+      margin: 10px 0; padding: 15px 5px 0 5px; border: 1px solid #ddd; background: #eee; width: 100%; float: left;
+    }
+
+.incompatible {
+    background: #eee; 
+    border: 1px solid #ddd; 
+    padding: 15px;
+    margin: 20px 0;
+  }
+
 /*Mobile syles*/
     @media only screen and (max-width: 480px) {
      table.body-wrap {
@@ -295,7 +303,7 @@
     width: auto !important; height: auto !important;
     }
     .widgets {
-    padding: 2% !important;
+    padding: 0 !important;
     }
     .widgets td {
     width: 100% !important; display: block !important; margin-bottom: 15px !important;
@@ -304,7 +312,7 @@
     padding: 0 !important;
     }
     .body-wrap { padding: 10px !imporant;}
-    .container { padding: 15px !imporant;}
+
     #content img {float: none !important; margin: 10px auto !important;}
     #content img.avatar, #content img.reply-icon {float: left !important; clear: left !important; margin: 0 10px 0 0 !important;}
     .gallery br {display:none !important; clear: none !important;}
@@ -354,9 +362,9 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .comment-date {color: gray; font-size: 90%;}
 .comment-header {padding-bottom: 15px; font-size: 110%;}
 .comment-body {clear: left; color: #000;}
-.reply {padding-bottom: 35px; border-bottom: 1px solid #ddd;}
+.reply {padding-bottom: 35px; border-bottom: 1px solid #ddd; margin-left: 40px;}
 .newpost {border-bottom: none;  margin-top: 25px; padding-bottom: 15px;}
-.reply-prompt {clear: both;}
+.reply-prompt {clear: both; margin-top: 20px;}
 .reply-prompt img {float: left !important; margin-right: 10px; width: 30px; height: 30px;}
 .previous-comment-3 {opacity: .4;}
 .previous-comment-2 {opacity: .6;}

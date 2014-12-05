@@ -189,7 +189,7 @@ class Prompt_Post_Mailing {
 			return do_shortcode_tag( $m );
 
 		$link = html( 'div class="incompatible"',
-			__( 'This content is not compatible with your email client.', 'Postmatic' ),
+			__( 'This content is not compatible with your email client. ', 'Postmatic' ),
 			html( 'a',
 				array( 'href' => get_permalink() ),
 			__( 'Click here to view this post in your browser.', 'Postmatic' )

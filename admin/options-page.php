@@ -17,6 +17,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	/** @var Prompt_Admin_Options_Tab[] */
 	protected $tabs;
 
+	/** @var  Prompt_Admin_Options_Tab */
 	protected $submitted_tab;
 
 	public function __construct( $file = false, $options = null, $overrides = null, $tabs = null ) {
@@ -27,7 +28,8 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$this->add_tab( new Prompt_Admin_Email_Options_Tab( $options, $overrides ) );
 		$this->add_tab( new Prompt_Admin_Invite_Options_Tab( $options, $overrides ) );
 		$this->add_tab( new Prompt_Admin_Options_Options_Tab( $options, $overrides ) );
-		$this->add_tab( new Prompt_Admin_Import_Options_Tab( $options, $overrides ) );
+		$this->add_tab( new Prompt_Admin_Jetpack_Import_Options_Tab( $options, $overrides ) );
+		$this->add_tab( new Prompt_Admin_Mailpoet_Import_Options_Tab( $options, $overrides ) );
 	}
 
 	public function add_tab( Prompt_Admin_Options_Tab $tab ) {

@@ -12,14 +12,13 @@ class Prompt_Admin_Mailpoet_Import {
 	protected $already_subscribed_count = 0;
 	/** @var int */
 	protected $imported_count = 0;
+	/** @var  array */
+	protected $rejects;
 
 	public static function is_ready() {
 		return class_exists( 'WYSIJA' );
 	}
 
-	public static function get_lists() {
-		return WYSIJA::get( 'list', 'model' )->getLists();
-	}
 
 	public static function make( $list_ids ) {
 		return new Prompt_Admin_Mailpoet_Import( WYSIJA::get( 'user', 'model' ), $list_ids );
@@ -28,6 +27,7 @@ class Prompt_Admin_Mailpoet_Import {
 	public function __construct( $user_model, $list_ids ) {
 		$this->user_model = $user_model;
 		$this->list_ids = $list_ids;
+		$this->rejects = array();
 	}
 
 	public function get_error() {
@@ -47,6 +47,10 @@ class Prompt_Admin_Mailpoet_Import {
 		return $this->already_subscribed_count;
 	}
 
+	public function get_rejected_subscribers() {
+		return $this->rejects;
+	}
+
 	public function execute() {
 		$this->ensure_subscribers();
 
@@ -63,15 +67,26 @@ class Prompt_Admin_Mailpoet_Import {
 
 		$this->subscribers = array();
 
+		// Enable the model to return more than 10 records. Could be fragile.
+		$this->user_model->limit_pp = 1000000;
+
 		$list_subscribers = $this->user_model->get_subscribers(
 			array( 'A.email', 'A.firstname', 'A.lastname', 'A.last_opened', 'A.last_clicked', 'A.created_at' ),
 			array( 'lists' => $this->list_ids )
 		);
 
 		foreach ( $list_subscribers as $list_subscriber ) {
-			if ( $this->is_valid_subscriber( $list_subscriber ) )
-				$this->subscribers[] = $list_subscriber;
+			$this->add_source_subscriber( $list_subscriber );
 		}
+	}
+
+	protected function add_source_subscriber( $subscriber ) {
+
+		if ( $this->is_valid_subscriber( $subscriber ) )
+			$this->subscribers[] = $subscriber;
+		else
+			$this->rejects[] = $subscriber;
+
 	}
 
 	protected function is_valid_subscriber( $subscriber ) {
