@@ -43,6 +43,7 @@ class Prompt_Post_Mailing {
 
 		// Set up global post data for use in the email template
 		$GLOBALS['post'] = $post;
+		$GLOBALS['more'] = true;
 		setup_postdata( $post );
 
 		$featured_image_src = wp_get_attachment_image_src( get_post_thumbnail_id(), 'prompt-post-featured' );

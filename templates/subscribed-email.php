@@ -12,7 +12,7 @@
 <p>Keep an eye on your inbox for content from <?php echo $object->subscription_object_label(); ?>.
 
 	<?php if ( $latest_post ) : ?>
-		We've inluded the latest, <em><?php the_title(); ?></em> from <?php the_date(); ?>, below.
+		We've included the latest, <em><?php the_title(); ?></em> from <?php the_date(); ?>, below.
 		Reply to this email to leave a comment!
 	<?php endif; ?>
 

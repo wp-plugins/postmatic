@@ -72,6 +72,11 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.0 beta 11 =
+- Removed support for MORE tag. Full post content will now be shown in email. Option to respect it coming soon.
+- Fixed a typo in the subscription confirmation email
+- More language bug fixes. Sorry about that. Spanish and French should be much happier now.
+
 = 1.0 beta 10 =
 - Put the _view this post online_ button back on new post notifications. By request. From many of you :)
 - Added links to view the post online in comment notification emails.
