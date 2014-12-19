@@ -13,13 +13,30 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 				'title' => __( 'Author Subscriptions', 'Postmatic' ),
 				'type' => 'checkbox',
 				'name' => 'auto_subscribe_authors',
-				'desc' => __( 'Subscribe authors to comments on their own posts.<small>(Recommended)</small><p>This will automatically subscribe post authors to new comment notifications on their posts. This works well to keep the author up to date with the latest comments and discussion.</p>', 'Postmatic' ),
+				'desc' => __(
+					'Subscribe authors to comments on their own posts.<small>(Recommended)</small>',
+					'Postmatic'
+					) . html( 'p',
+						__(
+							'This will automatically subscribe post authors to new comment notifications on ' .
+							'their posts. This works well to keep the author up to date with the latest comments ' .
+							'and discussion.',
+							'Postmatic'
+						)
+					),
 			),
 			array(
 				'title' => __( 'User Accounts', 'Postmatic' ),
 				'type' => 'checkbox',
 				'name' => 'send_login_info',
-				'desc' => __( 'Email subscribers WordPress account credentials when they subscribe. <p>Only necessary in some situations as all user commands are otherwise possible via email. If enabled we recommend using a good front end login plugin.</p>', 'Postmatic' ),
+				'desc' => __( 'Email subscribers WordPress account credentials when they subscribe.', 'Postmatic' ) .
+					html( 'p',
+						__(
+							'Only necessary in some situations as all user commands are otherwise possible via ' .
+							'email. If enabled we recommend using a good front end login plugin.',
+							'Postmatic'
+						)
+					),
 			)
 		);
 

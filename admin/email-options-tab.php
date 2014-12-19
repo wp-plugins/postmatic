@@ -59,7 +59,17 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 			),
 			html(
 				'tr class="email-header-image"',
-				html( 'th scope="row"', __( 'Email header image <br/><small>Will be displayed at half the size of your uploaded image to support retina displays. The ideal width to fill the full header area is 1440px wide.</small>', 'Postmatic' ) ),
+				html( 'th scope="row"',
+					__( 'Email header image', 'Postmatic' ),
+					'<br/>',
+					html( 'small',
+						__(
+							'Will be displayed at half the size of your uploaded image to support retina displays. ' .
+							'The ideal width to fill the full header area is 1440px wide.',
+							'Postmatic'
+						)
+					)
+				),
 				html(
 					'td',
 					html(

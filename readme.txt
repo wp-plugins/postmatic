@@ -2,7 +2,7 @@
 Contributors: vernalcreative
 Tags: email, subscription, comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, fantasticallyamazing
 Requires at least: 3.9
-Tested up to: 4.0.1
+Tested up to: 4.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -71,6 +71,12 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 9. Using the invitation system to send invites to the most active commenters.
 
 == Changelog ==
+
+= 1.0 beta 12 =
+- Added support for oembeds. If possible the content is displayed in the email. If not, a nice placeholder image will be used. The placeholders are even smart enough to know if they are standing in for audio, video, or a document.
+- Improved handling of quoted text using markdown on replies
+- New support tab in the admin interface including a handy button to send diagnostic info to our team. Your theme name as well as all active plugins will be sent if you click it. Glorious day.
+- Minor bugs were squashed.
 
 = 1.0 beta 11 =
 - Removed support for MORE tag. Full post content will now be shown in email. Option to respect it coming soon.

@@ -2,6 +2,8 @@
 
 class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 
+	protected $limit = 1500;
+
 	public function name() {
 		return __( 'Invite Subscribers', 'Postmatic' );
 	}
@@ -79,7 +81,14 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 
 	public function render() {
 
-		$introduction = __( '<h2>Send email invitations to subscribe to your site</h2><p>Use this tool to reach out to your community of past or current commenters. Be sure to check the subject and introductory text below.<p>', 'Postmatic' );
+		$introduction = html( 'h2',
+			__( 'Send email invitations to subscribe to your site', 'Postmatic' )
+		) . html( 'p',
+			__( 'Use this tool to reach out to your community of past or current commenters. Be sure to check ' .
+				'the subject and introductory text below.',
+				'Postmatic'
+			)
+		);
 
 		$rows = array(
 			$this->row_wrap(
@@ -93,7 +102,14 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 				)
 			),
 			$this->row_wrap(
-				__( 'Email Introduction<br /><small>This text will be placed at the top of invitation message. Make it as friendly and personalized as you can.', 'Postmatic' ),
+				__( 'Email Introduction', 'Postmatic' ) .
+				'<br />' .
+				html( 'small',
+					__( 'This text will be placed at the top of invitation message. Make it as friendly and ' .
+						'personalized as you can.',
+						'Postmatic'
+					)
+				),
 				$this->input(
 					array(
 						'type' => 'textarea',
@@ -129,7 +145,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 						array(
 							'type' => 'textarea',
 							'name' => 'manual_addresses',
-							'desc' => __( '<br />Please separate addresses with commas.', 'Postmatic' ),
+							'desc' => '<br />' . __( 'Please separate addresses with commas.', 'Postmatic' ),
 						)
 					)
 				)
@@ -182,11 +198,22 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 						)
 					),
 					html( 'p',
-						__( 'Based on the above your invite will be sent to', 'Postmatic' ),
-						' ',
-						html( 'span class="recipient-count"', '0' ),
-						' ',
-						__( 'people.', 'Postmatic' )
+						__(
+							'Based on the above your invite will be sent to <span class="recipient-count">0</span> ' .
+								'people.',
+							'Postmatic'
+						)
+					),
+					html( 'div class="invite-limit-warning"',
+						array( 'data-limit' => $this->limit ),
+						sprintf(
+							__(
+								'Wow, that\'s a lot of invitations! This tool is currently limited to %d invites. ' .
+									'You can contact support if you need to arrange more.',
+								'Postmatic'
+							),
+							$this->limit
+						)
 					),
 					$this->input(
 						array(

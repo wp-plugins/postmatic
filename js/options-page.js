@@ -4,6 +4,14 @@
 
 		$( '#prompt-tabs' ).tabs();
 
+		$( 'input.last-submit' ).keypress( function( e ) {
+			var $form = $( this ).parents( 'form' );
+			if ( ( e.keyCode && e.keyCode === 13 ) || ( e.which && e.which === 13 ) ) {
+				e.preventDefault();
+				$form.find( 'input[type="submit"]' ).get( -1 ).click();
+			}
+		} );
+
 		init_email_tab();
 		init_invite_tab();
 		init_import_tab();
@@ -86,6 +94,8 @@
 		var $loading_indicator = $form.find( '.loading-indicator' );
 		var $recipient_display = $form.find( 'textarea[name="recipients"]' );
 		var $recipient_count = $form.find( 'span.recipient-count' );
+		var $limit_warning = $form.find( '.invite-limit-warning' );
+		var limit = $limit_warning.data( 'limit' );
 
 		var manual_addresses_timer;
 		var $manual_addresses_input = $form.find( 'textarea[name="manual_addresses"]' )
@@ -139,6 +149,12 @@
 		}
 
 		function set_recipients( recipients ) {
+			if ( recipients.length > limit ) {
+				$limit_warning.show();
+				recipients = recipients.slice( 0, limit );
+			} else {
+				$limit_warning.hide();
+			}
 			$loading_indicator.hide();
 			$recipient_count.show();
 			$recipient_display.empty().show();

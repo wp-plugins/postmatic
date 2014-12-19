@@ -1,11 +1,14 @@
 <?php
 /**
-* HTML post notification email template
-*
-* Post globals are set so template tags like the_title() and the_content() will work.
-*
-* @see prompt/post_email/template_data
-*/
+ * HTML post notification email template
+ *
+ * Post globals are set so template tags like the_title() and the_content() will work.
+ *
+ * @see prompt/post_email/template_data
+ *
+ * @var array $featured_image_src
+ * @var Prompt_Interface_Subscribable $subscribed_object
+ */
 ?>
 <h1><?php the_title(); ?></h1>
 <?php if ( $featured_image_src ) : ?>
@@ -16,19 +19,49 @@
 <?php endif; ?>
 <div>
   <?php the_content(); ?>
-  <p><a href="<?php the_permalink(); ?>" class="btn-secondary">View this post online</a></p>
+  <p id="button"><a href="<?php the_permalink(); ?>" class="btn-secondary"><?php _e( 'View this post online', 'Postmatic' ); ?></a></p>
 </div>
 
 
-<div class="reply-prompt"><img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" /> <p class="reply">Reply to this email to add a comment. <br /><small><strong>Please note</strong>: Your comment will be published publicly and immediately on <?php bloginfo( 'name' ); ?></small></p>
-
+<div class="reply-prompt">
+	<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
+	<p class="reply">
+		<?php _e( 'Reply to this email to reply to add a comment.', 'Postmatic' ); ?><br />
+		<small>
+			<?php
+			printf(
+				__(
+					'<strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
+					'Postmatic'
+				),
+				get_bloginfo( 'name' )
+			);
+			?>
+		</small>
+	</p>
+</div>
 
 
 <div class="footnote">
 
-  <h3>Stay in the Loop</h3>
-    <p>To receive comments on this post directly in your inbox reply with the word <strong>subscribe</strong>.</p>
+	<h3><?php _e( 'Stay in the Loop', 'Postmatic' ); ?></h3>
 
-  <h4>Manage your subscription</h4>
-    <p>To <strong>unsubscribe</strong> to <?php echo $subscribed_object->subscription_object_label(); ?> reply with the word 'unsubscribe'.</p>
+	<p>
+		<?php
+		_e(
+			'To receive comments on this post directly in your inbox reply with the word <strong>subscribe</strong>.',
+			'Postmatic'
+		);
+		?>
+	</p>
+
+	<h4><?php _e( 'Manage your subscription', 'Postmatic' ); ?></h4>
+	<p>
+		<?php
+		printf(
+			__( "To <strong>unsubscribe</strong> to %s reply with the word 'unsubscribe'.", 'Postmatic' ),
+			$subscribed_object->subscription_object_label()
+		);
+		?>
+	</p>
 </div>

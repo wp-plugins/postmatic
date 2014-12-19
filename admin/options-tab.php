@@ -38,12 +38,21 @@ class Prompt_Admin_Options_Tab extends scbAdminPage {
 	}
 
 	/**
-	 * An identifier for the tab.
+	 * A CSS-style identifier for the tab.
 	 *
 	 * @return string Tab identifier.
 	 */
 	public function slug() {
 		return sanitize_title( $this->name() );
+	}
+
+	/**
+	 * A PHP form style identifier for the tab.
+	 *
+	 * @return string Tab action.
+	 */
+	public function action() {
+		return str_replace( '-', '_', $this->slug() );
 	}
 
 	/**
@@ -89,7 +98,7 @@ class Prompt_Admin_Options_Tab extends scbAdminPage {
 			array( 'name' => 'action', 'type' => 'hidden', 'value' => 'save_prompt_tab_options' )
 		);
 		$button_args = array_merge(
-			array( 'action' => $this->options->get_key() . '_submit' ),
+			array( 'action' => $this->action() . '_submit' ),
 			$button_args
 		);
 		return parent::form_wrap( $content, $button_args );

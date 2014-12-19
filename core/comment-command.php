@@ -85,7 +85,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		$strip_patterns = array(
 			'/\n[^\r\n]*' . date( 'Y' ) . '[^\r\n]*:[\s\n\r]*.*/s',          // google-style quoted mail intro
 			'/<a href="https:\/\/overview.mail.yahoo.com[^>]*>.*?<\/a>/',   // yahoo mobile "sent from"
-			'/[\r\n]-[\r\n].*/s',                                           // single dash signature
+			'/[\r\n]-+[\r\n].*/s',                                          // dash signature divider
 		);
 
 		$text = $this->message->message;
@@ -108,10 +108,10 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		if ( preg_match( '/^\s*(subscribe|unsubscribe)\s*/i', $message_text, $matches ) )
 			return $matches[1];
 
-		if ( preg_match( '/^\s*(unusbscribe|sunsubscribe|unsusbscribe|unsuscribe)\s*/i', $message_text, $matches ) )
+		if ( preg_match( '/^\s*(unusbscribe|sunsubscribe|unsusbscribe|unsuscribe|unsusrib|unsusribe)\s*/i', $message_text, $matches ) )
 			return 'unsubscribe';
 
-		if ( preg_match( '/^\s*(usbscribe|suscribe)\s*/i', $message_text, $matches ) )
+		if ( preg_match( '/^\s*(usbscribe|suscribe|susribe|susrib)\s*/i', $message_text, $matches ) )
 			return 'subscribe';
 
 		return '';

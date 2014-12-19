@@ -4,7 +4,6 @@
  * Handle Prompt options and those of active add-ons.
  */
 class Prompt_Admin_Options_Page extends scbAdminPage {
-	const SUPPORT_URL = 'http://gopostmatic.com/support';
 	const SUPPORT_EMAIL = 'support@gopostmatic.com';
 	const DISMISS_ERRORS_META_KEY = 'prompt_error_dismiss_time';
 	const BUG_REPORT_OPTION_NAME = 'prompt_error_submit_time';
@@ -30,6 +29,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$this->add_tab( new Prompt_Admin_Options_Options_Tab( $options, $overrides ) );
 		$this->add_tab( new Prompt_Admin_Jetpack_Import_Options_Tab( $options, $overrides ) );
 		$this->add_tab( new Prompt_Admin_Mailpoet_Import_Options_Tab( $options, $overrides ) );
+		$this->add_tab( new Prompt_Admin_Support_Options_Tab( $options, $overrides ) );
 	}
 
 	public function add_tab( Prompt_Admin_Options_Tab $tab ) {
@@ -189,8 +189,6 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		list( $tabs, $panels ) = $this->tabs_content();
 
-		echo $this->sidebar_content();
-
 		echo html(
 			'div id="prompt-tabs"',
 			html( 'ul',
@@ -294,61 +292,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	protected function sidebar_content() {
 		return html(
 			'div id="prompt-sidebar"',
-			$this->support_content(),
-			$this->news_content()
-		);
-	}
-
-	/**
-	 * Assemble support widget content
-	 * @return string content
-	 */
-	protected function support_content() {
-		return html(
-			'div class="ui-widget"',
-			html( 'div class="ui-widget-header ui-corner-top"', __( 'Get Support', 'Postmatic' ) ),
-			html(
-				'div class="ui-widget-content ui-corner-bottom"',
-				html(
-					'a',
-					array( 'href' => self::SUPPORT_URL ),
-					__( 'View the FAQ and submit support requests at gopostmatic.com.', 'Postmatic' )
-				)
-			)
-		);
-	}
-
-	/**
-	 * Assemble news widget content
-	 * @return string content
-	 */
-	protected function news_content() {
-		$feed = fetch_feed( 'http://gopostmatic.com/feed' );
-
-		if ( is_wp_error( $feed ) )
-			return __( 'No news available at the moment.', 'Postmatic' );
-
-		$item_count = $feed->get_item_quantity( 3 );
-
-		/** @var SimplePie_Item[] $items */
-		$items = $feed->get_items( 0, $item_count );
-		
-		$news_items = '';
-		foreach ( $items as $item ) {
-			$news_items .= html(
-				'li',
-				html( 'small', $item->get_date( 'j F Y ' ) ),
-				html( 'a', array( 'href' => $item->get_permalink() ), $item->get_title() )
-			);
-		}
-
-		return html(
-			'div class="ui-widget"',
-			html( 'div class="ui-widget-header ui-corner-top"', __( 'Postmatic News', 'Postmatic' ) ),
-			html(
-				'div class="ui-widget-content ui-corner-bottom"',
-				html( 'ul class="prompt-news"', $news_items )
-			)
+			'&nbsp;'
 		);
 	}
 
@@ -405,6 +349,27 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 						'value' => $user->user_email,
 					),
 					wp_unslash( $_POST )
+				)
+			),
+			html( 'tr class="concierge-install"',
+				html( 'th scope="row"', '' ),
+				html( 'td',
+					$this->input(
+						array(
+							'type' => 'checkbox',
+							'name' => 'concierge_install',
+							'desc' => sprintf(
+								__(
+									'Yes, I would like to take advantage of <a href="%s">complimentary concierge</a> ' .
+									'installation, configuration, and user migration.',
+									'Postmatic'
+								),
+								'http://gopostmatic.com/concierge'
+							),
+							'extra' => array( 'class' => 'concierge-install' ),
+						),
+						wp_unslash( $_POST )
+					)
 				)
 			)
 		);
@@ -520,14 +485,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		update_option( self::BUG_REPORT_OPTION_NAME, time() );
 
-		$options = array_diff_key( Prompt_Core::$options->get(), array( 'prompt_key' => '' ) );
-
-		$message = array(
-			'url' => get_option( 'siteurl' ),
-			'options' => $options,
-			'version' => Prompt_Core::version( $full = true ),
-			'error_log' => Prompt_Logging::get_log( $last_submit_time, ARRAY_A ),
-		);
+		$message = array( 'error_log' => Prompt_Logging::get_log( $last_submit_time, ARRAY_A ) );
 
 		$environment = new Prompt_Environment();
 
@@ -567,10 +525,11 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			'postmatic@robot.zapier.com',
 			'Postmatic Beta Key Request',
 			sprintf(
-				"first: %s\nlast: %s\nurl: %s",
+				"first: %s\nlast: %s\nurl: %s\nconcierge: %d",
 				$_POST['first_name'],
 				$_POST['last_name'],
-				site_url()
+				site_url(),
+				isset( $_POST['concierge_install'] )
 			),
 			array(
 				'From: ' . $_POST['email'],

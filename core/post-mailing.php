@@ -2,6 +2,8 @@
 
 class Prompt_Post_Mailing {
 
+	/** @var  bool */
+	protected static $reset_more;
 	/** @var array */
 	protected static $shortcode_whitelist = array( 'gallery', 'caption', 'wpv-post-body', 'types' );
 
@@ -41,19 +43,12 @@ class Prompt_Post_Mailing {
 		$prompt_site = new Prompt_Site();
 		$prompt_author = new Prompt_User( get_userdata( $post->post_author ) );
 
-		// Set up global post data for use in the email template
-		$GLOBALS['post'] = $post;
-		$GLOBALS['more'] = true;
-		setup_postdata( $post );
+		self::setup_postdata( $post );
 
 		$featured_image_src = wp_get_attachment_image_src( get_post_thumbnail_id(), 'prompt-post-featured' );
 
 		if ( Prompt_Admin_Delivery_Metabox::suppress_featured_image( $post->ID ) )
 			$featured_image_src = false;
-
-		remove_filter( 'the_content', 'do_shortcode', 11 );
-		add_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
-		add_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
 
 		$emails = array();
 		foreach ( $chunk_ids as $user_id ) {
@@ -94,11 +89,7 @@ class Prompt_Post_Mailing {
 			$emails[] = apply_filters( 'prompt/post_email', $email, $template_data );
 		}
 
-		wp_reset_postdata();
-
-		remove_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
-		remove_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
-		add_filter( 'the_content', 'do_shortcode', 11 );
+		self::reset_postdata();
 
 		$result = Prompt_Factory::make_mailer()->send_many( $emails );
 
@@ -114,6 +105,44 @@ class Prompt_Post_Mailing {
 			);
 
 		}
+
+	}
+
+	/**
+	 * Set up the global environment needed to render a post email.
+	 * @var WP_Post $post
+	 */
+	public static function setup_postdata( $post ) {
+
+		setup_postdata( $post );
+
+		self::$reset_more = isset( $GLOBALS['more'] ) ? $GLOBALS['more'] : null;
+
+		$GLOBALS['post'] = $post;
+		$GLOBALS['more'] = true;
+
+		remove_filter( 'the_content', 'do_shortcode', 11 );
+		remove_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
+		add_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
+		add_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
+		add_filter( 'the_content', array( __CLASS__, 'strip_incompatible_tags' ), 11 );
+
+	}
+
+	/**
+	 * Reset the global environment after rendering post emails.
+	 */
+	public static function reset_postdata() {
+
+		wp_reset_postdata();
+
+		$GLOBALS['more'] = self::$reset_more;
+
+		remove_filter( 'the_content', array( __CLASS__, 'strip_incompatible_tags' ), 11 );
+		remove_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
+		remove_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
+		add_filter( 'the_content', 'do_shortcode', 11 );
+		add_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
 
 	}
 
@@ -154,6 +183,31 @@ class Prompt_Post_Mailing {
 		return preg_replace( '/(<img[^>]*?) height=["\']\d*["\']([^>]*?>)/', '$1$2', $content );
 	}
 
+	public static function strip_incompatible_tags( $content ) {
+
+		if ( false === strpos( $content, '<iframe' ) and false === strpos( $content, '<object' ) )
+			return $content;
+
+		$content = preg_replace_callback(
+			'#<(iframe|object)([^>]*)(src|data)=[\'"]([^\'"]*)[\'"][^>]*>.*?<\\/\\1>#',
+			array( __CLASS__, 'strip_incompatible_tag' ),
+			$content
+		);
+
+		return $content;
+	}
+
+	public static function strip_incompatible_tag( $m ) {
+		$class = $m[1];
+
+		$url_parts = parse_url( $m[4] );
+
+		if ( $url_parts and isset( $url_parts['host'] ) )
+			$class = 'embed ' . str_replace( '.', '-', $url_parts['host'] );
+
+		return self::incompatible_placeholder( $class );
+	}
+
 	/**
 	 * @param string $content
 	 * @return string
@@ -189,15 +243,7 @@ class Prompt_Post_Mailing {
 		if ( in_array( $tag, self::$shortcode_whitelist ) )
 			return do_shortcode_tag( $m );
 
-		$link = html( 'div class="incompatible"',
-			__( 'This content is not compatible with your email client. ', 'Postmatic' ),
-			html( 'a',
-				array( 'href' => get_permalink() ),
-			__( 'Click here to view this post in your browser.', 'Postmatic' )
-			)
-		);
-
-		return $m[1] . $link . $m[6];
+		return $m[1] . self::incompatible_placeholder( $tag ) . $m[6];
 	}
 
 	/**
@@ -215,6 +261,17 @@ class Prompt_Post_Mailing {
 		return $out;
 	}
 
+	protected static function incompatible_placeholder( $class = '' ) {
+		$class = 'incompatible' . ( $class ? ' ' . $class : '' );
+		return html( 'div',
+			array( 'class' => $class ),
+			__( 'This content is not compatible with your email client. ', 'Postmatic' ),
+			html( 'a',
+				array( 'href' => get_permalink() ),
+			__( 'Click here to view this post in your browser.', 'Postmatic' )
+			)
+		);
+	}
 	protected static function send_error_notifications( $post, $error ) {
 
 		$recipient_id = get_current_user_id() ? get_current_user_id() : $post->post_author;

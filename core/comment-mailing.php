@@ -59,7 +59,10 @@ class Prompt_Comment_Mailing {
 
 		$previous_comments = self::get_previous_comments( $comment );
 
-		$comment_author = get_userdata( $comment->user_id );
+		$comment_author = get_user_by( 'id', $comment->user_id );
+		if ( !$comment_author )
+			get_user_by( 'email', $comment->comment_author_email );
+
 		$from_name = $comment_author ? $comment_author->display_name : $comment->comment_author;
 
 		$parent_comment = $parent_author = null;
@@ -78,7 +81,11 @@ class Prompt_Comment_Mailing {
 				continue;
 
 			$subscriber = get_userdata( $subscriber_id );
+
 			if ( !$subscriber )
+				continue;
+
+			if ( $subscriber->user_email == $comment->comment_author_email )
 				continue;
 
 			$template_data = array(

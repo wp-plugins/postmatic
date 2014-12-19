@@ -38,7 +38,7 @@ class Prompt_Subscription_Mailing {
 			$emails[] = self::make_agreement_email( $object, $user_data, null, $template_data );
 		}
 
-		Prompt_Factory::make_mailer( Prompt_Enum_Email_Transports::API )->send_many( $emails );
+		Prompt_Factory::make_mailer()->send_many( $emails );
 
 		if ( !empty( $chunks[$chunk + 1] ) ) {
 

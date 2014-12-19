@@ -5,6 +5,13 @@
 * @var Prompt_Interface_Subscribable   $object         The thing being subscribed to
 */
 ?>
-<h1>You have unsubscribed</h1>
-<p>You'll no longer receive email notices for <?php echo $object->subscription_object_label(); ?>.</p>
-<p>To re-subscribe visit: <?php echo $object->subscription_url(); ?></p>
+<h1><?php _e( 'You have unsubscribed', 'Postmatic' ); ?></h1>
+<p>
+	<?php
+	printf(
+		__( "You'll no longer receive email notices for %s.", 'Postmatic' ),
+		$object->subscription_object_label()
+	);
+	?>
+</p>
+<p><?php _e( 'To re-subscribe visit:', 'Postmatic' ); ?> <?php echo $object->subscription_url(); ?></p>

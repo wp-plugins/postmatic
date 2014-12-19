@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.0.0-beta11\n"
+"Email 1.0.0-beta12\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/1.0.0-"
-"beta11-20141208-1356\n"
-"POT-Creation-Date: 2014-12-08 21:56:13+00:00\n"
+"beta12-20141219-1122\n"
+"POT-Creation-Date: 2014-12-19 19:22:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,15 +22,11 @@ msgstr ""
 msgid "Postmatic Api Key"
 msgstr ""
 
-#: admin/core-options-tab.php:22
-msgid ""
-"<h3>Improve your site by making Postmatic even better</h3><p>We rely on "
-"users like you to help shape our development roadmap. By checking the box "
-"below you will be helping us know more about your site and how we can make "
-"Postmatic even better.</p>"
+#: admin/core-options-tab.php:24
+msgid "Improve your site by making Postmatic even better"
 msgstr ""
 
-#: admin/core-options-tab.php:27
+#: admin/core-options-tab.php:38
 msgid "Yes, send periodic usage statistics to Postmatic."
 msgstr ""
 
@@ -66,54 +62,51 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: admin/email-options-tab.php:54 admin/email-options-tab.php:106
+#: admin/email-options-tab.php:54 admin/email-options-tab.php:116
 msgid "Text"
 msgstr ""
 
-#: admin/email-options-tab.php:62
-msgid ""
-"Email header image <br/><small>Will be displayed at half the size of your "
-"uploaded image to support retina displays. The ideal width to fill the full "
-"header area is 1440px wide.</small>"
+#: admin/email-options-tab.php:63
+msgid "Email header image"
 msgstr ""
 
-#: admin/email-options-tab.php:82
+#: admin/email-options-tab.php:92
 msgid "Change"
 msgstr ""
 
-#: admin/email-options-tab.php:89
+#: admin/email-options-tab.php:99
 msgid "Email header text"
 msgstr ""
 
-#: admin/email-options-tab.php:99
+#: admin/email-options-tab.php:109
 msgid "Email footer type"
 msgstr ""
 
-#: admin/email-options-tab.php:105
+#: admin/email-options-tab.php:115
 msgid "Widgets"
 msgstr ""
 
-#: admin/email-options-tab.php:114
+#: admin/email-options-tab.php:124
 msgid "Footer Widgets"
 msgstr ""
 
-#: admin/email-options-tab.php:117
+#: admin/email-options-tab.php:127
 msgid "You can define widgets for your footer at "
 msgstr ""
 
-#: admin/email-options-tab.php:121
+#: admin/email-options-tab.php:131
 msgid "Appearance > Widgets"
 msgstr ""
 
-#: admin/email-options-tab.php:127
+#: admin/email-options-tab.php:137
 msgid "Email footer text"
 msgstr ""
 
-#: admin/email-options-tab.php:138
+#: admin/email-options-tab.php:148
 msgid "Send a test HTML email to"
 msgstr ""
 
-#: admin/email-options-tab.php:151
+#: admin/email-options-tab.php:161
 msgid "Send"
 msgstr ""
 
@@ -129,108 +122,95 @@ msgstr ""
 msgid "Important:"
 msgstr ""
 
-#: admin/invite-options-tab.php:6
+#: admin/invite-options-tab.php:8
 msgid "Invite Subscribers"
 msgstr ""
 
-#: admin/invite-options-tab.php:38
+#: admin/invite-options-tab.php:40
 msgid "Invalid email address"
 msgstr ""
 
-#: admin/invite-options-tab.php:44
+#: admin/invite-options-tab.php:46
 msgid "Already subscribed"
 msgstr ""
 
-#: admin/invite-options-tab.php:69
+#: admin/invite-options-tab.php:71
 msgid "Success. %d invite sent."
 msgid_plural "Success. %d invites sent."
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/invite-options-tab.php:74
+#: admin/invite-options-tab.php:76
 msgid "Something went wrong and these invites were not sent: "
 msgstr ""
 
-#: admin/invite-options-tab.php:82
-msgid ""
-"<h2>Send email invitations to subscribe to your site</h2><p>Use this tool to "
-"reach out to your community of past or current commenters. Be sure to check "
-"the subject and introductory text below.<p>"
+#: admin/invite-options-tab.php:85
+msgid "Send email invitations to subscribe to your site"
 msgstr ""
 
-#: admin/invite-options-tab.php:86
+#: admin/invite-options-tab.php:95
 msgid "Email Subject"
 msgstr ""
 
-#: admin/invite-options-tab.php:91
+#: admin/invite-options-tab.php:100
 msgid "You're invited to subscribe to %s"
 msgstr ""
 
-#: admin/invite-options-tab.php:96
-msgid ""
-"Email Introduction<br /><small>This text will be placed at the top of "
-"invitation message. Make it as friendly and personalized as you can."
+#: admin/invite-options-tab.php:105
+msgid "Email Introduction"
 msgstr ""
 
-#: admin/invite-options-tab.php:107
+#: admin/invite-options-tab.php:123
 msgid "Who should we send this invite to?"
 msgstr ""
 
-#: admin/invite-options-tab.php:114
+#: admin/invite-options-tab.php:130
 msgid "A list of email addresses"
 msgstr ""
 
-#: admin/invite-options-tab.php:115
+#: admin/invite-options-tab.php:131
 msgid "People who have recently commented"
 msgstr ""
 
-#: admin/invite-options-tab.php:116
+#: admin/invite-options-tab.php:132
 msgid "People who comment the most"
 msgstr ""
 
-#: admin/invite-options-tab.php:117
+#: admin/invite-options-tab.php:133
 msgid "Anyone that has ever commented"
 msgstr ""
 
-#: admin/invite-options-tab.php:132
-msgid "<br />Please separate addresses with commas."
+#: admin/invite-options-tab.php:148
+msgid "Please separate addresses with commas."
 msgstr ""
 
-#: admin/invite-options-tab.php:145
+#: admin/invite-options-tab.php:161
 msgid ""
 "Send this invitation to people who have had an approved comment within the "
 "last"
 msgstr ""
 
-#: admin/invite-options-tab.php:151
+#: admin/invite-options-tab.php:167
 msgid "months."
 msgstr ""
 
-#: admin/invite-options-tab.php:162
+#: admin/invite-options-tab.php:178
 msgid "Send this invitation to people who have at least"
 msgstr ""
 
-#: admin/invite-options-tab.php:169
+#: admin/invite-options-tab.php:185
 msgid "approved comments."
 msgstr ""
 
-#: admin/invite-options-tab.php:174
+#: admin/invite-options-tab.php:190
 msgid "Recipients"
 msgstr ""
 
-#: admin/invite-options-tab.php:180
+#: admin/invite-options-tab.php:196
 msgid "Loading..."
 msgstr ""
 
-#: admin/invite-options-tab.php:185
-msgid "Based on the above your invite will be sent to"
-msgstr ""
-
-#: admin/invite-options-tab.php:189
-msgid "people."
-msgstr ""
-
-#: admin/invite-options-tab.php:204
+#: admin/invite-options-tab.php:231
 msgid "Send Invites"
 msgstr ""
 
@@ -334,8 +314,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: admin/mailpoet-import-options-tab.php:74
-msgid "<br />One user didn't qualify for importing."
-msgid_plural "<br />There were %3$s users which didn't qualify for importing."
+msgid "One user didn't qualify for importing."
+msgid_plural "There were %3$s users which didn't qualify for importing."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -427,21 +407,15 @@ msgstr ""
 
 #: admin/options-options-tab.php:16
 msgid ""
-"Subscribe authors to comments on their own posts.<small>(Recommended)</"
-"small><p>This will automatically subscribe post authors to new comment "
-"notifications on their posts. This works well to keep the author up to date "
-"with the latest comments and discussion.</p>"
+"Subscribe authors to comments on their own posts.<small>(Recommended)</small>"
 msgstr ""
 
-#: admin/options-options-tab.php:19
+#: admin/options-options-tab.php:29
 msgid "User Accounts"
 msgstr ""
 
-#: admin/options-options-tab.php:22
-msgid ""
-"Email subscribers WordPress account credentials when they subscribe. <p>Only "
-"necessary in some situations as all user commands are otherwise possible via "
-"email. If enabled we recommend using a good front end login plugin.</p>"
+#: admin/options-options-tab.php:32
+msgid "Email subscribers WordPress account credentials when they subscribe."
 msgstr ""
 
 #: admin/options-page.php:81
@@ -459,7 +433,7 @@ msgid ""
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta11)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta12)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:126
 msgid "Postmatic"
@@ -485,111 +459,160 @@ msgstr ""
 msgid "terms of service"
 msgstr ""
 
-#: admin/options-page.php:229
+#: admin/options-page.php:227
 msgid ""
 "<strong>Attention:</strong> There have been some recent errors in your "
 "configuration. An error log can be found here: "
 msgstr ""
 
-#: admin/options-page.php:235 admin/options-page.php:245
+#: admin/options-page.php:233 admin/options-page.php:243
 msgid "Dismiss"
 msgstr ""
 
-#: admin/options-page.php:236
+#: admin/options-page.php:234
 msgid "Submit A Bug Report"
 msgstr ""
 
-#: admin/options-page.php:249
+#: admin/options-page.php:247
 msgid ""
 "Your current theme has no widget areas. This means you'll have to use the "
 "template tag to display the Postmatic Subscription widget."
 msgstr ""
 
-#: admin/options-page.php:257
+#: admin/options-page.php:255
 msgid ""
 "To get started now, place the Postmatic Subscribe widget where people can "
 "use it to subscribe!"
 msgstr ""
 
-#: admin/options-page.php:259
+#: admin/options-page.php:257
 msgid "Visit Your Widgets"
 msgstr ""
 
-#: admin/options-page.php:309
-msgid "Get Support"
-msgstr ""
-
-#: admin/options-page.php:315
-msgid "View the FAQ and submit support requests at gopostmatic.com."
-msgstr ""
-
-#: admin/options-page.php:329
-msgid "No news available at the moment."
-msgstr ""
-
-#: admin/options-page.php:347
-msgid "Postmatic News"
-msgstr ""
-
-#: admin/options-page.php:362
+#: admin/options-page.php:306
 msgid "Welcome to Postmatic. Let's get started."
 msgstr ""
 
-#: admin/options-page.php:363
+#: admin/options-page.php:307
 msgid "Postmatic is in limited-access beta and requires an activation key."
 msgstr ""
 
-#: admin/options-page.php:371
+#: admin/options-page.php:315
 msgid "Key request sent."
 msgstr ""
 
-#: admin/options-page.php:378
+#: admin/options-page.php:322
 msgid "First Name"
 msgstr ""
 
-#: admin/options-page.php:389
+#: admin/options-page.php:333
 msgid "Last Name"
 msgstr ""
 
-#: admin/options-page.php:400 templates/subscribe-form.php:78
+#: admin/options-page.php:344 templates/subscribe-form.php:78
 msgid "Email"
 msgstr ""
 
-#: admin/options-page.php:416
+#: admin/options-page.php:381
 msgid "Need a key?"
 msgstr ""
 
-#: admin/options-page.php:421
+#: admin/options-page.php:386
 msgid "Request a free Postmatic Api Key"
 msgstr ""
 
-#: admin/options-page.php:440
+#: admin/options-page.php:405
 msgid "Installed and Active"
 msgstr ""
 
-#: admin/options-page.php:446
+#: admin/options-page.php:411
 msgid "Purchase"
 msgstr ""
 
-#: admin/options-page.php:488
+#: admin/options-page.php:453
 msgid ""
 "There's a problem verifying your key. Please try later or report this error."
 msgstr ""
 
-#: admin/options-page.php:495
+#: admin/options-page.php:460
 msgid ""
 "We didn't recognize the key \"%s\". Please make sure it matches the one we "
 "gave you."
 msgstr ""
 
-#: admin/options-page.php:546
+#: admin/options-page.php:504
 msgid ""
 "We're even having trouble sending a bug report. Please copy the data to the "
 "right and send to support@gopostmatic.com."
 msgstr ""
 
-#: admin/options-page.php:561
+#: admin/options-page.php:519
 msgid "Please enter a valid email address."
+msgstr ""
+
+#: admin/support-options-tab.php:11 admin/support-options-tab.php:70
+msgid "Get Support"
+msgstr ""
+
+#: admin/support-options-tab.php:24
+msgid "Diagnostics from %s"
+msgstr ""
+
+#: admin/support-options-tab.php:35
+msgid "Diagnostics could not be sent, please try a bug report."
+msgstr ""
+
+#: admin/support-options-tab.php:41
+msgid "Diagnostics <strong>sent</strong>."
+msgstr ""
+
+#: admin/support-options-tab.php:45
+msgid "Support, News, and Documentation"
+msgstr ""
+
+#: admin/support-options-tab.php:48
+msgid "Documentation"
+msgstr ""
+
+#: admin/support-options-tab.php:49
+msgid "Find answers to the most common questions and ask your own."
+msgstr ""
+
+#: admin/support-options-tab.php:53
+msgid "Find Answers"
+msgstr ""
+
+#: admin/support-options-tab.php:59
+msgid "Widget Directory"
+msgstr ""
+
+#: admin/support-options-tab.php:60
+msgid ""
+"We've hand curated dozen of widgets. Get the most out of your email template."
+msgstr ""
+
+#: admin/support-options-tab.php:64
+msgid "Research Widgets"
+msgstr ""
+
+#: admin/support-options-tab.php:71
+msgid "Let us know if something isn't right. We'll fix it right away."
+msgstr ""
+
+#: admin/support-options-tab.php:75
+msgid "Submit a Ticket"
+msgstr ""
+
+#: admin/support-options-tab.php:80
+msgid "The Latest Postmatic News:"
+msgstr ""
+
+#: admin/support-options-tab.php:84
+msgid "Advanced: Send Diagnostic Info to Support"
+msgstr ""
+
+#: admin/support-options-tab.php:95
+msgid "No news available at the moment."
 msgstr ""
 
 #: admin/users-handling.php:24
@@ -704,15 +727,15 @@ msgstr ""
 msgid "You are subscribed to new comments on this post."
 msgstr ""
 
-#: core/comment-mailing.php:105
+#: core/comment-mailing.php:112
 msgid "New reply to \"%s\""
 msgstr ""
 
-#: core/comment-mailing.php:161
+#: core/comment-mailing.php:168
 msgid "a deleted post"
 msgstr ""
 
-#: core/comment-mailing.php:175
+#: core/comment-mailing.php:182
 msgid "Unable to publish your reply to \"%s\""
 msgstr ""
 
@@ -771,30 +794,30 @@ msgstr ""
 msgid "Refused an attempt to subscribe an invalid user ID."
 msgstr ""
 
-#: core/post-mailing.php:193
+#: core/post-mailing.php:268
 msgid "This content is not compatible with your email client. "
 msgstr ""
 
-#: core/post-mailing.php:196
+#: core/post-mailing.php:271
 msgid "Click here to view this post in your browser."
 msgstr ""
 
-#: core/post-mailing.php:230
+#: core/post-mailing.php:287
 msgid "Delivery issue for %s"
 msgstr ""
 
-#: core/post-mailing.php:233
+#: core/post-mailing.php:290
 msgid ""
 "Delivery of subscription notifications for the post \"%s\" may have failed."
 msgstr ""
 
-#: core/post-mailing.php:237
+#: core/post-mailing.php:294
 msgid ""
 "A site administrator can report this event to the development team from the "
 "Postmatic settings."
 msgstr ""
 
-#: core/post-mailing.php:239
+#: core/post-mailing.php:296
 msgid "The error message was: "
 msgstr ""
 
@@ -934,9 +957,161 @@ msgid ""
 "for you?"
 msgstr ""
 
+#: templates/comment-rejected-email.php:10
+msgid "We're sorry."
+msgstr ""
+
+#: templates/comment-rejected-email.php:14
+msgid ""
+"Your reply to <em>%s</em> cannot be published because the post cannot be "
+"found or the discussion has been closed."
+msgstr ""
+
+#: templates/comment-rejected-email.php:27
+msgid "Please visit %s for more information."
+msgstr ""
+
+#: templates/comment-rejected-email.php:33
+msgid "More Information"
+msgstr ""
+
 #: templates/comment-reply-email.php:14 templates/comment-reply-email.php:17
 #: templates/new-comment-email.php:13
 msgid "Anonymous"
+msgstr ""
+
+#: templates/comment-reply-email.php:26
+msgid "%s replied to your comment."
+msgstr ""
+
+#. translators: %1$s is date, %2$s time, %3$s linked title
+#: templates/comment-reply-email.php:36
+msgid "On %1$s at %2$s you made the following comment on %3$s:"
+msgstr ""
+
+#: templates/comment-reply-email.php:50 templates/comment-reply-email.php:98
+msgid "%s replied:"
+msgstr ""
+
+#: templates/comment-reply-email.php:60
+msgid "%s left a reply to a comment by %s"
+msgstr ""
+
+#. translators: %1$s is post title, %2$s is commenter name
+#: templates/comment-reply-email.php:71
+msgid "While discussing %1$s %2$s wrote:"
+msgstr ""
+
+#. translators: word between date and time
+#: templates/comment-reply-email.php:87 templates/comment-reply-email.php:106
+#: templates/new-comment-email.php:37 templates/new-comment-email.php:78
+msgid "at"
+msgstr ""
+
+#: templates/comment-reply-email.php:121 templates/new-comment-email.php:53
+#: templates/new-comment-email.php:94
+msgid "Reply to this email to reply to %s."
+msgstr ""
+
+#: templates/comment-reply-email.php:126 templates/new-comment-email.php:58
+#: templates/new-comment-email.php:99 templates/new-post-email.php:33
+#: templates/subscribed-email.php:47
+msgid ""
+"<strong>Please note</strong>: Your reply will be published publicly and "
+"immediately on %s."
+msgstr ""
+
+#: templates/comment-reply-email.php:137 templates/new-comment-email.php:110
+msgid "Leave this conversation"
+msgstr ""
+
+#: templates/comment-reply-email.php:140
+msgid ""
+"To no longer receive other comments or replies in this discussion to reply "
+"with the word 'unsubscribe'."
+msgstr ""
+
+#: templates/html-email-wrapper.php:470
+msgid "Sent from %s."
+msgstr ""
+
+#: templates/html-email-wrapper.php:477
+msgid "Delivered by %s."
+msgstr ""
+
+#: templates/html-email-wrapper.php:483
+msgid "About Postmatic (Beta)"
+msgstr ""
+
+#: templates/new-comment-email.php:19
+msgid "<span class=\"capitalize\">%s</span> added a comment."
+msgstr ""
+
+#: templates/new-comment-email.php:25
+msgid "In reply to: %s."
+msgstr ""
+
+#: templates/new-comment-email.php:68
+msgid "Recently in this conversation..."
+msgstr ""
+
+#: templates/new-comment-email.php:113
+msgid ""
+"To no longer receive other comments on this thread to reply with the word "
+"'unsubscribe'."
+msgstr ""
+
+#: templates/new-post-email.php:22 templates/subscribed-email.php:38
+msgid "View this post online"
+msgstr ""
+
+#: templates/new-post-email.php:29
+msgid "Reply to this email to reply to add a comment."
+msgstr ""
+
+#: templates/new-post-email.php:47
+msgid "Stay in the Loop"
+msgstr ""
+
+#: templates/new-post-email.php:51
+msgid ""
+"To receive comments on this post directly in your inbox reply with the word "
+"<strong>subscribe</strong>."
+msgstr ""
+
+#: templates/new-post-email.php:58
+msgid "Manage your subscription"
+msgstr ""
+
+#: templates/new-post-email.php:62
+msgid ""
+"To <strong>unsubscribe</strong> to %s reply with the word 'unsubscribe'."
+msgstr ""
+
+#: templates/new-user-email.php:8
+msgid "Welcome to %s."
+msgstr ""
+
+#: templates/new-user-email.php:12
+msgid ""
+"It's not required, but you can access some extra features on our site by <a "
+"href=\"%s\">logging in</a>."
+msgstr ""
+
+#: templates/new-user-email.php:20
+msgid "Your Account Information:"
+msgstr ""
+
+#: templates/new-user-email.php:22
+msgid "Username"
+msgstr ""
+
+#: templates/new-user-email.php:23
+msgid "Password"
+msgstr ""
+
+#: templates/new-user-email.php:27
+msgid "You may log in by visiting %s."
 msgstr ""
 
 #: templates/subscribe-form.php:16
@@ -991,6 +1166,83 @@ msgstr ""
 
 #: templates/subscribe-widget-settings.php:25
 msgid "Collect name (in addition to email)"
+msgstr ""
+
+#: templates/subscribed-email.php:10
+msgid "Welcome, <span class=\"capitalize\">%s</span>."
+msgstr ""
+
+#: templates/subscribed-email.php:13
+msgid "What's next?"
+msgstr ""
+
+#: templates/subscribed-email.php:16
+msgid "Keep an eye on your inbox for content from %s."
+msgstr ""
+
+#. translators: %1$s is title, %2$s date
+#: templates/subscribed-email.php:23
+msgid "We've included the latest, <em>%1$s</em> from %2$s, below."
+msgstr ""
+
+#: templates/subscribed-email.php:43
+msgid "To <strong>leave a comment</strong> simply reply to this email."
+msgstr ""
+
+#: templates/subscribed-email.php:59
+msgid "To unsubscribe at any time visit %s"
+msgstr ""
+
+#: templates/subscription-agreement-email.php:15
+msgid "An invitation from %s"
+msgstr ""
+
+#: templates/subscription-agreement-email.php:22
+msgid "There’s one more step to finish your subscription to %s."
+msgstr ""
+
+#: templates/subscription-agreement-email.php:31
+msgid "Important Notice"
+msgstr ""
+
+#: templates/subscription-agreement-email.php:46
+msgid "First, there are some important things you should know"
+msgstr ""
+
+#: templates/subscription-agreement-email.php:60
+msgid "You will be invited to reply to these emails."
+msgstr ""
+
+#: templates/subscription-agreement-email.php:63
+msgid ""
+"Your reply to those emails will be immediately published to the web as a "
+"comment."
+msgstr ""
+
+#: templates/subscription-agreement-email.php:81
+msgid "Now it’s time to confirm your subscription"
+msgstr ""
+
+#: templates/subscription-agreement-email.php:94
+msgid ""
+"If you did not initiate this subscription please ignore this email or "
+"forward it to abuse@gopostmatic.com."
+msgstr ""
+
+#: templates/subscription-agreement-email.php:101
+msgid "Thanks!"
+msgstr ""
+
+#: templates/unsubscribed-email.php:8
+msgid "You have unsubscribed"
+msgstr ""
+
+#: templates/unsubscribed-email.php:12
+msgid "You'll no longer receive email notices for %s."
+msgstr ""
+
+#: templates/unsubscribed-email.php:17
+msgid "To re-subscribe visit:"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

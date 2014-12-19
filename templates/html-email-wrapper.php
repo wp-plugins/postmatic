@@ -57,6 +57,10 @@
     a {
       color: #348eda;
     }
+    #button {
+      clear: both;
+      margin-top: 25px;
+    }
     .btn-primary {
       text-decoration: none;
       color: #FFF;
@@ -288,6 +292,42 @@
     margin: 20px 0;
   }
 
+.www-youtube-com,.animoto-com,.blip-tv,.www-collegehumor-com,.www-dailymotion-com,.flickr-com,.www-flickr-com,.www-funnyordie-com,.www-hulu-com,.embed-revision3-com,.www-ted-com,.vimeo-com,.vine-co,.wordpress-tv{
+  background-image: url(<?php echo Prompt_Core::$url_path . '/media/video.jpg' ;?>);
+}
+
+.www-mixcloud-com,.www-rdio-com,.www-soundcloud-com,.soundcloud-com,.w-soundcloud-com,.www-spotify-com {
+  background-image: url(<?php echo Prompt_Core::$url_path . '/media/audio.jpg' ;?>);
+}
+
+.issueembed,.embedarticles-com,.www-scribd-com,.www-slideshare-net {
+  background-image: url(<?php echo Prompt_Core::$url_path . '/media/article.jpg' ;?>);
+}
+
+.embed {
+  width: 95% !important;
+  overflow: hidden;  
+}
+
+.incompatible.embed {
+  background-color: #333 !important;
+  background-size: 100% !important;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  width: 95%;
+  overflow: hidden;
+  height: 180px;
+  padding-top:150px;
+  color: #fff;
+  text-align: center; 
+}
+
+.incompatible.embed a {
+  display: block;
+  width: 100%;
+  height: 90%;
+}
+
 /*Mobile syles*/
     @media only screen and (max-width: 480px) {
      table.body-wrap {
@@ -372,6 +412,14 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .new-reply {margin-left: 55px; margin-bottom: 55px; font-size: 115%;}
 .the-reply, {margin-bottom: 25px;}
 .reply-content {margin-left: 60px;}
+.comment blockquote, .previous-comments blockquote, .reply-content blockquote {
+  background: #fff;
+  border: none;
+  border-left: 3px solid #ddd;
+  padding: 0;
+  padding-left: 10px;
+  font-weight: normal;
+}
 
     </style>
     <!-- body -->
@@ -416,16 +464,37 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
         <table>
           <tr>
             <td class="credit">
-              <p>Sent from <unsubscribe><a href="<?php bloginfo( 'url' ); ?>"><?php bloginfo( 'name' ); ?></a></unsubscribe>.
+              <p>
+                  <?php
+                  printf(
+                      __( 'Sent from %s.', 'Postmatic' ),
+                      '<unsubscribe><a href="' . get_bloginfo( 'url' ) . '">' . get_bloginfo( 'name' ) . '</a></unsubscribe>'
+                  );
+                  ?>
               <?php if ( '' == Prompt_Core::$options->get( 'plan' ) ) : ?>
-              Delivered by <a href="http://gopostmatic.com/?utm_source=footer&utm_medium=email&utm_campaign=pluginfooter
-">Postmatic</a>.
+                  <?php
+                  printf(
+                      __( 'Delivered by %s.', 'Postmatic' ),
+                      '<a href="http://gopostmatic.com/?utm_source=footer&utm_medium=email&utm_campaign=pluginfooter">Postmatic</a>'
+                  );
+                  ?>
               <?php endif; ?>
-                <h3>About Postmatic (Beta)</h3>
-              <p style="margin-bottom: 15px;">Postmatic sends your posts to your readers where they’re comfortable: their inbox. They can send comments back by hitting the reply button. Just like you can  with this very email.
-              We’re currently in public beta. <a href="http://gopostmatic.com/?utm_source=footer&utm_medium=email&utm_campaign=pluginfooter
-">Sign Up</a> Thanks for being a willing test pilot! <a href="https://vernal.typeform.com/to/lehwGc">Share your thoughts in this short survey.</a></p>
-
+              </p>
+              <h3><?php _e( 'About Postmatic (Beta)', 'Postmatic' ); ?></h3>
+              <p style="margin-bottom: 15px;">
+                  <?php
+                  printf(
+                      __(
+                          'Postmatic sends your posts to your readers where they’re comfortable: their inbox. ' .
+                              'They can send comments back by hitting the reply button. Just like you can with this ' .
+                              'very email. We’re currently in public beta. <a href="%s">Sign Up</a> Thanks for being a ' .
+                              'willing test pilot! <a href="%s">Share your thoughts in this short survey.</a>',
+                          'Postmatic'
+                      ),
+                      'http://gopostmatic.com/?utm_source=footer&utm_medium=email&utm_campaign=pluginfooter',
+                      'https://vernal.typeform.com/to/lehwGc'
+                  );
+                  ?>
               </p>
             </td>
           </tr>

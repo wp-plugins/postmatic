@@ -139,7 +139,7 @@ class Prompt_Comment_Form_Handling {
 
 	public static function after_form() {
 
-		if ( !Prompt_Core::$options->get( 'augment_comment_form' ) )
+		if ( !Prompt_Core::$options->get( 'augment_comment_form' ) or empty( self::$prompt_post ) )
 			return;
 
 		$current_user = Prompt_User_Handling::current_user();

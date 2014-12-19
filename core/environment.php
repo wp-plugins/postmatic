@@ -3,11 +3,19 @@
 class Prompt_Environment {
 
 	/** @var  string */
+	protected $prompt_version;
+	/** @var  array */
+	protected $prompt_options;
+	/** @var  string */
 	protected $php_version;
+	/** @var  array */
+	protected $php_extensions;
 	/** @var  string */
 	protected $wp_version;
 	/** @var  string */
 	protected $db_version;
+	/** @var  string */
+	protected $siteurl;
 	/** @var  boolean */
 	protected $is_multisite;
 	/** @var  array */
@@ -16,15 +24,31 @@ class Prompt_Environment {
 	protected $active_sitewide_plugins;
 	/** @var  array */
 	protected $plugins;
+	/** @var  array */
+	protected $theme;
 
 	public function __construct() {
+
+		$this->prompt_version = Prompt_Core::version( $full = true );
+		$this->prompt_options = array_diff_key( Prompt_Core::$options->get(), array( 'prompt_key' => '' ) );
+
 		$this->php_version = phpversion();
+		$this->php_extensions = get_loaded_extensions();
 		$this->wp_version = $GLOBALS['wp_version'];
 		$this->db_version = $GLOBALS['wpdb']->db_version();
+
+		$this->siteurl = get_option( 'siteurl' );
 		$this->is_multisite = is_multisite();
 		$this->active_plugins = get_option( 'active_plugins' );
 		$this->active_sitewide_plugins = get_option( 'active_sitewide_plugins' );
 		$this->plugins = get_plugins();
+
+		$this->theme = array();
+		$theme = wp_get_theme();
+		$theme_fields = array( 'Name', 'ThemeURI', 'Author', 'AuthorURI', 'Version', 'Template' );
+		foreach ( $theme_fields as $field ) {
+			$this->theme[$field] = $theme->get( $field );
+		}
 	}
 
 	/**

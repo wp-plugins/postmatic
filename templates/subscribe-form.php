@@ -30,7 +30,7 @@ $subscriber_email_list = array();
 ?>
 <form class="prompt-subscribe" method="post">
 
-	<div class="loading-indicator" style="display: none; margin:3% 0;">
+	<div class="loading-indicator" style="display: none; margin:3% 0;min-height:70px;">
 		<img src="<?php echo $loading_image_url; ?>" alt="Loading..." />
 	</div>
 

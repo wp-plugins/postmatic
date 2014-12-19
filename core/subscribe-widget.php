@@ -15,7 +15,7 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 		$instance_defaults = array(
 			'title' => '',
-			'collect_name' => false,
+			'collect_name' => true,
 		);
 
 		$instance = wp_parse_args( $instance, $instance_defaults );

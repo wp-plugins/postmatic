@@ -170,16 +170,14 @@ class Prompt_Ajax_Handling {
 
 		$post = get_post( $post_id );
 
+		Prompt_Post_Mailing::setup_postdata( $post );
+
 		if ( Prompt_Admin_Delivery_Metabox::suppress_featured_image( $post_id ) ) {
 			$featured_image_src = false;
 		} else {
 			$featured_image = image_get_intermediate_size( get_post_thumbnail_id( $post_id ), 'prompt-post-featured' );
 			$featured_image_src = array( $featured_image['url'], $featured_image['width'], $featured_image['height'] );
 		}
-
-		// Set up global post data for use in the email template
-		$GLOBALS['post'] = $post;
-		setup_postdata( $post );
 
 		$email = Prompt_Post_Mailing::build_email( array(
 			'prompt_author' => new Prompt_User( $post->post_author ),
@@ -188,6 +186,8 @@ class Prompt_Ajax_Handling {
 			'subscribed_object' => new Prompt_Site(),
 			'featured_image_src' => $featured_image_src,
 		) );
+
+		Prompt_Post_Mailing::reset_postdata();
 
 		Prompt_Factory::make_mailer()->send_one( $email );
 

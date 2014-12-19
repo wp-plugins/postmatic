@@ -47,7 +47,6 @@
 
 #prompt-tabs {
   overflow: hidden;
-  margin-right: 21%;
   min-width: 400px; }
 
 #adminmenuback {
@@ -57,6 +56,8 @@
   width: 90%; }
 #prompt-settings-invite tr.recipient-type label {
   display: block; }
+#prompt-settings-invite .invite-limit-warning {
+  display: none; }
 
 .recipient-count {
   font-weight: bold; }
@@ -88,8 +89,6 @@ h2#prompt-settings-header span {
   font-weight: normal;
   font-size: 200%; }
 
-h2 {color:#3EC0C6;}
-
 .wrap.signup {
   background: #29bfc7 url(../media/background.png) no-repeat bottom;
   background-width: 100%; }
@@ -117,7 +116,7 @@ h2 {color:#3EC0C6;}
   padding: 25px 50px; }
 
 input.regular-text {
-  width: 100%; } 
+  width: 100%; }
 
 .initialize-key {
   padding: 0 50px 40px 50px; }
@@ -125,28 +124,73 @@ input.regular-text {
 .initialize-key td, .initialize-key tr {
   width: 100% !important; }
 
-#jetpack-import-instructions div, #mailpoet-import-intro div {
-  font-size: 90%;
+.widget {
+  width: 32%;
+  float: left;
+  margin-right: 1%;
+  padding: 130px 20px 0 20px;
+  text-align: center;
+  background-size: 112px !important;
+  vertical-align: bottom;
+  margin-bottom: 65px;
+  margin-top: 65px;
+}
+
+.widget a {
+  display: block;
+  background: #00C59C;
+  color: #fff !important;
+  text-decoration: none;  
+  -webkit-border-radius: 10px; 
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 10px 0;
+}
+
+#postmatic-documentation {
+  background: url(../media/docs.png) no-repeat top center;
+}
+#postmatic-widget-directory {
+  background: url(../media/widgets.png) no-repeat top center;
+}
+#postmatic-support {
+  background: url(../media/ticket.png) no-repeat top center;
+}
+
+ul.prompt-news {
+  margin: 3%;
+}
+
+ul.prompt-news li {
+  display: block;
+  width: 28%;
+  float: left;
+  margin-right: 1%;
+  padding: 0 2%;
+}
+
+ul.prompt-news li:nth-child(1) {
+  width: 100%;
+  font-size: 185%;
   line-height: normal;
+  margin-bottom: 25px;
 }
 
-#jetpack-import-instructions h3, #mailpoet-import-intro h3 {
-  font-weight: normal;
-  color: #35bfc6;
-  margin-bottom: 2px;
-}
-#jetpack-import-instructions h4, #mailpoet-import-intro h4 {
-  margin-bottom: 2px !important;
-}
-#jetpack-import-instructions p, #mailpoet-import-intro p {
-  margin: 0 0 10px 0;
+ul.prompt-news li div p:nth-child(2) {
+  display: none;
 }
 
-#jetpack-import-intro{
-  color: #00B16A;
-  margin-bottom: 15px;
+#news-header {
+  margin-left: 5%;
+  clear: left;
+
 }
 
-#jetpack-not-ready, #mailpoet-not-ready {
-  color:#C0392B;
+p.submit {
+  clear: both !important;
+  top: 30px;
+  left: 10px;
+  position: relative;
+  text-align: right;
+
 }

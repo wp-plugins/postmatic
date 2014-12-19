@@ -71,9 +71,9 @@ class Prompt_Admin_Mailpoet_Import_Options_Tab extends Prompt_Admin_Import_Optio
 		$reject_button = '';
 		if ( $rejects ) {
 
-			$results_format .= ' ' . _n(
-				'<br />One user didn\'t qualify for importing.',
-				'<br />There were %3$s users which didn\'t qualify for importing.',
+			$results_format .= '<br />' . _n(
+				'One user didn\'t qualify for importing.',
+				'There were %3$s users which didn\'t qualify for importing.',
 				count( $rejects )
 			);
 
@@ -83,7 +83,7 @@ class Prompt_Admin_Mailpoet_Import_Options_Tab extends Prompt_Admin_Import_Optio
 					html( 'p',
 						__(
 							'We have a very strict policy regarding user imports: <em>we will never allow anyone ' .
-							'to be subscribed to a blog running Posmatic without them having opted in</em> (such as ' .
+							'to be subscribed to a blog running Postmatic without them having opted in</em> (such as ' .
 							'subscriber lists bought and imported in bulk for spamming). Because of this we will not ' .
 							'import any Mailpoet subscribers unless the following two conditions are true:',
 							'Postmatic'
@@ -178,7 +178,7 @@ class Prompt_Admin_Mailpoet_Import_Options_Tab extends Prompt_Admin_Import_Optio
 				html( 'p',
 					__(
 						'We have a very strict policy regarding user imports: <em>we will never allow anyone ' .
-						'to be subscribed to a blog running Posmatic without them having opted in</em> (such as ' .
+						'to be subscribed to a blog running Postmatic without them having opted in</em> (such as ' .
 						'subscriber lists bought and imported in bulk for spamming). Because of this we will not ' .
 						'import any Mailpoet subscribers unless the following two conditions are true:',
 						'Postmatic'

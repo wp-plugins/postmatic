@@ -198,7 +198,7 @@ class Prompt_Admin_Jetpack_Import {
 
 		foreach( $rows as $row ) {
 			$this->subscribers[] = array(
-				'email_address' => $row->td[1]->__toString(),
+				'email_address' => $row->td[1],
 				'subscribe_date' => $row->td[3]->span['title'],
 			);
 		}
@@ -211,14 +211,14 @@ class Prompt_Admin_Jetpack_Import {
 		if ( empty( $email_followers ) )
 			return;
 
-		preg_match( '/\((\d+)\)$/', $email_followers[0]->__toString(), $user_count_matches );
+		preg_match( '/\((\d+)\)$/', $email_followers[0], $user_count_matches );
 		$this->subscriber_count = intval( $user_count_matches[1] );
 
 		$this->page_count = 1;
 		$page_links = $xml->xpath( "//a[contains(concat(' ',normalize-space(@class),' '), ' page-numbers ')]" );
 		if ( count( $page_links ) > 1 ) {
 			$last_page_link = $page_links[ count( $page_links ) - 2 ];
-			$this->page_count = intval( $last_page_link->__toString() );
+			$this->page_count = intval( $last_page_link );
 		}
 	}
 }

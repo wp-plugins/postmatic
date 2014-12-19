@@ -7,13 +7,29 @@
 * @var string $post_title Post title or placeholder if post no longer exists
 */
 ?>
-<h1>We're sorry.</h1>
+<h1><?php _e( "We're sorry.", 'Postmatic' ); ?></h1>
 <p>
-Your reply to <em><?php echo $post_title; ?> </em>cannot be published because the post cannot be found or the
-discussion has been closed.</p>
+	<?php
+	printf(
+		__(
+			'Your reply to <em>%s</em> cannot be published because the post cannot be found or the discussion has been closed.',
+			'Postmatic'
+		),
+		$post_title
+	);
+	?>
+</p>
+
 <?php if ( $post ) : ?>
-<p>
-Please visit <a href="<?php echo get_permalink( $post ); ?>"><?php echo get_permalink( $post ); ?></a>
-for more information.</p>
-<a href="<?php echo get_permalink( $post ); ?>#comments" class="btn-primary">More Information</a>
+	<p>
+		<?php
+		printf(
+			__( 'Please visit %s for more information.', 'Postmatic' ),
+			'<a href="' . get_permalink( $post ) . '">' . get_permalink( $post ) . '</a>'
+		);
+		?>
+	</p>
+	<a href="<?php echo get_permalink( $post ); ?>#comments" class="btn-primary">
+		<?php _e( 'More Information', 'Postmatic' ); ?>
+	</a>
 <?php endif; ?>
