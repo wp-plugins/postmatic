@@ -72,6 +72,14 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+
+= 1.0 beta 13 =
+- Fixed up issues with overly-large aligncenter images in certain vesions of gmail.
+- Better support for posts with comments turned off. If you have comments turned off when publishing a post replies to the email notification will be sent to you directly and not posted as comments. If a post is published with comments turned on, but they get turned off in the future, replies will then send the usual error notification to the sender.
+- Fixed a bug in the subscription confirmation email which displayed the latest post incorrectly.
+- Removed 1,500 limit on sending invites to past commenters. Limit stays in place for pasted email addresses.
+- Modified the email template query so author-aware widgets (like bio widgets) now work happily
+
 = 1.0 beta 12 =
 - Added support for oembeds. If possible the content is displayed in the email. If not, a nice placeholder image will be used. The placeholders are even smart enough to know if they are standing in for audio, video, or a document.
 - Improved handling of quoted text using markdown on replies

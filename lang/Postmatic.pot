@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.0.0-beta12\n"
+"Email 1.0.0-beta13\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/1.0.0-"
-"beta12-20141219-1122\n"
-"POT-Creation-Date: 2014-12-19 19:22:02+00:00\n"
+"beta13-20141223-1151\n"
+"POT-Creation-Date: 2014-12-23 19:51:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -433,7 +433,7 @@ msgid ""
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta12)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta13)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:126
 msgid "Postmatic"
@@ -794,30 +794,30 @@ msgstr ""
 msgid "Refused an attempt to subscribe an invalid user ID."
 msgstr ""
 
-#: core/post-mailing.php:268
+#: core/post-mailing.php:275
 msgid "This content is not compatible with your email client. "
 msgstr ""
 
-#: core/post-mailing.php:271
+#: core/post-mailing.php:278
 msgid "Click here to view this post in your browser."
 msgstr ""
 
-#: core/post-mailing.php:287
+#: core/post-mailing.php:294
 msgid "Delivery issue for %s"
 msgstr ""
 
-#: core/post-mailing.php:290
+#: core/post-mailing.php:297
 msgid ""
 "Delivery of subscription notifications for the post \"%s\" may have failed."
 msgstr ""
 
-#: core/post-mailing.php:294
+#: core/post-mailing.php:301
 msgid ""
 "A site administrator can report this event to the development team from the "
 "Postmatic settings."
 msgstr ""
 
-#: core/post-mailing.php:296
+#: core/post-mailing.php:303
 msgid "The error message was: "
 msgstr ""
 
@@ -831,24 +831,24 @@ msgid ""
 "new comment on <em>%s</em>."
 msgstr ""
 
-#: core/register-subscribe-command.php:38
+#: core/register-subscribe-command.php:39
 msgid "Couldn't find the original registration information for a new user."
 msgstr ""
 
-#: core/register-subscribe-command.php:48
+#: core/register-subscribe-command.php:49
 msgid "Couldn't find the original object subscribed to for a new user."
 msgstr ""
 
-#: core/register-subscribe-command.php:80
+#: core/register-subscribe-command.php:84
 msgid "Failed to create a new user from an agreement reply email."
 msgstr ""
 
-#: core/register-subscribe-command.php:138
-#: core/register-subscribe-command.php:149
+#: core/register-subscribe-command.php:142
+#: core/register-subscribe-command.php:153
 msgid "Received invalid metadata with a subscription agreement."
 msgstr ""
 
-#: core/register-subscribe-command.php:158
+#: core/register-subscribe-command.php:162
 msgid "Received no message with a subscription agreement."
 msgstr ""
 
@@ -1004,7 +1004,7 @@ msgstr ""
 
 #. translators: word between date and time
 #: templates/comment-reply-email.php:87 templates/comment-reply-email.php:106
-#: templates/new-comment-email.php:37 templates/new-comment-email.php:78
+#: templates/new-comment-email.php:38 templates/new-comment-email.php:78
 msgid "at"
 msgstr ""
 
@@ -1014,7 +1014,7 @@ msgid "Reply to this email to reply to %s."
 msgstr ""
 
 #: templates/comment-reply-email.php:126 templates/new-comment-email.php:58
-#: templates/new-comment-email.php:99 templates/new-post-email.php:33
+#: templates/new-comment-email.php:99 templates/new-post-email.php:37
 #: templates/subscribed-email.php:47
 msgid ""
 "<strong>Please note</strong>: Your reply will be published publicly and "
@@ -1061,29 +1061,29 @@ msgid ""
 "'unsubscribe'."
 msgstr ""
 
-#: templates/new-post-email.php:22 templates/subscribed-email.php:38
+#: templates/new-post-email.php:24 templates/subscribed-email.php:38
 msgid "View this post online"
 msgstr ""
 
-#: templates/new-post-email.php:29
+#: templates/new-post-email.php:33
 msgid "Reply to this email to reply to add a comment."
 msgstr ""
 
-#: templates/new-post-email.php:47
+#: templates/new-post-email.php:50
 msgid "Stay in the Loop"
 msgstr ""
 
-#: templates/new-post-email.php:51
+#: templates/new-post-email.php:54
 msgid ""
 "To receive comments on this post directly in your inbox reply with the word "
 "<strong>subscribe</strong>."
 msgstr ""
 
-#: templates/new-post-email.php:58
+#: templates/new-post-email.php:61
 msgid "Manage your subscription"
 msgstr ""
 
-#: templates/new-post-email.php:62
+#: templates/new-post-email.php:65
 msgid ""
 "To <strong>unsubscribe</strong> to %s reply with the word 'unsubscribe'."
 msgstr ""

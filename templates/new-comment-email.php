@@ -32,13 +32,13 @@ $previous_index = count( $previous_comments );
 	<div class="comment-header">
 		<?php echo get_avatar( $comment ); ?>
 		<div class="author-name"><?php echo $commenter_name; ?></div>
-			<div class="comment-date">
-				<?php comment_date( '', $comment->comment_ID ); ?>
-				<?php /* translators: word between date and time */ _e( 'at', 'Postmatic' ); ?>
-				<?php echo mysql2date( get_option( 'time_format' ), $comment->comment_date ); ?>
-			</div>
+
+		<div class="comment-date">
+			<?php comment_date( '', $comment->comment_ID ); ?>
+			<?php /* translators: word between date and time */ _e( 'at', 'Postmatic' ); ?>
+			<?php echo mysql2date( get_option( 'time_format' ), $comment->comment_date ); ?>
 		</div>
-		
+
 		<div class="comment-body">
 			<?php echo wpautop( $comment->comment_content ); ?>
 		</div>

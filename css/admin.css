@@ -186,11 +186,16 @@ ul.prompt-news li div p:nth-child(2) {
 
 }
 
-p.submit {
+#get_support_submit {
   clear: both !important;
   top: 30px;
-  left: 10px;
-  position: relative;
+  left: 100px;
+  position: relative; 
   text-align: right;
+  margin-top: 45px;
+}
 
+tr.concierge-install {
+  clear: both; 
+  width: 65% !important;
 }

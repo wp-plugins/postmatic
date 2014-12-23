@@ -106,12 +106,14 @@ jQuery( function( $ ) {
 		});
 	}
 
-	function submit_form() {
+	function submit_form( event ) {
+		var $submitted_form = $( event.currentTarget );
+
 		$loading_indicator.show();
 		$inputs.hide();
 		$message.hide();
 
-		$.post( prompt_subscribe_form_env.ajaxurl, $form.serialize(), function( message ) {
+		$.post( prompt_subscribe_form_env.ajaxurl, $submitted_form.serialize(), function( message ) {
 
 			$message.html( message ).show();
 			$loading_indicator.hide();

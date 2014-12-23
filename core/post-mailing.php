@@ -155,10 +155,6 @@ class Prompt_Post_Mailing {
 
 		$template = Prompt_Template::locate( "new-post-email.php" );
 
-		$command = new Prompt_New_Post_Comment_Command();
-		$command->set_post_id( $template_data['prompt_post']->id() );
-		$command->set_user_id( $template_data['recipient']->ID );
-
 		$from_name = get_option( 'blogname' );
 		if ( is_a( $template_data['subscribed_object'], 'Prompt_User' ) and $template_data['prompt_author']->id() )
 			$from_name .= ' [' . $template_data['prompt_author']->get_wp_user()->display_name . ']';
@@ -170,7 +166,18 @@ class Prompt_Post_Mailing {
 			'message' => Prompt_Template::render( $template, $template_data, false ),
 		) );
 
-		Prompt_Command_Handling::add_command_metadata( $command, $email );
+		if ( comments_open( $template_data['prompt_post']->id() ) ) {
+
+			$command = new Prompt_New_Post_Comment_Command();
+			$command->set_post_id( $template_data['prompt_post']->id() );
+			$command->set_user_id( $template_data['recipient']->ID );
+			Prompt_Command_Handling::add_command_metadata( $command, $email );
+
+		} else {
+
+			$email->set_from_address( $template_data['prompt_author']->get_wp_user()->user_email );
+
+		}
 
 		return $email;
 	}

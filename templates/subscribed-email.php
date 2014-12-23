@@ -21,8 +21,8 @@
 		/* translators: %1$s is title, %2$s date */
 		printf(
 			__( 'We\'ve included the latest, <em>%1$s</em> from %2$s, below.', 'Postmatic' ),
-			the_title(),
-			the_date()
+			get_the_title(),
+			get_the_date()
 		);
 	endif;
 	?>

@@ -114,7 +114,7 @@
 
     .alignright {float: right !important; margin: 0 0 20px 20px !important;}
     .alignleft {float: left; margin: 0 20px 20px 0;}
-    .aligncenter {margin: 20px auto; display: block !important; float: none;}
+    .aligncenter {margin: 20px auto; display: block !important; float: none; width: auto !important;}
 
  
     .gallery-item, .ngg-gallery-thumbnail-box {float: left !important; margin: 5px;}

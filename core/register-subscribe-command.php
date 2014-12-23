@@ -1,8 +1,9 @@
 <?php
 
 class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
-	const USER_DATA_META_KEY = 'prompt_user_data';
-	const COMMENT_TYPE = 'prompt_pre_reg';
+	protected static $user_data_meta_key = 'prompt_user_data';
+	protected static $resend_count_meta_key = 'prompt_resend_count';
+	protected static $comment_type = 'prompt_pre_reg';
 
 	protected $keys = array( 0 );
 	protected $subscribable_object;
@@ -55,13 +56,16 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 		/** @var Prompt_Interface_Subscribable $subscribable_object */
 		$subscribable_object = new $subscribable_object_class( $subscribable_object_id );
 
-		$user_data = get_comment_meta( $comment_id, self::USER_DATA_META_KEY, true );
+		$user_data = get_comment_meta( $comment_id, self::$user_data_meta_key, true );
 
 		$email = $comment->comment_author_email;
 
 		$subscriber = get_user_by( 'email', $email );
 
 		if ( !$subscriber and !preg_match( '/(?<!n[o\']t )age?ree?/i', $this->get_message_text() ) ) {
+
+			if ( self::stop_resending( $comment ) )
+				return;
 
 			Prompt_Subscription_Mailing::send_agreement(
 				$subscribable_object,
@@ -120,12 +124,12 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 			'comment_author_IP' => preg_replace( '/[^0-9a-fA-F:., ]/', '',$remote_address ),
 			'comment_agent' => $class,
 			'comment_parent' => $object->id(),
-			'comment_type' => self::COMMENT_TYPE,
+			'comment_type' => self::$comment_type,
 			'comment_approved' => 'Prompt',
 		) );
 
 		if ( !empty( $user_data ) )
-			add_comment_meta( $comment_id, self::USER_DATA_META_KEY, $user_data );
+			add_comment_meta( $comment_id, self::$user_data_meta_key, $user_data );
 
 		$this->keys = array( $comment_id );
 	}
@@ -166,5 +170,16 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 
 	protected function get_message_text() {
 		return $this->message->message;
+	}
+
+	protected function stop_resending( $comment ) {
+
+		$resend_count = get_comment_meta( $comment->comment_ID, self::$resend_count_meta_key, true );
+
+		$resend_count += 1;
+
+		update_comment_meta( $comment->comment_ID, self::$resend_count_meta_key, $resend_count );
+
+		return ( $resend_count > 2 );
 	}
 }

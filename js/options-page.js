@@ -149,7 +149,9 @@
 		}
 
 		function set_recipients( recipients ) {
-			if ( recipients.length > limit ) {
+			var invite_type = $invite_recipient_types.filter( ':checked' ).val();
+
+			if ( recipients.length > limit && 'manual' === invite_type ) {
 				$limit_warning.show();
 				recipients = recipients.slice( 0, limit );
 			} else {

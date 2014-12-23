@@ -6,7 +6,6 @@
  * Decorates the native WordPress HTTP function wp_remote_request().
  */
 class Prompt_Api_Client implements Prompt_Interface_Http_Client {
-	const URL = 'https://app.gopostmatic.com/api/v1';
 
 	protected $key;
 	protected $base_url;
@@ -21,8 +20,9 @@ class Prompt_Api_Client implements Prompt_Interface_Http_Client {
 	 * @param string $implementation    Optional decorator target. Defaults to wp_remote_request.
 	 */
 	public function __construct( $defaults = array(), $key = null, $base_url = null, $implementation = 'wp_remote_request' ) {
+		$default_url = defined( 'PROMPT_API_URL' ) ? PROMPT_API_URL : 'https://app.gopostmatic.com/api/v1';
 		$this->key = $key ? $key : Prompt_Core::$options->get( 'prompt_key' );
-		$this->base_url = $base_url ? $base_url : self::URL;
+		$this->base_url = $base_url ? $base_url : $default_url;
 		$this->defaults = $defaults;
 		$this->implementation = $implementation;
 	}
