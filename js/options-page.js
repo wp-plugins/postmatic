@@ -87,6 +87,7 @@
 
 	function init_invite_tab() {
 		var cached_commenters = null;
+		var cached_users = null;
 
 		var $form = $( '#prompt-settings-invite form' )
 			.on( 'submit', enable_recipients );
@@ -121,30 +122,36 @@
 
 		function show_invite_recipient_type() {
 			var $radio_button = $invite_recipient_types.filter( ':checked' ),
-				$manual_row = $( 'tr.invite-manual' ),
-				$recent_row = $( 'tr.invite-recent' ),
-				$count_row = $( 'tr.invite-count' );
+				$manual_row = $( 'tr.invite-manual' ).hide(),
+				$recent_row = $( 'tr.invite-recent' ).hide(),
+				$count_row = $( 'tr.invite-count' ).hide();
 
-			if ( 'manual' == $radio_button.val() ) {
-				$manual_row.show();
-				$recent_row.hide();
-				$count_row.hide();
-				set_manual_recipients();
-			} else if ( 'recent' == $radio_button.val() ) {
-				$manual_row.hide();
-				$recent_row.show();
-				$count_row.hide();
-				load_commenters( select_recent );
-			} else if ( 'count' == $radio_button.val() ) {
-				$manual_row.hide();
-				$recent_row.hide();
-				$count_row.show();
-				load_commenters( select_active );
-			} else {
-				$manual_row.hide();
-				$recent_row.hide();
-				$count_row.hide();
-				load_commenters( select_commenters );
+			switch ( $radio_button.val() ) {
+
+				case 'recent':
+					$recent_row.show();
+					load_commenters( select_recent );
+					break;
+
+				case 'count':
+					$count_row.show();
+					load_commenters( select_active );
+					break;
+
+				case 'all':
+					load_commenters( select_commenters );
+					break;
+
+				case 'users':
+					load_users( select_users );
+					break;
+
+				default:
+				case 'manual':
+					$manual_row.show();
+					set_manual_recipients();
+					break;
+
 			}
 		}
 
@@ -168,6 +175,22 @@
 			$recipient_count.text( recipients.length );
 		}
 
+		function select_users( users ) {
+			var recipients = [];
+
+			cached_users = users;
+
+			$.each( users, function( i, user ) {
+				if ( user.name ) {
+					recipients.push( user.name + ' <' + user.address + '>' );
+				} else {
+					recipients.push( user.address );
+				}
+			} );
+
+			set_recipients( recipients );
+		}
+
 		function select_commenters( commenters, filter ) {
 			var recipients = [];
 
@@ -178,7 +201,6 @@
 			}
 
 			$.each( commenters, function( i, commenter ) {
-				var recipient = '';
 
 				if ( filter && !filter( commenter ) )
 					return;
@@ -255,6 +277,25 @@
 			$.ajax( {
 				url: ajaxurl,
 				data: { action: 'prompt_get_commenters' },
+				success: callback
+			} );
+
+		}
+
+		function load_users( callback ) {
+
+			if ( cached_users ) {
+				callback( cached_users );
+				return;
+			}
+
+			$loading_indicator.show();
+			$recipient_count.hide();
+			$recipient_display.hide();
+
+			$.ajax( {
+				url: ajaxurl,
+				data: { action: 'prompt_get_invite_users' },
 				success: callback
 			} );
 

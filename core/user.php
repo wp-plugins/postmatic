@@ -80,7 +80,7 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 		return html( 'div class="prompt-profile-options"',
 			html( 'h2', __( 'Postmatic Subscription Information', 'Postmatic' ) ),
 			$this->profile_subscribers(),
-			$this->profile_site_subscription(),
+			$this->profile_site_subscriptions(),
 			$this->profile_author_subscriptions(),
 			$this->profile_post_subscriptions()
 		);
@@ -97,6 +97,13 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 			$site->unsubscribe( $this->id );
 		elseif ( $this->is_current_user() )
 			$site->subscribe( $this->id );
+
+		$site_comments = new Prompt_Site_Comments();
+
+		if ( empty( $options['prompt_site_comments_subscribed'] ) )
+			$site_comments->unsubscribe( $this->id );
+		elseif ( $this->is_current_user() )
+			$site_comments->subscribe( $this->id );
 	}
 
 	public function subscription_url() {
@@ -148,8 +155,9 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 		);
 	}
 
-	protected function profile_site_subscription() {
-		$site = new Prompt_Site;
+	protected function profile_site_subscriptions() {
+		$site = new Prompt_Site();
+		$site_comments = new Prompt_Site_Comments();
 		return html(
 			'div id="prompt-site-subscription"',
 			html( 'h4', __( 'Site Subscriptions:', 'Postmatic' ) ),
@@ -157,10 +165,20 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 				array(
 					'name' => 'prompt_site_subscribed',
 					'type' => 'checkbox',
-					'desc' => __( 'Notify me by email when new site content is published.', 'Postmatic' ),
+					'desc' => __( 'Please send all new posts to me by email.', 'Postmatic' ),
 					'extra' => array( 'disabled' => !$site->is_subscribed( $this->id ) and !$this->is_current_user() )
 				),
 				array( 'prompt_site_subscribed' => $site->is_subscribed( $this->id ) )
+			),
+			'<br/>',
+			scbForms::input(
+				array(
+					'name' => 'prompt_site_comments_subscribed',
+					'type' => 'checkbox',
+					'desc' => __( 'Please send me all new comments by email. Even ones on posts to which I have not subscribed.', 'Postmatic' ),
+					'extra' => array( 'disabled' => !$site_comments->is_subscribed( $this->id ) and !$this->is_current_user() )
+				),
+				array( 'prompt_site_comments_subscribed' => $site_comments->is_subscribed( $this->id ) )
 			)
 		);
 	}

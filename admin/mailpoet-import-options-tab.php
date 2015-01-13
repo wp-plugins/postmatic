@@ -82,10 +82,7 @@ class Prompt_Admin_Mailpoet_Import_Options_Tab extends Prompt_Admin_Import_Optio
 					html( 'h4', __( 'Why weren\'t more of my users imported?', 'Postmatic' ) ),
 					html( 'p',
 						__(
-							'We have a very strict policy regarding user imports: <em>we will never allow anyone ' .
-							'to be subscribed to a blog running Postmatic without them having opted in</em> (such as ' .
-							'subscriber lists bought and imported in bulk for spamming). Because of this we will not ' .
-							'import any Mailpoet subscribers unless the following two conditions are true:',
+							'We have a very strict policy regarding user imports: <em>we will never allow anyone to be subscribed to a blog running Postmatic without them having opted in</em> (such as subscriber lists bought and imported in bulk for spamming). Because of this we will not import any Mailpoet subscribers unless the following two conditions are true:',
 							'Postmatic'
 						)
 					),
@@ -95,11 +92,7 @@ class Prompt_Admin_Mailpoet_Import_Options_Tab extends Prompt_Admin_Import_Optio
 					),
 					html( 'h5', __( 'Why so strict?', 'Postmatic' ) ),
 					html( 'p',
-						'Bulk importing unwilling users and marking them as opted-in is easy in Mailpoet. If we did ' .
-						'not hold our import to a higher standard the magic button below would allow those unwilling ' .
-						'users to be imported into Postmatic. And then they would spam your grandmother. Nobody wants ' .
-						'that. Plus, if a subscriber does not open or interact with your emails maybe they aren\'t all ' .
-						'that good of a match anyway, right? Think of it as spring cleaning.',
+						'Bulk importing unwilling users and marking them as opted-in is easy in Mailpoet. If we did not hold our import to a higher standard the magic button below would allow those unwilling users to be imported into Postmatic. And then they would spam your grandmother. Nobody wants that. Plus, if a subscriber does not open or interact with your emails maybe they aren\'t all that good of a match anyway, right? Think of it as spring cleaning.',
 						'Postmatic'
 					),
 					html( 'h4', __( 'But we do have good news', 'Postmatic' ) ),
@@ -177,10 +170,7 @@ class Prompt_Admin_Mailpoet_Import_Options_Tab extends Prompt_Admin_Import_Optio
 				html( 'h4', __( 'Which of my subscribers will be imported?', 'Postmatic' ) ),
 				html( 'p',
 					__(
-						'We have a very strict policy regarding user imports: <em>we will never allow anyone ' .
-						'to be subscribed to a blog running Postmatic without them having opted in</em> (such as ' .
-						'subscriber lists bought and imported in bulk for spamming). Because of this we will not ' .
-						'import any Mailpoet subscribers unless the following two conditions are true:',
+						'We have a very strict policy regarding user imports: <em>we will never allow anyone to be subscribed to a blog running Postmatic without them having opted in</em> (such as subscriber lists bought and imported in bulk for spamming). Because of this we will not import any Mailpoet subscribers unless the following two conditions are true:',
 						'Postmatic'
 					)
 				),
@@ -190,18 +180,15 @@ class Prompt_Admin_Mailpoet_Import_Options_Tab extends Prompt_Admin_Import_Optio
 				),
 				html( 'h5', __( 'Why so strict?', 'Postmatic' ) ),
 				html( 'p',
-					'Bulk importing unwilling users and marking them as opted-in is easy in Mailpoet. If we did ' .
-					'not hold our import to a higher standard the magic button below would allow those unwilling ' .
-					'users to be imported into Postmatic. And then they would spam your grandmother. Nobody wants ' .
-					'that. Plus, if a subscriber does not open or interact with your emails maybe they aren\'t all ' .
-					'that good of a match anyway, right? Think of it as spring cleaning.',
-					'Postmatic'
+					__(
+						'Bulk importing unwilling users and marking them as opted-in is easy in Mailpoet. If we did not hold our import to a higher standard the magic button below would allow those unwilling users to be imported into Postmatic. And then they would spam your grandmother. Nobody wants that. Plus, if a subscriber does not open or interact with your emails maybe they aren\'t all that good of a match anyway, right? Think of it as spring cleaning.',
+						'Postmatic'
+					)
 				),
 				html( 'h4', __( 'Can I import multiple lists?', 'Postmatic' ) ),
 				html( 'p',
 					__(
-						'Yes. Re-run this importer with as many lists as you like. Postmatic will not create ' .
-						'duplicate subscribers.',
+						'Yes. Re-run this importer with as many lists as you like. Postmatic will not create duplicate subscribers.',
 						'Postmatic'
 					)
 				),
@@ -213,18 +200,14 @@ class Prompt_Admin_Mailpoet_Import_Options_Tab extends Prompt_Admin_Import_Optio
 				),
 				html( 'p',
 					__(
-						'No, we do not have a concept of multiple lists. All users are the same in Postmatic. ' .
-						'If list segmentation is important to you please let us know by visiting our support site. ' .
-						'You\'ll find the link to the right.',
+						'No, we do not have a concept of multiple lists. All users are the same in Postmatic. If list segmentation is important to you please let us know by visiting our support site. You\'ll find the link to the right.',
 						'Postmatic'
 					)
 				),
 				html( 'h4', __( 'What will happen to my Mailpoet subscribers?', 'Postmatic' ) ),
 				html( 'p',
 					__(
-						'Mailpoet and Postmatic store subscribers in different places within your WordPress ' .
-						'database. Your Mailpoet subscribers will always be available to you provided you have ' .
-						'Mailpoet activated.',
+						'Mailpoet and Postmatic store subscribers in different places within your WordPress database. Your Mailpoet subscribers will always be available to you provided you have Mailpoet activated.',
 						'Postmatic'
 					)
 				)

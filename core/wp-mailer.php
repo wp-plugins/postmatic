@@ -4,6 +4,18 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 
 	/** @var bool Timeouts on local outbounds will not complete successfully */
 	protected $ignore_timeouts = false;
+	/** @var  PHPMailer */
+	protected $local_mailer;
+
+	public function __construct( Prompt_Interface_Http_Client $client = null ) {
+		parent::__construct( $client );
+
+		if ( func_num_args() > 1 ) {
+			$this->local_mailer = func_get_arg( 1 );
+		} else {
+			$this->local_mailer = $this->get_phpmailer();
+		}
+	}
 
 	public function send_one( Prompt_Email $email ) {
 
@@ -42,36 +54,44 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 	}
 
 	protected function send_prepared( Prompt_Email $email ) {
-		// beware changing content type if retrieve_password() is used: http://core.trac.wordpress.org/ticket/23578
-		add_filter( 'wp_mail_content_type', array( $email, 'get_content_type' ) );
 
-		$to = Prompt_Email::name_address( $email->get_to_address(), $email->get_to_name() );
+		$this->local_mailer->clearAllRecipients();
+		$this->local_mailer->clearCustomHeaders();
+		$this->local_mailer->clearReplyTos();
 
-		$headers = array();
+		$this->local_mailer->From = $email->get_from_address();
+		$this->local_mailer->FromName =  $email->get_from_name();
 
-		if ( $email->get_from_address() )
-			$headers[] = 'from: ' . Prompt_Email::name_address( $email->get_from_address(), $email->get_from_name() );
+		$this->local_mailer->addAddress( $email->get_to_address(), $email->get_to_name() );
 
 		if ( $email->get_reply_address() )
-			$headers[] = 'reply-to: ' . Prompt_Email::name_address( $email->get_reply_address(), $email->get_reply_name() );
+			$this->local_mailer->addReplyTo( $email->get_reply_address(), $email->get_reply_name() );
 
-		$sent = wp_mail(
-			$to,
-			$email->get_subject(),
-			$email->get_rendered_message(),
-			$headers,
-			$email->get_file_attachments()
-		);
+		$this->local_mailer->Subject = $email->get_subject();
+		$this->local_mailer->Body = $email->get_rendered_message();
 
-		if ( !$sent )
+		$this->local_mailer->isMail();
+
+		$this->local_mailer->ContentType = $email->get_content_type();
+
+		$this->local_mailer->CharSet = get_bloginfo( 'charset' );
+
+		foreach ( $email->get_file_attachments() as $file_attachment ) {
+			$this->local_mailer->addAttachment( $file_attachment );
+		}
+
+		try {
+			$this->local_mailer->send();
+		} catch ( phpmailerException $e ) {
 			Prompt_Logging::add_error(
 				'prompt_wp_mail',
-				__( 'WordPress failed sending an email. Did you know Postmatic can deliver email for you?', 'Postmatic' ),
-				array( 'email' => $email, 'error_info' => $GLOBALS['phpmailer']->ErrorInfo )
+				__( 'Failed sending an email locally. Did you know Postmatic can deliver email for you?', 'Prompt_Core' ),
+				array( 'email' => $email, 'error_info' => $this->local_mailer->ErrorInfo )
 			);
+			return false;
+		}
 
-		remove_filter( 'wp_mail_content_type', array( $this, 'get_content_type' ) );
-		return $sent;
+		return true;
 	}
 
 	protected function prepare_one( &$email ) {
@@ -108,4 +128,11 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 		return $results;
 	}
 
+	protected function get_phpmailer() {
+		if ( !class_exists( 'PHPMailer' ) ) {
+			require_once ABSPATH . WPINC . '/class-phpmailer.php';
+			require_once ABSPATH . WPINC . '/class-smtp.php';
+		}
+		return new PHPMailer( true );
+	}
 }

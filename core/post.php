@@ -7,12 +7,15 @@
  */
 class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 
+	/** @var string */
+	protected static $sent_meta_key = 'prompt_sent_ids';
+	/** @var string */
+	protected static $recipient_ids_meta_key = 'prompt_recipient_ids';
+
 	/** @var  int user ID */
 	protected $id;
 	/** @var WP_Post post object */
 	protected $wp_post;
-	/** @var string */
-	protected $sent_meta_key = 'prompt_sent_ids';
 
 	/**
 	 * Create a Prompt post.
@@ -77,11 +80,15 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 	 * @return array An array of user IDs.
 	 */
 	public function recipient_ids() {
-		$recipient_ids = array();
 
 		$post = $this->get_wp_post();
 
-		if ( in_array( $post->post_type, Prompt_Core::$options->get( 'site_subscription_post_types' ) ) ) {
+		if ( ! in_array( $post->post_type, Prompt_Core::$options->get( 'site_subscription_post_types' ) ) )
+			return array();
+
+		$recipient_ids = get_post_meta( $post->ID, self::$recipient_ids_meta_key, true );
+
+		if ( ! $recipient_ids ) {
 
 			$prompt_site = new Prompt_Site;
 			$recipient_ids = $prompt_site->subscriber_ids();
@@ -91,15 +98,17 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 				array_merge( $recipient_ids, $prompt_author->subscriber_ids() )
 			);
 
-		}
+			/**
+			 * Filter the recipient ids of notifications for a post.
+			 *
+			 * @param array $recipient_ids
+			 * @param WP_Post $post
+			 */
+			$recipient_ids = apply_filters( 'prompt/recipient_ids/post', $recipient_ids, $post );
 
-		/**
-		 * Filter the recipient ids of notifications for a post.
-		 *
-		 * @param array $recipient_ids
-		 * @param WP_Post $post
-		 */
-		$recipient_ids = apply_filters( 'prompt/recipient_ids/post', $recipient_ids, $post );
+			update_post_meta( $post->ID, self::$recipient_ids_meta_key, $recipient_ids );
+
+		}
 
 		return $recipient_ids;
 	}
@@ -109,7 +118,7 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 	 * @return array
 	 */
 	public function sent_recipient_ids() {
-		$sent_ids = get_post_meta( $this->id, $this->sent_meta_key, true );
+		$sent_ids = get_post_meta( $this->id, self::$sent_meta_key, true );
 
 		if ( !$sent_ids )
 			$sent_ids = array();
@@ -124,7 +133,7 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 	 */
 	public function add_sent_recipient_ids( $ids ) {
 		$sent_ids = array_unique( array_merge( $this->sent_recipient_ids(), $ids ) );
-		update_post_meta( $this->id, $this->sent_meta_key, $sent_ids );
+		update_post_meta( $this->id, self::$sent_meta_key, $sent_ids );
 		return $this;
 	}
 

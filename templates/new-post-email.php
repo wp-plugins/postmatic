@@ -10,7 +10,7 @@
  * @var Prompt_Interface_Subscribable $subscribed_object
  */
 ?>
-<h1><?php the_title(); ?></h1>
+<h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
 <?php if ( $featured_image_src ) : ?>
 	<img src="<?php echo $featured_image_src[0]; ?>"
 	     width="<?php echo intval( $featured_image_src[1] / 2 ); ?>"

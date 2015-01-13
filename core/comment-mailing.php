@@ -1,6 +1,7 @@
 <?php
 
 class Prompt_Comment_Mailing {
+	protected static $recipient_ids_meta_key = 'prompt_recipient_ids';
 	protected static $sent_meta_key = 'prompt_sent_ids';
 
 	/**
@@ -9,37 +10,36 @@ class Prompt_Comment_Mailing {
 	 * Top level comments go to all post subscribers, replies optionally to the replyee.
 	 *
 	 * @param object|int $comment_id_or_object
-	 * @param int $chunk
+	 * @param string $signature Optional identifier for this batch. Just distinguishes cron jobs, ignored here.
 	 */
-	public static function send_notifications( $comment_id_or_object, $chunk = 0 ) {
+	public static function send_notifications( $comment_id_or_object, $signature = '' ) {
 
 		$comment = get_comment( $comment_id_or_object );
 
 		self::handle_new_subscriber( $comment );
 
-		self::send_post_subscriber_notifications( $comment, $chunk );
+		self::send_post_subscriber_notifications( $comment );
 	}
 
 	/**
 	 * Send post subscribers a new comment notification.
 	 *
+	 * Sends up to 25 unsent notifications, and schedules another batch if there are more.
+	 *
 	 * @param object $comment
-	 * @param int $chunk
 	 */
-	protected static function send_post_subscriber_notifications( $comment, $chunk = 0 ) {
+	protected static function send_post_subscriber_notifications( $comment ) {
 
-		$prompt_post = new Prompt_Post( $comment->comment_post_ID );
-
-		$recipient_ids = $prompt_post->subscriber_ids();
+		$recipient_ids = self::recipient_ids( $comment );
 		$sent_ids = self::sent_recipient_ids( $comment );
 		$unsent_ids = array_diff( $recipient_ids, $sent_ids );
 
 		$chunks = array_chunk( $unsent_ids, 25 );
 
-		if ( empty( $chunks[$chunk] ) )
+		if ( empty( $chunks[0] ) )
 			return;
 
-		$chunk_ids = $chunks[$chunk];
+		$chunk_ids = $chunks[0];
 
 		/**
 		 * Filter whether to send new comment notifications.
@@ -59,9 +59,7 @@ class Prompt_Comment_Mailing {
 
 		$previous_comments = self::get_previous_comments( $comment );
 
-		$comment_author = get_user_by( 'id', $comment->user_id );
-		if ( !$comment_author )
-			get_user_by( 'email', $comment->comment_author_email );
+		$comment_author = self::get_comment_author_user( $comment );
 
 		$from_name = $comment_author ? $comment_author->display_name : $comment->comment_author;
 
@@ -74,18 +72,13 @@ class Prompt_Comment_Mailing {
 			$template_file = 'comment-reply-email.php';
 		}
 
+		$prompt_post = new Prompt_Post( $comment->comment_post_ID );
 		$emails = array();
 		foreach ( $chunk_ids as $subscriber_id ) {
 
-			if ( $subscriber_id == $comment->user_id )
-				continue;
-
 			$subscriber = get_userdata( $subscriber_id );
 
-			if ( !$subscriber )
-				continue;
-
-			if ( $subscriber->user_email == $comment->comment_author_email )
+			if ( !$subscriber or !$subscriber->user_email )
 				continue;
 
 			$template_data = array(
@@ -141,12 +134,12 @@ class Prompt_Comment_Mailing {
 
 		Prompt_Factory::make_mailer()->send_many( $emails );
 
-		if ( !empty( $chunks[$chunk + 1] ) ) {
+		if ( !empty( $chunks[1] ) ) {
 
 			wp_schedule_single_event(
 				time(),
 				'prompt/comment_mailing/send_notifications',
-				array( $prompt_post->id(), $chunk + 1 )
+				array( $comment->comment_ID, implode( '', $chunks[1] ) )
 			);
 
 		}
@@ -310,5 +303,61 @@ class Prompt_Comment_Mailing {
 
 		return implode( ' ', array_slice( $words, 0, $word_count ) ) . $elipsis;
 
+	}
+
+	/**
+	 * @param $comment
+	 * @return array
+	 */
+	protected static function recipient_ids( $comment ) {
+
+		// We currently only mail standard WP comments
+		if ( !empty( $comment->comment_type ) )
+			return array();
+
+		$recipient_ids = get_comment_meta( $comment->comment_ID, self::$recipient_ids_meta_key, true );
+
+		if ( ! $recipient_ids ) {
+
+			$site_comments = new Prompt_Site_Comments();
+			$recipient_ids = $site_comments->subscriber_ids();
+
+			$prompt_post = new Prompt_Post( $comment->comment_post_ID );
+			$recipient_ids = array_unique(
+				array_merge( $recipient_ids, $prompt_post->subscriber_ids() )
+			);
+
+			$comment_author = self::get_comment_author_user( $comment );
+			if ( $comment_author )
+				$recipient_ids = array_diff( $recipient_ids, array( $comment_author->ID ) );
+
+			/**
+			 * Filter the recipient ids of notifications for a comment.
+			 *
+			 * @param array $recipient_ids
+			 * @param WP_Post $post
+			 */
+			$recipient_ids = apply_filters( 'prompt/recipient_ids/comment', $recipient_ids, $comment );
+
+			update_comment_meta( $comment->comment_ID, self::$recipient_ids_meta_key, $recipient_ids );
+
+		}
+
+		return $recipient_ids;
+	}
+
+
+	/**
+	 * Get the comment author user if there is one.
+	 * @param $comment
+	 * @return bool|WP_User
+	 */
+	protected static function get_comment_author_user( $comment ) {
+
+		$comment_author = get_user_by( 'id', $comment->user_id );
+		if ( !$comment_author )
+			$comment_author = get_user_by( 'email', $comment->comment_author_email );
+
+		return $comment_author;
 	}
 }

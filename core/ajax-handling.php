@@ -66,7 +66,7 @@ class Prompt_Ajax_Handling {
 	/**
 	 * Handle commenter requests from the invite settings tab
 	 */
-	static public function action_wp_ajax_prompt_get_commenters() {
+	public static function action_wp_ajax_prompt_get_commenters() {
 		/** @var WPDB $wpdb */
 		global $wpdb;
 
@@ -86,6 +86,28 @@ class Prompt_Ajax_Handling {
 			"GROUP BY c.comment_author_email ";
 
 		$results = $wpdb->get_results( $query );
+
+		wp_send_json( $results );
+	}
+
+	/**
+	 * Handle user requests from the invite settings tab.
+	 */
+	public static function action_wp_ajax_prompt_get_invite_users() {
+
+		$users = get_users( array( 'exclude' => Prompt_Site::all_subscriber_ids() ) );
+
+		$results = array();
+		foreach( $users as $user ) {
+
+			if ( empty( $user->user_email ) )
+				continue;
+
+			$results[] = array(
+				'name' => $user->display_name,
+				'address' => $user->user_email,
+			);
+		}
 
 		wp_send_json( $results );
 	}

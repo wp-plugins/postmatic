@@ -18,9 +18,7 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 					'Postmatic'
 					) . html( 'p',
 						__(
-							'This will automatically subscribe post authors to new comment notifications on ' .
-							'their posts. This works well to keep the author up to date with the latest comments ' .
-							'and discussion.',
+							'This will automatically subscribe post authors to new comment notifications on their posts. This works well to keep the author up to date with the latest comments and discussion.',
 							'Postmatic'
 						)
 					),
@@ -32,8 +30,7 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 				'desc' => __( 'Email subscribers WordPress account credentials when they subscribe.', 'Postmatic' ) .
 					html( 'p',
 						__(
-							'Only necessary in some situations as all user commands are otherwise possible via ' .
-							'email. If enabled we recommend using a good front end login plugin.',
+							'Only necessary in some situations as all user commands are otherwise possible via email. If enabled we recommend using a good front end login plugin.',
 							'Postmatic'
 						)
 					),

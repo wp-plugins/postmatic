@@ -30,11 +30,7 @@ class Prompt_Admin_Jetpack_Import_Options_Tab extends Prompt_Admin_Import_Option
 		$content = html( 'div id="jetpack-import-instructions"',
 			html( 'p',
 				__(
-					'Migrating your users from Jetpack to Postmatic takes only seconds. We’ve built a safe and ' .
-					'secure importer which will copy over all of your new post notification Jetpack subscribers ' .
-					'with a single click. Once the import has completed you can safely disable Jetpack Subscriptions ' .
-					'and continue on doing what you do best. Your Jetpack subscribers will be left in tact should ' .
-					'you ever need to access them again.',
+					'Migrating your users from Jetpack to Postmatic takes only seconds. We’ve built a safe and secure importer which will copy over all of your new post notification Jetpack subscribers with a single click. Once the import has completed you can safely disable Jetpack Subscriptions and continue on doing what you do best. Your Jetpack subscribers will be left in tact should you ever need to access them again.',
 					'Postmatic'
 				)
 			),
@@ -43,28 +39,21 @@ class Prompt_Admin_Jetpack_Import_Options_Tab extends Prompt_Admin_Import_Option
 				html( 'h4', __( 'Will my subscribers be alerted to the change?', 'Postmatic' ) ),
 				html( 'p',
 					__(
-						'No. The import process is invisible to subscribers. They will not be alerted nor will ' .
-						'they need to opt-in again.',
+						'No. The import process is invisible to subscribers. They will not be alerted nor will they need to opt-in again.',
 						'Postmatic'
 					)
 				),
 				html( 'h4', __( 'What kind of subscribers are imported?', 'Postmatic' ) ),
 				html( 'p',
 					__(
-						'People who have subscribed to new posts on your site will be imported. At this time ' .
-						'it\'s not going to be in the cards to import people that have subscribed only to ' .
-						'comments on individual posts.',
+						'People who have subscribed to new posts on your site will be imported. At this time it\'s not going to be in the cards to import people that have subscribed only to comments on individual posts.',
 						'Postmatic'
 					)
 				),
 				html( 'h4', __( 'Who isn\'t imported?', 'Postmatic' ) ),
 				html( 'p',
 					__(
-						'Jetpack supports two kinds of users: people that subscribe to your site with their ' .
-						'email address, and people that subscribe to your site with their wordpress.com user ' .
-						'identity. At this time we can\'t access the email address of a user which subscribed ' .
-						'with their wordpress.com identity. This will in most cases be a very small percentage ' .
-						'of your audience.',
+						'Jetpack supports two kinds of users: people that subscribe to your site with their email address, and people that subscribe to your site with their wordpress.com user identity. At this time we can\'t access the email address of a user which subscribed with their wordpress.com identity. This will in most cases be a very small percentage of your audience.',
 						'Postmatic'
 					)
 				),
@@ -72,8 +61,7 @@ class Prompt_Admin_Jetpack_Import_Options_Tab extends Prompt_Admin_Import_Option
 					__( 'What happens if something goes wrong? Will my Jetpack subscribers be safe?', 'Postmatic' )
 				),
 				html( 'p',
-					'If something goes wrong with the import you will be notified of the error. Your Jetpack ' .
-					'subscribers list lives on wordpress.com and will always be there in case you need it again.',
+					'If something goes wrong with the import you will be notified of the error. Your Jetpack subscribers list lives on wordpress.com and will always be there in case you need it again.',
 					'Postmatic'
 				)
 			)

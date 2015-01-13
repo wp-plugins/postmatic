@@ -188,6 +188,11 @@
       line-height: 1.2;
       font-weight: 200;
     }
+
+    h1 a {
+      color: #000;
+      text-decoration: none;
+    }
     h1 {
       font-size: 36px;
     }
@@ -485,10 +490,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
                   <?php
                   printf(
                       __(
-                          'Postmatic sends your posts to your readers where they’re comfortable: their inbox. ' .
-                              'They can send comments back by hitting the reply button. Just like you can with this ' .
-                              'very email. We’re currently in public beta. <a href="%s">Sign Up</a> Thanks for being a ' .
-                              'willing test pilot! <a href="%s">Share your thoughts in this short survey.</a>',
+                          'Postmatic sends your posts to your readers where they’re comfortable: their inbox. They can send comments back by hitting the reply button. Just like you can with this very email. We’re currently in public beta. <a href="%s">Sign Up</a> Thanks for being a willing test pilot! <a href="%s">Share your thoughts in this short survey.</a>',
                           'Postmatic'
                       ),
                       'http://gopostmatic.com/?utm_source=footer&utm_medium=email&utm_campaign=pluginfooter',

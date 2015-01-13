@@ -2,17 +2,18 @@
 
 class Prompt_Post_Mailing {
 
-	/** @var  bool */
-	protected static $reset_more;
 	/** @var array */
 	protected static $shortcode_whitelist = array( 'gallery', 'caption', 'wpv-post-body', 'types' );
 
 	/**
 	 * Send email notifications for a post.
+	 *
+	 * Sends up to 25 unsent notifications, and schedules another batch if there are more.
+	 *
 	 * @param WP_Post|int $post
-	 * @param int $chunk
+	 * @param string $signature Optional identifier for this batch.
 	 */
-	public static function send_notifications( $post, $chunk = 0 ) {
+	public static function send_notifications( $post, $signature = '' ) {
 
 		$post = get_post( $post );
 
@@ -22,10 +23,10 @@ class Prompt_Post_Mailing {
 
 		$chunks = array_chunk( $recipient_ids, 25 );
 
-		if ( empty( $chunks[$chunk] ) )
+		if ( empty( $chunks[0] ) )
 			return;
 
-		$chunk_ids = $chunks[$chunk];
+		$chunk_ids = $chunks[0];
 
 		/**
 		 * Filter whether to send new post notifications. Default true.
@@ -96,12 +97,12 @@ class Prompt_Post_Mailing {
 		if ( is_wp_error( $result ) )
 			self::send_error_notifications( $post, $result );
 
-		if ( !empty( $chunks[$chunk + 1] ) ) {
+		if ( !empty( $chunks[1] ) ) {
 
 			wp_schedule_single_event(
 				time(),
 				'prompt/post_mailing/send_notifications',
-				array( $post->ID, $chunk + 1 )
+				array( $post->ID, implode( '', $chunks[1] ) )
 			);
 
 		}
@@ -114,18 +115,16 @@ class Prompt_Post_Mailing {
 	 */
 	public static function setup_postdata( $post ) {
 
-		setup_postdata( $post );
+		query_posts( array( 'p' => $post->ID, 'post_type' => $post->post_type, 'post_status' => $post->post_status ) );
 
-		self::$reset_more = isset( $GLOBALS['more'] ) ? $GLOBALS['more'] : null;
-
-		$GLOBALS['post'] = $post;
-		$GLOBALS['more'] = true;
+		the_post();
 
 		remove_filter( 'the_content', 'do_shortcode', 11 );
 		remove_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
 		add_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
 		add_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
 		add_filter( 'the_content', array( __CLASS__, 'strip_incompatible_tags' ), 11 );
+		add_filter( 'oembed_dataparse', array( __CLASS__, 'use_original_oembed_url' ), 10, 3 );
 
 	}
 
@@ -134,10 +133,9 @@ class Prompt_Post_Mailing {
 	 */
 	public static function reset_postdata() {
 
-		wp_reset_postdata();
+		wp_reset_query();
 
-		$GLOBALS['more'] = self::$reset_more;
-
+		remove_filter( 'oembed_dataparse', array( __CLASS__, 'use_original_oembed_url' ), 10, 3 );
 		remove_filter( 'the_content', array( __CLASS__, 'strip_incompatible_tags' ), 11 );
 		remove_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
 		remove_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
@@ -209,10 +207,13 @@ class Prompt_Post_Mailing {
 
 		$url_parts = parse_url( $m[4] );
 
-		if ( $url_parts and isset( $url_parts['host'] ) )
+		$url = null;
+		if ( $url_parts and isset( $url_parts['host'] ) ) {
 			$class = 'embed ' . str_replace( '.', '-', $url_parts['host'] );
+			$url = $m[4];
+		}
 
-		return self::incompatible_placeholder( $class );
+		return self::incompatible_placeholder( $class, $url );
 	}
 
 	/**
@@ -247,6 +248,9 @@ class Prompt_Post_Mailing {
 
 		$tag = $m[2];
 
+		if ( 'wpgist' == $tag )
+			return self::override_wp_gist_shortcode_tag( $m );
+
 		if ( in_array( $tag, self::$shortcode_whitelist ) )
 			return do_shortcode_tag( $m );
 
@@ -268,14 +272,64 @@ class Prompt_Post_Mailing {
 		return $out;
 	}
 
-	protected static function incompatible_placeholder( $class = '' ) {
+	/**
+	 * Replace constructed provider URL with the original for placeholders.
+	 *
+	 * @see oembed_dataparse WordPress filter
+	 *
+	 * @param $return
+	 * @param $data
+	 * @param $url
+	 * @return mixed
+	 */
+	public static function use_original_oembed_url( $return, $data, $url ) {
+		$match_pattern = preg_replace( '#^https?#', 'https?', $data->provider_url );
+		return preg_replace( '#' . $match_pattern . '[^"]*#', $url, $return );
+	}
+
+	protected static function override_wp_gist_shortcode_tag( $m ) {
+		$defaults = array( 'file' => '', 'id' => '', 'url' => '' );
+
+		$atts = shortcode_atts( $defaults, shortcode_parse_atts( $m[3] ) );
+
+		if ( empty( $atts['id'] ) and empty( $atts['url'] ) )
+			return '';
+
+		if ( empty( $atts['id'] ) ) {
+			$url_parts = parse_url( $atts['url'] );
+			$atts['id'] = basename( $url_parts['path'] );
+		}
+
+		$api_url = 'https://api.github.com/gists/' . $atts['id'];
+
+		$response = wp_remote_get( $api_url );
+		$json = wp_remote_retrieve_body( $response );
+
+		if ( !$json )
+			return '';
+
+		$gist = json_decode( $json, $associative_arrays = true );
+		$files = $gist['files'];
+
+		if ( empty( $atts['file'] ) or empty( $files[$atts['file'] ] ) ) {
+			$file_keys = array_keys( $files );
+			$atts['file'] = $file_keys[0];
+		}
+
+		$content = $files[$atts['file']]['content'];
+
+		return html( 'pre class="wp-gist"', esc_html( $content ) );
+	}
+
+	protected static function incompatible_placeholder( $class = '', $url = null ) {
 		$class = 'incompatible' . ( $class ? ' ' . $class : '' );
+		$url = $url ? $url : get_permalink();
 		return html( 'div',
 			array( 'class' => $class ),
 			__( 'This content is not compatible with your email client. ', 'Postmatic' ),
 			html( 'a',
-				array( 'href' => get_permalink() ),
-			__( 'Click here to view this post in your browser.', 'Postmatic' )
+				array( 'href' => $url ),
+			__( 'Click here to view this content in your browser.', 'Postmatic' )
 			)
 		);
 	}

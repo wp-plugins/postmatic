@@ -24,9 +24,7 @@ class Prompt_Admin_Core_Options_Tab extends Prompt_Admin_Options_Tab {
 					html( 'h3', __( 'Improve your site by making Postmatic even better', 'Postmatic' ) ),
 					html( 'p',
 						__(
-							'We rely on users like you to help shape our development roadmap. By checking the ' .
-							'box below you will be helping us know more about your site and how we can make ' .
-							'Postmatic even better.',
+							'We rely on users like you to help shape our development roadmap. By checking the box below you will be helping us know more about your site and how we can make Postmatic even better.',
 							'Postmatic'
 						)
 					)

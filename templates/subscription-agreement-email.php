@@ -33,8 +33,7 @@ $recipient = esc_html(
 		<?php
 		printf(
 			__(
-				'You recently signed up for updates from %s. We sent you an email asking for verification ' .
-					'but you did not reply correctly. Please read the following:',
+				'You recently signed up for updates from %s. We sent you an email asking for verification but you did not reply correctly. Please read the following:',
 				'Postmatic'
 			),
 			get_bloginfo( 'name' )
@@ -49,8 +48,7 @@ $recipient = esc_html(
 		<?php
 		printf(
 			__(
-				"As a subscriber to %s, you'll receive new posts or comments directly to your inbox " .
-					"as soon as they are published.",
+				"As a subscriber to %s, you'll receive new posts or comments directly to your inbox as soon as they are published.",
 				'Postmatic'
 			),
 			get_bloginfo( 'name' )
@@ -68,9 +66,7 @@ $recipient = esc_html(
 	<?php
 	printf(
 		__(
-			"Please note that your email replies will be seen by anyone visiting the post on %s. That means your " .
-				"email replies are subject to the privacy policy and terms of service of %s. We just wanted to " .
-				"make sure you knew :)",
+			"Please note that your email replies will be seen by anyone visiting the post on %s. That means your email replies are subject to the privacy policy and terms of service of %s. We just wanted to make sure you knew :)",
 			'Postmatic'
 		),
 		get_bloginfo( 'url' ),
@@ -82,8 +78,7 @@ $recipient = esc_html(
 <p>
 	<?php
 	_e(
-		'If you understand these guidelines and you’re ready to complete your subscription, please ' .
-			'<strong class="alert">reply to this email with the word agree</strong>.',
+		'If you understand these guidelines and you’re ready to complete your subscription, please <strong class="alert">reply to this email with the word agree</strong>.',
 		'Postmatic'
 	);
 	?>

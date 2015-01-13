@@ -72,6 +72,16 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.0 beta 14 =
+- Added support to invite existing WordPress users to become subscribers.
+- Changed links on embeds in email view. They now link directly to the embed url instead of the online post. Very cool on mobile.
+- Added ability for users to subscribe to all site comments from their profile page.
+- Added more classes to the comment form checkbox for improved styling.
+- Added recommendations for fighting spam commenting. If you are not running proper anti-spam plugins we'll sniff it out and let you know.
+- We made the title of the post link to the post url on new post notifications. It's a little bit of an easter egg but what it means is that if you get the email and want to view the post online without scrolling to the bottom... you can now do so.
+- Added support for the wp-gist plugin. We'll now show your gists directly in the email body.
+- Official full translations for French, German, and Spanish. All plugin functions and templates are now fully translated into all three of these languages. Four total if you count English.
+
 
 = 1.0 beta 13 =
 - Fixed up issues with overly-large aligncenter images in certain vesions of gmail.

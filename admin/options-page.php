@@ -50,6 +50,14 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			return;
 		}
 
+		// Check key validity when viewing settings
+		$key = $this->options->get( 'prompt_key' );
+		if ( !isset( $_POST['tab'] ) and !isset( $_POST['prompt_key'] ) and $key ) {
+			$key = $this->validate_key( $key );
+			if ( is_wp_error( $key ) )
+				add_settings_error( 'prompt_key', 'invalid_key', $key->get_error_message() );
+		}
+
 		if ( !empty( $_POST['send_beta_request'] ) ) {
 			$this->send_beta_request();
 			return;
@@ -132,6 +140,12 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		) {
 			$this->options->set( 'skip_widget_intro', true );
 		}
+
+		if ( isset( $_GET['skip_akismet_intro'] ) )
+			$this->options->set( 'skip_akismet_intro', true );
+
+		if ( isset( $_GET['skip_zero_spam_intro'] ) )
+			$this->options->set( 'skip_zero_spam_intro', true );
 	}
 
 	public function page_header() {
@@ -183,9 +197,15 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			return;
 		}
 
-		if ( !$this->options->get( 'skip_widget_intro' ) ) {
+		if ( !$this->options->get( 'skip_widget_intro' ) )
 			echo $this->widget_intro();
-		}
+
+		if ( !$this->options->get( 'skip_akismet_intro' ) )
+			echo $this->akismet_intro();
+
+		if ( !$this->options->get( 'skip_zero_spam_intro' ) )
+			echo $this->zero_spam_intro();
+
 
 		list( $tabs, $panels ) = $this->tabs_content();
 
@@ -261,6 +281,53 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		}
 
 		return html( 'div class="error"', $content );
+	}
+
+	protected function akismet_intro() {
+
+		if ( is_plugin_active( 'akismet/akismet.php' ) )
+			return '';
+
+		return html( 'div class="notice error"',
+			html( 'p',
+				sprintf(
+					__(
+						'Heads up! We noticed Akismet is not active on your site. Akismet is free, bundled with WordPress, and stops the vast majority of comment spam. Please be sure that you are using it or a similar product to keep from spamming your subscribers. <a href="%s">Learn more</a>.',
+						'Postmatic'
+					),
+					'http://docs.gopostmatic.com/86-spam'
+				),
+				'&nbsp;',
+				html( 'a',
+					array( 'href' => add_query_arg( 'skip_akismet_intro', 'true' ), 'class' => 'button' ),
+					__( 'Dismiss', 'Postmatic' )
+				)
+			)
+		);
+
+	}
+
+	protected function zero_spam_intro() {
+
+		if ( is_plugin_active( 'zero-spam/zero-spam.php' ) )
+			return '';
+
+		return html( 'div class="notice error"',
+			html( 'p',
+				sprintf(
+					__(
+						'Did you know there is an excellent and free way to keep spam comments from ever getting submitted? We heartily recommend installing <a href="%s">WordPress Zero Spam</a>.',
+						'Postmatic'
+					),
+					'https://wordpress.org/plugins/zero-spam/'
+				),
+				'&nbsp;',
+				html( 'a',
+					array( 'href' => add_query_arg( 'skip_zero_spam_intro', 'true' ), 'class' => 'button' ),
+					__( 'Dismiss', 'Postmatic' )
+				)
+			)
+		);
 	}
 
 	protected function tabs_content() {

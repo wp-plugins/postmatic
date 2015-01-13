@@ -9,8 +9,7 @@ class Prompt_Email_Footer_Sidebar {
 			'name' => 'Postmatic Emails Footer',
 			'id' => self::SIDEBAR_ID,
 			'description' => __(
-				'These widgets will be included in the footer of Postmatic subscription emails. Need inspiration? ' .
-				'Try our widgets directory at http://gopostmatic.com/widgets.',
+				'These widgets will be included in the footer of Postmatic subscription emails. Need inspiration? Try our widgets directory at http://gopostmatic.com/widgets.',
 				'Postmatic'
 			),
 			'before_widget' => "<td valign='top'>",

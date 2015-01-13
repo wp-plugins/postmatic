@@ -17,7 +17,7 @@
 		),
 		$post_title
 	);
-	?>
+	?> 
 </p>
 
 <?php if ( $post ) : ?>

@@ -84,8 +84,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 		$introduction = html( 'h2',
 			__( 'Send email invitations to subscribe to your site', 'Postmatic' )
 		) . html( 'p',
-			__( 'Use this tool to reach out to your community of past or current commenters. Be sure to check ' .
-				'the subject and introductory text below.',
+			__( 'Use this tool to reach out to your community of past or current commenters. Be sure to check the subject and introductory text below.',
 				'Postmatic'
 			)
 		);
@@ -105,8 +104,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 				__( 'Email Introduction', 'Postmatic' ) .
 				'<br />' .
 				html( 'small',
-					__( 'This text will be placed at the top of invitation message. Make it as friendly and ' .
-						'personalized as you can.',
+					__( 'This text will be placed at the top of invitation message. Make it as friendly and personalized as you can.',
 						'Postmatic'
 					)
 				),
@@ -131,6 +129,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 								'recent' => __( 'People who have recently commented', 'Postmatic' ),
 								'count' => __( 'People who comment the most', 'Postmatic' ),
 								'all' => __( 'Anyone that has ever commented', 'Postmatic' ),
+								'users' => __( 'WordPress users who are not subscribed', 'Postmatic' ),
 							),
 						),
 						$_POST
@@ -199,8 +198,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 					),
 					html( 'p',
 						__(
-							'Based on the above your invite will be sent to <span class="recipient-count">0</span> ' .
-								'people.',
+							'Based on the above your invite will be sent to <span class="recipient-count">0</span> people.',
 							'Postmatic'
 						)
 					),
@@ -208,8 +206,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 						array( 'data-limit' => $this->limit ),
 						sprintf(
 							__(
-								'Wow, that\'s a lot of invitations! This tool is currently limited to %d invites. ' .
-									'You can contact support if you need to arrange more.',
+								'Wow, that\'s a lot of invitations! This tool is currently limited to %d invites. You can contact support if you need to arrange more.',
 								'Postmatic'
 							),
 							$this->limit
