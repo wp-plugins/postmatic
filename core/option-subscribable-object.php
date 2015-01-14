@@ -4,10 +4,11 @@ abstract class Prompt_Option_Subscribable_Object implements Prompt_Interface_Sub
 
 	abstract protected function option_key();
 
-	abstract public function id();
-	abstract public function subscription_url();
-	abstract public function subscription_object_label();
-	abstract public function subscription_description();
+	// These would be abstract, but PHP 5.3 pukes on that
+	public function id() {}
+	public function subscription_url() {}
+	public function subscription_object_label() {}
+	public function subscription_description() {}
 
 	public function subscriber_ids() {
 		$ids = get_option( $this->option_key() );

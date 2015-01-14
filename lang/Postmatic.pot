@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.0.0-beta14\n"
+"Email 1.0.0-beta14a\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/1.0.0-"
-"beta14-20150113-1208\n"
-"POT-Creation-Date: 2015-01-13 20:08:23+00:00\n"
+"beta14a-20150114-0753\n"
+"POT-Creation-Date: 2015-01-14 15:53:59+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -565,7 +565,7 @@ msgid ""
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta14)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta14a)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:134
 msgid "Postmatic"
@@ -949,7 +949,7 @@ msgstr ""
 msgid "Refused an attempt to subscribe an invalid user ID."
 msgstr ""
 
-#: core/option-subscribable-object.php:28
+#: core/option-subscribable-object.php:29
 msgid "Refusing to subscribe an invalid user ID."
 msgstr ""
 
