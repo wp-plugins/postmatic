@@ -123,6 +123,7 @@ class Prompt_Post_Mailing {
 		remove_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
 		add_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
 		add_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
+		add_filter( 'the_content', array( __CLASS__, 'limit_image_width_attributes' ), 11 );
 		add_filter( 'the_content', array( __CLASS__, 'strip_incompatible_tags' ), 11 );
 		add_filter( 'oembed_dataparse', array( __CLASS__, 'use_original_oembed_url' ), 10, 3 );
 
@@ -137,6 +138,7 @@ class Prompt_Post_Mailing {
 
 		remove_filter( 'oembed_dataparse', array( __CLASS__, 'use_original_oembed_url' ), 10, 3 );
 		remove_filter( 'the_content', array( __CLASS__, 'strip_incompatible_tags' ), 11 );
+		remove_filter( 'the_content', array( __CLASS__, 'limit_image_width_attributes' ), 11 );
 		remove_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
 		remove_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
 		add_filter( 'the_content', 'do_shortcode', 11 );
@@ -186,6 +188,27 @@ class Prompt_Post_Mailing {
 	 */
 	public static function strip_image_height_attributes( $content ) {
 		return preg_replace( '/(<img[^>]*?) height=["\']\d*["\']([^>]*?>)/', '$1$2', $content );
+	}
+
+	/**
+	 * @param string $content
+	 * @return string
+	 */
+	public static function limit_image_width_attributes( $content ) {
+		return preg_replace_callback(
+			'/(<img[^>]*?) width=["\'](\d*)["\']([^>]*?>)/',
+			array( __CLASS__, 'limit_image_width_attribute' ),
+			$content
+		);
+	}
+
+	public static function limit_image_width_attribute( $match ) {
+		$width = intval( $match[2] );
+
+		if ( $width <= 675 )
+			return $match[0];
+
+		return $match[1] . ' width="675"' . $match[3];
 	}
 
 	public static function strip_incompatible_tags( $content ) {

@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <?php /**
 * HTML Email template, called with variables in scope:
-*  @var string  $subject
-*  @var string  $message
+* @var string  $subject
+* @var string  $message
 * @var string  $brand_type text or html
 * @var string  $brand_text
 * @var string  $brand_image_url
@@ -39,7 +39,7 @@
     text-decoration:none;
     -ms-interpolation-mode: bicubic;
     width: auto;
-    max-width: 100%;
+    max-width: 615px;
     clear: both;
     height: auto !important;
     display: block;
@@ -103,6 +103,11 @@
       text-align: center;
       float: none !important;
       height: auto;
+      <?php if ( $brand_image_width < 687 ) : ?>
+        width: <?php echo intval( $brand_image_width ); ?>px !important;
+      <?php else: ?>
+        width: 100% !important;
+      <?php endif; ?>
     }
 
     .first {
@@ -214,15 +219,16 @@
     pre {display: block;font-family: courier;}
 
     ul li, ol li {
-      margin-left: 5px;
+      margin-left: 25px !important;
       list-style-position: inside;
     }
 
     ol li {list-style-type: decimal;}
 
-    blockquote { background:#f9f9f9;border:1px solid #eee;padding:5%;font-style: italic;}
+    blockquote { background:#f9f9f9;border:1px solid #eee;padding:5%;font-style: italic;margin: 15px 0;}
 
     .alert {background: #FFFEBA; padding: 2px; font-weight: normal;}
+    .noforward { background: #fffeee; padding: 2px;}
    .slideshowlink {margin: 15px 0; text-align: center;} 
    .addtoany_list a {float: left;}
     /* ---------------------------------------------------
@@ -263,6 +269,8 @@
   list-style: none;
   display: inline;
 }
+
+.sd-title { clear: both !important;}
 
 .content .sd-content ul li a {
   color: #555;

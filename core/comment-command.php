@@ -2,6 +2,9 @@
 
 class Prompt_Comment_Command implements Prompt_Interface_Command {
 
+	protected static $subscribe_method = 'subscribe';
+	protected static $unsubscribe_method = 'unsubscribe';
+
 	/** @var array */
 	protected $keys = array( 0 );
 	/** @var  int */
@@ -86,6 +89,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 			'/\n[^\r\n]*' . date( 'Y' ) . '[^\r\n]*:[\s\n\r]*.*/s',          // google-style quoted mail intro
 			'/<a href="https:\/\/overview.mail.yahoo.com[^>]*>.*?<\/a>/',   // yahoo mobile "sent from"
 			'/[\r\n]-+[\r\n].*/s',                                          // dash signature divider
+			'/[\r\n]?Links:[\r\n]\s*1\..*/s',                               // Fastmail links list
 		);
 
 		$text = $this->message->message;
@@ -98,21 +102,27 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 	}
 
 	/**
-	 * Get text command from the message, if any
+	 * Get text command from the message, if any.
+	 *
+	 * A blank message is treated as a subscribe command.
+	 *
 	 * @return string Text command if found, otherwise empty.
 	 */
 	protected function get_text_command() {
 
 		$message_text = $this->get_message_text();
 
+		if ( preg_match( '/^\s*$/', $message_text, $matches ) )
+			return self::$subscribe_method;
+
 		if ( preg_match( '/^\s*(subscribe|unsubscribe)\s*/i', $message_text, $matches ) )
 			return $matches[1];
 
 		if ( preg_match( '/^\s*(unusbscribe|sunsubscribe|unsusbscribe|unsuscribe|unsusrib|unsusribe)\s*/i', $message_text, $matches ) )
-			return 'unsubscribe';
+			return self::$unsubscribe_method;
 
 		if ( preg_match( '/^\s*(usbscribe|suscribe|susribe|susrib)\s*/i', $message_text, $matches ) )
-			return 'subscribe';
+			return self::$subscribe_method;
 
 		return '';
 	}

@@ -30,7 +30,7 @@
 	<div class="reply-prompt">
 		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
 		<p class="reply">
-			<?php _e( 'Reply to this email to reply to add a comment.', 'Postmatic' ); ?><br />
+			<?php _e( 'Reply to this email to add a comment.', 'Postmatic' ); ?><br />
 			<small>
 				<?php
 				printf(
@@ -67,6 +67,18 @@
 			);
 			?>
 		</p>
+			<h4 class="noforward"><?php _e( 'Please do not forward this email', 'Postmatic' ); ?></h4>
+			<p>
+				<?php
+				printf(
+					__(
+						'This email was meant specifically for you and any replies sent to it will post as a comment in your name. If you would like to share this post please use this url: %s.',
+						'Postmatic'
+					),
+					get_permalink()
+				);
+				?>
+			</p>
 	</div>
 
 <?php endif; ?>

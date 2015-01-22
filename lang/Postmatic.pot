@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.0.0-beta14a\n"
+"Email 1.0.0-beta15\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/1.0.0-"
-"beta14a-20150114-0753\n"
-"POT-Creation-Date: 2015-01-14 15:53:59+00:00\n"
+"beta15-20150122-1239\n"
+"POT-Creation-Date: 2015-01-22 20:39:06+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -143,119 +143,123 @@ msgstr ""
 msgid "Invite Subscribers"
 msgstr ""
 
-#: admin/invite-options-tab.php:40
+#: admin/invite-options-tab.php:42
+msgid "Duplicate email address"
+msgstr ""
+
+#: admin/invite-options-tab.php:47
 msgid "Invalid email address"
 msgstr ""
 
-#: admin/invite-options-tab.php:46
+#: admin/invite-options-tab.php:53
 msgid "Already subscribed"
 msgstr ""
 
-#: admin/invite-options-tab.php:71
+#: admin/invite-options-tab.php:80
 msgid "Success. %d invite sent."
 msgid_plural "Success. %d invites sent."
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/invite-options-tab.php:76
+#: admin/invite-options-tab.php:85
 msgid "Something went wrong and these invites were not sent: "
 msgstr ""
 
-#: admin/invite-options-tab.php:85
+#: admin/invite-options-tab.php:94
 msgid "Send email invitations to subscribe to your site"
 msgstr ""
 
-#: admin/invite-options-tab.php:87
+#: admin/invite-options-tab.php:96
 msgid ""
 "Use this tool to reach out to your community of past or current commenters. "
 "Be sure to check the subject and introductory text below."
 msgstr ""
 
-#: admin/invite-options-tab.php:94
+#: admin/invite-options-tab.php:103
 msgid "Email Subject"
 msgstr ""
 
-#: admin/invite-options-tab.php:99
+#: admin/invite-options-tab.php:108
 msgid "You're invited to subscribe to %s"
 msgstr ""
 
-#: admin/invite-options-tab.php:104
+#: admin/invite-options-tab.php:113
 msgid "Email Introduction"
 msgstr ""
 
-#: admin/invite-options-tab.php:107
+#: admin/invite-options-tab.php:116
 msgid ""
 "This text will be placed at the top of invitation message. Make it as "
 "friendly and personalized as you can."
 msgstr ""
 
-#: admin/invite-options-tab.php:121
+#: admin/invite-options-tab.php:130
 msgid "Who should we send this invite to?"
 msgstr ""
 
-#: admin/invite-options-tab.php:128
+#: admin/invite-options-tab.php:137
 msgid "A list of email addresses"
 msgstr ""
 
-#: admin/invite-options-tab.php:129
+#: admin/invite-options-tab.php:138
 msgid "People who have recently commented"
 msgstr ""
 
-#: admin/invite-options-tab.php:130
+#: admin/invite-options-tab.php:139
 msgid "People who comment the most"
 msgstr ""
 
-#: admin/invite-options-tab.php:131
+#: admin/invite-options-tab.php:140
 msgid "Anyone that has ever commented"
 msgstr ""
 
-#: admin/invite-options-tab.php:132
+#: admin/invite-options-tab.php:141
 msgid "WordPress users who are not subscribed"
 msgstr ""
 
-#: admin/invite-options-tab.php:147
+#: admin/invite-options-tab.php:156
 msgid "Please separate addresses with commas."
 msgstr ""
 
-#: admin/invite-options-tab.php:160
+#: admin/invite-options-tab.php:169
 msgid ""
 "Send this invitation to people who have had an approved comment within the "
 "last"
 msgstr ""
 
-#: admin/invite-options-tab.php:166
+#: admin/invite-options-tab.php:175
 msgid "months."
 msgstr ""
 
-#: admin/invite-options-tab.php:177
+#: admin/invite-options-tab.php:186
 msgid "Send this invitation to people who have at least"
 msgstr ""
 
-#: admin/invite-options-tab.php:184
+#: admin/invite-options-tab.php:193
 msgid "approved comments."
 msgstr ""
 
-#: admin/invite-options-tab.php:189
+#: admin/invite-options-tab.php:198
 msgid "Recipients"
 msgstr ""
 
-#: admin/invite-options-tab.php:195
+#: admin/invite-options-tab.php:204
 msgid "Loading..."
 msgstr ""
 
-#: admin/invite-options-tab.php:200
+#: admin/invite-options-tab.php:209
 msgid ""
 "Based on the above your invite will be sent to <span class=\"recipient-count"
 "\">0</span> people."
 msgstr ""
 
-#: admin/invite-options-tab.php:208
+#: admin/invite-options-tab.php:217
 msgid ""
 "Wow, that's a lot of invitations! This tool is currently limited to %d "
 "invites. You can contact support if you need to arrange more."
 msgstr ""
 
-#: admin/invite-options-tab.php:228
+#: admin/invite-options-tab.php:237
 msgid "Send Invites"
 msgstr ""
 
@@ -565,7 +569,7 @@ msgid ""
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta14a)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta15)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:134
 msgid "Postmatic"
@@ -688,13 +692,19 @@ msgid ""
 "gave you."
 msgstr ""
 
-#: admin/options-page.php:571
+#: admin/options-page.php:537
+msgid ""
+"Please request a key for this site's dedicated use, or <a href=\"%s\" target="
+"\"_blank\">contact us</a> for assistance. Thanks!"
+msgstr ""
+
+#: admin/options-page.php:584
 msgid ""
 "We're even having trouble sending a bug report. Please copy the data to the "
 "right and send to support@gopostmatic.com."
 msgstr ""
 
-#: admin/options-page.php:586
+#: admin/options-page.php:599
 msgid "Please enter a valid email address."
 msgstr ""
 
@@ -851,19 +861,19 @@ msgstr ""
 msgid "Tried to create an email with an unrecognized reply command."
 msgstr ""
 
-#: core/comment-command.php:64
+#: core/comment-command.php:67
 msgid "Invalid comment keys"
 msgstr ""
 
-#: core/comment-command.php:73
+#: core/comment-command.php:76
 msgid "Invalid message"
 msgstr ""
 
-#: core/comment-command.php:157
+#: core/comment-command.php:167
 msgid "rejected comment on unqualified post %s"
 msgstr ""
 
-#: core/comment-command.php:166
+#: core/comment-command.php:176
 msgid "rejected duplicate comment on %s"
 msgstr ""
 
@@ -953,30 +963,30 @@ msgstr ""
 msgid "Refusing to subscribe an invalid user ID."
 msgstr ""
 
-#: core/post-mailing.php:329
+#: core/post-mailing.php:352
 msgid "This content is not compatible with your email client. "
 msgstr ""
 
-#: core/post-mailing.php:332
+#: core/post-mailing.php:355
 msgid "Click here to view this content in your browser."
 msgstr ""
 
-#: core/post-mailing.php:348
+#: core/post-mailing.php:371
 msgid "Delivery issue for %s"
 msgstr ""
 
-#: core/post-mailing.php:351
+#: core/post-mailing.php:374
 msgid ""
 "Delivery of subscription notifications for the post \"%s\" may have failed."
 msgstr ""
 
-#: core/post-mailing.php:355
+#: core/post-mailing.php:378
 msgid ""
 "A site administrator can report this event to the development team from the "
 "Postmatic settings."
 msgstr ""
 
-#: core/post-mailing.php:357
+#: core/post-mailing.php:380
 msgid "The error message was: "
 msgstr ""
 
@@ -1202,19 +1212,19 @@ msgid ""
 "with the word 'unsubscribe'."
 msgstr ""
 
-#: templates/html-email-wrapper.php:475
+#: templates/html-email-wrapper.php:483
 msgid "Sent from %s."
 msgstr ""
 
-#: templates/html-email-wrapper.php:482
+#: templates/html-email-wrapper.php:490
 msgid "Delivered by %s."
 msgstr ""
 
-#: templates/html-email-wrapper.php:488
+#: templates/html-email-wrapper.php:496
 msgid "About Postmatic (Beta)"
 msgstr ""
 
-#: templates/html-email-wrapper.php:492
+#: templates/html-email-wrapper.php:500
 msgid ""
 "Postmatic sends your posts to your readers where they’re comfortable: their "
 "inbox. They can send comments back by hitting the reply button. Just like "
@@ -1246,7 +1256,7 @@ msgid "View this post online"
 msgstr ""
 
 #: templates/new-post-email.php:33
-msgid "Reply to this email to reply to add a comment."
+msgid "Reply to this email to add a comment."
 msgstr ""
 
 #: templates/new-post-email.php:50
@@ -1266,6 +1276,17 @@ msgstr ""
 #: templates/new-post-email.php:65
 msgid ""
 "To <strong>unsubscribe</strong> to %s reply with the word 'unsubscribe'."
+msgstr ""
+
+#: templates/new-post-email.php:70
+msgid "Please do not forward this email"
+msgstr ""
+
+#: templates/new-post-email.php:74
+msgid ""
+"This email was meant specifically for you and any replies sent to it will "
+"post as a comment in your name. If you would like to share this post please "
+"use this url: %s."
 msgstr ""
 
 #: templates/new-user-email.php:8

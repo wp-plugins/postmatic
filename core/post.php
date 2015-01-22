@@ -86,7 +86,10 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 		if ( ! in_array( $post->post_type, Prompt_Core::$options->get( 'site_subscription_post_types' ) ) )
 			return array();
 
-		$recipient_ids = get_post_meta( $post->ID, self::$recipient_ids_meta_key, true );
+		$recipient_ids = array();
+
+		if ( 'publish' == $post->post_status )
+			$recipient_ids = get_post_meta( $post->ID, self::$recipient_ids_meta_key, true );
 
 		if ( ! $recipient_ids ) {
 

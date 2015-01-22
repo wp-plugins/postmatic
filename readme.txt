@@ -72,6 +72,16 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.0 beta 15 =
+- Fixed more gmail and Thunderbird image problems which caused the template to get blown out. Looks great now.
+- Added support for Fastmail links in the footer of emails.
+- Added some langauge to the new post notification template which gives a warning about forwarding the email to others.
+- Removed support for the Jetpack _Like This_ button. Sorry, no way to pull it off via email.
+- Improved Jetpack share button support.
+- A new top secret feature: to subscribe to the comments on a post you don't need to actually write 'subscribe'. Just reply with a blank email.
+- Fixed a bug in which the inviter would mistakingly send duplicate invitations in rare situations.
+- We now cache subscribers less agressively. This will avoid the problem of a user unsubscribing but still receiving a new post that is published right around the same time...
+
 = 1.0 beta 14 =
 - Added support to invite existing WordPress users to become subscribers.
 - Changed links on embeds in email view. They now link directly to the embed url instead of the online post. Very cool on mobile.

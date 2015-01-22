@@ -530,9 +530,22 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			return new WP_Error( 'invalid_key', $message );
 		}
 
+		$configuration = json_decode( $response['body'] );
+
+		if ( $configuration->site->url != admin_url( 'admin-ajax.php' ) ) {
+			$message = sprintf(
+				__(
+					'Please request a key for this site\'s dedicated use, or <a href="%s" target="_blank">contact us</a> for assistance. Thanks!',
+					'Postmatic'
+				),
+				'http://gopostmatic.com/bug/'
+			);
+			return new WP_Error( 'wrong_key', $message );
+		}
+
 		$configurator = Prompt_Factory::make_configurator( $client );
 
-		$configurator->update_configuration( json_decode( $response['body'] ) );
+		$configurator->update_configuration( $configuration );
 
 		return $key;
 	}

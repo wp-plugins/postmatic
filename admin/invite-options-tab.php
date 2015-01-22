@@ -29,12 +29,19 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 	public function schedule_invites( $recipients, $subject, $message ) {
 
 		$users_data = array();
+		$address_index = array();
 		$failures = array();
 		$prompt_site = new Prompt_Site();
 
 		foreach( $recipients as $recipient ){
 
 			$to_address = Prompt_Email::address( $recipient );
+			$lower_case_to_address = strtolower( $to_address );
+
+			if ( isset( $address_index[$lower_case_to_address] ) ) {
+				$failures[] = __( 'Duplicate email address', 'Postmatic' ) . ': ' . $recipient;
+				continue;
+			}
 
 			if ( !is_email( $to_address ) ) {
 				$failures[] = __( 'Invalid email address', 'Postmatic' ) . ': ' . $recipient;
@@ -46,6 +53,8 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 				$failures[] = __( 'Already subscribed', 'Postmatic' ) . ': ' . $recipient;
 				continue;
 			}
+
+			$address_index[$lower_case_to_address] = true;
 
 			$to_name = Prompt_Email::name( $recipient );
 
