@@ -125,7 +125,7 @@ class Prompt_Post_Mailing {
 		add_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
 		add_filter( 'the_content', array( __CLASS__, 'limit_image_width_attributes' ), 11 );
 		add_filter( 'the_content', array( __CLASS__, 'strip_incompatible_tags' ), 11 );
-		add_filter( 'oembed_dataparse', array( __CLASS__, 'use_original_oembed_url' ), 10, 3 );
+		add_filter( 'embed_oembed_html', array( __CLASS__, 'use_original_oembed_url' ), 10, 2 );
 
 	}
 
@@ -136,7 +136,7 @@ class Prompt_Post_Mailing {
 
 		wp_reset_query();
 
-		remove_filter( 'oembed_dataparse', array( __CLASS__, 'use_original_oembed_url' ), 10, 3 );
+		remove_filter( 'embed_oembed_html', array( __CLASS__, 'use_original_oembed_url' ), 10, 2 );
 		remove_filter( 'the_content', array( __CLASS__, 'strip_incompatible_tags' ), 11 );
 		remove_filter( 'the_content', array( __CLASS__, 'limit_image_width_attributes' ), 11 );
 		remove_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
@@ -203,12 +203,16 @@ class Prompt_Post_Mailing {
 	}
 
 	public static function limit_image_width_attribute( $match ) {
+		$max_width = 709;
+
 		$width = intval( $match[2] );
 
-		if ( $width <= 675 )
+		if ( $width <= $max_width )
 			return $match[0];
 
-		return $match[1] . ' width="675"' . $match[3];
+		$tag = $match[1] . ' width="' . $max_width . '"' . $match[3];
+
+		return self::add_image_size_class( $tag );
 	}
 
 	public static function strip_incompatible_tags( $content ) {
@@ -300,14 +304,12 @@ class Prompt_Post_Mailing {
 	 *
 	 * @see oembed_dataparse WordPress filter
 	 *
-	 * @param $return
-	 * @param $data
-	 * @param $url
-	 * @return mixed
+	 * @param string $html
+	 * @param string $url
+	 * @return string
 	 */
-	public static function use_original_oembed_url( $return, $data, $url ) {
-		$match_pattern = preg_replace( '#^https?#', 'https?', $data->provider_url );
-		return preg_replace( '#' . $match_pattern . '[^"]*#', $url, $return );
+	public static function use_original_oembed_url( $html, $url ) {
+		return preg_replace( '#https?://[^"\']*#', $url, $html );
 	}
 
 	protected static function override_wp_gist_shortcode_tag( $m ) {
@@ -387,4 +389,14 @@ class Prompt_Post_Mailing {
 
 	}
 
+	protected static function add_image_size_class( $tag ) {
+
+		if ( preg_match( '/class=[\'"]([^\'"]*)[\'"]/', $tag, $matches ) ) {
+			$classes = explode( ' ', $matches[1] );
+			$classes[] = 'retina';
+			return str_replace( $matches[0], 'class="' . implode( ' ', $classes ) . '"', $tag );
+		}
+
+		return str_replace( '<img', '<img class="retina"', $tag );
+	}
 }

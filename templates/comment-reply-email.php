@@ -138,7 +138,7 @@ $previous_index = count( $previous_comments );
 <p>
 	<?php
 	_e(
-		"To no longer receive other comments or replies in this discussion to reply with the word 'unsubscribe'.",
+		"To no longer receive other comments or replies in this discussion reply with the word 'unsubscribe'.",
 		'Postmatic'
 	);
 	?>

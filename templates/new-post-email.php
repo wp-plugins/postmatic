@@ -15,7 +15,7 @@
 	<img src="<?php echo $featured_image_src[0]; ?>"
 	     width="<?php echo intval( $featured_image_src[1] / 2 ); ?>"
 	     alt="featured image"
-	     class="aligncenter"/>
+	     class="aligncenter retina"/>
 <?php endif; ?>
 
 <div>
@@ -30,7 +30,7 @@
 	<div class="reply-prompt">
 		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
 		<p class="reply">
-			<?php _e( 'Reply to this email to add a comment.', 'Postmatic' ); ?><br />
+			<?php _e( 'Reply to this email to add a comment. Your email address will not be shown.', 'Postmatic' ); ?><br />
 			<small>
 				<?php
 				printf(
@@ -47,12 +47,12 @@
 
 	<div class="footnote">
 
-		<h3><?php _e( 'Stay in the Loop', 'Postmatic' ); ?></h3>
+		<h3><?php _e( 'Get the latest comments and stay in the loop', 'Postmatic' ); ?></h3>
 
 		<p>
 			<?php
 			_e(
-				'To receive comments on this post directly in your inbox reply with the word <strong>subscribe</strong>.',
+				'To subscribe to comments on this post and receive a copy of the conversation so far reply with the word <strong>subscribe</strong>.',
 				'Postmatic'
 			);
 			?>
@@ -80,6 +80,12 @@
 				?>
 			</p>
 	</div>
+
+<?php elseif ( !comments_open() ) : ?>
+
+	<h4><?php _e( 'Comments on this post are closed', 'Postmatic' ); ?> </h4>
+
+	<p><?php _e( 'You can reply to this email to send a note directly to the post author.', 'Postmatic' ); ?></p>
 
 <?php endif; ?>
 

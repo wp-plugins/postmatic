@@ -19,9 +19,14 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	/** @var  Prompt_Admin_Options_Tab */
 	protected $submitted_tab;
 
+	/** @var  string shortcut for $this->options->get( 'prompt_key' ) */
+	protected $key;
+
 	public function __construct( $file = false, $options = null, $overrides = null, $tabs = null ) {
 		parent::__construct( $file, $options );
 		$this->_overridden_options = $overrides;
+
+		$this->key = $options->get( 'prompt_key' );
 
 		$this->add_tab( new Prompt_Admin_Core_Options_Tab( $options, $overrides ) );
 		$this->add_tab( new Prompt_Admin_Email_Options_Tab( $options, $overrides ) );
@@ -48,14 +53,6 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			$this->submitted_tab = $this->tabs[$_POST['tab']];
 			$this->submitted_tab->form_handler();
 			return;
-		}
-
-		// Check key validity when viewing settings
-		$key = $this->options->get( 'prompt_key' );
-		if ( !isset( $_POST['tab'] ) and !isset( $_POST['prompt_key'] ) and $key ) {
-			$key = $this->validate_key( $key );
-			if ( is_wp_error( $key ) )
-				add_settings_error( 'prompt_key', 'invalid_key', $key->get_error_message() );
 		}
 
 		if ( !empty( $_POST['send_beta_request'] ) ) {
@@ -149,7 +146,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	}
 
 	public function page_header() {
-		if ( $this->options->get( 'prompt_key' ) )
+		if ( $this->key )
 			echo '<div class="wrap">';
 		else
 			echo '<div class="wrap signup">';
@@ -173,7 +170,10 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		echo $this->log_alert();
 
-		if ( !$this->options->get( 'prompt_key' ) ) {
+		$key_alert = $this->key_alert();
+		echo $key_alert;
+
+		if ( $key_alert or !$this->key ) {
 
 			self::render_key_form();
 
@@ -217,6 +217,23 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			$panels
 		);
 
+	}
+
+	protected function key_alert() {
+
+		// Before key is entered we don't check anything
+		if ( empty( $this->key ) )
+			return '';
+
+		// Only check key validity when viewing main settings page
+		if ( isset( $_POST['tab'] ) or isset( $_POST['prompt_key'] ) )
+			return '';
+
+		$key = $this->validate_key( $this->key );
+		if ( is_wp_error( $key ) )
+			return html( 'div class="error"',  html( 'p', $key->get_error_message() ) );
+
+		return '';
 	}
 
 	protected function log_alert() {
@@ -493,13 +510,17 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	public function validate( $new_data, $old_data ) {
 		$valid_data = $old_data;
 
-		if ( isset( $new_data['prompt_key'] ) and $new_data['prompt_key'] != $old_data['prompt_key'] ) {
-			$key = $this->validate_key( $new_data['prompt_key'] );
-			if ( is_wp_error( $key ) )
-				add_settings_error( 'prompt_key', 'invalid_key', $key->get_error_message() );
-			else
-				$valid_data['prompt_key'] = $key;
+		if ( !isset( $new_data['prompt_key'] ) or $new_data['prompt_key'] == $old_data['prompt_key'] )
+			return $valid_data;
+
+		$key = $this->validate_key( $new_data['prompt_key'] );
+		if ( is_wp_error( $key ) ) {
+			add_settings_error( 'prompt_key', 'invalid_key', $key->get_error_message() );
+			return $valid_data;
 		}
+
+		$valid_data['prompt_key'] = $key;
+		$this->key = $key;
 
 		return $valid_data;
 	}
@@ -535,7 +556,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		if ( $configuration->site->url != admin_url( 'admin-ajax.php' ) ) {
 			$message = sprintf(
 				__(
-					'Please request a key for this site\'s dedicated use, or <a href="%s" target="_blank">contact us</a> for assistance. Thanks!',
+					'Your key was registered for a different site. Please request a key for this site\'s dedicated use, or <a href="%s" target="_blank">contact us</a> for assistance. Thanks!',
 					'Postmatic'
 				),
 				'http://gopostmatic.com/bug/'

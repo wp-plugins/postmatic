@@ -134,7 +134,7 @@ class Prompt_Core {
 
 		add_action( 'admin_post_prompt_subscribers_export_csv', array( 'Prompt_Admin_Subscribers_Export', 'export_subscribers_csv' ) );
 
-		add_image_size( 'prompt-post-featured', 1480, 600, true );
+		add_image_size( 'prompt-post-featured', 1350, 515, true );
 	}
 
 	public static function detect_version_change() {

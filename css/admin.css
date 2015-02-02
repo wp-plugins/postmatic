@@ -125,3 +125,64 @@ input.regular-text {
 
 .initialize-key td, .initialize-key tr {
   width: 100% !important; }
+
+.widget {
+  width: 32%;
+  float: left;
+  margin-right: 1%;
+  padding: 130px 20px 0 20px;
+  text-align: center;
+  background-size: 112px !important;
+  vertical-align: bottom;
+  margin-bottom: 65px;
+  margin-top: 65px; }
+  .widget a {
+    display: block;
+    background: #00C59C;
+    color: #fff !important;
+    text-decoration: none;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 10px 0; }
+
+#postmatic-documentation {
+  background: url(../media/docs.png) no-repeat top center; }
+
+#postmatic-widget-directory {
+  background: url(../media/widgets.png) no-repeat top center; }
+
+#postmatic-support {
+  background: url(../media/ticket.png) no-repeat top center; }
+
+ul.prompt-news {
+  margin: 3%; }
+  ul.prompt-news li {
+    display: block;
+    width: 28%;
+    float: left;
+    margin-right: 1%;
+    padding: 0 2%; }
+    ul.prompt-news li div p:nth-child(2) {
+      display: none; }
+  ul.prompt-news li:nth-child(1) {
+    width: 100%;
+    font-size: 185%;
+    line-height: normal;
+    margin-bottom: 25px; }
+
+#news-header {
+  margin-left: 5%;
+  clear: left; }
+
+#get_support_submit {
+  clear: both !important;
+  top: 30px;
+  left: 100px;
+  position: relative;
+  text-align: right;
+  margin-top: 45px; }
+
+tr.concierge-install {
+  clear: both;
+  width: 65% !important; }

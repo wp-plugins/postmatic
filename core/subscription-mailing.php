@@ -32,7 +32,7 @@ class Prompt_Subscription_Mailing {
 
 		$emails = array();
 
-		$chunks = array_chunk( $users_data, 25 );
+		$chunks = array_chunk( $users_data, 30 );
 
 		foreach ( $chunks[$chunk] as $user_data ) {
 			$emails[] = self::make_agreement_email( $object, $user_data, null, $template_data );
@@ -136,6 +136,7 @@ class Prompt_Subscription_Mailing {
 			$template = "unsubscribed-email.php";
 			$filter = 'prompt/unsubscribed_email';
 			$latest_post = null;
+			$comments = array();
 
 		} else {
 
@@ -145,6 +146,7 @@ class Prompt_Subscription_Mailing {
 			$template = "subscribed-email.php";
 			$filter = 'prompt/subscribed_email';
 			$latest_post = self::get_latest_post( $object );
+			$comments = self::get_comments( $object );
 
 		}
 
@@ -153,6 +155,7 @@ class Prompt_Subscription_Mailing {
 			'subscriber' => $prompt_subscriber->get_wp_user(),
 			'object' => $object,
 			'latest_post' => $latest_post,
+			'comments' => $comments,
 		);
 		/**
 		 * Filter template data for subscription notification email.
@@ -163,14 +166,18 @@ class Prompt_Subscription_Mailing {
 		 *      @type WP_User $object The object subscribed to
 		 *      @type Prompt_Interface_Subscribable $object The object subscribed to
 		 *      @type WP_Post $latest_post For site and author subscriptions, the latest relevant post.
+		 *      @type array $comments For post subscriptions, the comments on the post so far.
 		 * }
 		 */
 		$template_data = apply_filters( $filter . '/template_data', $template_data );
 
-		if ( $latest_post ) {
+		if ( $latest_post )
 			setup_postdata( $GLOBALS['post'] = $latest_post );
+
+		if ( $latest_post or $comments ) {
+			$post = $latest_post ? $latest_post : $object->get_wp_post();
 			$command = new Prompt_Comment_Command();
-			$command->set_post_id( $latest_post->ID );
+			$command->set_post_id( $post->ID );
 			$command->set_user_id( $subscriber->ID );
 			Prompt_Command_Handling::add_command_metadata( $command, $email );
 		}
@@ -218,5 +225,30 @@ class Prompt_Subscription_Mailing {
 			return null;
 
 		return $posts[0];
+	}
+
+	protected static function get_comments( Prompt_Interface_Subscribable $object ) {
+
+		if ( ! is_a( $object, 'Prompt_Post' ) )
+			return array();
+
+		$include_count = 20;
+		$offset = 0;
+
+		$count = get_comments( array( 'post_id' => $object->id(), 'status' => 'approve', 'count' => true ) );
+
+		if ( $count === 0 )
+			return array();
+
+		if ( $count > $include_count )
+			$offset = $count - $include_count;
+
+		return get_comments( array(
+			'post_id' => $object->id(),
+			'status' => 'approve',
+			'order' => 'ASC',
+			'offset' => $offset,
+			'number' => $include_count,
+		) );
 	}
 }

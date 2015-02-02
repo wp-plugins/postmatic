@@ -71,6 +71,11 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 9. Using the invitation system to send invites to the most active commenters.
 
 == Changelog ==
+= 1.0 beta 16 =
+- New: When you subscribe to a conversation the confirmation email will bring you up to date on the conversation thus far. Now when you subscribe to a post you'll know exactly what you've missed and where to jump in.
+- We've squashed a ton of bugs with the new post email template. Things have been tightened up all around and older email clients are now better supported. **There are now new requirements and considerations for header images**. You'll want to read our [blog post](http://gopostmatic.com/blog) about it.
+- We fixed an issue in which was keeping incoming emails from getting to your site if you were running wp zero spam on certain host environments. Sorry about that.
+- Better notifications if a new post is emailed out with comments disabled.
 
 = 1.0 beta 15 =
 - Fixed more gmail and Thunderbird image problems which caused the template to get blown out. Looks great now.

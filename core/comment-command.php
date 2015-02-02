@@ -90,6 +90,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 			'/<a href="https:\/\/overview.mail.yahoo.com[^>]*>.*?<\/a>/',   // yahoo mobile "sent from"
 			'/[\r\n]-+[\r\n].*/s',                                          // dash signature divider
 			'/[\r\n]?Links:[\r\n]\s*1\..*/s',                               // Fastmail links list
+			'/[\r\n]?>\s*$/s',                                              // Trailing bracket quotes
 		);
 
 		$text = $this->message->message;
@@ -118,7 +119,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		if ( preg_match( '/^\s*(subscribe|unsubscribe)\s*/i', $message_text, $matches ) )
 			return $matches[1];
 
-		if ( preg_match( '/^\s*(unusbscribe|sunsubscribe|unsusbscribe|unsuscribe|unsusrib|unsusribe)\s*/i', $message_text, $matches ) )
+		if ( preg_match( '/^\s*(unusbscribe|sunsubscribe|unsusbscribe|unsuscribe|unsusrib|unsusribe|unsubcribe)\s*/i', $message_text, $matches ) )
 			return self::$unsubscribe_method;
 
 		if ( preg_match( '/^\s*(usbscribe|suscribe|susribe|susrib)\s*/i', $message_text, $matches ) )
@@ -199,7 +200,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		else
 			$comment_data['comment_approved'] = 1;
 
-		$comment_data = apply_filters( 'preprocess_comment', $comment_data );
+		$comment_data = apply_filters( 'prompt_preprocess_comment', $comment_data );
 		$comment_data = wp_filter_comment( $comment_data );
 
 		wp_insert_comment( $comment_data );

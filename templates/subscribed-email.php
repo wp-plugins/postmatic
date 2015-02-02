@@ -3,7 +3,8 @@
 * Template variables in scope:
 * @var WP_User               $subscriber
 * @var Prompt_Interface_Subscribable   $object        The thing being subscribed to
-* @var WP_Post               $latest_post   For site and author subscriptions, the latest relevant post.
+* @var WP_Post               $latest_post   For site and author subscriptions, the latest relevant post
+* @var array                 $comments      Comments so far for post subscriptions
 */
 ?>
 <h1>
@@ -24,6 +25,8 @@
 			get_the_title(),
 			get_the_date()
 		);
+	elseif ( $comments ) :
+		_e( 'The conversation so far is included below.', 'Postmatic' );
 	endif;
 	?>
 
@@ -39,6 +42,23 @@
 		</p>
 	</div>
 
+<?php elseif ( $comments ) : ?>
+	<hr />
+
+	<h3><?php __( "Want to catch up? Here are the 30 most recent comments:", 'Postmatic' ); ?></h3>
+
+	<div class="previous-comments">
+		<?php
+		wp_list_comments( array(
+			'callback' => array( 'Prompt_Email_Comment_Rendering', 'render' ),
+			'style' => 'div',
+		), $comments );
+		?>
+	</div>
+
+<?php endif; ?>
+
+<?php if ( $latest_post or $comments ) : ?>
 	<ul>
 		<li><?php _e( 'To <strong>leave a comment</strong> simply reply to this email.', 'Postmatic' ); ?></li>
 		<li>

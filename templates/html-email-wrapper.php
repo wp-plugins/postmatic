@@ -34,16 +34,23 @@
     a img {
     border: none;
     }
-    img {
+  
+  img {
     outline:none;
     text-decoration:none;
     -ms-interpolation-mode: bicubic;
     width: auto;
-    max-width: 615px;
+    max-width: 100%;
     clear: both;
     height: auto !important;
     display: block;
     }
+
+img.retina {
+      width: 100% !important;
+      max-width: 675px !important;
+}
+
     
     body {
       -webkit-font-smoothing: antialiased;
@@ -99,17 +106,20 @@
 
     .logo {
       display: block;
-      margin: 15px auto !important;
       text-align: center;
       float: none !important;
       height: auto;
-      <?php if ( $brand_image_width < 687 ) : ?>
+      <?php if ( $brand_image_width < 720 ) : ?>
         width: <?php echo intval( $brand_image_width ); ?>px !important;
+        margin: 20px auto 15px auto !important;
       <?php else: ?>
         width: 100% !important;
+        margin: 0 auto 15px auto !important;
       <?php endif; ?>
-    }
+    } 
 
+    .brand {background: #fff;max-width: 760px!important;border-bottom: 0 !important;}
+    .post {border-top: 0 !important;}
     .first {
       margin-top: 0;
     }
@@ -132,14 +142,22 @@
     /* -------------------------------------
         BODY
     ------------------------------------- */
-    table.body-wrap {
+    table.wrap {
       width: 100%;
-      padding: 2%;
+      border-collapse: collapse;
     }
-    table.body-wrap .container {
-      border: 1px solid #f0f0f0;
+    table.wrap .container {
+      padding: 20px !important;
       margin-bottom: 20px;
-
+      border: 1px solid #f0f0f0;
+    }
+    table.header {
+      padding: 0 !important;
+      border: 1px solid #f0f0f0;
+      border-bottom: none;
+      max-width: 762px;
+      width: 100%;
+      margin: 0 auto;
     }
     #web {clear: both; padding-top: 20px;}
     /* -------------------------------------
@@ -189,7 +207,6 @@
       line-height: 1.1;
       margin-bottom: 15px;
       color: #000;
-      margin: 40px 0 10px;
       line-height: 1.2;
       font-weight: 200;
     }
@@ -225,7 +242,7 @@
 
     ol li {list-style-type: decimal;}
 
-    blockquote { background:#f9f9f9;border:1px solid #eee;padding:5%;font-style: italic;margin: 15px 0;}
+    blockquote { background:#f9f9f9;border:1px solid #eee;padding:5%;font-style: italic;margin: 15px 0 !important;}
 
     .alert {background: #FFFEBA; padding: 2px; font-weight: normal;}
     .noforward { background: #fffeee; padding: 2px;}
@@ -243,8 +260,8 @@
       clear: both!important;
     }
     /* Set the padding on the td rather than the div for Outlook compatibility */
-    .body-wrap .container {
-      padding: 2%;
+    .wrap .container {
+      padding: 20px;
     }
     .footer-wrap .container {padding: 0 !important;max-width: 720px !important;}
     /* This should also be a block element, so that it will fill 100% of the .container */
@@ -261,6 +278,7 @@
     .content table {
       width: 100%;
     }
+
     .widgets li, .widgets ul {list-style: none !important; margin-left: 0 !important; padding-left: 0 !important;}
     .alignright {float: right !important; margin: 0 0 10px 10px !important;}
 
@@ -272,6 +290,9 @@
 
 .sd-title { clear: both !important;}
 
+.content .sd-content ul li {
+  margin-left: 5px;
+}
 .content .sd-content ul li a {
   color: #555;
   font-size: 12px;
@@ -285,11 +306,17 @@
 
 }
 
+#socialmedia-container div {
+  float: left;
+  margin-right: 10px;
+}
+
+
 /*Beta styles*/
 
 .inverse td {padding: 4%;}
 .inverse h3, .inverse h4 {margin: 0 0 5px 0; }
-.brand h1 {font-size:36px; color:#348eda;padding:0;margin:0 0 5px 0;}
+.brand h1 {font-size:42px; color:#348eda;padding:0;margin:3% 2%;}
 .left {float: left;margin:0; width: 45%}
 .right {margin-left:50%; width:45%;}
 
@@ -343,11 +370,13 @@
 
 /*Mobile syles*/
     @media only screen and (max-width: 480px) {
-     table.body-wrap {
+     table.wrap {
       width: 100% !important;
       padding: 0% !important;
     }
-    .container {padding: 0 !important; border: 0 !important;}
+
+    table.wrap .container {padding: 0 !important; border: 0 !important;}
+    .header {border: 0 !important;}
     .credit {
     text-align: left !important;
     }
@@ -364,9 +393,20 @@
     .midwidget {
     padding: 0 !important;
     }
-    .body-wrap { padding: 10px !imporant;}
-
+    .wrap {padding: 0 !important;}
+      
+      .logo {
+      <?php if ( $brand_image_width < 720 ) : ?>
+        margin: 20px 20px 15px 20px !important;
+        width: 80% !important;
+        max-width: 90% !important;
+      <?php else: ?>
+        width: 100% !important;
+        margin: 0 auto 15px auto !important;
+      <?php endif; ?>
+    }
     #content img {float: none !important; margin: 10px auto !important;}
+    img.avatar {float: left !important;}
     #content img.avatar, #content img.reply-icon {float: left !important; clear: left !important; margin: 0 10px 0 0 !important;}
     .gallery br {display:none !important; clear: none !important;}
     .gallery-item, .ngg-gallery-thumbnail-box {margin: 5px auto !important; float: none !important; display: block !important; width: 100% !important; text-align: center !important;}
@@ -405,15 +445,15 @@
 }
 
 /*Comments Template*/
-img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !important;float: left; margin-right: 10px; padding-bottom: 15px; border-radius: 5px;}
+img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !important;float: left !important; margin-right: 10px; padding-bottom: 15px; border-radius: 5px;}
 
 .inreply {font-weight: normal; font-size: 120%; color: #737373; margin-bottom: 15px;}
 .inreply a {color: black; text-decoration: none !important; font-style: italic;}
 
 .author-name {color: #DF623B; font-style: italic; font-family: serif; line-height: normal;}
-.comment {margin-bottom: 55px; font-size: 110%;}
+.comment {margin-bottom: 15px; font-size: 100%; line-height:normal;}
 .comment-date {color: gray; font-size: 90%;}
-.comment-header {padding-bottom: 15px; font-size: 110%;}
+.comment-header {padding-bottom: 15px; font-size: 100%;}
 .comment-body {clear: left; color: #000;}
 .reply {padding-bottom: 35px; border-bottom: 1px solid #ddd; margin-left: 40px;}
 .newpost {border-bottom: none;  margin-top: 25px; padding-bottom: 15px;}
@@ -423,6 +463,10 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .previous-comment-2 {opacity: .6;}
 .previous-comment-1 {opacity: .8;}
 .new-reply {margin-left: 55px; margin-bottom: 55px; font-size: 115%;}
+.depth-2 {margin-left: 55px;}
+.depth-3 {margin-left: 110px;}
+.depth-4 {margin-left: 165px;}
+.depth-5 {margin-left: 220px;}
 .the-reply, {margin-bottom: 25px;}
 .reply-content {margin-left: 60px;}
 .comment blockquote, .previous-comments blockquote, .reply-content blockquote {
@@ -436,20 +480,25 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 
     </style>
     <!-- body -->
-    <table class="body-wrap"><tr>
-    <td class="container" bgcolor="#FFFFFF">
+   <table class="header wrap">
+      <tr>
+      <td class="brand" bgcolor="#FFFFFF">
+        <?php if ( Prompt_Enum_Email_Header_Types::IMAGE === $brand_type ) : ?>
+        <img width="<?php echo intval( $brand_image_width ); ?>" src="<?php echo esc_attr( $brand_image_url ); ?>" align="middle" class="logo" />
+        <?php else : ?>
+        <h1><?php echo $brand_text; ?></h1>
+        <?php endif; ?>
+      </td>
+    </tr>
+    </table>
+
+    <table class="body wrap">
+      <tr>
+    <td class="post container" bgcolor="#FFFFFF">
       <!-- content -->
       <div class="content">
         <table>
-          <tr>
-            <td class="brand">
-              <?php if ( Prompt_Enum_Email_Header_Types::IMAGE === $brand_type ) : ?>
-              <img width="<?php echo intval( $brand_image_width ); ?>" src="<?php echo esc_attr( $brand_image_url ); ?>" align="middle" class="logo" />
-              <?php else : ?>
-              <h1><?php echo $brand_text; ?></h1>
-              <?php endif; ?>
-            </td>
-          </tr>
+         
           <tr>
             <td id="content">
               
