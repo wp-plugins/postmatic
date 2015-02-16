@@ -91,6 +91,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 			'/[\r\n]-+[\r\n].*/s',                                          // dash signature divider
 			'/[\r\n]?Links:[\r\n]\s*1\..*/s',                               // Fastmail links list
 			'/[\r\n]?>\s*$/s',                                              // Trailing bracket quotes
+			'/\r\n\r\n  \[image: photo\]\r\n.*/s',                             // Wisestamp
 		);
 
 		$text = $this->message->message;
@@ -98,6 +99,9 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		foreach ( $strip_patterns as $pattern ) {
 			$text = preg_replace( $pattern, '', $text );
 		}
+
+		// Remove single linebreaks
+		$text = preg_replace( '/([^\n])\r?\n([^\r\n])/', '$1 $2', $text );
 
 		return $text;
 	}
@@ -119,10 +123,10 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		if ( preg_match( '/^\s*(subscribe|unsubscribe)\s*/i', $message_text, $matches ) )
 			return $matches[1];
 
-		if ( preg_match( '/^\s*(unusbscribe|sunsubscribe|unsusbscribe|unsuscribe|unsusrib|unsusribe|unsubcribe)\s*/i', $message_text, $matches ) )
+		if ( preg_match( '/^[\s\*\_]*(un..bscribe?|sunsubscribe|unsusbscribe|un..scribe|unsusribe?|unsubcribe)[\s\*\_]*/i', $message_text, $matches ) )
 			return self::$unsubscribe_method;
 
-		if ( preg_match( '/^\s*(usbscribe|suscribe|susribe|susrib)\s*/i', $message_text, $matches ) )
+		if ( preg_match( '/^[\s\*\_]*(usbscribe|s..scribe|suscribe|susribe?|susrib)[\s\*\_]*/i', $message_text, $matches ) )
 			return self::$subscribe_method;
 
 		return '';

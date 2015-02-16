@@ -5,7 +5,8 @@
 * string   $password   The new user plaintext password
 */
 ?>
-<h1><?php printf( __( 'Welcome to %s.', 'Postmatic' ), get_option( 'blogname' ) );?></h1>
+<div class="padded">
+	<h1><?php printf( __( 'Welcome to %s.', 'Postmatic' ), get_option( 'blogname' ) );?></h1>
 <p>
 	<?php
 	printf(
@@ -26,3 +27,4 @@
 <p>
 	<?php printf( __( 'You may log in by visiting %s.', 'Postmatic' ), wp_login_url() ); ?>
 </p>
+</div>

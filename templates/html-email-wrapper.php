@@ -2,17 +2,18 @@
 <!DOCTYPE html>
 <?php /**
 * HTML Email template, called with variables in scope:
-* @var string  $subject
-* @var string  $message
-* @var string  $brand_type text or html
-* @var string  $brand_text
-* @var string  $brand_image_url
-* @var int     $brand_image_height
-* @var int     $brand_image_width
-* @var string  $footer_widgets
-* @var string  $footer_type
-* @var string  $footer_text
-*/
+* @var string           $subject
+* @var string           $message
+* @var string           $brand_type text or html
+* @var string           $brand_text
+* @var string           $brand_image_url
+* @var int              $brand_image_height
+* @var int              $brand_image_width
+* @var string           $footer_widgets
+* @var string           $footer_type
+* @var string           $footer_text
+* @var string           $site_icon_url
+ */
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -51,6 +52,11 @@ img.retina {
       max-width: 675px !important;
 }
 
+img.featured {
+      width: 100% !important;
+      max-width: 720px !important;
+}
+
     
     body {
       -webkit-font-smoothing: antialiased;
@@ -62,7 +68,16 @@ img.retina {
         ELEMENTS
     ------------------------------------- */
     a {
-      color: #348eda;
+      color: black;
+    }
+    .padded {padding: 0 20px 20px 20px;}
+    .padded a {color:black;}
+    .gray {background: #eee; padding: 25px; border-top: 3px solid gray;}
+    .padded h3 {clear: both;}
+    .padded h3.reply {clear: none;}
+    #the_title {padding-bottom: 0;}
+    #the_content a {
+          color: #348eda;
     }
     #button {
       clear: both;
@@ -70,7 +85,7 @@ img.retina {
     }
     .btn-primary {
       text-decoration: none;
-      color: #FFF;
+      color: #FFF !important;
       background-color: #348eda;
       border: solid #348eda;
       border-width: 10px 20px;
@@ -85,7 +100,7 @@ img.retina {
     }
     .btn-secondary {
       text-decoration: none;
-      color: #FFF;
+      color: #FFF !important;
       background-color: #aaa;
       border: solid #aaa;
       border-width: 5px 10px;
@@ -119,6 +134,9 @@ img.retina {
     } 
 
     .brand {background: #fff;max-width: 760px!important;border-bottom: 0 !important;}
+    .brand img.favicon {width: 32px !important; float: left; margin-right: 10px;}
+    .brand h2.sitename {padding: 0 !important;}
+    .commentheader td, .noheader {padding: 20px 20px 0 20px;}
     .post {border-top: 0 !important;}
     .first {
       margin-top: 0;
@@ -147,7 +165,7 @@ img.retina {
       border-collapse: collapse;
     }
     table.wrap .container {
-      padding: 20px !important;
+      padding: 0 !important;
       margin-bottom: 20px;
       border: 1px solid #f0f0f0;
     }
@@ -155,7 +173,7 @@ img.retina {
       padding: 0 !important;
       border: 1px solid #f0f0f0;
       border-bottom: none;
-      max-width: 762px;
+      max-width: 722px;
       width: 100%;
       margin: 0 auto;
     }
@@ -195,10 +213,11 @@ img.retina {
       margin-bottom: 10px;
     }
     .footnote {
-      font-size: 85% !important;
       clear: both;
-      margin-top: 20px;
     }
+    .footnote h3, .footnote h4 {font-size: 12px; margin-bottom: 5px;}
+    .footnote p  {font-size: 10px; margin-bottom: 15px;}
+
     /* -------------------------------------
         TYPOGRAPHY
     ------------------------------------- */
@@ -225,7 +244,9 @@ img.retina {
       font-size: 22px;
     }
     h4 {
-      font-weight: bold;
+      font-weight: normal;
+      font-size: 16px;
+      margin-bottom: 5px;
     }
     p, ul, ol {
       margin-bottom: 10px;
@@ -291,7 +312,7 @@ img.retina {
 .sd-title { clear: both !important;}
 
 .content .sd-content ul li {
-  margin-left: 5px;
+  margin: 0 5px 0 0 !important;
 }
 .content .sd-content ul li a {
   color: #555;
@@ -305,12 +326,11 @@ img.retina {
   text-decoration: none;
 
 }
-
 #socialmedia-container div {
   float: left;
   margin-right: 10px;
 }
-
+.sd-like {display: none !important;}
 
 /*Beta styles*/
 
@@ -445,28 +465,33 @@ img.retina {
 }
 
 /*Comments Template*/
-img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !important;float: left !important; margin-right: 10px; padding-bottom: 15px; border-radius: 5px;}
+img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !important;float: left !important;  padding-bottom: 15px; border-radius: 5px;}
 
 .inreply {font-weight: normal; font-size: 120%; color: #737373; margin-bottom: 15px;}
 .inreply a {color: black; text-decoration: none !important; font-style: italic;}
-
+.author-name,.comment-date,.comment-body { margin-left: 60px;}
 .author-name {color: #DF623B; font-style: italic; font-family: serif; line-height: normal;}
-.comment {margin-bottom: 15px; font-size: 100%; line-height:normal;}
+.comment {font-size: 100%; line-height:normal; min-height: 55px; clear: left !important;}
 .comment-date {color: gray; font-size: 90%;}
-.comment-header {padding-bottom: 15px; font-size: 100%;}
-.comment-body {clear: left; color: #000;}
-.reply {padding-bottom: 35px; border-bottom: 1px solid #ddd; margin-left: 40px;}
+.comment-header {padding-bottom: 0; font-size: 100%;margin-bottom: 15px !important; }
+.comment-body {color: #000;}
+.reply {padding-bottom: 15px; margin-left: 40px; clear: none;}
 .newpost {border-bottom: none;  margin-top: 25px; padding-bottom: 15px;}
-.reply-prompt {clear: both; margin-top: 20px;}
+.reply-prompt {clear: both; margin-top: 20px; margin-bottom: 20px;}
 .reply-prompt img {float: left !important; margin-right: 10px; width: 30px; height: 30px;}
+.reply-prompt h3 {font-size: 125% !important; padding-top: 5px !important; clear: none;}
+.reply-prompt h3 small {display: block; font-size: 70% !important;}
+.reply-prompt p {margin-bottom: 0 !important;}
+.reply-promtp a {color: black;}
+.previous-comments {margin-bottom: 30px;}
 .previous-comment-3 {opacity: .4;}
 .previous-comment-2 {opacity: .6;}
 .previous-comment-1 {opacity: .8;}
-.new-reply {margin-left: 55px; margin-bottom: 55px; font-size: 115%;}
-.depth-2 {margin-left: 55px;}
-.depth-3 {margin-left: 110px;}
-.depth-4 {margin-left: 165px;}
-.depth-5 {margin-left: 220px;}
+.new-reply {margin-left: 55px; margin-bottom: 25px; font-size: 115%;}
+.depth-2 {margin-left: 25px; margin-bottom: 15px;}
+.depth-3 {margin-left: 25px; margin-bottom: 15px;}
+.depth-4 {margin-left: 25px; margin-bottom: 15px;}
+.depth-5 {margin-left: 25px; margin-bottom: 15px;}
 .the-reply, {margin-bottom: 25px;}
 .reply-content {margin-left: 60px;}
 .comment blockquote, .previous-comments blockquote, .reply-content blockquote {
@@ -477,20 +502,44 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
   padding-left: 10px;
   font-weight: normal;
 }
+.context {font-size: 90%; line-height: normal; margin-bottom: 45px;}
+.context .excerpt {font-style: italic;}
+.context h4 {margin-bottom: 10px;}
+.context img {float: left; margin-right: 15px; padding: 1px; border: 1px solid #ddd; width: 50%; margin-bottom: 25px;}
+
 
     </style>
     <!-- body -->
-   <table class="header wrap">
-      <tr>
-      <td class="brand" bgcolor="#FFFFFF">
-        <?php if ( Prompt_Enum_Email_Header_Types::IMAGE === $brand_type ) : ?>
-        <img width="<?php echo intval( $brand_image_width ); ?>" src="<?php echo esc_attr( $brand_image_url ); ?>" align="middle" class="logo" />
-        <?php else : ?>
-        <h1><?php echo $brand_text; ?></h1>
-        <?php endif; ?>
-      </td>
-    </tr>
-    </table>
+
+   <?php if ( isset( $comment_header ) and $comment_header ) : ?>
+       <table class="header wrap commentheader">
+          <tr>
+              <td class="brand" bgcolor="#FFFFFF">
+                <img width="32" height="32" src="<?php echo $site_icon_url; ?>" class="favicon" />
+                <h2 class="sitename"><?php echo $brand_text; ?></h2>
+              </td>
+          </tr>
+        </table>
+
+   <?php elseif ( !isset( $comment_header ) or !$comment_header ) : ?>
+
+       <table class="header wrap">
+          <tr>
+              <td class="brand" bgcolor="#FFFFFF">
+                <?php if ( Prompt_Enum_Email_Header_Types::IMAGE === $brand_type ) : ?>
+                <img width="<?php echo intval( $brand_image_width ); ?>" src="<?php echo esc_attr( $brand_image_url ); ?>" align="middle" class="logo" />
+                <?php else : ?>
+                <div class="noheader">
+                  <img width="32" height="32" src="<?php echo $site_icon_url; ?>" class="favicon" />
+                <h2 class="sitename"><?php echo $brand_text; ?></h2>
+                </div>
+
+                <?php endif; ?>
+              </td>
+          </tr>
+        </table>
+
+   <?php endif; ?>
 
     <table class="body wrap">
       <tr>
@@ -500,8 +549,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
         <table>
          
           <tr>
-            <td id="content">
-              
+            <td>
               <?php echo $message; ?>
             </td>
           </tr>

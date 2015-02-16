@@ -8,6 +8,11 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 
 	public function form_handler() {
 
+		if ( !empty( $_POST['site_icon_button'] ) ) {
+			Prompt_Core::set_site_icon();
+			return;
+		}
+
 		if ( !empty( $_POST['send_test_email_button'] ) ) {
 
 			$to_address = sanitize_email( $_POST['test_email_address'] );
@@ -42,6 +47,12 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 		if ( $this->options->get( 'email_header_image' ) ) {
 			$email_header_image_src = wp_get_attachment_image_src( $this->options->get( 'email_header_image' ), 'full' );
 		}
+
+		$site_icon_src = array( '', 0, 0 );
+		if ( $this->options->get( 'site_icon' ) ) {
+			$site_icon_src = wp_get_attachment_image_src( $this->options->get( 'site_icon' ), 'full' );
+		}
+
 		$rows = array(
 			$this->row_wrap(
 				__( 'Email header type', 'Postmatic' ),
@@ -64,8 +75,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 					'<br/>',
 					html( 'small',
 						__(
-							'Will be displayed at half the size of your uploaded image to support retina displays. ' .
-							'The ideal width to fill the full header area is 1440px wide.',
+							'Will be displayed at half the size of your uploaded image to support retina displays. The ideal width to fill the full header area is 1440px wide.',
 							'Postmatic'
 						)
 					)
@@ -102,6 +112,42 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 					$this->input(
 						array( 'name' => 'email_header_text', 'type' => 'text' ),
 						$this->options->get()
+					)
+				)
+			),
+			html(
+				'tr class="site-icon"',
+				html( 'th scope="row"',
+					__( 'Site icon', 'Postmatic' ),
+					'<br/>',
+					html( 'small',
+						__(
+							'This is generated from your site\'s favicon, and used in comment notifications in place of the header image.',
+							'Postmatic'
+						)
+					)
+				),
+				html(
+					'td',
+					html(
+						'img',
+						array(
+							'src' => $site_icon_src[0],
+							'width' => $site_icon_src[1] / 2,
+							'height' => $site_icon_src[2] / 2,
+							'class' => 'alignleft',
+						)
+					),
+					html(
+						'div',
+						$this->input(
+							array( 'name' => 'site_icon', 'type' => 'hidden' ),
+							$this->options->get()
+						),
+						html(
+							'input class="button" type="submit" name="site_icon_button"',
+							array( 'value' => __( 'Refresh', 'Postmatic' ) )
+						)
 					)
 				)
 			),
@@ -183,6 +229,10 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 
 		if ( isset( $new_data['email_header_image'] ) ) {
 			$valid_data['email_header_image'] = absint( $new_data['email_header_image'] );
+		}
+
+		if ( isset( $new_data['site_icon'] ) ) {
+			$valid_data['site_icon'] = absint( $new_data['site_icon'] );
 		}
 
 		$footer_type_reflect = new ReflectionClass( 'Prompt_Enum_Email_Footer_Types' );

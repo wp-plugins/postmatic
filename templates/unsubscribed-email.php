@@ -5,7 +5,8 @@
 * @var Prompt_Interface_Subscribable   $object         The thing being subscribed to
 */
 ?>
-<h1><?php _e( 'You have unsubscribed', 'Postmatic' ); ?></h1>
+<div class="padded">
+	<h1><?php _e( 'You have unsubscribed', 'Postmatic' ); ?></h1>
 <p>
 	<?php
 	printf(
@@ -15,3 +16,4 @@
 	?>
 </p>
 <p><?php _e( 'To re-subscribe visit:', 'Postmatic' ); ?> <?php echo $object->subscription_url(); ?></p>
+</div>

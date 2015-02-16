@@ -71,6 +71,14 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 9. Using the invitation system to send invites to the most active commenters.
 
 == Changelog ==
+= 1.0 beta 17 =
+- Oh goodness. We decided to make an entire second set of templates for powering commenting. They are tiny, simple, and to the point. Try it to see.
+- Sites without a header image will now use a favicon.
+- We figured out a way to strip out single-line breaks that were impossed by oldschool clients. Inbound comments look much better now.
+- We improved subjects all around. Now you know if a comment is a new top level, a new reply to someone else, or a new reply to you.
+- Added support for stripping Wisestamp signatures. Or removed it. Not sure. But now you won't see them :)
+- Subscribe / Unsubscribe and other commands will now be processed even if they are in the subject line (where they don't belong)
+
 = 1.0 beta 16 =
 - New: When you subscribe to a conversation the confirmation email will bring you up to date on the conversation thus far. Now when you subscribe to a post you'll know exactly what you've missed and where to jump in.
 - We've squashed a ton of bugs with the new post email template. Things have been tightened up all around and older email clients are now better supported. **There are now new requirements and considerations for header images**. You'll want to read our [blog post](http://gopostmatic.com/blog) about it.

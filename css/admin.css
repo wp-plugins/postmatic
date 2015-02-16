@@ -186,3 +186,6 @@ ul.prompt-news {
 tr.concierge-install {
   clear: both;
   width: 65% !important; }
+
+.site-icon img {
+  margin-right: 10px; }

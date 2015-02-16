@@ -7,30 +7,27 @@
 * @var array                 $comments      Comments so far for post subscriptions
 */
 ?>
-<h1>
+<div class="padded">
+	<h3>
 	<?php printf( __( 'Welcome, <span class="capitalize">%s</span>.', 'Postmatic' ), $subscriber->display_name ); ?>
-</h1>
+</h3>
 <p><?php echo $object->subscription_description(); ?></p>
-<h3><?php _e( "What's next?", 'Postmatic' ); ?></h3>
-<p>
-	<?php
-	printf( __( 'Keep an eye on your inbox for content from %s.', 'Postmatic' ), $object->subscription_object_label() );
-	?>
 
+	
+	<h4>
 	<?php
 	if ( $latest_post ) :
 		/* translators: %1$s is title, %2$s date */
 		printf(
-			__( 'We\'ve included the latest, <em>%1$s</em> from %2$s, below.', 'Postmatic' ),
+			__( 'The latest post, <em>%1$s</em> from %2$s, below. Reply to this email to leave a comment.', 'Postmatic' ),
 			get_the_title(),
 			get_the_date()
 		);
 	elseif ( $comments ) :
-		_e( 'The conversation so far is included below.', 'Postmatic' );
+		_e( 'Here is what others have to say. Reply to add your thoughts.', 'Postmatic' );
 	endif;
 	?>
-
-</p>
+</h4>
 
 <?php if ( $latest_post ) : ?>
 	<hr />
@@ -59,22 +56,27 @@
 <?php endif; ?>
 
 <?php if ( $latest_post or $comments ) : ?>
-	<ul>
-		<li><?php _e( 'To <strong>leave a comment</strong> simply reply to this email.', 'Postmatic' ); ?></li>
-		<li>
-			<?php
-			printf(
-				__(
-					'<strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
-					'Postmatic'
-				),
-				get_bloginfo( 'name' )
-			);
-			?>
-		</li>
-	</ul>
+		<div class="reply-prompt">
+		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
+		<p class="reply">
+			<?php _e( 'Reply to this email to add a comment. Your email address will not be shown.', 'Postmatic' ); ?><br />
+			<small>
+				<?php
+				printf(
+					__(
+						'<strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
+						'Postmatic'
+					),
+					get_bloginfo( 'name' )
+				);
+				?>
+			</small>
+		</p>
+	</div>
 <?php endif; ?>
 
 <p>
-	<?php printf( __( 'To unsubscribe at any time visit %s', 'Postmatic' ), $object->subscription_url() ); ?>
+	<?php printf( __( 'To unsubscribe at any time visit %s or reply with the word <strong>unsubscribe</strong>.', 'Postmatic' ), $object->subscription_url() ); ?>
 </p>
+
+</div>

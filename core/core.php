@@ -58,6 +58,7 @@ class Prompt_Core {
 			'invite_introduction' => $invite_intro,
 			'last_version' => 0,
 			'enable_collection' => false,
+			'site_icon' => 0,
 		);
 		self::$options = new scbOptions( 'prompt_options', __FILE__, $default_options );
 
@@ -92,6 +93,10 @@ class Prompt_Core {
 		register_deactivation_hook( self::$basename, array( 'Prompt_Event_Handling', 'record_deactivation' ) );
 		register_activation_hook( self::$basename, array( 'Prompt_Event_Handling', 'record_reactivation' ) );
 
+		if ( ! self::$options->get( 'site_icon' ) )
+			add_action( 'init', array( __CLASS__, 'set_site_icon' ) );
+
+		add_action( 'admin_init', array( __CLASS__, 'detect_version_change' ) );
 		add_action( 'admin_init', array( __CLASS__, 'detect_version_change' ) );
 
 		add_action( 'widgets_init', array( 'Prompt_Widget_Handling', 'register' ), 100 ); // Let theme load first
@@ -134,7 +139,7 @@ class Prompt_Core {
 
 		add_action( 'admin_post_prompt_subscribers_export_csv', array( 'Prompt_Admin_Subscribers_Export', 'export_subscribers_csv' ) );
 
-		add_image_size( 'prompt-post-featured', 1350, 515, true );
+		add_image_size( 'prompt-post-featured', 1420, 542, true );
 	}
 
 	public static function detect_version_change() {
@@ -231,6 +236,14 @@ class Prompt_Core {
 		}
 
 		return self::$delivery_metabox;
+	}
+
+	/**
+	 * Get a site icon from grabicon.com.
+	 */
+	public static function set_site_icon() {
+		$icon = new Prompt_Grab_Icon();
+		self::$options->set( 'site_icon', $icon->get_attachment_id() );
 	}
 
 } // end Prompt_Core class

@@ -7,7 +7,8 @@
 * @var string $post_title Post title or placeholder if post no longer exists
 */
 ?>
-<h1><?php _e( "We're sorry.", 'Postmatic' ); ?></h1>
+<div class="padded">
+	<h1><?php _e( "We're sorry.", 'Postmatic' ); ?></h1>
 <p>
 	<?php
 	printf(
@@ -33,3 +34,4 @@
 		<?php _e( 'More Information', 'Postmatic' ); ?>
 	</a>
 <?php endif; ?>
+</div>

@@ -11,7 +11,8 @@ $recipient = esc_html(
 );
 ?>
 
-<?php if ( !empty( $invite_introduction  ) ) : ?>
+<div class="padded">
+	<?php if ( !empty( $invite_introduction  ) ) : ?>
 	<h3><?php printf( __( 'An invitation from %s', 'Postmatic' ), get_bloginfo( 'name' ) ); ?></h3>
 	<p><?php echo $invite_introduction; ?></p>
 <?php else : ?>
@@ -41,6 +42,7 @@ $recipient = esc_html(
 		?>
 	</p>
 <?php endif; ?>
+
 
 <h1><?php _e( 'First, there are some important things you should know', 'Postmatic' ); ?></h1>
 <ol>
@@ -83,7 +85,10 @@ $recipient = esc_html(
 	);
 	?>
 </p>
+</div>
 
+<div class="padded gray">
+	
 <p>
 	<?php
 	_e(
@@ -94,3 +99,4 @@ $recipient = esc_html(
 </p>
 
 <p><?php _e( 'Thanks!', 'Postmatic' ); ?></p>
+</div>

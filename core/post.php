@@ -52,6 +52,21 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 		return $this->wp_post;
 	}
 
+	/**
+	 * Get a post excerpt without having to set up globals.
+	 * @return string
+	 */
+	public function get_excerpt() {
+		$excerpt = $this->get_wp_post()->post_excerpt;
+
+		if ( empty( $excerpt ) ) {
+			$text = apply_filters( 'the_content', $this->get_wp_post()->post_content );
+			$excerpt = wp_trim_words( $text, 55, '[&hellip;]' );
+		}
+
+		return $excerpt;
+	}
+
 	public function subscription_url() {
 		return get_permalink( $this->id );
 	}

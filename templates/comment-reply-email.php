@@ -5,132 +5,113 @@
  * @var WP_User $comment_author
  * @var WP_User $subscriber
  * @var object $comment
+ * @var string $commenter_name
  * @var Prompt_Post $subscribed_post
+ * @var string $subscribed_post_author_name
+ * @var string $subscribed_post_title_link
  * @var array $previous_comments
  * @var WP_User $parent_author
+ * @var string $parent_author_name
  * @var object $parent_comment
  */
-$commenter_name = $comment_author ? $comment_author->display_name : $comment->comment_author;
-$commenter_name = $commenter_name ? $commenter_name : __( 'Anonymous' );
 
-$parent_author_name = $parent_author ? $parent_author->display_name : $parent_comment->comment_author;
-$parent_author_name = $parent_author_name ? $parent_author_name : __( 'Anonymous' );
-
-$previous_index = count( $previous_comments );
 ?>
 
+<div class="padded">
+
 <?php if ( $parent_author and $parent_author->ID == $subscriber->ID ) : ?>
-	<h1>
+
+	<p class="padding">
 		<?php
 		printf(
-			__( '%s replied to your comment.', 'Postmatic' ),
-			'<span class="capitalize">' . $commenter_name . '</span>'
+			__( '%s replied to your comment on %s:', 'Postmatic' ),
+			html( 'span class="capitalize"', $commenter_name ),
+			$subscribed_post_title_link
 		);
 		?>
-	</h1>
-	<div class="previous-comment-1 the-reply">
-		<h4 class="inreply">
-			<?php
-			/* translators: %1$s is date, %2$s time, %3$s linked title */
-			printf(
-				__( 'On %1$s at %2$s you made the following comment on %3$s:', 'Postmatic' ),
-				get_comment_date( '', $parent_comment->comment_ID ),
-				mysql2date( get_option( 'time_format' ), $parent_comment->comment_date ),
-				'<a href="' . get_permalink( $comment->comment_post_ID ) . '">' .  get_the_title( $comment->comment_post_ID  ) . '</a>'
-			);
-			?>
-		</h4>
-		<div class="quote">
-			<?php echo get_avatar( $parent_comment ); ?>
-			<div class="reply-content"><em><?php echo wpautop( $parent_comment->comment_content ); ?></em></div>
-		</div>
-	</div>
-
-	<div class="new-reply">
-		<h4 class="inreply"><?php printf( __( '%s replied:', 'Postmatic' ), $commenter_name ); ?></h4>
-		<?php echo get_avatar( $comment ); ?>
-		<div class="reply-content"><?php echo wpautop( $comment->comment_content ); ?></div>
-	</div>
+	</p>
 
 <?php else : ?>
 
-	<h1>
+	<p class="padding">
 		<?php
 		printf(
-			__( '%s left a reply to a comment by %s', 'Postmatic' ),
-			'<span class="capitalize">' . $commenter_name . '</span>',
-			$parent_author_name
+			__( '%s left a reply to a comment by %s on %s:', 'Postmatic' ),
+			html( 'span class="capitalize"', $commenter_name ),
+			html( 'span class="capitalize"', $parent_author_name ),
+			$subscribed_post_title_link
 		);
 		?>
-	</h1>
+	</p>
 
-	<h4 class="inreply">
-		<?php
-		/* translators: %1$s is post title, %2$s is commenter name */
-		printf(
-			__( 'While discussing %1$s %2$s wrote:', 'Postmatic' ),
-			html( 'a',
-				array( 'href' => get_permalink( $comment->comment_post_ID ) ),
-				get_the_title( $comment->comment_post_ID  )
-			),
-			$parent_author_name
-		);
-		?>
-	</h4>
+<?php endif; ?>
 
-	<div class="previous-comments">
+<div class="new-reply">
+	<div class="primary-comment comment">
 		<div class="comment-header">
-			<?php echo get_avatar( $parent_comment ); ?>
-			<div class="author-name"><?php echo $parent_author_name; ?></div>
-			<div class="comment-date">
-				<?php comment_date( '', $parent_comment->comment_ID ); ?>
-				<?php /* translators: word between date and time */ _e( 'at', 'Postmatic' ); ?>
-				<?php echo mysql2date( get_option( 'time_format' ), $parent_comment->comment_date ); ?>
+			<?php echo get_avatar( $comment ); ?>
+			<div class="author-name">
+				<?php echo $commenter_name; ?>
 			</div>
-		</div>
-
-		<div class="comment-body">
-			<?php echo wpautop( $parent_comment->comment_content ); ?>
-		</div>
-	</div>
-
-	<div class="new-reply">
-		<h4 class="inreply"><?php printf( __( '%s replied:', 'Postmatic' ), $commenter_name ); ?></h4>
-
-		<div class="primary-comment comment">
-			<div class="comment-header">
-				<?php echo get_avatar( $comment ); ?>
-				<div class="author-name"><?php echo $commenter_name; ?></div>
-				<div class="comment-date">
-					<?php comment_date( '', $comment->comment_ID ); ?>
-					<?php /* translators: word between date and time */ _e( 'at', 'Postmatic' ); ?>
-					<?php echo mysql2date( get_option( 'time_format' ), $comment->comment_date ); ?>
-				</div>
-			</div>
-
 			<div class="comment-body">
 				<?php echo wpautop( $comment->comment_content ); ?>
 			</div>
 		</div>
 	</div>
-<?php endif; ?>
+</div>
 
 <div class="reply-prompt">
 	<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
 	<h3 class="reply">
 		<?php printf( __( 'Reply to this email to reply to %s.', 'Postmatic' ), $commenter_name ); ?>
 	</h3>
+</div>
+</div>
+
+
+<div class="padded gray">
+	<div class="context">
+	<h3><?php _e( 'Here\'s a recap of this post and conversation:', 'Postmatic' ); ?></h3>
 	<p>
 		<?php
+		/* translators: %1$s is post title, %2$s date, %3$s time, %4$s author */
 		printf(
-			__(
-				'<strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
-			'Postmatic'
-			),
-			get_bloginfo( 'name' )
+			__( '%1$s was published on %2$s by %4$s.' ),
+			$subscribed_post_title_link,
+			get_the_date( '', $subscribed_post->get_wp_post() ),
+			get_the_time( '', $subscribed_post->get_wp_post() ),
+			$subscribed_post_author_name
 		);
 		?>
 	</p>
+	<?php echo get_the_post_thumbnail( $subscribed_post->id(), 'medium' ); ?>
+	<p class="excerpt"><?php echo $subscribed_post->get_excerpt(); ?></p>
+</div>
+
+<h3>
+	<?php
+	printf(
+		__( 'There were <a href="%1$s">%2$d comments</a> previous to this. Here is this reply in context:', 'Postmatic' ),
+		get_permalink( $subscribed_post->id() ) . '#comments',
+		wp_count_comments( $subscribed_post->id() )->approved
+	);
+	?>
+</h3>
+
+<div class="previous-comments">
+	<?php
+	wp_list_comments( array(
+		'callback' => array( 'Prompt_Email_Comment_Rendering', 'render' ),
+		'style' => 'div',
+	), $previous_comments );
+	?>
+</div>
+
+<div class="reply-prompt">
+	<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
+	<h3 class="reply">
+		<?php printf( __( 'Reply to this email to reply to %s.', 'Postmatic' ), $commenter_name ); ?>
+	</h3>
 </div>
 
 
@@ -143,3 +124,4 @@ $previous_index = count( $previous_comments );
 	);
 	?>
 </p>
+</div>

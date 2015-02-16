@@ -14,36 +14,29 @@ $commenter_name = $commenter_name ? $commenter_name : __( 'Anonymous' );
 
 $previous_index = count( $previous_comments );
 ?>
-
-<h1>
-	<?php printf( __( '<span class="capitalize">%s</span> added a comment.', 'Postmatic' ), $commenter_name ); ?>
-</h1>
-
-<h4 class="inreply">
+<div class="padded">
+	<p>
+	<?php printf( __( '<span class="capitalize">%s</span> added a comment ', 'Postmatic' ), $commenter_name ); ?> 
 	<?php
 	printf(
-		__( 'In reply to: %s.', 'Postmatic' ),
+		__( 'in reply to %s.', 'Postmatic' ),
 		'<a href="' . get_permalink( $comment->comment_post_ID ) . '">' .  get_the_title( $comment->comment_post_ID ) . '</a>'
 	);
 	?>
-</h4>
+</p>
 
 <div class="primary-comment comment">
 	<div class="comment-header">
 		<?php echo get_avatar( $comment ); ?>
 		<div class="author-name"><?php echo $commenter_name; ?></div>
-
-		<div class="comment-date">
-			<?php comment_date( '', $comment->comment_ID ); ?>
-			<?php /* translators: word between date and time */ _e( 'at', 'Postmatic' ); ?>
-			<?php echo mysql2date( get_option( 'time_format' ), $comment->comment_date ); ?>
-		</div>
-
 		<div class="comment-body">
 			<?php echo wpautop( $comment->comment_content ); ?>
 		</div>
 	</div>
 </div>
+
+
+
 
 <?php if ( count( $previous_comments ) > 1 ) : ?>
 
@@ -51,8 +44,7 @@ $previous_index = count( $previous_comments );
 		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
 		<h3 class="reply">
 			<?php printf( __( 'Reply to this email to reply to %s.', 'Postmatic' ), $commenter_name ); ?>
-		</h3>
-		<p>
+		<small>
 			<?php
 			printf(
 				__(
@@ -62,10 +54,15 @@ $previous_index = count( $previous_comments );
 				'<a href="' . get_permalink( $comment->comment_post_ID ) . '">' .  get_the_title( $comment->comment_post_ID ) . '</a>'
 			);
 			?>
-		</p>
+		</small>
+		</h3>
 	</div>
 
-	<h3><?php _e( 'Recently in this conversation...', 'Postmatic' ); ?></h3>
+	</div>
+
+
+	<div class="padded gray">
+		<h3><?php _e( 'Recently in this conversation...', 'Postmatic' ); ?></h3>
 
 	<div class="previous-comments">
 		<?php foreach( $previous_comments as $previous_comment ) : $previous_index--; ?>
@@ -78,9 +75,9 @@ $previous_index = count( $previous_comments );
 						<?php /* translators: word between date and time */ _e( 'at', 'Postmatic' ); ?>
 						<?php echo mysql2date( get_option( 'time_format' ), $previous_comment->comment_date ); ?>
 					</div>
-				</div>
 				<div class="comment-body">
 					<em><?php echo wpautop( $previous_comment->excerpt ); ?></em>
+				</div>
 				</div>
 			</div>
 		<?php endforeach; ?>
@@ -92,9 +89,8 @@ $previous_index = count( $previous_comments );
 	<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
 	<h3 class="reply">
 		<?php printf( __( 'Reply to this email to reply to %s.', 'Postmatic' ), $commenter_name ); ?>
-	</h3>
-	<p>
-		<?php
+	<small>
+				<?php
 		printf(
 			__(
 				'<strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
@@ -104,10 +100,13 @@ $previous_index = count( $previous_comments );
 				get_the_title( $comment->comment_post_ID ) . '</a>'
 		);
 		?>
-	</p>
+	</small>
+	</h3>
+</div>
 </div>
 
-<h4><?php _e( 'Leave this conversation', 'Postmatic' ); ?></h4>
+<div class="padded gray">
+	<h4><?php _e( 'Want to leave this conversation?', 'Postmatic' ); ?></h4>
 <p>
 	<?php
 	_e(
@@ -116,3 +115,5 @@ $previous_index = count( $previous_comments );
 	);
 	?>
 </p>
+</div>
+

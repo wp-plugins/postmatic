@@ -64,15 +64,30 @@ class Prompt_Comment_Mailing {
 		$from_name = $comment_author ? $comment_author->display_name : $comment->comment_author;
 
 		$parent_comment = $parent_author = null;
+		$parent_author_name = '';
 		$template_file = 'new-comment-email.php';
 
 		if ( $comment->comment_parent ) {
 			$parent_comment = get_comment( $comment->comment_parent );
 			$parent_author = get_userdata( $parent_comment->user_id );
+
+			$parent_author_name = $parent_author ? $parent_author->display_name : $parent_comment->comment_author;
+			$parent_author_name = $parent_author_name ? $parent_author_name : __( 'Anonymous', 'Postmatic' );
+
 			$template_file = 'comment-reply-email.php';
 		}
 
+		$commenter_name = $comment_author ? $comment_author->display_name : $comment->comment_author;
+		$commenter_name = $commenter_name ? $commenter_name : __( 'Anonymous', 'Postmatic' );
+
 		$prompt_post = new Prompt_Post( $comment->comment_post_ID );
+		$post_permalink_html = html( 'a',
+			array( 'href' => get_permalink( $prompt_post->id() ) ),
+			get_the_title( $prompt_post->id() )
+		);
+		$post_author = get_userdata( $prompt_post->get_wp_post()->post_author );
+		$post_author_name = $post_author ? $post_author->display_name : __( 'Anonymous', 'Postmatic' );
+
 		$emails = array();
 		foreach ( $chunk_ids as $subscriber_id ) {
 
@@ -81,13 +96,18 @@ class Prompt_Comment_Mailing {
 			if ( !$subscriber or !$subscriber->user_email )
 				continue;
 
+
 			$template_data = array(
 				'comment_author' => $comment_author,
 				'subscriber' => $subscriber,
 				'comment' => $comment,
+				'commenter_name' => $commenter_name,
 				'subscribed_post' => $prompt_post,
+				'subscribed_post_author_name' => $post_author_name,
+				'subscribed_post_title_link' => $post_permalink_html,
 				'previous_comments' => $previous_comments,
 				'parent_author' => $parent_author,
+				'parent_author_name' => $parent_author_name,
 				'parent_comment' => $parent_comment,
 			);
 			/**
@@ -98,11 +118,17 @@ class Prompt_Comment_Mailing {
 			 * @type WP_User $subscriber
 			 * @type object $comment
 			 * @type Prompt_post $subscribed_post
+			 * @type string $subscribed_post_author_name
+			 * @type string $subscribed_post_title_link
+			 * @type array $previous_comments
+			 * @type WP_User $parent_author
+			 * @type string $parent_author_name
+			 * @type object $parent_comment
 			 * }
 			 */
 			$template_data = apply_filters( 'prompt/comment_email/template_data', $template_data );
 
-			$subject = sprintf( __( 'New reply to "%s"', 'Postmatic' ), $prompt_post->get_wp_post()->post_title );
+			$subject = self::get_subject( $template_data );
 
 			$template = Prompt_Template::locate( $template_file );
 
@@ -111,6 +137,7 @@ class Prompt_Comment_Mailing {
 				'from_name' => $from_name,
 				'subject' => $subject,
 				'message' => Prompt_Template::render( $template, $template_data, false ),
+				'template' => 'html-comment-email-wrapper.php',
 			) );
 
 			$command = new Prompt_Comment_Command();
@@ -238,7 +265,7 @@ class Prompt_Comment_Mailing {
 	protected static function get_previous_comments( $comment, $number = 3 ) {
 
 		if ( $comment->comment_parent )
-			return array();
+			return self::get_comment_thread( $comment );
 
 		$comments = self::get_previous_top_level_comments( $comment, $number );
 
@@ -272,19 +299,38 @@ class Prompt_Comment_Mailing {
 
 	/**
 	 * @param object $comment
-	 * @param int $number
 	 * @return array
 	 */
-	protected static function get_comment_thread( $comment, $number = 3 ) {
+	protected static function get_comment_thread( $comment ) {
 
 		$comments = array( $comment );
 
-		while ( $comment->comment_parent and count( $comments ) <= $number ) {
+		while ( $comment->comment_parent ) {
 			$comment = get_comment( $comment->comment_parent );
 			$comments[] = $comment;
 		}
 
 		return $comments;
+	}
+
+	/**
+	 * @param $comment_id
+	 * @return array
+	 */
+	protected static function get_comment_children( $comment_id ) {
+		$children = get_comments( array(
+			'parent' => $comment_id,
+			'status' => 'approve',
+		) );
+
+		if ( ! $children )
+			return array();
+
+		foreach ( $children as $child ) {
+			$children = array_merge( $children, self::get_comment_children( $child->comment_ID ) );
+		}
+
+		return $children;
 	}
 
 	/**
@@ -359,5 +405,41 @@ class Prompt_Comment_Mailing {
 			$comment_author = get_user_by( 'email', $comment->comment_author_email );
 
 		return $comment_author;
+	}
+
+	/**
+	 * @param array $template_data
+	 * @return string
+	 */
+	protected static function get_subject( $template_data ) {
+
+		/** @var WP_User|null $parent_author */
+		/** @var WP_User $subscriber */
+		/** @var string $commenter_name */
+		/** @var Prompt_Post $subscribed_post */
+		/** @var object $parent_comment */
+		/** @var string $parent_author_name */
+		extract( $template_data );
+
+		if ( $parent_author and $parent_author->ID == $subscriber->ID )
+			return sprintf(
+				__( '%s replied to your comment on %s.', 'Postmatic' ),
+				$commenter_name,
+				$subscribed_post->get_wp_post()->post_title
+			);
+
+		if ( $parent_comment )
+			return sprintf(
+				__( '%s replied to %s on %s', 'Postmatic' ),
+				$commenter_name,
+				$parent_author_name,
+				$subscribed_post->get_wp_post()->post_title
+			);
+
+		return sprintf(
+			__( '%s commented on %s', 'Postmatic' ),
+			$commenter_name,
+			$subscribed_post->get_wp_post()->post_title
+		);
 	}
 }
