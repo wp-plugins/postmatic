@@ -71,6 +71,18 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 9. Using the invitation system to send invites to the most active commenters.
 
 == Changelog ==
+= 1.0 beta 18 =
+
+A few quick bug fixes that we found in b17:
+
+- We now less agressively strip line breaks. I think we found a happy middle ground.
+- A quick improvement to the _you've subscribed_ notification template. We stuck a button at the bottom of the comment stream which brings you to the conversation online.
+- The button that lets you choose to show the featured image or not on new posts is now sticky.
+- Support for the socialshare plugin
+- We added an option to disable new post notifications by default. Find it in settings > postmatic > options.
+- You can now display the subscribe form via shortcode. See [how it works here](http://docs.gopostmatic.com/article/96-can-i-insert-a-subscribe-form-via-shortcode).
+
+
 = 1.0 beta 17 =
 - Oh goodness. We decided to make an entire second set of templates for powering commenting. They are tiny, simple, and to the point. Try it to see.
 - Sites without a header image will now use a favicon.

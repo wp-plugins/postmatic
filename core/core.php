@@ -59,6 +59,8 @@ class Prompt_Core {
 			'last_version' => 0,
 			'enable_collection' => false,
 			'site_icon' => 0,
+			'no_post_featured_image_default' => false,
+			'no_post_email_default' => false,
 		);
 		self::$options = new scbOptions( 'prompt_options', __FILE__, $default_options );
 
@@ -93,8 +95,7 @@ class Prompt_Core {
 		register_deactivation_hook( self::$basename, array( 'Prompt_Event_Handling', 'record_deactivation' ) );
 		register_activation_hook( self::$basename, array( 'Prompt_Event_Handling', 'record_reactivation' ) );
 
-		if ( ! self::$options->get( 'site_icon' ) )
-			add_action( 'init', array( __CLASS__, 'set_site_icon' ) );
+		add_action( 'init', array( __CLASS__, 'ensure_site_icon' ) );
 
 		add_action( 'admin_init', array( __CLASS__, 'detect_version_change' ) );
 		add_action( 'admin_init', array( __CLASS__, 'detect_version_change' ) );
@@ -140,6 +141,8 @@ class Prompt_Core {
 		add_action( 'admin_post_prompt_subscribers_export_csv', array( 'Prompt_Admin_Subscribers_Export', 'export_subscribers_csv' ) );
 
 		add_image_size( 'prompt-post-featured', 1420, 542, true );
+
+		add_shortcode( 'postmatic_subscribe_widget', array( 'Prompt_Subscribe_Widget_Shortcode', 'render' ) );
 	}
 
 	public static function detect_version_change() {
@@ -236,6 +239,25 @@ class Prompt_Core {
 		}
 
 		return self::$delivery_metabox;
+	}
+
+	/**
+	 * Make sure the site icon has been created.
+	 *
+	 * Take care to only create it once.
+	 */
+	public static function ensure_site_icon() {
+
+		if ( self::$options->get( 'site_icon' ) )
+			return;
+
+		// Make extra sure we're checking current options
+		wp_cache_delete( self::$options->get_key(), 'options' );
+
+		if ( self::$options->get( 'site_icon' ) )
+			return;
+
+		self::set_site_icon();
 	}
 
 	/**

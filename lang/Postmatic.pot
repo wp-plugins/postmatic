@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.0.0-beta17\n"
+"Email 1.0.0-beta18\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/1.0.0-"
-"beta17-20150216-1410\n"
-"POT-Creation-Date: 2015-02-16 22:10:34+00:00\n"
+"beta18-20150219-2000\n"
+"POT-Creation-Date: 2015-02-20 04:00:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,15 +37,15 @@ msgstr ""
 msgid "Yes, send periodic usage statistics to Postmatic."
 msgstr ""
 
-#: admin/delivery-metabox.php:89
+#: admin/delivery-metabox.php:99
 msgid "Do not deliver this post via email."
 msgstr ""
 
-#: admin/delivery-metabox.php:100
+#: admin/delivery-metabox.php:110
 msgid "Do not use the featured image in email."
 msgstr ""
 
-#: admin/delivery-metabox.php:111
+#: admin/delivery-metabox.php:121
 msgid "Send me a preview email"
 msgstr ""
 
@@ -267,19 +267,23 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: admin/invite-options-tab.php:209
+#: admin/invite-options-tab.php:208
+msgid "If you have many commenters, this could take some time."
+msgstr ""
+
+#: admin/invite-options-tab.php:211
 msgid ""
 "Based on the above your invite will be sent to <span class=\"recipient-count"
 "\">0</span> people."
 msgstr ""
 
-#: admin/invite-options-tab.php:217
+#: admin/invite-options-tab.php:219
 msgid ""
 "Wow, that's a lot of invitations! This tool is currently limited to %d "
 "invites. You can contact support if you need to arrange more."
 msgstr ""
 
-#: admin/invite-options-tab.php:237
+#: admin/invite-options-tab.php:239
 msgid "Send Invites"
 msgstr ""
 
@@ -574,6 +578,20 @@ msgid ""
 "plugin."
 msgstr ""
 
+#: admin/options-options-tab.php:39 core/core.php:232
+msgid "Postmatic Delivery"
+msgstr ""
+
+#: admin/options-options-tab.php:42
+msgid "Do not send new posts via email."
+msgstr ""
+
+#: admin/options-options-tab.php:44
+msgid ""
+"You can still uncheck the \"Do not deliver this post via email\" checkbox "
+"for a specific post, but delivery will be disabled by default."
+msgstr ""
+
 #: admin/options-page.php:86
 msgid "Settings <strong>saved</strong>."
 msgstr ""
@@ -589,7 +607,7 @@ msgid ""
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta17)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta18)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:131
 msgid "Postmatic"
@@ -822,53 +840,53 @@ msgstr[1] ""
 msgid "%s is not subscribed to %s."
 msgstr ""
 
-#: core/ajax-handling.php:137 core/ajax-handling.php:337
+#: core/ajax-handling.php:140 core/ajax-handling.php:340
 msgid "You have unsubscribed."
 msgstr ""
 
-#: core/ajax-handling.php:159
+#: core/ajax-handling.php:162
 msgid "No emails will be sent for this post."
 msgstr ""
 
-#: core/ajax-handling.php:164
+#: core/ajax-handling.php:167
 msgid "This post will be sent to %d subscribers."
 msgstr ""
 
-#: core/ajax-handling.php:170
+#: core/ajax-handling.php:173
 msgid "No emails have been sent for this post."
 msgstr ""
 
-#: core/ajax-handling.php:175
+#: core/ajax-handling.php:178
 msgid "This post has been sent to %d subscribers."
 msgstr ""
 
-#: core/ajax-handling.php:216
+#: core/ajax-handling.php:219
 msgid "Preview email sent."
 msgstr ""
 
-#: core/ajax-handling.php:279
+#: core/ajax-handling.php:282
 msgid "Sorry, that email address is not valid."
 msgstr ""
 
-#: core/ajax-handling.php:303
+#: core/ajax-handling.php:306
 msgid ""
 "Almost done - you'll receive an email with instructions to complete your "
 "subscription."
 msgstr ""
 
-#: core/ajax-handling.php:318
+#: core/ajax-handling.php:321
 msgid "Are you sure you want to unsubscribe %s?"
 msgstr ""
 
-#: core/ajax-handling.php:320
+#: core/ajax-handling.php:323
 msgid "Not you? Click here to start over"
 msgstr ""
 
-#: core/ajax-handling.php:322 core/comment-form-handling.php:163
+#: core/ajax-handling.php:325 core/comment-form-handling.php:163
 msgid "Unsubscribe"
 msgstr ""
 
-#: core/ajax-handling.php:351
+#: core/ajax-handling.php:354
 msgid ""
 "<strong>Confirmation email sent. Please check your email for further "
 "instructions.</strong>"
@@ -948,10 +966,6 @@ msgstr ""
 
 #: core/core.php:57
 msgid "Welcome!"
-msgstr ""
-
-#: core/core.php:229
-msgid "Postmatic Delivery"
 msgstr ""
 
 #: core/email-footer-sidebar.php:11
@@ -1228,19 +1242,19 @@ msgid ""
 "the word 'unsubscribe'."
 msgstr ""
 
-#: templates/html-email-wrapper.php:580
+#: templates/html-email-wrapper.php:581
 msgid "Sent from %s."
 msgstr ""
 
-#: templates/html-email-wrapper.php:587
+#: templates/html-email-wrapper.php:588
 msgid "Delivered by %s."
 msgstr ""
 
-#: templates/html-email-wrapper.php:593
+#: templates/html-email-wrapper.php:594
 msgid "About Postmatic (Beta)"
 msgstr ""
 
-#: templates/html-email-wrapper.php:597
+#: templates/html-email-wrapper.php:598
 msgid ""
 "Postmatic sends your posts to your readers where they’re comfortable: their "
 "inbox. They can send comments back by hitting the reply button. Just like "
@@ -1258,7 +1272,7 @@ msgid "in reply to %s."
 msgstr ""
 
 #: templates/new-comment-email.php:50 templates/new-comment-email.php:95
-#: templates/new-post-email.php:39 templates/subscribed-email.php:66
+#: templates/new-post-email.php:39 templates/subscribed-email.php:72
 msgid ""
 "<strong>Please note</strong>: Your reply will be published publicly and "
 "immediately on %s."
@@ -1283,11 +1297,11 @@ msgid ""
 "'unsubscribe'."
 msgstr ""
 
-#: templates/new-post-email.php:26 templates/subscribed-email.php:38
+#: templates/new-post-email.php:26 templates/subscribed-email.php:37
 msgid "View this post online"
 msgstr ""
 
-#: templates/new-post-email.php:35 templates/subscribed-email.php:62
+#: templates/new-post-email.php:35 templates/subscribed-email.php:68
 msgid ""
 "Reply to this email to add a comment. Your email address will not be shown."
 msgstr ""
@@ -1425,11 +1439,15 @@ msgstr ""
 msgid "Here is what others have to say. Reply to add your thoughts."
 msgstr ""
 
-#: templates/subscribed-email.php:45
+#: templates/subscribed-email.php:42 templates/subscribed-email.php:58
+msgid "View this conversation online"
+msgstr ""
+
+#: templates/subscribed-email.php:46
 msgid "Want to catch up? Here are the 30 most recent comments:"
 msgstr ""
 
-#: templates/subscribed-email.php:79
+#: templates/subscribed-email.php:85
 msgid ""
 "To unsubscribe at any time visit %s or reply with the word "
 "<strong>unsubscribe</strong>."

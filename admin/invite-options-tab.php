@@ -203,7 +203,9 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 								'src' => path_join( Prompt_Core::$url_path, 'media/ajax-loader.gif' ),
 								'alt' => __( 'Loading...', 'Postmatic' ),
 							)
-						)
+						),
+						' ',
+						__( 'If you have many commenters, this could take some time.', 'Postmatic' )
 					),
 					html( 'p',
 						__(

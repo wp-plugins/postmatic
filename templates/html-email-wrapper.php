@@ -332,6 +332,7 @@ img.featured {
 }
 .sd-like {display: none !important;}
 
+.nc_socialPanel {display: none !important;}
 /*Beta styles*/
 
 .inverse td {padding: 4%;}
@@ -487,7 +488,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .previous-comment-3 {opacity: .4;}
 .previous-comment-2 {opacity: .6;}
 .previous-comment-1 {opacity: .8;}
-.new-reply {margin-left: 55px; margin-bottom: 25px; font-size: 115%;}
+/*.new-reply {margin-left: 55px; margin-bottom: 25px; font-size: 115%;}*/
 .depth-2 {margin-left: 25px; margin-bottom: 15px;}
 .depth-3 {margin-left: 25px; margin-bottom: 15px;}
 .depth-4 {margin-left: 25px; margin-bottom: 15px;}

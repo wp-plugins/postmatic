@@ -70,6 +70,9 @@ class Prompt_Ajax_Handling {
 		/** @var WPDB $wpdb */
 		global $wpdb;
 
+		// Ask for some time for this one
+		ini_set('max_execution_time', 300);
+
 		$query = "SELECT MAX( c.comment_author ) as name, " .
 			"c.comment_author_email as address, " .
 			"MAX( c.comment_date ) as date, " .

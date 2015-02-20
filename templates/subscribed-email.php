@@ -14,7 +14,7 @@
 <p><?php echo $object->subscription_description(); ?></p>
 
 	
-	<h4>
+	<h3>
 	<?php
 	if ( $latest_post ) :
 		/* translators: %1$s is title, %2$s date */
@@ -27,10 +27,9 @@
 		_e( 'Here is what others have to say. Reply to add your thoughts.', 'Postmatic' );
 	endif;
 	?>
-</h4>
+</h3>
 
 <?php if ( $latest_post ) : ?>
-	<hr />
 	<h2><?php the_title(); ?><br /><small><?php the_date(); ?></small></h2>
 	<div>
 		<?php the_content(); ?>
@@ -39,8 +38,10 @@
 		</p>
 	</div>
 
+	<p id="button"><a href="<?php the_permalink(); ?>#comments" class="btn-secondary">
+			<?php _e( 'View this conversation online', 'Postmatic' ); ?></a>
+	</p>
 <?php elseif ( $comments ) : ?>
-	<hr />
 
 	<h3><?php __( "Want to catch up? Here are the 30 most recent comments:", 'Postmatic' ); ?></h3>
 
@@ -53,9 +54,14 @@
 		?>
 	</div>
 
+	<p id="button"><a href="<?php echo get_the_permalink( $object->id() ); ?>#comments" class="btn-secondary">
+			<?php _e( 'View this conversation online', 'Postmatic' ); ?></a>
+	</p>
 <?php endif; ?>
 
 <?php if ( $latest_post or $comments ) : ?>
+
+
 		<div class="reply-prompt">
 		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
 		<p class="reply">

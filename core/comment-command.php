@@ -100,8 +100,8 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 			$text = preg_replace( $pattern, '', $text );
 		}
 
-		// Remove single linebreaks
-		$text = preg_replace( '/([^\n])\r?\n([^\r\n])/', '$1 $2', $text );
+		// Remove single linebreaks except after punctuation
+		$text = preg_replace( '/([^\n\.\?\!\"])\r?\n([^\r\n])/', '$1 $2', $text );
 
 		return $text;
 	}

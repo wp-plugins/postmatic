@@ -34,7 +34,19 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 							'Postmatic'
 						)
 					),
-			)
+			),
+			array(
+				'title' => __( 'Postmatic Delivery', 'Postmatic' ),
+				'type' => 'checkbox',
+				'name' => 'no_post_email_default',
+				'desc' => __( 'Do not send new posts via email.', 'Postmatic' ) .
+					html( 'p',
+						__(
+							'You can still uncheck the "Do not deliver this post via email" checkbox for a specific post, but delivery will be disabled by default.',
+							'Postmatic'
+						)
+					),
+			),
 		);
 
 		$this->override_entries( $table_entries );
@@ -62,7 +74,7 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 		$valid_data = $this->validate_checkbox_fields(
 			$new_data,
 			$old_data,
-			array( 'send_login_info', 'auto_subscribe_authors' )
+			array( 'send_login_info', 'auto_subscribe_authors', 'no_post_email_default' )
 		);
 
 		return $valid_data;

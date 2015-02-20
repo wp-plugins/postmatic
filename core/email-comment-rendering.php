@@ -14,7 +14,7 @@ class Prompt_Email_Comment_Rendering {
 				get_comment_author( '', $comment )
 			),
 			html( 'div class="comment-body"',
-				get_comment_text( $comment->comment_ID )
+				apply_filters( 'comment_text', get_comment_text( $comment->comment_ID ), $comment )
 			)
 		);
 	}

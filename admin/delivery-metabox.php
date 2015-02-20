@@ -26,7 +26,12 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 		if ( isset( $_POST[self::$no_email_name] ) and isset( $_POST['post_ID'] ) and $_POST['post_ID'] == $post_id )
 			return true; // Meta hasn't been saved yet but will be
 
-		return (bool)get_post_meta( $post_id, self::$no_email_name, true );
+		$meta_value = get_post_meta( $post_id, self::$no_email_name, true );
+
+		if ( '' !== $meta_value )
+			return (bool) $meta_value;
+
+		return Prompt_Core::$options->get( 'no_post_email_default' );
 	}
 
 	/**
@@ -47,7 +52,12 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 			return true; // Meta hasn't been saved yet but will be
 		}
 
-		return (bool)get_post_meta( $post_id, self::$no_featured_image_name, true );
+		$meta_value = get_post_meta( $post_id, self::$no_featured_image_name, true );
+
+		if ( '' != $meta_value )
+			return (bool) $meta_value;
+
+		return Prompt_Core::$options->get( 'no_post_featured_image_default' );
 	}
 
 	public function admin_enqueue_scripts() {
@@ -118,14 +128,16 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 	}
 
 	protected function before_save( $post_data, $post_id ) {
-		return array(
+		$post_data =  array(
 			self::$no_email_name => isset( $_POST[self::$no_email_name] ),
 			self::$no_featured_image_name => isset( $_POST[self::$no_featured_image_name] ),
 		);
-	}
 
-	protected function validate_post_data( $post_data, $post_id ) {
-		return !array_diff_key( $post_data, array( self::$no_email_name => true, self::$no_featured_image_name => true ) );
+		// Make changes to featured image suppression sticky
+		if ( $post_data[self::$no_featured_image_name] != Prompt_Core::$options->get( 'no_post_featured_image_default' ) )
+			Prompt_Core::$options->set( 'no_post_featured_image_default', $post_data[self::$no_featured_image_name] );
+
+		return $post_data;
 	}
 
 	protected function set_post( $post ) {
