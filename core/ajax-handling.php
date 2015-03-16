@@ -197,19 +197,12 @@ class Prompt_Ajax_Handling {
 
 		Prompt_Post_Mailing::setup_postdata( $post );
 
-		if ( Prompt_Admin_Delivery_Metabox::suppress_featured_image( $post_id ) ) {
-			$featured_image_src = false;
-		} else {
-			$featured_image = image_get_intermediate_size( get_post_thumbnail_id( $post_id ), 'prompt-post-featured' );
-			$featured_image_src = array( $featured_image['url'], $featured_image['width'], $featured_image['height'] );
-		}
-
 		$email = Prompt_Post_Mailing::build_email( array(
 			'prompt_author' => new Prompt_User( $post->post_author ),
 			'recipient' => wp_get_current_user(),
 			'prompt_post' => new Prompt_Post( $post ),
 			'subscribed_object' => new Prompt_Site(),
-			'featured_image_src' => $featured_image_src,
+			'featured_image_src' => self::featured_image_src( $post_id ),
 		) );
 
 		Prompt_Post_Mailing::reset_postdata();
@@ -228,14 +221,36 @@ class Prompt_Ajax_Handling {
 
 		$instance = array( 'collect_name' => !empty( $_GET['collect_name'] ) );
 
+		$template_id = is_numeric( $_GET['template'] ) ? intval( $_GET['template'] ) : null;
+
 		$object = new Prompt_Site();
 
 		if ( isset( $_GET['object_type'] ) and isset( $_GET['object_id'] ) )
 			$object = new $_GET['object_type']( $_GET['object_id'] );
 
-		Prompt_Subscribe_Widget::render_dynamic_content( $widget_id, $instance, $object );
+		Prompt_Subscribe_Widget::render_dynamic_content( $widget_id, $instance, $object, $template_id );
 
 		wp_die();
+	}
+
+	/**
+	 * @param $post_id
+	 * @return array|bool
+	 */
+	protected static function featured_image_src( $post_id ) {
+
+		if ( Prompt_Admin_Delivery_Metabox::suppress_featured_image( $post_id ) )
+			return false;
+
+		$featured_image = image_get_intermediate_size( get_post_thumbnail_id( $post_id ), 'prompt-post-featured' );
+
+		if ( ! $featured_image )
+			$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+
+		if ( ! $featured_image )
+			return false;
+
+		return array( $featured_image['url'], $featured_image['width'], $featured_image['height'] );
 	}
 
 	/**

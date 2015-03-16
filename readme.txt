@@ -71,6 +71,21 @@ We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
 9. Using the invitation system to send invites to the most active commenters.
 
 == Changelog ==
+= 1.0 beta 19 =
+
+Mostly integrations with other plugins as we make our way to our public release very  soon!
+
+- Fixed an issue in which featured images smaller than 1350x1550 would sometimes break
+- Added support for Magic Action Box. Full integration coming in their next release.
+- Added translation support for email commands (subscribe, unsub, etc)
+- Fixed occasional problem with images not floating correctly in galleries
+- Added support for Jetpack image galleries
+- Added support for Yumprint recipes plugin
+- Added support for Hupso social sharing
+- Added support for the official Twitter plugin
+- HTML entities in post and site titles are now translated to UTF-8
+
+
 = 1.0 beta 18 =
 
 A few quick bug fixes that we found in b17:

@@ -80,7 +80,7 @@ img.featured {
           color: #348eda;
     }
     #button {
-      clear: both;
+      clear: both !important;
       margin-top: 25px;
     }
     .btn-primary {
@@ -331,6 +331,12 @@ img.featured {
   margin-right: 10px;
 }
 .sd-like {display: none !important;}
+
+/*Jetpack tiled gallery*/
+.gallery-row {width: 675px !important; float: none !important;}
+.gallery-group {float: left; margin-bottom: 20px !important;}
+.tiled-gallery-caption {font-size: 70% !important; padding-left: 5px !important;}
+.tiled-gallery img {margin: 1px !important;}
 
 .nc_socialPanel {display: none !important;}
 /*Beta styles*/

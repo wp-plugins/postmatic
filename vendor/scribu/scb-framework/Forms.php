@@ -1,52 +1,48 @@
 <?php
+
 /**
- * Data-aware form generator.
+ * Data-aware form generator
  */
 class scbForms {
 
 	const TOKEN = '%input%';
 
 	/**
-	 * Generates form field.
-	 *
 	 * @param array|scbFormField_I $args
 	 * @param mixed                $value
 	 *
 	 * @return string
 	 */
-	public static function input_with_value( $args, $value ) {
+	static function input_with_value( $args, $value ) {
 		$field = scbFormField::create( $args );
 
 		return $field->render( $value );
 	}
 
 	/**
-	 * Generates form field.
-	 *
 	 * @param array|scbFormField_I $args
-	 * @param array                $formdata (optional)
+	 * @param array                $formdata
 	 *
 	 * @return string
 	 */
-	public static function input( $args, $formdata = null ) {
+	static function input( $args, $formdata = null ) {
 		$field = scbFormField::create( $args );
 
 		return $field->render( scbForms::get_value( $args['name'], $formdata ) );
 	}
 
 	/**
-	 * Generates a table wrapped in a form.
+	 * Generates a table wrapped in a form
 	 *
 	 * @param array $rows
-	 * @param array $formdata (optional)
+	 * @param array $formdata
 	 *
 	 * @return string
 	 */
-	public static function form_table( $rows, $formdata = null ) {
+	static function form_table( $rows, $formdata = null ) {
 		$output = '';
-		foreach ( $rows as $row ) {
+		foreach ( $rows as $row )
 			$output .= self::table_row( $row, $formdata );
-		}
 
 		$output = self::form_table_wrap( $output );
 
@@ -54,19 +50,18 @@ class scbForms {
 	}
 
 	/**
-	 * Generates a form.
+	 * Generates a form
 	 *
 	 * @param array  $inputs
-	 * @param array  $formdata (optional)
+	 * @param array  $formdata
 	 * @param string $nonce
 	 *
 	 * @return string
 	 */
-	public static function form( $inputs, $formdata = null, $nonce ) {
+	static function form( $inputs, $formdata = null, $nonce ) {
 		$output = '';
-		foreach ( $inputs as $input ) {
+		foreach ( $inputs as $input )
 			$output .= self::input( $input, $formdata );
-		}
 
 		$output = self::form_wrap( $output, $nonce );
 
@@ -74,18 +69,17 @@ class scbForms {
 	}
 
 	/**
-	 * Generates a table.
+	 * Generates a table
 	 *
 	 * @param array $rows
-	 * @param array $formdata (optional)
+	 * @param array $formdata
 	 *
 	 * @return string
 	 */
-	public static function table( $rows, $formdata = null ) {
+	static function table( $rows, $formdata = null ) {
 		$output = '';
-		foreach ( $rows as $row ) {
+		foreach ( $rows as $row )
 			$output .= self::table_row( $row, $formdata );
-		}
 
 		$output = self::table_wrap( $output );
 
@@ -93,14 +87,14 @@ class scbForms {
 	}
 
 	/**
-	 * Generates a table row.
+	 * Generates a table row
 	 *
 	 * @param array $args
-	 * @param array $formdata (optional)
+	 * @param array $formdata
 	 *
 	 * @return string
 	 */
-	public static function table_row( $args, $formdata = null ) {
+	static function table_row( $args, $formdata = null ) {
 		return self::row_wrap( $args['title'], self::input( $args, $formdata ) );
 	}
 
@@ -108,26 +102,22 @@ class scbForms {
 // ____________WRAPPERS____________
 
 	/**
-	 * Wraps a table in a form.
-	 *
 	 * @param string $content
-	 * @param string $nonce (optional)
+	 * @param string $nonce
 	 *
 	 * @return string
 	 */
-	public static function form_table_wrap( $content, $nonce = 'update_options' ) {
+	static function form_table_wrap( $content, $nonce = 'update_options' ) {
 		return self::form_wrap( self::table_wrap( $content ), $nonce );
 	}
 
 	/**
-	 * Wraps a content in a form.
-	 *
 	 * @param string $content
-	 * @param string $nonce (optional)
+	 * @param string $nonce
 	 *
 	 * @return string
 	 */
-	public static function form_wrap( $content, $nonce = 'update_options' ) {
+	static function form_wrap( $content, $nonce = 'update_options' ) {
 		return html( "form method='post' action=''",
 			$content,
 			wp_nonce_field( $nonce, '_wpnonce', $referer = true, $echo = false )
@@ -135,25 +125,21 @@ class scbForms {
 	}
 
 	/**
-	 * Wraps a content in a table.
-	 *
 	 * @param string $content
 	 *
 	 * @return string
 	 */
-	public static function table_wrap( $content ) {
+	static function table_wrap( $content ) {
 		return html( "table class='form-table'", $content );
 	}
 
 	/**
-	 * Wraps a content in a table row.
-	 *
 	 * @param string $title
 	 * @param string $content
 	 *
 	 * @return string
 	 */
-	public static function row_wrap( $title, $content ) {
+	static function row_wrap( $title, $content ) {
 		return html( 'tr',
 			html( "th scope='row'", $title ),
 			html( 'td', $content )
@@ -174,7 +160,7 @@ class scbForms {
 	 *
 	 * @return string
 	 */
-	public static function get_name( $name ) {
+	static function get_name( $name ) {
 		$name = (array) $name;
 
 		$name_str = array_shift( $name );
@@ -191,17 +177,16 @@ class scbForms {
 	 *
 	 * @param string $name     The name of the value
 	 * @param array  $value    The data that will be traversed
-	 * @param mixed  $fallback (optional) The value returned when the key is not found
+	 * @param mixed  $fallback The value returned when the key is not found
 	 *
 	 * @return mixed
 	 */
-	public static function get_value( $name, $value, $fallback = null ) {
+	static function get_value( $name, $value, $fallback = null ) {
 		foreach ( (array) $name as $key ) {
-			if ( ! isset( $value[ $key ] ) ) {
+			if ( !isset( $value[ $key ] ) )
 				return $fallback;
-			}
 
-			$value = $value[ $key ];
+			$value = $value[$key];
 		}
 
 		return $value;
@@ -211,12 +196,12 @@ class scbForms {
 	 * Given a list of fields, validate some data.
 	 *
 	 * @param array $fields    List of args that would be sent to scbForms::input()
-	 * @param array $data      (optional) The data to validate. Defaults to $_POST
-	 * @param array $to_update (optional) Existing data to populate. Necessary for nested values
+	 * @param array $data      The data to validate. Defaults to $_POST
+	 * @param array $to_update Existing data to populate. Necessary for nested values
 	 *
 	 * @return array
 	 */
-	public static function validate_post_data( $fields, $data = null, $to_update = array() ) {
+	static function validate_post_data( $fields, $data = null, $to_update = array() ) {
 		if ( null === $data ) {
 			$data = stripslashes_deep( $_POST );
 		}
@@ -228,9 +213,8 @@ class scbForms {
 
 			$value = $fieldObj->validate( $value );
 
-			if ( null !== $value ) {
+			if ( null !== $value )
 				self::set_value( $to_update, $field['name'], $value );
-			}
 		}
 
 		return $to_update;
@@ -243,11 +227,11 @@ class scbForms {
 	 *
 	 * @param array  $args      Field arguments.
 	 * @param int    $object_id The object ID the metadata is attached to
-	 * @param string $meta_type (optional)
+	 * @param string $meta_type
 	 *
 	 * @return string
 	 */
-	public static function input_from_meta( $args, $object_id, $meta_type = 'post' ) {
+	static function input_from_meta( $args, $object_id, $meta_type = 'post' ) {
 		$single = ( 'checkbox' != $args['type'] );
 
 		$key = (array) $args['name'];
@@ -259,63 +243,51 @@ class scbForms {
 	}
 
 	/**
-	 * Updates metadata for passed list of fields.
-	 *
 	 * @param array  $fields
 	 * @param array  $data
-	 * @param int    $object_id The object ID the metadata is attached to
-	 * @param string $meta_type (optional) Defaults to 'post'
-	 *
-	 * @return void
+	 * @param int    $object_id
+	 * @param string $meta_type
 	 */
-	public static function update_meta( $fields, $data, $object_id, $meta_type = 'post' ) {
+	static function update_meta( $fields, $data, $object_id, $meta_type = 'post' ) {
 		foreach ( $fields as $field_args ) {
 			$key = $field_args['name'];
 
 			if ( 'checkbox' == $field_args['type'] ) {
-				$new_values = isset( $data[ $key ] ) ? $data[ $key ] : array();
+				$new_values = isset( $data[$key] ) ? $data[$key] : array();
 
 				$old_values = get_metadata( $meta_type, $object_id, $key );
 
-				foreach ( array_diff( $new_values, $old_values ) as $value ) {
+				foreach ( array_diff( $new_values, $old_values ) as $value )
 					add_metadata( $meta_type, $object_id, $key, $value );
-				}
 
-				foreach ( array_diff( $old_values, $new_values ) as $value ) {
+				foreach ( array_diff( $old_values, $new_values ) as $value )
 					delete_metadata( $meta_type, $object_id, $key, $value );
-				}
 			} else {
-				$value = isset( $data[ $key ] ) ? $data[ $key ] : '';
+				$value = isset( $data[$key] ) ? $data[$key] : '';
 
-				if ( '' === $value ) {
+				if ( '' === $value )
 					delete_metadata( $meta_type, $object_id, $key );
-				} else {
+				else
 					update_metadata( $meta_type, $object_id, $key, $value );
-				}
 			}
 		}
 	}
 
 	/**
-	 * Sets value using a reference.
-	 *
 	 * @param array  $arr
 	 * @param string $name
 	 * @param mixed  $value
-	 *
-	 * @return void
 	 */
 	private static function set_value( &$arr, $name, $value ) {
 		$name = (array) $name;
 
 		$final_key = array_pop( $name );
 
-		while ( ! empty( $name ) ) {
+		while ( !empty( $name ) ) {
 			$key = array_shift( $name );
 
-			if ( ! isset( $arr[ $key ] ) ) {
+			if ( !isset( $arr[ $key ] ) )
 				$arr[ $key ] = array();
-			}
 
 			$arr =& $arr[ $key ];
 		}
@@ -326,38 +298,30 @@ class scbForms {
 
 
 /**
- * A wrapper for scbForms, containing the formdata.
+ * A wrapper for scbForms, containing the formdata
  */
 class scbForm {
 	protected $data   = array();
 	protected $prefix = array();
 
 	/**
-	 * Constructor.
-	 *
 	 * @param array          $data
-	 * @param string|boolean $prefix (optional)
-	 *
-	 * @return void
+	 * @param string|boolean $prefix
 	 */
-	public function __construct( $data, $prefix = false ) {
-		if ( is_array( $data ) ) {
+	function __construct( $data, $prefix = false ) {
+		if ( is_array( $data ) )
 			$this->data = $data;
-		}
 
-		if ( $prefix ) {
+		if ( $prefix )
 			$this->prefix = (array) $prefix;
-		}
 	}
 
 	/**
-	 * Traverses the form.
-	 *
 	 * @param string $path
 	 *
-	 * @return object A scbForm
+	 * @return scbForm
 	 */
-	public function traverse_to( $path ) {
+	function traverse_to( $path ) {
 		$data = scbForms::get_value( $path, $this->data );
 
 		$prefix = array_merge( $this->prefix, (array) $path );
@@ -366,16 +330,14 @@ class scbForm {
 	}
 
 	/**
-	 * Generates form field.
-	 *
 	 * @param array $args
 	 *
 	 * @return string
 	 */
-	public function input( $args ) {
+	function input( $args ) {
 		$value = scbForms::get_value( $args['name'], $this->data );
 
-		if ( ! empty( $this->prefix ) ) {
+		if ( !empty( $this->prefix ) ) {
 			$args['name'] = array_merge( $this->prefix, (array) $args['name'] );
 		}
 
@@ -389,9 +351,9 @@ class scbForm {
 interface scbFormField_I {
 
 	/**
-	 * Generate the corresponding HTML for a field.
+	 * Generate the corresponding HTML for a field
 	 *
-	 * @param mixed $value (optional) The value to use.
+	 * @param mixed $value The value to use
 	 *
 	 * @return string
 	 */
@@ -400,7 +362,7 @@ interface scbFormField_I {
 	/**
 	 * Validates a value against a field.
 	 *
-	 * @param mixed $value The value to check.
+	 * @param mixed $value The value to check
 	 *
 	 * @return mixed null if the validation failed, sanitized value otherwise.
 	 */
@@ -415,16 +377,13 @@ abstract class scbFormField implements scbFormField_I {
 	protected $args;
 
 	/**
-	 * Creates form field.
-	 *
 	 * @param array|scbFormField_I $args
 	 *
 	 * @return mixed false on failure or instance of form class
 	 */
 	public static function create( $args ) {
-		if ( is_a( $args, 'scbFormField_I' ) ) {
+		if ( is_a( $args, 'scbFormField_I' ) )
 			return $args;
-		}
 
 		if ( empty( $args['name'] ) ) {
 			return trigger_error( 'Empty name', E_USER_WARNING );
@@ -440,9 +399,8 @@ abstract class scbFormField implements scbFormField_I {
 			unset( $args['values'] );
 		}
 
-		if ( isset( $args['extra'] ) && ! is_array( $args['extra'] ) ) {
+		if ( isset( $args['extra'] ) && !is_array( $args['extra'] ) )
 			$args['extra'] = shortcode_parse_atts( $args['extra'] );
-		}
 
 		$args = wp_parse_args( $args, array(
 			'desc'      => '',
@@ -452,42 +410,34 @@ abstract class scbFormField implements scbFormField_I {
 		) );
 
 		// depends on $args['desc']
-		if ( isset( $args['choices'] ) ) {
+		if ( isset( $args['choices'] ) )
 			self::_expand_choices( $args );
-		}
 
 		switch ( $args['type'] ) {
-			case 'radio':
-				return new scbRadiosField( $args );
-			case 'select':
-				return new scbSelectField( $args );
-			case 'checkbox':
-				if ( isset( $args['choices'] ) ) {
-					return new scbMultipleChoiceField( $args );
-				} else {
-					return new scbSingleCheckboxField( $args );
-				}
-			case 'custom':
-				return new scbCustomField( $args );
-			default:
-				return new scbTextField( $args );
+		case 'radio':
+			return new scbRadiosField( $args );
+		case 'select':
+			return new scbSelectField( $args );
+		case 'checkbox':
+			if ( isset( $args['choices'] ) )
+				return new scbMultipleChoiceField( $args );
+			else
+				return new scbSingleCheckboxField( $args );
+		case 'custom':
+			return new scbCustomField( $args );
+		default:
+			return new scbTextField( $args );
 		}
 	}
 
 	/**
-	 * Constructor.
-	 *
 	 * @param array $args
-	 *
-	 * @return void
 	 */
 	protected function __construct( $args ) {
 		$this->args = $args;
 	}
 
 	/**
-	 * Magic method: $field->arg
-	 *
 	 * @param string $key
 	 *
 	 * @return mixed
@@ -497,8 +447,6 @@ abstract class scbFormField implements scbFormField_I {
 	}
 
 	/**
-	 * Magic method: isset( $field->arg )
-	 *
 	 * @param string $key
 	 *
 	 * @return bool
@@ -508,22 +456,18 @@ abstract class scbFormField implements scbFormField_I {
 	}
 
 	/**
-	 * Generate the corresponding HTML for a field.
-	 *
-	 * @param mixed $value (optional)
+	 * @param mixed $value
 	 *
 	 * @return string
 	 */
 	public function render( $value = null ) {
-		if ( null === $value && isset( $this->default ) ) {
+		if ( null === $value && isset( $this->default ) )
 			$value = $this->default;
-		}
 
 		$args = $this->args;
 
-		if ( null !== $value ) {
+		if ( null !== $value )
 			$this->_set_value( $args, $value );
-		}
 
 		$args['name'] = scbForms::get_name( $args['name'] );
 
@@ -539,14 +483,14 @@ abstract class scbFormField implements scbFormField_I {
 	abstract protected function _set_value( &$args, $value );
 
 	/**
-	 * The actual rendering.
+	 * The actual rendering
 	 *
 	 * @param array $args
 	 */
 	abstract protected function _render( $args );
 
 	/**
-	 * Handle args for a single checkbox or radio input.
+	 * Handle args for a single checkbox or radio input
 	 *
 	 * @param array $args
 	 *
@@ -562,15 +506,14 @@ abstract class scbFormField implements scbFormField_I {
 
 		$args['extra']['checked'] = $args['checked'];
 
-		if ( is_null( $args['desc'] ) && ! is_bool( $args['value'] ) ) {
+		if ( is_null( $args['desc'] ) && ! is_bool( $args['value'] ) )
 			$args['desc'] = str_replace( '[]', '', $args['value'] );
-		}
 
 		return self::_input_gen( $args );
 	}
 
 	/**
-	 * Generate html with the final args.
+	 * Generate html with the final args
 	 *
 	 * @param array $args
 	 *
@@ -597,8 +540,6 @@ abstract class scbFormField implements scbFormField_I {
 	}
 
 	/**
-	 * Wraps a form field in a label, and position field description.
-	 *
 	 * @param string $input
 	 * @param string $desc
 	 * @param string $desc_pos
@@ -610,8 +551,6 @@ abstract class scbFormField implements scbFormField_I {
 	}
 
 	/**
-	 * Adds description before/after the form field.
-	 *
 	 * @param string $input
 	 * @param string $desc
 	 * @param string $desc_pos
@@ -619,15 +558,13 @@ abstract class scbFormField implements scbFormField_I {
 	 * @return string
 	 */
 	protected static function add_desc( $input, $desc, $desc_pos ) {
-		if ( empty( $desc ) ) {
+		if ( empty( $desc ) )
 			return $input;
-		}
 
-		if ( 'before' == $desc_pos ) {
+		if ( 'before' == $desc_pos )
 			return $desc . ' ' . $input;
-		} else {
+		else
 			return $input . ' ' . $desc;
-		}
 	}
 
 	/**
@@ -636,19 +573,17 @@ abstract class scbFormField implements scbFormField_I {
 	private static function _expand_choices( &$args ) {
 		$choices =& $args['choices'];
 
-		if ( ! empty( $choices ) && ! self::is_associative( $choices ) ) {
+		if ( !empty( $choices ) && !self::is_associative( $choices ) ) {
 			if ( is_array( $args['desc'] ) ) {
 				$choices = array_combine( $choices, $args['desc'] );	// back-compat
 				$args['desc'] = false;
-			} else if ( ! isset( $args['numeric'] ) || ! $args['numeric'] ) {
+			} elseif ( !isset( $args['numeric'] ) || !$args['numeric'] ) {
 				$choices = array_combine( $choices, $choices );
 			}
 		}
 	}
 
 	/**
-	 * Checks if passed array is associative.
-	 *
 	 * @param array $array
 	 *
 	 * @return bool
@@ -665,8 +600,6 @@ abstract class scbFormField implements scbFormField_I {
 class scbTextField extends scbFormField {
 
 	/**
-	 * Sanitizes value.
-	 *
 	 * @param string $value
 	 *
 	 * @return string
@@ -678,8 +611,6 @@ class scbTextField extends scbFormField {
 	}
 
 	/**
-	 * Generate the corresponding HTML for a field.
-	 *
 	 * @param array $args
 	 *
 	 * @return string
@@ -691,20 +622,15 @@ class scbTextField extends scbFormField {
 			'extra'    => array( 'class' => 'regular-text' ),
 		) );
 
-		if ( ! isset( $args['extra']['id'] ) && ! is_array( $args['name'] ) && false === strpos( $args['name'], '[' ) ) {
+		if ( ! isset( $args['extra']['id'] ) && ! is_array( $args['name'] ) && false === strpos( $args['name'], '[' ) )
 			$args['extra']['id'] = $args['name'];
-		}
 
 		return scbFormField::_input_gen( $args );
 	}
 
 	/**
-	 * Sets value using a reference.
-	 *
 	 * @param array  $args
 	 * @param string $value
-	 *
-	 * @return void
 	 */
 	protected function _set_value( &$args, $value ) {
 		$args['value'] = $value;
@@ -717,23 +643,18 @@ class scbTextField extends scbFormField {
 abstract class scbSingleChoiceField extends scbFormField {
 
 	/**
-	 * Validates a value against a field.
-	 *
 	 * @param mixed $value
 	 *
 	 * @return mixed|null
 	 */
 	public function validate( $value ) {
-		if ( isset( $this->choices[ $value ] ) ) {
+		if ( isset( $this->choices[ $value ] ) )
 			return $value;
-		}
 
 		return null;
 	}
 
 	/**
-	 * Generate the corresponding HTML for a field.
-	 *
 	 * @param array $args
 	 *
 	 * @return string
@@ -746,27 +667,21 @@ abstract class scbSingleChoiceField extends scbFormField {
 		if ( isset( $args['selected'] ) ) {
 			$args['selected'] = (string) $args['selected'];
 		} else {
-			$args['selected'] = array( 'foo' );  // hack to make default blank
+			$args['selected'] = array('foo');  // hack to make default blank
 		}
 
 		return $this->_render_specific( $args );
 	}
 
 	/**
-	 * Sets value using a reference.
-	 *
-	 * @param array  $args
-	 * @param string $value
-	 *
-	 * @return void
+	 * @param array $args
+	 * @param mixed $value
 	 */
 	protected function _set_value( &$args, $value ) {
 		$args['selected'] = $value;
 	}
 
 	/**
-	 * Generate the corresponding HTML for a field.
-	 *
 	 * @param array $args
 	 *
 	 * @return string
@@ -780,8 +695,6 @@ abstract class scbSingleChoiceField extends scbFormField {
 class scbSelectField extends scbSingleChoiceField {
 
 	/**
-	 * Generate the corresponding HTML for a field.
-	 *
 	 * @param array $args
 	 *
 	 * @return string
@@ -831,8 +744,6 @@ class scbSelectField extends scbSingleChoiceField {
 class scbRadiosField extends scbSelectField {
 
 	/**
-	 * Generate the corresponding HTML for a field.
-	 *
 	 * @param array $args
 	 *
 	 * @return string
@@ -870,8 +781,6 @@ class scbRadiosField extends scbSelectField {
 class scbMultipleChoiceField extends scbFormField {
 
 	/**
-	 * Validates a value against a field.
-	 *
 	 * @param mixed $value
 	 *
 	 * @return array
@@ -881,8 +790,6 @@ class scbMultipleChoiceField extends scbFormField {
 	}
 
 	/**
-	 * Generate the corresponding HTML for a field.
-	 *
 	 * @param array $args
 	 *
 	 * @return string
@@ -893,9 +800,8 @@ class scbMultipleChoiceField extends scbFormField {
 			'checked' => null,
 		) );
 
-		if ( ! is_array( $args['checked'] ) ) {
+		if ( ! is_array( $args['checked'] ) )
 			$args['checked'] = array();
-		}
 
 		$opts = '';
 		foreach ( $args['choices'] as $value => $title ) {
@@ -915,12 +821,8 @@ class scbMultipleChoiceField extends scbFormField {
 	}
 
 	/**
-	 * Sets value using a reference.
-	 *
-	 * @param array  $args
-	 * @param string $value
-	 *
-	 * @return void
+	 * @param array $args
+	 * @param mixed $value
 	 */
 	protected function _set_value( &$args, $value ) {
 		$args['checked'] = (array) $value;
@@ -933,8 +835,6 @@ class scbMultipleChoiceField extends scbFormField {
 class scbSingleCheckboxField extends scbFormField {
 
 	/**
-	 * Validates a value against a field.
-	 *
 	 * @param mixed $value
 	 *
 	 * @return boolean
@@ -944,8 +844,6 @@ class scbSingleCheckboxField extends scbFormField {
 	}
 
 	/**
-	 * Generate the corresponding HTML for a field.
-	 *
 	 * @param array $args
 	 *
 	 * @return string
@@ -960,20 +858,15 @@ class scbSingleCheckboxField extends scbFormField {
 
 		$args['extra']['checked'] = $args['checked'];
 
-		if ( is_null( $args['desc'] ) && ! is_bool( $args['value'] ) ) {
+		if ( is_null( $args['desc'] ) && ! is_bool( $args['value'] ) )
 			$args['desc'] = str_replace( '[]', '', $args['value'] );
-		}
 
 		return scbFormField::_input_gen( $args );
 	}
 
 	/**
-	 * Sets value using a reference.
-	 *
-	 * @param array  $args
-	 * @param string $value
-	 *
-	 * @return void
+	 * @param array $args
+	 * @param mixed $value
 	 */
 	protected function _set_value( &$args, $value ) {
 		$args['checked'] = ( $value || ( isset( $args['value'] ) && $value == $args['value'] ) );
@@ -988,11 +881,7 @@ class scbCustomField implements scbFormField_I {
 	protected $args;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param array $args
-	 *
-	 * @return void
 	 */
 	function __construct( $args ) {
 		$this->args = wp_parse_args( $args, array(
@@ -1002,8 +891,6 @@ class scbCustomField implements scbFormField_I {
 	}
 
 	/**
-	 * Magic method: $field->arg
-	 *
 	 * @param string $key
 	 *
 	 * @return mixed
@@ -1013,8 +900,6 @@ class scbCustomField implements scbFormField_I {
 	}
 
 	/**
-	 * Magic method: isset( $field->arg )
-	 *
 	 * @param string $key
 	 *
 	 * @return boolean
@@ -1024,9 +909,7 @@ class scbCustomField implements scbFormField_I {
 	}
 
 	/**
-	 * Generate the corresponding HTML for a field.
-	 *
-	 * @param mixed $value (optional)
+	 * @param mixed $value
 	 *
 	 * @return string
 	 */
@@ -1035,8 +918,6 @@ class scbCustomField implements scbFormField_I {
 	}
 
 	/**
-	 * Sanitizes value.
-	 *
 	 * @param mixed $value
 	 *
 	 * @return mixed

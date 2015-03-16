@@ -62,7 +62,11 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 
 		$subscriber = get_user_by( 'email', $email );
 
-		if ( !$subscriber and !preg_match( '/(?<!n[o\']t )age?ree?/i', $this->get_message_text() ) ) {
+		/* translators: this should match "reply with the word 'agree'" translations */
+		$agree_command = __( 'agree', 'Postmatic' );
+		$agree_pattern = '/(?<!n[o\']t )(' . $agree_command . '|age?ree?)/i';
+
+		if ( !$subscriber and !preg_match( $agree_pattern, $this->get_message_text() ) ) {
 
 			if ( self::stop_resending( $comment ) )
 				return;

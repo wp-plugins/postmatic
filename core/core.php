@@ -61,6 +61,7 @@ class Prompt_Core {
 			'site_icon' => 0,
 			'no_post_featured_image_default' => false,
 			'no_post_email_default' => false,
+			'custom_widget_templates' => array(),
 		);
 		self::$options = new scbOptions( 'prompt_options', __FILE__, $default_options );
 

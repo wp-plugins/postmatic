@@ -120,14 +120,21 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		if ( preg_match( '/^\s*$/', $message_text, $matches ) )
 			return self::$subscribe_method;
 
-		if ( preg_match( '/^\s*(subscribe|unsubscribe)\s*/i', $message_text, $matches ) )
-			return $matches[1];
+		/* translators: this word should match "reply with the word 'subscribe'" translations */
+		$subscribe_command = __( 'subscribe', 'Postmatic' );
+		$subscribe_pattern = '/^[\s\*\_]*(' . $subscribe_command .
+			'|usbscribe|s..scribe|suscribe|susribe?|susrib)[\s\*\_]*/i';
 
-		if ( preg_match( '/^[\s\*\_]*(un..bscribe?|sunsubscribe|unsusbscribe|un..scribe|unsusribe?|unsubcribe)[\s\*\_]*/i', $message_text, $matches ) )
-			return self::$unsubscribe_method;
-
-		if ( preg_match( '/^[\s\*\_]*(usbscribe|s..scribe|suscribe|susribe?|susrib)[\s\*\_]*/i', $message_text, $matches ) )
+		if ( preg_match( $subscribe_pattern, $message_text, $matches ) )
 			return self::$subscribe_method;
+
+		/* translators: this word should match "reply with the word 'unsubscribe'" translations */
+		$unsubscribe_command = __( 'unsubscribe', 'Postmatic' );
+		$unsubscribe_pattern = '/^[\s\*\_]*(' . $unsubscribe_command .
+			'|un..bscribe?|sunsubscribe|unsusbscribe|un..scribe|unsusribe?|unsubcribe)[\s\*\_]*/i';
+
+		if ( preg_match( $unsubscribe_pattern, $message_text, $matches ) )
+			return self::$unsubscribe_method;
 
 		return '';
 	}

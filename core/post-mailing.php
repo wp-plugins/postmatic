@@ -3,7 +3,7 @@
 class Prompt_Post_Mailing {
 
 	/** @var array */
-	protected static $shortcode_whitelist = array( 'gallery', 'caption', 'wpv-post-body', 'types' );
+	protected static $shortcode_whitelist = array( 'gallery', 'caption', 'wpv-post-body', 'types', );
 
 	/**
 	 * Send email notifications for a post.

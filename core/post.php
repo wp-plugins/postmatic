@@ -124,12 +124,14 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 			 */
 			$recipient_ids = apply_filters( 'prompt/recipient_ids/post', $recipient_ids, $post );
 
-			update_post_meta( $post->ID, self::$recipient_ids_meta_key, $recipient_ids );
+			if ( 'publish' == $post->post_status )
+				update_post_meta( $post->ID, self::$recipient_ids_meta_key, $recipient_ids );
 
 		}
 
 		return $recipient_ids;
 	}
+
 
 	/**
 	 * Get the IDs of users who have been sent an email notification for this post.

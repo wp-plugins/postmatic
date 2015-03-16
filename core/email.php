@@ -134,7 +134,7 @@ class Prompt_Email {
 	 * @return Prompt_Email
 	 */
 	public function set_to_name( $to_name ) {
-		$this->to_name = $to_name;
+		$this->to_name = $this->to_utf8( $to_name );
 		return $this;
 	}
 
@@ -198,7 +198,7 @@ class Prompt_Email {
 	 * @return Prompt_Email
 	 */
 	public function set_from_name( $from_name ) {
-		$this->from_name = $from_name;
+		$this->from_name = $this->to_utf8( $from_name );
 		return $this;
 	}
 
@@ -262,7 +262,7 @@ class Prompt_Email {
 	 * @return Prompt_Email
 	 */
 	public function set_reply_name( $reply_name ) {
-		$this->reply_name = $reply_name;
+		$this->reply_name = $this->to_utf8( $reply_name );
 		return $this;
 	}
 
@@ -278,7 +278,7 @@ class Prompt_Email {
 	 * @return Prompt_Email
 	 */
 	public function set_subject( $subject ) {
-		$this->subject = wp_strip_all_tags( html_entity_decode( $subject, ENT_QUOTES, 'UTF-8' ) );
+		$this->subject = $this->to_utf8( $subject );
 		return $this;
 	}
 
@@ -380,4 +380,7 @@ class Prompt_Email {
 		return $this;
 	}
 
+	protected function to_utf8( $content ) {
+		return wp_strip_all_tags( html_entity_decode( $content, ENT_QUOTES, 'UTF-8' ) );
+	}
 }

@@ -315,7 +315,7 @@
 				.val( $rejected_addresses_input.data( 'addresses' ) )
 				.trigger( 'keyup' );
 
-			$( 'a[href="#prompt-settings-invite"' ).click();
+			$( 'a[href="#prompt-settings-invite"]' ).click();
 		}
 	}
 

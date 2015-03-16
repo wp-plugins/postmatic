@@ -1,130 +1,152 @@
 var prompt_subscribe_form_env;
 
 jQuery( function( $ ) {
-	var $widget = $( '.prompt-subscribe-widget-content' ),
-		$form,
-		$message,
-		$inputs,
-		$expand_list,
-		$subscriber_list,
-		$loading_indicator,
-		$nonce_input,
-		$prompts,
-		$show_unsubscribe_link,
-		$submit_input,
-		$cancel_link,
-		$confirm_unsubscribe_input = $( '<input name="confirm_unsubscribe" type="hidden" value="1" />' );
+	var $widgets = $( '.prompt-subscribe-widget-content' );
 
-	$.ajax( {
-		url: prompt_subscribe_form_env.ajaxurl,
-		method: 'GET',
-		data: {
-			action: 'prompt_subscribe_widget_content',
-			widget_id: $widget.data( 'widgetId' ),
-			collect_name: $widget.data( 'collectName' ),
-			object_type: prompt_subscribe_form_env.object_type,
-			object_id: prompt_subscribe_form_env.object_id
-		},
-		success: load_form
+	$widgets.each( function( i, widget ) {
+		init( $( widget ) );
 	} );
 
-	function load_form( content ) {
+	function init( $widget ) {
+		var $form,
+			$message,
+			$inputs,
+			$expand_list,
+			$subscriber_list,
+			$loading_indicator,
+			$nonce_input,
+			$prompts,
+			$show_unsubscribe_link,
+			$submit_input,
+			$cancel_link,
+			$confirm_unsubscribe_input = $( '<input name="confirm_unsubscribe" type="hidden" value="1" />' );
 
-		$widget.html( content );
-		$form = $widget.find( 'form.prompt-subscribe' );
-		$message = $form.find( '.message' );
-		$inputs = $form.find( '.inputs' );
-		$expand_list = $form.find( '.expand-list' );
-		$subscriber_list = $form.find( '.subscriber-list' );
-		$loading_indicator = $form.find( '.loading-indicator' );
-		$nonce_input = $form.find( 'input[name=subscribe_nonce]' );
-		$prompts = $form.find( '.prompt' ).hide();
-		$show_unsubscribe_link = $form.find( 'a.show-unsubscribe' );
-		$submit_input = $form.find( 'input[name=subscribe_submit]' );
-		$cancel_link = $form.find( 'a.cancel' );
-
-		$nonce_input.val( prompt_subscribe_form_env.nonce );
-
-		$cancel_link.hide();
-		$prompts.filter( '.' + $submit_input.val() ).show();
-
-		$show_unsubscribe_link.click( switch_to_unsubscribe );
-
-		$cancel_link.click( switch_to_subscribe );
-
-		enable_placeholders();
-
-		$expand_list.click( function() {
-			$subscriber_list.slideToggle();
+		$.ajax( {
+			url: prompt_subscribe_form_env.ajaxurl,
+			method: 'GET',
+			data: {
+			action: 'prompt_subscribe_widget_content',
+				widget_id: $widget.data( 'widgetId' ),
+				collect_name: $widget.data( 'collectName' ),
+				template: $widget.data( 'template' ),
+				object_type: prompt_subscribe_form_env.object_type,
+				object_id: prompt_subscribe_form_env.object_id
+			},
+			success: load_form
 		} );
 
-		$form.submit( submit_form );
+		function load_form( content ) {
 
-	}
+			$widget.html( content );
+			$form = $widget.find( 'form.prompt-subscribe' );
+			$message = $form.find( '.message' );
+			$inputs = $form.find( '.inputs' );
+			$expand_list = $form.find( '.expand-list' );
+			$subscriber_list = $form.find( '.subscriber-list' );
+			$loading_indicator = $form.find( '.loading-indicator' );
+			$nonce_input = $form.find( 'input[name=subscribe_nonce]' );
+			$prompts = $form.find( '.prompt' ).hide();
+			$show_unsubscribe_link = $form.find( 'a.show-unsubscribe' );
+			$submit_input = $form.find( 'input[name=subscribe_submit]' );
+			$cancel_link = $form.find( 'a.cancel' );
 
-	function switch_to_unsubscribe( e ) {
-		e.preventDefault();
+			$nonce_input.val( prompt_subscribe_form_env.nonce );
 
-		$form.append( $confirm_unsubscribe_input );
-		$form.find( 'input[name=subscribe_name]' ).hide();
-		$prompts.filter( '.subscribe' ).hide();
-		$prompts.filter( '.unsubscribe' ).show();
-		$submit_input.val( prompt_subscribe_form_env.unsubscribe_action );
-		$cancel_link.show();
-	}
+			$cancel_link.hide();
+			$prompts.filter( '.' + $submit_input.val() ).show();
 
-	function switch_to_subscribe( e ) {
-		e.preventDefault();
+			$show_unsubscribe_link.click( switch_to_unsubscribe );
 
-		$confirm_unsubscribe_input.detach();
-		$form.find( 'input[name=subscribe_name]' ).show();
-		$prompts.filter( '.subscribe' ).show();
-		$prompts.filter( '.unsubscribe' ).hide();
-		$submit_input.val( prompt_subscribe_form_env.subscribe_action );
-		$cancel_link.hide();
-	}
+			$cancel_link.click( switch_to_subscribe );
 
-	function enable_placeholders() {
+			enable_placeholders();
 
-		$('[placeholder]' ).focus( function() {
-			var $input = $( this );
-			if ( $input.val() == $input.attr( 'placeholder' ) ) {
-				$input.val( '' ).removeClass( 'placeholder' );
-			}
-		} ).blur( function() {
-			var $input = $( this );
-			if ( $input.val() == '' || $input.val() === $input.attr( 'placeholder' ) ) {
-				$input.addClass( 'placeholder' ).val( $input.attr( 'placeholder' ) );
-			}
-		} ).blur().parents('form').submit(function() {
-			$(this).find('[placeholder]').each(function() {
-				var input = $(this);
-				if (input.val() == input.attr('placeholder')) {
-					input.val('');
+			$expand_list.click(
+				function () {
+					$subscriber_list.slideToggle();
 				}
-			})
-		});
-	}
+			);
 
-	function submit_form( event ) {
-		var $submitted_form = $( event.currentTarget );
+			$form.submit( submit_form );
 
-		$loading_indicator.show();
-		$inputs.hide();
-		$message.hide();
+		}
 
-		$.post( prompt_subscribe_form_env.ajaxurl, $submitted_form.serialize(), function( message ) {
+		function switch_to_unsubscribe( e ) {
+			e.preventDefault();
 
-			$message.html( message ).show();
-			$loading_indicator.hide();
+			$form.append( $confirm_unsubscribe_input );
+			$form.find( 'input[name=subscribe_name]' ).hide();
+			$prompts.filter( '.subscribe' ).hide();
+			$prompts.filter( '.unsubscribe' ).show();
+			$submit_input.val( prompt_subscribe_form_env.unsubscribe_action );
+			$cancel_link.show();
+		}
 
-		} ).error( function() {
+		function switch_to_subscribe( e ) {
+			e.preventDefault();
 
-			$message.html( prompt_subscribe_form_env.ajax_error_message ).show();
-			$inputs.show();
-			$loading_indicator.hide();
+			$confirm_unsubscribe_input.detach();
+			$form.find( 'input[name=subscribe_name]' ).show();
+			$prompts.filter( '.subscribe' ).show();
+			$prompts.filter( '.unsubscribe' ).hide();
+			$submit_input.val( prompt_subscribe_form_env.subscribe_action );
+			$cancel_link.hide();
+		}
 
-		} );
-		return false;
+		function enable_placeholders() {
+
+			$( '[placeholder]' ).focus(
+				function () {
+					var $input = $( this );
+					if ( $input.val() == $input.attr( 'placeholder' ) ) {
+						$input.val( '' ).removeClass( 'placeholder' );
+					}
+				}
+			).blur(
+				function () {
+					var $input = $( this );
+					if ( $input.val() == '' || $input.val() === $input.attr( 'placeholder' ) ) {
+						$input.addClass( 'placeholder' ).val( $input.attr( 'placeholder' ) );
+					}
+				}
+			).blur().parents( 'form' ).submit(
+				function () {
+					$( this ).find( '[placeholder]' ).each(
+						function () {
+							var input = $( this );
+							if ( input.val() == input.attr( 'placeholder' ) ) {
+								input.val( '' );
+							}
+						}
+					)
+				}
+			);
+		}
+
+		function submit_form( event ) {
+			var $submitted_form = $( event.currentTarget );
+
+			$loading_indicator.show();
+			$inputs.hide();
+			$message.hide();
+
+			$.post(
+				prompt_subscribe_form_env.ajaxurl, $submitted_form.serialize(), function ( message ) {
+
+					$message.html( message ).show();
+					$loading_indicator.hide();
+
+				}
+			).error(
+				function () {
+
+					$message.html( prompt_subscribe_form_env.ajax_error_message ).show();
+					$inputs.show();
+					$loading_indicator.hide();
+
+				}
+			);
+			return false;
+		}
 	}
 } );

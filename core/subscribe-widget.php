@@ -16,21 +16,24 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 		$instance_defaults = array(
 			'title' => '',
 			'collect_name' => true,
+			'template_path' => null,
 		);
 
 		$instance = wp_parse_args( $instance, $instance_defaults );
+
 		$this->enqueue_widget_assets();
 
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		echo $args['before_widget'] . $args['before_title'] . $title . $args['after_title'];
 
-		echo html( 'div',
-			array(
-				'class' => 'prompt-subscribe-widget-content',
-				'data-collect-name' => $instance['collect_name'],
-				'data-widget-id' => $this->id,
-			)
+		$container_attributes = array(
+			'class' => 'prompt-subscribe-widget-content',
+			'data-collect-name' => $instance['collect_name'],
+			'data-widget-id' => $this->id,
+			'data-template' => self::template_id( $instance['template_path'] ),
 		);
+
+		echo html( 'div',$container_attributes );
 
 		echo $args['after_widget'];
 	}
@@ -84,7 +87,7 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 	 * }
 	 * @param Prompt_Interface_Subscribable $object Target object for subscriptions
 	 */
-	public static function render_dynamic_content( $widget_id, $instance, $object ) {
+	public static function render_dynamic_content( $widget_id, $instance, $object, $template_id = null ) {
 
 		$commenter = wp_get_current_commenter();
 		$defaults = array(
@@ -104,9 +107,12 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 		$template_data = compact( 'widget_id', 'instance', 'user', 'object', 'action', 'defaults' );
 
-		$template = Prompt_Template::locate( 'subscribe-form.php' );
-		Prompt_Template::render( $template, $template_data );
+		if ( is_null( $template_id ) )
+			$template = Prompt_Template::locate( 'subscribe-form.php' );
+		else
+			$template = self::template_path( $template_id );
 
+		Prompt_Template::render( $template, $template_data );
 	}
 
 	protected function enqueue_widget_assets() {
@@ -164,5 +170,30 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 		$object = apply_filters( 'prompt/subscribe_widget_object', $object, $this );
 
 		return Prompt_Subscribing::make_subscribable( $object );
+	}
+
+	protected static function template_id( $template_path ) {
+
+		if ( !$template_path )
+			return null;
+
+		$templates = Prompt_Core::$options->get( 'custom_widget_templates' );
+
+		$reverse = array_flip( $templates );
+
+		if ( isset( $reverse[$template_path] ) )
+			return $reverse[$template_path];
+
+		$count = array_push( $templates, $template_path );
+
+		Prompt_Core::$options->set( 'custom_widget_templates', $templates );
+
+		return $count - 1;
+	}
+
+	protected static function template_path( $template_id ) {
+		$templates = Prompt_Core::$options->get( 'custom_widget_templates' );
+
+		return isset( $templates[$template_id] ) ? $templates[$template_id] : null;
 	}
  }
