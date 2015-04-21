@@ -8,7 +8,7 @@ var ajaxurl;
 	init_delivery_metabox();
 
 	function init_delivery_metabox() {
-		var $box, $status, $spinner, $preview_button, $no_featured_image_checkbox;
+		var $box, $status, $spinner, $preview_button, $no_featured_image_checkbox, $excerpt_only_checkbox;
 
 		$( document ).ready( function() {
 
@@ -18,6 +18,7 @@ var ajaxurl;
 			$preview_button = $box.find( 'input[name="prompt_preview_email"]' )
 				.on( 'click', send_preview_email );
 			$no_featured_image_checkbox = $box.find( 'input[name=prompt_no_featured_image]' );
+			$excerpt_only_checkbox = $box.find( 'input[name=prompt_excerpt_only]' );
 
 			request_status();
 
@@ -62,6 +63,10 @@ var ajaxurl;
 				data[$no_featured_image_checkbox.attr('name')] = $no_featured_image_checkbox.val();
 			}
 
+			if ( $excerpt_only_checkbox.is( ':checked' ) ) {
+				data[$excerpt_only_checkbox.attr('name')] = $excerpt_only_checkbox.val();
+			}
+
 			$.ajax( {
 				url: ajaxurl,
 				data: data,
@@ -82,4 +87,6 @@ var ajaxurl;
 		}
 
 	}
+
+
 }( jQuery ) );

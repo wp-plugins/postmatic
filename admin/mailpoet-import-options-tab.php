@@ -7,7 +7,7 @@ class Prompt_Admin_Mailpoet_Import_Options_Tab extends Prompt_Admin_Import_Optio
 	protected $import_type = 'mailpoet_import';
 
 	public function name() {
-		return __( 'Import from Mailpoet', 'Postmatic' );
+		return __( 'Migrate from Mailpoet', 'Postmatic' );
 	}
 
 	public function slug() {
@@ -92,8 +92,10 @@ class Prompt_Admin_Mailpoet_Import_Options_Tab extends Prompt_Admin_Import_Optio
 					),
 					html( 'h5', __( 'Why so strict?', 'Postmatic' ) ),
 					html( 'p',
-						'Bulk importing unwilling users and marking them as opted-in is easy in Mailpoet. If we did not hold our import to a higher standard the magic button below would allow those unwilling users to be imported into Postmatic. And then they would spam your grandmother. Nobody wants that. Plus, if a subscriber does not open or interact with your emails maybe they aren\'t all that good of a match anyway, right? Think of it as spring cleaning.',
-						'Postmatic'
+						__(
+							'Bulk importing unwilling users and marking them as opted-in is easy in Mailpoet. If we did not hold our import to a higher standard the magic button below would allow those unwilling users to be imported into Postmatic. And then they would spam your grandmother. Nobody wants that. Plus, if a subscriber does not open or interact with your emails maybe they aren\'t all that good of a match anyway, right? Think of it as spring cleaning.',
+							'Postmatic'
+						)
 					),
 					html( 'h4', __( 'But we do have good news', 'Postmatic' ) ),
 					html( 'p',

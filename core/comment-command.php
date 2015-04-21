@@ -15,6 +15,14 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 	protected $message;
 	/** @var  int */
 	protected $parent_comment_id;
+	/** @var  Prompt_Email_Text_Cleaner */
+	protected $cleaner;
+	/** @var  string */
+	protected $message_text;
+
+	public function __construct( Prompt_Email_Text_Cleaner $cleaner = null ) {
+		$this->cleaner = $cleaner ? $cleaner : new Prompt_Email_Text_Cleaner();
+	}
 
 	public function set_keys( $keys ) {
 		$this->keys = $keys;
@@ -85,25 +93,10 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 	}
 
 	protected function get_message_text() {
-		$strip_patterns = array(
-			'/\n[^\r\n]*' . date( 'Y' ) . '[^\r\n]*:[\s\n\r]*.*/s',          // google-style quoted mail intro
-			'/<a href="https:\/\/overview.mail.yahoo.com[^>]*>.*?<\/a>/',   // yahoo mobile "sent from"
-			'/[\r\n]-+[\r\n].*/s',                                          // dash signature divider
-			'/[\r\n]?Links:[\r\n]\s*1\..*/s',                               // Fastmail links list
-			'/[\r\n]?>\s*$/s',                                              // Trailing bracket quotes
-			'/\r\n\r\n  \[image: photo\]\r\n.*/s',                             // Wisestamp
-		);
+		if ( !$this->message_text )
+			$this->message_text = $this->cleaner->strip( $this->message->message );
 
-		$text = $this->message->message;
-
-		foreach ( $strip_patterns as $pattern ) {
-			$text = preg_replace( $pattern, '', $text );
-		}
-
-		// Remove single linebreaks except after punctuation
-		$text = preg_replace( '/([^\n\.\?\!\"])\r?\n([^\r\n])/', '$1 $2', $text );
-
-		return $text;
+		return $this->message_text;
 	}
 
 	/**
@@ -115,9 +108,9 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 	 */
 	protected function get_text_command() {
 
-		$message_text = $this->get_message_text();
+		$stripped_text = $this->get_message_text();
 
-		if ( preg_match( '/^\s*$/', $message_text, $matches ) )
+		if ( preg_match( '/^\s*$/', $stripped_text, $matches ) )
 			return self::$subscribe_method;
 
 		/* translators: this word should match "reply with the word 'subscribe'" translations */
@@ -125,7 +118,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		$subscribe_pattern = '/^[\s\*\_]*(' . $subscribe_command .
 			'|usbscribe|s..scribe|suscribe|susribe?|susrib)[\s\*\_]*/i';
 
-		if ( preg_match( $subscribe_pattern, $message_text, $matches ) )
+		if ( preg_match( $subscribe_pattern, $stripped_text, $matches ) )
 			return self::$subscribe_method;
 
 		/* translators: this word should match "reply with the word 'unsubscribe'" translations */
@@ -133,7 +126,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		$unsubscribe_pattern = '/^[\s\*\_]*(' . $unsubscribe_command .
 			'|un..bscribe?|sunsubscribe|unsusbscribe|un..scribe|unsusribe?|unsubcribe)[\s\*\_]*/i';
 
-		if ( preg_match( $unsubscribe_pattern, $message_text, $matches ) )
+		if ( preg_match( $unsubscribe_pattern, $stripped_text, $matches ) )
 			return self::$unsubscribe_method;
 
 		return '';
@@ -144,14 +137,18 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		$prompt_post = new Prompt_Post( $this->post_id );
 
 		if ( $prompt_post->is_subscribed( $this->user_id ) )
-			return array( 'status' => 'OK' );
+			return;
+
+		if (
+			Prompt_Core::$options->get( 'auto_subscribe_authors' ) and
+			$this->user_id == $prompt_post->get_wp_post()->post_author
+		)
+			return;
 
 		$prompt_post->subscribe( $this->user_id );
 
 		if ( $notify )
 			Prompt_Subscription_Mailing::send_subscription_notification( $this->user_id, $prompt_post );
-
-		return array( 'status' => 'OK' );
 	}
 
 	protected function unsubscribe() {
@@ -206,15 +203,16 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 			'comment_parent' => $this->parent_comment_id,
 		);
 
-		if ( 1 == get_option( 'comment_moderation' ) )
-			$comment_data['comment_approved'] = 0;
-		else
-			$comment_data['comment_approved'] = 1;
+		$comment_data['comment_approved'] = get_option( 'comment_moderation' ) ? 0 : 1;
 
 		$comment_data = apply_filters( 'prompt_preprocess_comment', $comment_data );
 		$comment_data = wp_filter_comment( $comment_data );
 
-		wp_insert_comment( $comment_data );
+		$comment_id = wp_insert_comment( $comment_data );
+
+		if ( 0 == $comment_data['comment_approved'] )
+			wp_notify_moderator( $comment_id );
+
 	}
 
 	protected function comment_exists( $text ) {

@@ -20,7 +20,11 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 			$recipients = explode( "\n", $recipients );
 
 			$subject = sanitize_text_field( wp_unslash( $_POST['invite_subject'] ) );
-			$message = wpautop( wp_unslash( $_POST['invite_introduction'] ) );
+			Prompt_Core::$options->set( 'invite_subject', $subject );
+
+			$message = wp_unslash( $_POST['invite_introduction'] );
+			Prompt_Core::$options->set( 'invite_introduction', $message );
+			$message = wpautop( $message );
 
 			$this->schedule_invites( $recipients, $subject, $message );
 		}
@@ -32,6 +36,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 		$address_index = array();
 		$failures = array();
 		$prompt_site = new Prompt_Site();
+		$current_user = wp_get_current_user();
 
 		foreach( $recipients as $recipient ){
 
@@ -67,8 +72,10 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 
 		if ( !empty( $users_data ) ) {
 			$message_data = array(
-				'subject' => $subject,
+				'subject' => html_entity_decode( $subject, ENT_QUOTES ),
 				'invite_introduction' => $message,
+				'message_type' => Prompt_Enum_Message_Types::INVITATION,
+				'from_name' => $current_user->display_name . ' - ' . get_option( 'blogname' ),
 			);
 
 			wp_schedule_single_event(
@@ -105,8 +112,8 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 					array(
 						'type' => 'text',
 						'name' => 'invite_subject',
-						'value' => sprintf( __( 'You\'re invited to subscribe to %s', 'Postmatic' ), get_option( 'blogname' ) ),
-					)
+					),
+					$this->options->get()
 				)
 			),
 			$this->row_wrap(
@@ -123,7 +130,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 						'name' => 'invite_introduction',
 						'extra' => 'rows="7"',
 					),
-					wp_unslash( $_POST )
+					$this->options->get()
 				)
 			),
 			html( 'tr class="recipient-type"',
@@ -139,6 +146,10 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 								'count' => __( 'People who comment the most', 'Postmatic' ),
 								'all' => __( 'Anyone that has ever commented', 'Postmatic' ),
 								'users' => __( 'WordPress users who are not subscribed', 'Postmatic' ),
+								'post_subscribers' => __(
+									'WordPress users subscribed to a comment thread but not new posts',
+									'Postmatic'
+								),
 							),
 						),
 						$_POST
@@ -194,6 +205,24 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 				)
 			),
 			html(
+				'tr class="invite-users"',
+				html( 'th', '' ),
+				html( 'td',
+					$this->input(
+						array(
+							'type' => 'select',
+							'name' => 'user_role',
+							'desc' => __( 'Send this invitation to ', 'Postmatic' ),
+							'desc_pos' => 'before',
+							'choices' => $this->user_role_choices(),
+							'selected' => 5,
+						),
+						$_POST
+					),
+					html( 'label', __( 'users who are not subscribed.', 'Postmatic' ) )
+				)
+			),
+			html(
 				'tr class="recipient-list"',
 				html( 'th', __( 'Recipients', 'Postmatic' ) ),
 				html( 'td',
@@ -239,4 +268,8 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 			$this->form_table_wrap( implode( '', $rows ), array( 'value' => __( 'Send Invites', 'Postmatic' ) ) );
 	}
 
+	protected function user_role_choices() {
+		global $wp_roles;
+		return array_merge( array( 'all' => __( 'All', 'Postmatic' ) ), $wp_roles->role_names );
+	}
 }

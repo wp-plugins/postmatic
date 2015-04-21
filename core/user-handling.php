@@ -60,7 +60,7 @@ class Prompt_User_Handling {
 			return $user_id;
 
 		if ( Prompt_Core::$options->get( 'send_login_info' ) ) {
-			$template = Prompt_Template::locate( 'new-user-email.php' );
+			$template = new Prompt_Template( 'new-user-email.php' );
 			Prompt_User_Mailing::send_new_user_notification( $user_id, $password, $template );
 		}
 

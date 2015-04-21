@@ -36,7 +36,7 @@ $previous_index = count( $previous_comments );
 </div>
 
 
-
+ 
 
 <?php if ( count( $previous_comments ) > 1 ) : ?>
 

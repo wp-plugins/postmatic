@@ -47,7 +47,15 @@
 
 #prompt-tabs {
   overflow: hidden;
-  min-width: 400px; }
+  min-width: 400px;
+  font-family: "open-sans", "helvetica", sans-serif; }
+
+#prompt-tabs .ui-tabs-nav .ui-state-active a {
+  border-top: 1px solid #ddd !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  color: #28B0C8 !important; }
 
 #adminmenuback {
   z-index: auto; }
@@ -73,21 +81,14 @@ h2#prompt-settings-header span {
   display: none; }
 
 .opt-in {
-  margin: 90px -25px -97px -25px;
+  margin: 30px -25px -97px -25px;
   padding: 10px 15px 90px 22px;
-  border-left: 5px solid #ddd;
-  border-right: 5px solid #ddd;
-  background: white;
-  background: -moz-linear-gradient(90deg, white 41%, #dbe9e9 93%);
-  background: -webkit-linear-gradient(90deg, white 41%, #dbe9e9 93%);
-  background: -o-linear-gradient(90deg, white 41%, #dbe9e9 93%);
-  background: -ms-linear-gradient(90deg, white 41%, #dbe9e9 93%);
-  background: linear-gradient(180deg, white 41%, #dbe9e9 93%); }
+  width: 50%; }
 
 .opt-in h3 {
-  color: #4783b3;
+  color: #3EC0C6;
   font-weight: normal;
-  font-size: 200%; }
+  font-size: 150%; }
 
 .wrap.signup {
   background: #29bfc7 url(../media/background.png) no-repeat bottom;
@@ -115,7 +116,11 @@ h2#prompt-settings-header span {
     width: 100%; }
 
 .get-prompt-key {
-  padding: 25px 50px; }
+  padding: 25px 50px;
+  color: #fff; }
+
+.get-prompt-key p {
+  font-size: 110%; }
 
 input.regular-text {
   width: 100%; }
@@ -155,6 +160,10 @@ input.regular-text {
 #postmatic-support {
   background: url(../media/ticket.png) no-repeat top center; }
 
+#prompt-settings-general {
+  background: url(http://postmatic.staging.wpengine.com/wp-content/uploads/2015/03/growth.png) bottom right no-repeat;
+  background-size: 100% !important; }
+
 ul.prompt-news {
   margin: 3%; }
   ul.prompt-news li {
@@ -178,7 +187,6 @@ ul.prompt-news {
 #get_support_submit {
   clear: both !important;
   top: 30px;
-  left: 100px;
   position: relative;
   text-align: right;
   margin-top: 45px; }
@@ -189,3 +197,107 @@ tr.concierge-install {
 
 .site-icon img {
   margin-right: 10px; }
+
+pre.prompt-custom-text {
+  white-space: -moz-pre-wrap;
+  /* Mozilla, supported since 1999 */
+  white-space: -o-pre-wrap;
+  /* Opera */
+  white-space: pre-wrap;
+  /* CSS3 - Text module (Candidate Recommendation) http://www.w3.org/TR/css3-text/#white-space */
+  word-wrap: break-word;
+  /* IE 5.5+ */ }
+
+textarea.prompt-custom-text {
+  width: 100%;
+  height: 10em; }
+
+.prompt-custom-text-upgrade {
+  background: #28B0C8;
+  padding: 10px;
+  color: #fff;
+  text-align: left; }
+  .prompt-custom-text-upgrade a {
+    color: #fff; }
+
+#screenshots {
+  width: 70%;
+  float: right;
+  margin-left: 20px;
+  margin-bottom: 25px; }
+
+.tab-footer {
+  font-family: "open-sans", "helvetica", sans-serif;
+  margin-top: 35px; }
+  .tab-footer h1 {
+    color: #28B0C8;
+    font-weight: normal;
+    font-size: 220%;
+    line-height: normal; }
+  .tab-footer h2 {
+    color: #28B0C8;
+    margin-bottom: 5px; }
+  .tab-footer h4 {
+    font-weight: normal; }
+  .tab-footer p {
+    margin-top: 0; }
+
+.clear {
+  clear: both !important; }
+
+.col {
+  width: 30%;
+  float: left;
+  margin-right: 3%; }
+
+h2#trial {
+  margin-top: 36px; }
+
+h2#trial a {
+  text-decoration: none;
+  color: #E14D43; }
+
+#comments {
+  width: 35%;
+  float: right;
+  margin-left: 20px;
+  margin-bottom: 25px; }
+
+#prompt-tabs.ui-tabs .ui-widget-content {
+  border: 1px solid #ddd !important;
+  border-top: none !important; }
+
+#prompt-tabs .ui-tabs-nav .ui-state-active a {
+  border: 1px solid #ddd !important;
+  border-bottom: none !important; }
+
+.ui-tabs-nav {
+  border: none !important; }
+
+.welcome {
+  padding: 3% 5%;
+  width: 50%;
+  line-height: 190%;
+  border: 1px double #ddd;
+  margin-bottom: 25px;
+  background: #eee;
+  text-align: left; }
+
+.welcome p {
+  font-size: 100%;
+  font-style: italic; }
+
+div#manage-account a {
+  float: right;
+  background: none;
+  font-size: 100%;
+  margin-top: 15px;
+  margin-right: 3%;
+  background-color: #28B0C8;
+  color: #fff;
+  padding: 5px 7px;
+  font-weight: bold;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-decoration: none; }

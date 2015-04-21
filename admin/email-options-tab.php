@@ -25,10 +25,12 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 				return;
 			}
 
-			$template = Prompt_Template::locate( 'test-email.php' );
+			$html_template = new Prompt_Email_Template( 'test-email.php' );
+
 			$email = new Prompt_Email( array(
 				'to_address' => $to_address,
-				'message' => Prompt_Template::render( $template, array(), $echo = false ),
+				'html' => $html_template->render( array() ),
+				'message_type' => Prompt_Enum_Message_Types::ADMIN,
 			) );
 
 			if ( Prompt_Factory::make_mailer()->send_one( $email ) ) {
@@ -53,8 +55,11 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 			$site_icon_src = wp_get_attachment_image_src( $this->options->get( 'site_icon' ), 'full' );
 		}
 
-		$rows = array(
-			$this->row_wrap(
+		$rows = array();
+
+		if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) ) {
+
+			$rows[] =  $this->row_wrap(
 				__( 'Email header type', 'Postmatic' ),
 				$this->input(
 					array(
@@ -67,8 +72,9 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 					),
 					$this->options->get()
 				)
-			),
-			html(
+			);
+
+			$rows[] = html(
 				'tr class="email-header-image"',
 				html( 'th scope="row"',
 					__( 'Email header image', 'Postmatic' ),
@@ -103,19 +109,24 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 						)
 					)
 				)
-			),
+			);
+		}
+
+		$rows[] = html(
+			'tr class="email-header-text"',
+			html( 'th scope="row"', __( 'Email header text', 'Postmatic' ) ),
 			html(
-				'tr class="email-header-text"',
-				html( 'th scope="row"', __( 'Email header text', 'Postmatic' ) ),
-				html(
-					'td',
-					$this->input(
-						array( 'name' => 'email_header_text', 'type' => 'text' ),
-						$this->options->get()
-					)
+				'td',
+				$this->input(
+					array( 'name' => 'email_header_text', 'type' => 'text' ),
+					$this->options->get()
 				)
-			),
-			html(
+			)
+		);
+
+		if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) ) {
+
+			$rows[] = html(
 				'tr class="site-icon"',
 				html( 'th scope="row"',
 					__( 'Site icon', 'Postmatic' ),
@@ -150,8 +161,9 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 						)
 					)
 				)
-			),
-			$this->row_wrap(
+			);
+
+			$rows[] = $this->row_wrap(
 				__( 'Email footer type', 'Postmatic' ),
 				$this->input(
 					array(
@@ -164,8 +176,9 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 					),
 					$this->options->get()
 				)
-			),
-			html(
+			);
+
+			$rows[] = html(
 				'tr class="email-footer-widgets"',
 				html( 'th scope="row"', __( 'Footer Widgets', 'Postmatic' ) ),
 				html(
@@ -177,40 +190,45 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 						__( 'Appearance > Widgets', 'Postmatic' )
 					)
 				)
-			),
+			);
+
+		}
+
+		$rows[] = html(
+			'tr class="email-footer-text"',
+			html( 'th scope="row"', __( 'Email footer text', 'Postmatic' ) ),
 			html(
-				'tr class="email-footer-text"',
-				html( 'th scope="row"', __( 'Email footer text', 'Postmatic' ) ),
-				html(
-					'td',
-					$this->input(
-						array( 'name' => 'email_footer_text', 'type' => 'text' ),
-						$this->options->get()
-					)
-				)
-			),
-			html(
-				'tr',
-				html( 'th scope="row"',  __( 'Send a test HTML email to', 'Postmatic' ) ),
-				html(
-					'td',
-					$this->input(
-						array(
-							'type' => 'text',
-							'name' => 'test_email_address',
-							'value' => wp_get_current_user()->user_email,
-						),
-						$_POST
-					),
-					html(
-						'input class="button" type="submit" name="send_test_email_button"',
-						array( 'value' => __( 'Send', 'Postmatic' ) )
-					)
+				'td',
+				$this->input(
+					array( 'name' => 'email_footer_text', 'type' => 'text' ),
+					$this->options->get()
 				)
 			)
 		);
 
-		return $this->form_table_wrap( implode( '', $rows ), $this->options->get() );
+		$rows[] = html(
+			'tr',
+			html( 'th scope="row"',  __( 'Send a test email to', 'Postmatic' ) ),
+			html(
+				'td',
+				$this->input(
+					array(
+						'type' => 'text',
+						'name' => 'test_email_address',
+						'value' => wp_get_current_user()->user_email,
+					),
+					$_POST
+				),
+				html(
+					'input class="button" type="submit" name="send_test_email_button"',
+					array( 'value' => __( 'Send', 'Postmatic' ) )
+				)
+			)
+		);
+
+		$content = $this->table_wrap( implode( '', $rows ) );
+
+		return $this->form_wrap( $content ) . $this->footer();
 	}
 
 	function validate( $new_data, $old_data ) {
@@ -247,6 +265,34 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 		}
 
 		return $valid_data;
+	}
+
+	protected function footer() {
+
+		if ( Prompt_Enum_Email_Transports::LOCAL != $this->options->get( 'email_transport' ) )
+			return '';
+
+		$base_url = defined( 'PROMPT_RSS_BASE_URL' ) ? PROMPT_RSS_BASE_URL : Prompt_Enum_Urls::HOME;
+
+		$feed_url = $base_url . '/targets/email-options/feed/?post_type=update';
+
+		$feed = new Prompt_Admin_Feed( $feed_url );
+
+		$content = $feed->item_content();
+
+		if ( ! $content ) {
+
+			$footer_template = new Prompt_Template( 'email-options-tab-footer.php' );
+
+			$data = array(
+				'upgrade_url' => Prompt_Enum_Urls::PREMIUM,
+				'image_url' => path_join( Prompt_Core::$url_path, 'media/screenshots.jpg' ),
+			);
+
+			$content = $footer_template->render( $data );
+		}
+
+		return $content;
 	}
 
 }

@@ -100,6 +100,8 @@ class Prompt_Ajax_Handling {
 
 		$users = get_users( array( 'exclude' => Prompt_Site::all_subscriber_ids() ) );
 
+		$post_subscriber_ids = Prompt_Post::all_subscriber_ids();
+
 		$results = array();
 		foreach( $users as $user ) {
 
@@ -109,6 +111,8 @@ class Prompt_Ajax_Handling {
 			$results[] = array(
 				'name' => $user->display_name,
 				'address' => $user->user_email,
+				'roles' => $user->roles,
+				'is_post_subscriber' => in_array( $user->ID, $post_subscriber_ids ),
 			);
 		}
 
@@ -152,36 +156,7 @@ class Prompt_Ajax_Handling {
 		if ( !$post_id )
 			wp_die( 0 );
 
-		$prompt_post = new Prompt_Post( $post_id );
-
-		$recipient_count = count( $prompt_post->recipient_ids() );
-		$sent_count = count( $prompt_post->sent_recipient_ids() );
-
-		if ( $recipient_count == 0 ) {
-
-			$description = __( 'No emails will be sent for this post.', 'Postmatic' );
-
-		} else if ( $sent_count == 0 and 'publish' != $prompt_post->get_wp_post()->post_status ) {
-
-			$description = sprintf(
-				__( 'This post will be sent to %d subscribers.', 'Postmatic' ),
-				$recipient_count
-			);
-
-		} else if ( $sent_count == 0 ) {
-
-			$description = __( 'No emails have been sent for this post.', 'Postmatic' );
-
-		} else {
-
-			$description = sprintf(
-				__( 'This post has been sent to %d subscribers.', 'Postmatic' ),
-				$sent_count
-			);
-
-		}
-
-		wp_send_json( compact( 'description', 'sent_count', 'recipient_count' ) );
+		wp_send_json( Prompt_Admin_Delivery_Metabox::status( $post_id ) );
 	}
 
 	/**
@@ -203,6 +178,13 @@ class Prompt_Ajax_Handling {
 			'prompt_post' => new Prompt_Post( $post ),
 			'subscribed_object' => new Prompt_Site(),
 			'featured_image_src' => self::featured_image_src( $post_id ),
+			'excerpt_only' => Prompt_Admin_Delivery_Metabox::excerpt_only( $post->ID ),
+			'the_text_content' => Prompt_Post_Mailing::get_the_text_content(),
+			'subject' => sprintf(
+				__( 'PREVIEW of %s', 'Postmatic' ),
+				html_entity_decode( $post->post_title, ENT_QUOTES )
+			),
+			'alternate_versions_menu' => Prompt_Post_Mailing::alternate_versions_menu( $post ),
 		) );
 
 		Prompt_Post_Mailing::reset_postdata();
@@ -233,6 +215,50 @@ class Prompt_Ajax_Handling {
 		wp_die();
 	}
 
+	/**
+	 * Handle mailchimp lists loading
+	 */
+	public static function action_wp_ajax_prompt_mailchimp_get_lists() {
+
+		if( empty( $_POST['api_key'] ) ){
+			wp_send_json_error( array( 'error' => __( 'An API Key is required', 'Postmatic' ) ) );
+		}
+		// pull in the lib
+		require_once dirname( dirname( __FILE__ ) ) . '/vendor/mailchimp/mailchimp/src/Mailchimp.php';
+		
+		$api_key = sanitize_text_field( $_POST['api_key'] );
+
+		$mailchimp = new Mailchimp( $api_key );
+		try {
+			$lists = $mailchimp->call( 'lists/list', array( 'filters' => array( 'created_before' => date('Y-m-d H:i:s', strtotime( '-60 days' ) ) ) ) );	
+		} catch (Exception $e) {
+			wp_send_json_error( array( 'error' => $e->getMessage() ) );
+		}
+		
+		$list_options = '';
+		if( !empty( $lists['data'] ) ){
+			foreach ( $lists['data'] as $list ) {
+				$list_options .= html( 'option',
+					array( 'value' => $list['id'] ),
+					$list['name'],
+					' (',
+					$list['stats']['member_count'],
+					')'
+				);
+			}
+		}
+		
+		$content = html( 'label for="import_list"',
+			__( 'Choose a list to import to Postmatic: ', 'Postmatic' ),
+				html( 'select',
+				array( 'name' => 'import_list', 'type' => 'select' ),
+				$list_options
+			)
+		);
+
+		wp_send_json_success( $content );
+
+	}
 	/**
 	 * @param $post_id
 	 * @return array|bool

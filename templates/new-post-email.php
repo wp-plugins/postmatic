@@ -6,12 +6,16 @@
  *
  * @see prompt/post_email/template_data
  *
- * @var array $featured_image_src
- * @var Prompt_Interface_Subscribable $subscribed_object
+ * @var array                           $featured_image_src
+ * @var bool                            $excerpt_only
+ * @var string                          $alternate_versions_menu
+ * @var Prompt_Interface_Subscribable   $subscribed_object
  */
 ?>
 
-	<h1 class="padded" id="the_title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+<h1 class="padded" id="the_title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+<?php echo $alternate_versions_menu; ?>
+
 <?php if ( $featured_image_src ) : ?>
 	<img src="<?php echo $featured_image_src[0]; ?>"
 	     width="<?php echo intval( $featured_image_src[1] / 2 ); ?>"
@@ -21,13 +25,13 @@
 
 <div class="padded">
 <div id="the_content">
-	<?php the_content(); ?>
+	<?php $excerpt_only ? the_excerpt() : the_content(); ?>
 	<p id="button"><a href="<?php the_permalink(); ?>"
 	                  class="btn-secondary"><?php _e( 'View this post online', 'Postmatic' ); ?></a></p>
 </div>
 
 
-<?php if ( comments_open() ) : ?>
+<?php if ( comments_open() and ! $excerpt_only ) : ?>
 
 	<div class="reply-prompt">
 		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
@@ -70,18 +74,6 @@
 			);
 			?>
 		</p>
-			<h3 class="noforward"><?php _e( 'Please do not forward this email', 'Postmatic' ); ?></h3>
-			<p>
-				<?php
-				printf(
-					__(
-						'This email was meant specifically for you and any replies sent to it will post as a comment in your name. If you would like to share this post please use this url: %s.',
-						'Postmatic'
-					),
-					get_permalink()
-				);
-				?>
-			</p>
 	</div>
 
 <?php elseif ( !comments_open() ) : ?>

@@ -1,31 +1,18 @@
 <?php
 /**
  * Variables in scope:
- * @var string               $widget_id      The widget generating this form
- * @var array                $instance       The widget instance data
+ * @var string               $widget_id         The widget generating this form
+ * @var array                $instance          The widget instance data
  * @var Prompt_Interface_Subscribable  $object         Object of subscription
- * @var object               $user           Logged in user or null
- * @var string               $action         'subscribe' or 'unsubscribe'
- * @var array                $defaults       Default form values
+ * @var object               $user              Logged in user or null
+ * @var string               $action            'subscribe' or 'unsubscribe'
+ * @var array                $defaults          Default form values
+ * @var string               $loading_image_url
+ * @var string               $subscribe_prompt
+ * @var string               $unsubscribe_prompt
  */
 
-$loading_image_url = path_join( Prompt_Core::$url_path, 'media/ajax-loader.gif' );
 
-if ( is_user_logged_in() ) {
-
-	$subscribe_prompt = sprintf( __( 'Subscribe to %s:', 'Postmatic' ), $object->subscription_object_label() );
-	$unsubscribe_prompt = '';
-
-} else {
-
-	$subscribe_prompt = sprintf( __( 'Enter your email to subscribe to %s:', 'Postmatic' ), $object->subscription_object_label() );
-	$unsubscribe_prompt = html( 'h5', __( 'Want to unsubscribe?', 'Postmatic' ) ) . __( 'Confirm your email:', 'Postmatic' );
-
-}
-
-$subscriber_ids = $object->subscriber_ids( $object );
-
-$subscriber_email_list = array();
 
 ?>
 <form class="prompt-subscribe" method="post">
@@ -92,30 +79,4 @@ $subscriber_email_list = array();
 		<?php endif; ?>
 	</div>
 
-	<?php if ( current_user_can( 'publish_posts' ) ) : ?>
-		<div class="meta"<?php echo 'title="' . empty( $subscriber_email_list ) ? '' : implode( ', ', $subscriber_email_list ) . '"'; ?>>
-			<p class="expand-list" style="text-decoration:underline;cursor:pointer;">
-				<?php
-				printf(
-					_n(
-						'You have %1$s current subscriber.',
-						'You have %1$s current subscribers.',
-						count( $subscriber_ids ),
-						'Postmatic'
-					),
-					'<span class="subscriber-count">' . count( $subscriber_ids ) . '</span>'
-				); ?>
-			</p>
-			<?php if ( !empty( $subscriber_ids ) and current_user_can( 'manage_options' ) ) : ?>
-				<div class="subscriber-list" style="display: none;">
-				<h5><?php _e( 'Your Subscribers:', 'Postmatic' ); ?></h5>
-				<ol>
-					<?php foreach ( $subscriber_ids as $id ) : $subscriber = get_userdata( $id ); ?>
-						<li><?php echo $subscriber->user_email; ?></li>
-					<?php endforeach; ?>
-				</ol>
-				</div>
-			<?php endif; ?>
-		</div>
-	<?php endif; ?>
 </form>

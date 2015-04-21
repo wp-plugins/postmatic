@@ -128,7 +128,9 @@ class Prompt_Admin_Options_Tab extends scbAdminPage {
 	protected function validate_checkbox_fields( $new_data, $old_data, $field_names ) {
 		$valid_data = $old_data;
 
-		$field_names = array_diff( $field_names, array_keys( $this->overridden_options ) );
+		if ( $this->overridden_options )
+			$field_names = array_diff( $field_names, array_keys( $this->overridden_options ) );
+
 		foreach ( $field_names as $field ) {
 			if ( isset( $new_data[$field] ) )
 				$valid_data[$field] = true;

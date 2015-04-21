@@ -31,15 +31,12 @@
 
 		function show_email_header_type() {
 			var $radio_button = $email_header_types.filter(':checked' ),
-				$image_row = $( 'tr.email-header-image' ),
-				$text_row = $( 'tr.email-header-text' );
+				$image_row = $( 'tr.email-header-image' );
 
 			if ( 'image' === $radio_button.val() ) {
 				$image_row.show();
-				$text_row.hide();
 			} else {
 				$image_row.hide();
-				$text_row.show();
 			}
 		}
 
@@ -109,6 +106,9 @@
 		var $minimum_count_select = $form.find( 'select[name="minimum_count"]' )
 			.on( 'change', change_minimum_count );
 
+		var $user_role_select = $form.find( 'select[name="user_role"]' )
+			.on( 'change', change_user_role );
+
 		var $invite_recipient_types = $form.find( 'input[name="recipient_type"]' )
 			.on( 'change', show_invite_recipient_type );
 		show_invite_recipient_type();
@@ -124,7 +124,8 @@
 			var $radio_button = $invite_recipient_types.filter( ':checked' ),
 				$manual_row = $( 'tr.invite-manual' ).hide(),
 				$recent_row = $( 'tr.invite-recent' ).hide(),
-				$count_row = $( 'tr.invite-count' ).hide();
+				$count_row = $( 'tr.invite-count' ).hide(),
+				$users_row = $( 'tr.invite-users' ).hide();
 
 			switch ( $radio_button.val() ) {
 
@@ -143,7 +144,12 @@
 					break;
 
 				case 'users':
+					$users_row.show();
 					load_users( select_users );
+					break;
+
+				case 'post_subscribers':
+					load_users( select_post_subscribers );
 					break;
 
 				default:
@@ -175,12 +181,20 @@
 			$recipient_count.text( recipients.length );
 		}
 
-		function select_users( users ) {
+		function select_users( users, filter ) {
 			var recipients = [];
 
 			cached_users = users;
 
+			if ( typeof filter != 'function' ) {
+				filter = false;
+			}
+
 			$.each( users, function( i, user ) {
+
+				if ( filter && !filter( user ) )
+					return;
+
 				if ( user.name ) {
 					recipients.push( user.name + ' <' + user.address + '>' );
 				} else {
@@ -257,6 +271,31 @@
 			set_recipients( recipients );
 		}
 
+		function change_user_role( e ) {
+			select_role( cached_users );
+		}
+
+		function select_role( users ) {
+			select_users( users, has_role );
+		}
+
+		function has_role( user ) {
+			var role = $user_role_select.val();
+
+			if ( role == 'all' )
+				return true;
+
+			return user.roles.indexOf( role ) >= 0;
+		}
+
+		function select_post_subscribers( users ) {
+			select_users( users, is_post_subscriber );
+		}
+
+		function is_post_subscriber( user ) {
+			return user.is_post_subscriber;
+		}
+
 		function handle_manual_key( e ) {
 			clearTimeout( manual_addresses_timer );
 			manual_addresses_timer = setTimeout( set_manual_recipients(), 1000 );
@@ -319,5 +358,54 @@
 		}
 	}
 
+	// load mailchimp lists
+	$(document).on('click', '#mail_chimp_load_lists', function( e ){
+
+		e.preventDefault();
+
+		$('#mailchimp_api_key').trigger('loadlists');
+
+	})
+
+	$(document).on('loadlists', '#mailchimp_api_key', function( e ){
+
+		e.preventDefault();
+
+		var $submit 		= $('#import_mailchimp_submit'),
+			$container		= $('#mailchimp_lists'),
+			$spinner		= $('#mail_chimp_spinner');
+
+		data = {
+			action	: 'prompt_mailchimp_get_lists',
+			api_key	: this.value
+		};
+		
+		// hide button
+		$submit.hide();
+		// clear container
+		$container.empty();
+		// show spinner
+		$spinner.css('display', 'inline-block');
+
+		$.ajax( {
+			url: ajaxurl,
+			method: 'POST',
+			data: data,
+			dataType: 'json',
+			complete: function(){
+				$spinner.hide();
+			},
+			success: function( data ){
+				if( false === data.success ){
+					// nope
+					$container.html( '<div class="error"><p>' + data.data.error + '.</p></div>' );
+				} else {
+					$container.html( data.data );
+					$submit.show();
+				}
+			}
+		} );
+
+	});
 
 }( jQuery ));

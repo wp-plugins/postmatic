@@ -21,7 +21,7 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 
 		$results = new stdClass();
 
-		if ( Prompt_Enum_Content_Types::HTML == $email->get_content_type() or $email->get_metadata() )
+		if ( $email->get_metadata() )
 			$results = $this->prepare_one( $email );
 
 		if ( is_wp_error( $results ) )
@@ -40,7 +40,7 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 
 		$results = new stdClass();
 
-		if ( Prompt_Enum_Content_Types::HTML == $emails[0]->get_content_type() or $emails[0]->get_metadata() )
+		if ( $emails[0]->get_metadata() )
 			$results = $this->prepare_many( $emails );
 
 		if ( is_wp_error( $results ) )
@@ -68,13 +68,13 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 			$this->local_mailer->addReplyTo( $email->get_reply_address(), $email->get_reply_name() );
 
 		$this->local_mailer->Subject = $email->get_subject();
-		$this->local_mailer->Body = $email->get_rendered_message();
+		$this->local_mailer->Body = $email->get_text();
 
 		$this->local_mailer->isMail();
 
-		$this->local_mailer->ContentType = $email->get_content_type();
+		$this->local_mailer->ContentType = Prompt_Enum_Content_Types::TEXT;
 
-		$this->local_mailer->CharSet = get_bloginfo( 'charset' );
+		$this->local_mailer->CharSet = 'UTF-8';
 
 		foreach ( $email->get_file_attachments() as $file_attachment ) {
 			$this->local_mailer->addAttachment( $file_attachment );
@@ -107,6 +107,8 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 
 		$actions = $this->implied_actions( $emails );
 
+		$actions = array_diff( $actions, array( 'inline-styles' ) );
+
 		$results = $this->prompt_outbound( $emails, $actions );
 
 		if ( is_wp_error( $results ) ) {
@@ -117,10 +119,6 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 		$result_messages = $results->outboundMessages;
 
 		for( $i = 0; $i < count( $result_messages ); $i += 1 ) {
-
-			if ( in_array( 'inline-styles', $actions ) )
-				$emails[$i]->set_rendered_message( $result_messages[$i]->message );
-
 			$emails[$i]->set_reply_address( Prompt_Email::address( $result_messages[$i]->reply_to ) );
 			$emails[$i]->set_reply_name( Prompt_Email::name( $result_messages[$i]->reply_to ) );
 		}
@@ -135,4 +133,5 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 		}
 		return new PHPMailer( true );
 	}
+
 }

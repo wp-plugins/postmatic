@@ -13,8 +13,9 @@
 * @var string           $footer_type
 * @var string           $footer_text
 * @var string           $site_icon_url
+* @var string           $unsubscribe_url
  */
-?>
+?> 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta name="viewport" content="width=device-width" />
@@ -72,7 +73,7 @@ img.featured {
     }
     .padded {padding: 0 20px 20px 20px;}
     .padded a {color:black;}
-    .gray {background: #eee; padding: 25px; border-top: 3px solid gray;}
+    .gray {background: #fbfbfb; padding: 25px; border-top: 1px solid #ddd;}
     .padded h3 {clear: both;}
     .padded h3.reply {clear: none;}
     #the_title {padding-bottom: 0;}
@@ -147,7 +148,7 @@ img.featured {
 
     .alignright {float: right !important; margin: 0 0 20px 20px !important;}
     .alignleft {float: left; margin: 0 20px 20px 0;}
-    .aligncenter {margin: 20px auto; display: block !important; float: none; width: auto !important;}
+    .aligncenter, .alignnone {margin: 20px auto; display: block !important; float: none; width: auto !important;}
 
  
     .gallery-item, .ngg-gallery-thumbnail-box {float: left !important; margin: 5px;}
@@ -482,6 +483,8 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .comment-date {color: gray; font-size: 90%;}
 .comment-header {padding-bottom: 0; font-size: 100%;margin-bottom: 15px !important; }
 .comment-body {color: #000;}
+.rejoin .comment-header {opacity: 0.5;}
+.rejoin .comment.post-flood .comment-header {opacity: 1.0;}
 .reply {padding-bottom: 15px; margin-left: 40px; clear: none;}
 .newpost {border-bottom: none;  margin-top: 25px; padding-bottom: 15px;}
 .reply-prompt {clear: both; margin-top: 20px; margin-bottom: 20px;}
@@ -513,7 +516,6 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .context .excerpt {font-style: italic;}
 .context h4 {margin-bottom: 10px;}
 .context img {float: left; margin-right: 15px; padding: 1px; border: 1px solid #ddd; width: 50%; margin-bottom: 25px;}
-
 
     </style>
     <!-- body -->
@@ -578,6 +580,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
               <?php echo $footer_text; ?>
           <?php endif; ?>
         </tr></table>
+        <?php if ( empty( $suppress_delivery ) ) : ?>
         <table>
           <tr>
             <td class="credit">
@@ -585,34 +588,34 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
                   <?php
                   printf(
                       __( 'Sent from %s.', 'Postmatic' ),
-                      '<unsubscribe><a href="' . get_bloginfo( 'url' ) . '">' . get_bloginfo( 'name' ) . '</a></unsubscribe>'
+                      '<a href="' . get_bloginfo( 'url' ) . '">' . get_bloginfo( 'name' ) . '</a>'
                   );
                   ?>
-              <?php if ( '' == Prompt_Core::$options->get( 'plan' ) ) : ?>
                   <?php
                   printf(
-                      __( 'Delivered by %s.', 'Postmatic' ),
-                      '<a href="http://gopostmatic.com/?utm_source=footer&utm_medium=email&utm_campaign=pluginfooter">Postmatic</a>'
+                      __( 'Delivered by <a href="%s">Postmatic</a>.', 'Postmatic' ),
+                      path_join( Prompt_Enum_Urls::HOME, '?utm_source=footer&utm_medium=email&utm_campaign=pluginfooter' )
                   );
                   ?>
+              </p>
+              <?php if ( !empty( $unsubscribe_url ) ) : ?>
+                  <p><unsubscribe>
+                      <?php
+                      printf(
+                          __(
+                              'To stop receiving all posts and comments from %s you can <a href="%s">unsubscribe with a single click</a>.',
+                              'Postmatic'
+                          ),
+                          get_bloginfo( 'name' ),
+                          $unsubscribe_url
+                      );
+                      ?>
+                  </unsubscribe></p>
               <?php endif; ?>
-              </p>
-              <h3><?php _e( 'About Postmatic (Beta)', 'Postmatic' ); ?></h3>
-              <p style="margin-bottom: 15px;">
-                  <?php
-                  printf(
-                      __(
-                          'Postmatic sends your posts to your readers where they’re comfortable: their inbox. They can send comments back by hitting the reply button. Just like you can with this very email. We’re currently in public beta. <a href="%s">Sign Up</a> Thanks for being a willing test pilot! <a href="%s">Share your thoughts in this short survey.</a>',
-                          'Postmatic'
-                      ),
-                      'http://gopostmatic.com/?utm_source=footer&utm_medium=email&utm_campaign=pluginfooter',
-                      'https://vernal.typeform.com/to/lehwGc'
-                  );
-                  ?>
-              </p>
             </td>
           </tr>
         </table>
+        <?php endif; ?>
       </div>
       <!-- /content -->
       

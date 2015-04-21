@@ -11,6 +11,10 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 	protected static $sent_meta_key = 'prompt_sent_ids';
 	/** @var string */
 	protected static $recipient_ids_meta_key = 'prompt_recipient_ids';
+	/** @var string */
+	protected static $flood_control_meta_key = '_flood_control_comment_id';
+	/** @var string */
+	protected static $text_version_meta_key = '_prompt_text_version';
 
 	/** @var  int user ID */
 	protected $id;
@@ -67,6 +71,26 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 		return $excerpt;
 	}
 
+	/**
+	 * @return string The customized post text, empty if none was set.
+	 */
+	public function get_custom_text() {
+		return get_post_meta( $this->id, self::$text_version_meta_key, true );
+	}
+
+	/**
+	 * @param string $text The customized post text.
+	 * @return Prompt_Post $this
+	 */
+	public function set_custom_text( $text ) {
+		update_post_meta( $this->id, self::$text_version_meta_key, $text );
+		return $this;
+	}
+
+	/**
+	 * Use the post permalink as the subscription URL.
+	 * @return string
+	 */
 	public function subscription_url() {
 		return get_permalink( $this->id );
 	}
@@ -166,6 +190,23 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 	}
 
 	/**
+	 * Get the comment ID that triggered flood control on this post.
+	 * @return int Comment ID or 0 for none.
+	 */
+	public function get_flood_control_comment_id() {
+		return intval( get_post_meta( $this->id, self::$flood_control_meta_key, true ) );
+	}
+
+	/**
+	 * @param int $comment_id
+	 * @return $this
+	 */
+	public function set_flood_control_comment_id( $comment_id ) {
+		update_post_meta( $this->id, self::$flood_control_meta_key, $comment_id );
+		return $this;
+	}
+
+	/**
 	 * Get all the posts a user is subscribed to.
 	 *
 	 * @param $user_id
@@ -189,5 +230,16 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 		$prompt_post = new Prompt_Post( 0 );
 
 		return $prompt_post->_all_subscriber_ids();
+	}
+
+	/**
+	 * Get a meta query clause to select posts that have been sent out.
+	 * @return array
+	 */
+	public static function sent_posts_meta_clause() {
+		return array(
+			'key' => self::$sent_meta_key,
+			'compare' => 'EXISTS',
+		);
 	}
 }

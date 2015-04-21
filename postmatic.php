@@ -2,7 +2,7 @@
 /*
   Plugin Name: Postmatic - WordPress Subscriptions & Commenting by Email
   Description:
-  Version: 1.0.0-beta19
+  Version: 1.0.0-rc1
   License: GPL2+
   Author: Postmatic
   Author URI: http://gopostmatic.com/
@@ -12,7 +12,7 @@
  */
 
 /*
-  Copyright (c) 2014 Transitive, Inc
+  Copyright (c) 2015 Transitive, Inc
 
   This program is free software; you can redistribute it
   and/or modify it under the terms of the GNU General Public

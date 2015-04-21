@@ -8,7 +8,9 @@ class Prompt_Email {
 	/** @var  string */
 	protected $subject;
 	/** @var  string */
-	protected $message;
+	protected $html;
+	/** @var  string */
+	protected $text;
 	/** @var  string */
 	protected $from_name;
 	/** @var  string */
@@ -19,12 +21,10 @@ class Prompt_Email {
 	protected $reply_address;
 	/** @var  array */
 	protected $file_attachments;
-	/** @var  string */
-	protected $content_type;
-	/** @var  string */
-	protected $template;
 	/** @var  object */
 	protected $metadata;
+	/** @var  string */
+	protected $message_type;
 
 	// TODO: string attachments
 	protected $string_attachments = array();
@@ -107,15 +107,13 @@ class Prompt_Email {
 			'to_address' => '',
 			'to_name' => '',
 			'subject' => __( 'This is a test email. By Postmatic.', 'Postmatic' ),
-			'message' => '',
 			'from_name' => get_option( 'blogname' ),
 			'from_address' =>  self::default_from_email(),
 			'reply_name' => '',
 			'reply_address' => '',
 			'file_attachments' => array(),
 			'metadata' => null,
-			'content_type' => Prompt_Enum_Content_Types::HTML,
-			'template' => 'html-email-wrapper.php',
+			'message_type' => '',
 		);
 
 		$values = wp_parse_args( $values, $defaults );
@@ -123,9 +121,6 @@ class Prompt_Email {
 		foreach( $values as $name => $value ) {
 			call_user_func( array( $this, 'set_' . $name ), $value );
 		}
-
-		if ( Prompt_Enum_Content_Types::HTML != $this->content_type and $defaults['template'] == $this->template )
-			$this->template = null;
 
 	}
 
@@ -143,22 +138,6 @@ class Prompt_Email {
 	 */
 	public function get_to_name() {
 		return $this->to_name;
-	}
-
-	/**
-	 * @param string $content_type
-	 * @return Prompt_Email
-	 */
-	public function set_content_type( $content_type ) {
-		$this->content_type = $content_type;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_content_type() {
-		return $this->content_type;
 	}
 
 	/**
@@ -210,19 +189,47 @@ class Prompt_Email {
 	}
 
 	/**
-	 * @param string $message
+	 * @param string $html
 	 * @return Prompt_Email
 	 */
-	public function set_message( $message ) {
-		$this->message = $message;
+	public function set_html( $html ) {
+		$this->html = $html;
 		return $this;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_message() {
-		return $this->message;
+	public function get_html() {
+
+		if ( ! isset( $this->html ) and isset( $this->text ) )
+			$this->html = $this->text;
+
+		return $this->html;
+	}
+
+	/**
+	 * @param string $text
+	 * @return Prompt_Email
+	 */
+	public function set_text( $text ) {
+		$this->text = $text;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_text() {
+
+		if ( ! isset( $this->text ) and isset( $this->html ) ) {
+			$html = preg_replace( '@<(head|script|style)[^>]*?>.*?</\\1>@si', '', $this->html );
+			//$html = preg_replace( '@<\!--.*?-->@si', '', $html );
+			$text = Prompt_Html_To_Markdown::convert( $html );
+			$this->text = strip_tags( $text );
+		}
+
+		return $this->text;
 	}
 
 	/**
@@ -290,22 +297,6 @@ class Prompt_Email {
 	}
 
 	/**
-	 * @param string $template
-	 * @return Prompt_Email
-	 */
-	public function set_template( $template ) {
-		$this->template = $template;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_template() {
-		return $this->template;
-	}
-
-	/**
 	 * @param string $to_address
 	 * @return Prompt_Email
 	 */
@@ -322,62 +313,31 @@ class Prompt_Email {
 	}
 
 	/**
+	 * @param string $message_type
+	 * @return Prompt_Email
+	 */
+	public function set_message_type( $message_type ) {
+		$this->message_type = $message_type;
+		return $this;
+	}
+
+	/**
 	 * @return string
 	 */
-	public function get_rendered_message() {
+	public function get_message_type() {
+		return $this->message_type;
+	}
 
-		$message = $this->message;
-
-		if ( !empty( $this->template ) ) {
-			// Wrap the message in the given template
-			$brand_type = Prompt_Core::$options->get( 'email_header_type' );
-			$brand_text = Prompt_Core::$options->get( 'email_header_text' );
-
-			if ( Prompt_Enum_Email_Header_Types::IMAGE === $brand_type ) {
-				$brand_image_src = wp_get_attachment_image_src( Prompt_Core::$options->get( 'email_header_image' ), 'full' );
-			} else {
-				$brand_image_src = array( '', 0, 0 );
-			}
-
-			$site_icon_src = wp_get_attachment_image_src( Prompt_Core::$options->get( 'site_icon' ), 'full' );
-			$site_icon_url = $site_icon_src[0];
-
-			$template = Prompt_Template::locate( $this->template );
-			$template_data = array(
-				'subject' => $this->subject,
-				'message' => $this->message,
-				'brand_type' => $brand_type,
-				'brand_text' => $brand_text,
-				'brand_image_url' => $brand_image_src[0],
-				'brand_image_width' => $brand_image_src[1] / 2,
-				'brand_image_height' => $brand_image_src[2] / 2,
-				'footer_type' => Prompt_Core::$options->get( 'email_footer_type' ),
-				'footer_text' => Prompt_Core::$options->get( 'email_footer_text' ),
-				'site_icon_url' => $site_icon_url,
-			);
-			$message = Prompt_Template::render( $template, $template_data, false );
-		}
-
-		return $message;
+	/**
+	 * @return bool
+	 */
+	public function have_html() {
+		return isset( $this->html );
 	}
 
 	// TODO: add string attachments
 	private function add_string_attachment( $string, $filename, $encoding = 'base64' , $type = 'application/octet-stream' ) {
 		$this->string_attachments[] = compact( 'string', 'filename', 'encoding', 'type' );
-	}
-
-	/**
-	 * Replace the message with a fully rendered version.
-	 *
-	 * Assumes any template supplied is no longer needed, and ditches it.
-	 *
-	 * @param $message
-	 * @return Prompt_Email
-	 */
-	public function set_rendered_message( $message ) {
-		$this->template = null;
-		$this->message = $message;
-		return $this;
 	}
 
 	protected function to_utf8( $content ) {

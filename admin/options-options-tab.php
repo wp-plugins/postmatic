@@ -47,6 +47,18 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 						)
 					),
 			),
+			array(
+				'title' => __( 'Default sending mode', 'Postmatic' ),
+				'type' => 'checkbox',
+				'name' => 'excerpt_default',
+				'desc' => __( 'Send only the excerpt instead of the full post content.', 'Postmatic' ) .
+					html( 'p',
+						__(
+							'Enable this setting to only send excerpts with a button to read more online. You can override this on a per-post basis when drafting a new post.',
+							'Postmatic'
+						)
+					),
+			),
 		);
 
 		$this->override_entries( $table_entries );
@@ -74,7 +86,7 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 		$valid_data = $this->validate_checkbox_fields(
 			$new_data,
 			$old_data,
-			array( 'send_login_info', 'auto_subscribe_authors', 'no_post_email_default' )
+			array( 'send_login_info', 'auto_subscribe_authors', 'no_post_email_default', 'excerpt_default' )
 		);
 
 		return $valid_data;

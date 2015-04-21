@@ -105,7 +105,9 @@ class Prompt_Mailer {
 			'to' => array( 'address' => $email->get_to_address(), 'name' => $email->get_to_name() ),
 			'from' => array( 'address' => $email->get_from_address(), 'name' => $email->get_from_name() ),
 			'subject' => $email->get_subject(),
-			'message' => $email->get_rendered_message(),
+			'html_content' => $email->get_html(),
+			'text_content' => $email->get_text(),
+			'type' => $email->get_message_type(),
 		);
 
 		if ( $email->get_reply_address() )
@@ -132,7 +134,7 @@ class Prompt_Mailer {
 
 		foreach ( $emails as $email ) {
 
-			if ( Prompt_Enum_Content_Types::HTML == $email->get_content_type() and !in_array( 'inline-styles', $actions ) )
+			if ( $email->have_html() and !in_array( 'inline-styles', $actions ) )
 				$actions[] = 'inline-styles';
 
 			if ( $email->get_metadata() and !in_array( 'track-replies', $actions ) )

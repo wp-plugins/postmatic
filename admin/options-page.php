@@ -4,10 +4,8 @@
  * Handle Prompt options and those of active add-ons.
  */
 class Prompt_Admin_Options_Page extends scbAdminPage {
-	const SUPPORT_EMAIL = 'support@gopostmatic.com';
 	const DISMISS_ERRORS_META_KEY = 'prompt_error_dismiss_time';
 	const BUG_REPORT_OPTION_NAME = 'prompt_error_submit_time';
-	const BETA_REQUEST_OPTION_NAME = 'prompt_beta_submit_time';
 
 	protected $_overridden_options;
 
@@ -28,13 +26,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		$this->key = $options->get( 'prompt_key' );
 
-		$this->add_tab( new Prompt_Admin_Core_Options_Tab( $options, $overrides ) );
-		$this->add_tab( new Prompt_Admin_Email_Options_Tab( $options, $overrides ) );
-		$this->add_tab( new Prompt_Admin_Invite_Options_Tab( $options, $overrides ) );
-		$this->add_tab( new Prompt_Admin_Options_Options_Tab( $options, $overrides ) );
-		$this->add_tab( new Prompt_Admin_Jetpack_Import_Options_Tab( $options, $overrides ) );
-		$this->add_tab( new Prompt_Admin_Mailpoet_Import_Options_Tab( $options, $overrides ) );
-		$this->add_tab( new Prompt_Admin_Support_Options_Tab( $options, $overrides ) );
+		$this->tabs = $tabs;
 	}
 
 	public function add_tab( Prompt_Admin_Options_Tab $tab ) {
@@ -44,19 +36,33 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$this->tabs[$tab->slug()] = $tab;
 	}
 
+	protected function add_tabs() {
+
+		$this->add_tab( new Prompt_Admin_Core_Options_Tab( $this->options, $this->_overridden_options ) );
+		$this->add_tab( new Prompt_Admin_Email_Options_Tab( $this->options, $this->_overridden_options ) );
+		$this->add_tab( new Prompt_Admin_Invite_Options_Tab( $this->options, $this->_overridden_options ) );
+		$this->add_tab( new Prompt_Admin_Options_Options_Tab( $this->options, $this->_overridden_options ) );
+		if ( class_exists( 'Jetpack' ) )
+			$this->add_tab( new Prompt_Admin_Jetpack_Import_Options_Tab( $this->options, $this->_overridden_options ) );
+		if ( class_exists( 'WYSIJA' ) )
+			$this->add_tab( new Prompt_Admin_Mailpoet_Import_Options_Tab( $this->options, $this->_overridden_options ) );
+		$this->add_tab( new Prompt_Admin_MailChimp_Import_Options_Tab( $this->options, $this->_overridden_options ) );
+		$this->add_tab( new Prompt_Admin_Support_Options_Tab( $this->options, $this->_overridden_options ) );
+
+	}
+
 	/**
-	 * Before there is any output, handle any posted options.
+	 * Before there is any output, add tabs and handle any posted options.
 	 */
 	public function page_loaded() {
+
+		if ( ! $this->tabs )
+			$this->add_tabs();
 
 		if ( isset( $_POST['tab'] ) and isset( $this->tabs[$_POST['tab']] ) ) {
 			$this->submitted_tab = $this->tabs[$_POST['tab']];
 			$this->submitted_tab->form_handler();
-			return;
-		}
-
-		if ( !empty( $_POST['send_beta_request'] ) ) {
-			$this->send_beta_request();
+			$this->reset_key();
 			return;
 		}
 
@@ -75,6 +81,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		}
 
 		$this->form_handler();
+		$this->reset_key();
 	}
 
 	public function admin_msg( $msg = '', $class = 'updated' ) {
@@ -151,11 +158,23 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		else
 			echo '<div class="wrap signup">';
 
+		echo html( 'div id="manage-account"',
+			html( 'p',
+				html( 'a',
+					array( 'href' => Prompt_Enum_Urls::MANAGE ),
+					__( '&#9998; Manage your account', 'Postmatic' )
+				)
+			)
+		);
 		echo html( 'h2 id="prompt-settings-header"', html( 'span', $this->args['page_title'] ) );
 	}
 
 	protected function is_subscribe_widget_in_use() {
 		$sidebars_widgets = wp_get_sidebars_widgets();
+
+		if ( !$sidebars_widgets )
+			return false;
+
 		$subscribe_widget_in_use = false;
 		foreach( $sidebars_widgets as $sidebar => $widgets ) {
 			foreach ( $widgets as $widget ) {
@@ -175,20 +194,21 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		if ( $key_alert or !$this->key ) {
 
-			self::render_key_form();
+			self::display_key_prompt();
 
 			echo html( 'div class="initialize-key"',
-				html( 'h2', __( 'Have a key?', 'Postmatic' ) ),
+				html( 'h2', __( 'Already have a key?', 'Postmatic' ) ),
 				$this->form_table( array(
 					array(
 						'title' => __( 'Postmatic Key', 'Postmatic' ),
 						'type' => 'text',
 						'name' => 'prompt_key',
 						'desc' => sprintf(
-							'%s<br/>%s <a href="http://gopostmatic.com/tos" target="_blank">%s</a>.',
-							__( 'Once you have your key, enter it here to blast off!', 'Postmatic' ),
-							__( 'By entering a valid api key and activating Postmatic you agree to the', 'Postmatic' ),
-							__( 'terms of service', 'Postmatic' )
+							__(
+								'Once you have your key, enter it here to blast off!.',
+								'Postmatic'
+							),
+							Prompt_Enum_Urls::TERMS_OF_SERVICE
 						)
 					),
 				) )
@@ -277,11 +297,14 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		$sidebars = wp_get_sidebars_widgets();
 
-		$dismiss_link = html( 'a', array( 'href' => add_query_arg( 'skip_widget_intro', 'true' ), 'class' => 'button' ), __( 'Dismiss' ) );
+		$dismiss_link = html( 'a',
+			array( 'href' => esc_url( add_query_arg( 'skip_widget_intro', 'true' ) ), 'class' => 'button' ),
+			__( 'Dismiss' )
+		);
 		if ( empty( $sidebars ) ) {
 			$content = html(
 				'p',
-				__( 'Your current theme has no widget areas. This means you\'ll have to use the template tag to display the Postmatic Subscription widget.', 'Postmatic' ),
+				__( 'Your current theme is missing widget areas. This means you\'ll have to use the template tag to display the Postmatic Subscription widget.', 'Postmatic' ),
 				html( 'pre class="code"', htmlentities( '<?php the_widget( \'Prompt_Subscribe_Widget\', array( \'title\' => \'Subscribe by email\', \'collect_name\' => false ) ); ?>' ) ),
 				'&nbsp;',
 				$dismiss_link
@@ -312,11 +335,11 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 						'Heads up! We noticed Akismet is not active on your site. Akismet is free, bundled with WordPress, and stops the vast majority of comment spam. Please be sure that you are using it or a similar product to keep from spamming your subscribers. <a href="%s">Learn more</a>.',
 						'Postmatic'
 					),
-					'http://docs.gopostmatic.com/86-spam'
+					Prompt_Enum_Urls::SPAM_DOC
 				),
 				'&nbsp;',
 				html( 'a',
-					array( 'href' => add_query_arg( 'skip_akismet_intro', 'true' ), 'class' => 'button' ),
+					array( 'href' => esc_url( add_query_arg( 'skip_akismet_intro', 'true' ) ), 'class' => 'button' ),
 					__( 'Dismiss', 'Postmatic' )
 				)
 			)
@@ -340,7 +363,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 				),
 				'&nbsp;',
 				html( 'a',
-					array( 'href' => add_query_arg( 'skip_zero_spam_intro', 'true' ), 'class' => 'button' ),
+					array( 'href' => esc_url( add_query_arg( 'skip_zero_spam_intro', 'true' ) ), 'class' => 'button' ),
 					__( 'Dismiss', 'Postmatic' )
 				)
 			)
@@ -380,131 +403,32 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		);
 	}
 
-	protected function render_key_form() {
+	protected function display_key_prompt() {
 
-		$user = wp_get_current_user();
+		$base_url = defined( 'PROMPT_RSS_BASE_URL' ) ? PROMPT_RSS_BASE_URL : Prompt_Enum_Urls::HOME;
 
-		$lead = html(
-			'div',
-			array( 'class' => 'description' ),
-			html( 'h1', __( 'Welcome to Postmatic. Let\'s get started.', 'Postmatic' ) ),
-			html( 'p', __( 'Postmatic is in limited-access beta and requires an activation key.', 'Postmatic' ) )
-		);
+		$feed_url = $base_url . '/targets/get-a-key/feed/?post_type=update';
 
-		if ( isset( $_POST['send_beta_request'] ) ) {
-			echo html(
-				'div',
-				array( 'class' => 'get-prompt-key' ),
-				$lead,
-				html( 'p', __( 'Key request sent.', 'Postmatic' ) )
-			);
-			return;
+		$signup_url = Prompt_Enum_Urls::MANAGE . '/signup';
+
+		$new_site_url = Prompt_Enum_Urls::MANAGE . '/sites/link?ajax_url=' . urlencode( admin_url( 'admin-ajax.php') );
+
+		$feed = new Prompt_Admin_Feed( $feed_url );
+
+		$content = $feed->item_content();
+
+
+		if ( $content )
+			$content = str_replace( $signup_url, $new_site_url, $content );
+
+		if ( ! $content ) {
+
+			$template = new Prompt_Template( 'get-a-key.php' );
+			$content = $template->render( compact( 'new_site_url' ) );
+
 		}
 
-		$rows = array(
-			$this->row_wrap(
-				__( 'First Name', 'Postmatic' ),
-				$this->input(
-					array(
-						'type' => 'text',
-						'name' => 'first_name',
-						'value' => $user->first_name,
-					),
-					wp_unslash( $_POST )
-				)
-			),
-			$this->row_wrap(
-				__( 'Last Name', 'Postmatic' ),
-				$this->input(
-					array(
-						'type' => 'text',
-						'name' => 'last_name',
-						'value' => $user->last_name,
-					),
-					wp_unslash( $_POST )
-				)
-			),
-			$this->row_wrap(
-				__( 'Email', 'Postmatic' ),
-				$this->input(
-					array(
-						'type' => 'text',
-						'name' => 'email',
-						'value' => $user->user_email,
-					),
-					wp_unslash( $_POST )
-				)
-			),
-			html( 'tr class="concierge-install"',
-				html( 'th scope="row"', '' ),
-				html( 'td',
-					$this->input(
-						array(
-							'type' => 'checkbox',
-							'name' => 'concierge_install',
-							'desc' => sprintf(
-								__(
-									'Yes, I would like to take advantage of <a href="%s">complimentary concierge</a> ' .
-									'installation, configuration, and user migration.',
-									'Postmatic'
-								),
-								'http://gopostmatic.com/concierge'
-							),
-							'extra' => array( 'class' => 'concierge-install' ),
-						),
-						wp_unslash( $_POST )
-					)
-				)
-			)
-		);
-
-		echo html(
-			'div',
-			array( 'class' => 'get-prompt-key' ),
-			$lead,
-			html( 'h2', __( 'Need a key?', 'Postmatic' ) ),
-			$this->form_wrap(
-				html( 'div', $this->table_wrap( implode( '', $rows ) ) ),
-				array(
-					'action' => 'send_beta_request',
-					'value' => __( 'Request a free Postmatic Api Key', 'Postmatic' ),
-					'class' => 'button-primary',
-				)
-			)
-		);
-	}
-
-	protected function add_ons_content() {
-		$content = '';
-
-		$available_add_ons = Prompt_Add_On_Manager::available_add_ons();
-
-		foreach( $available_add_ons as $add_on_core => $add_on ) {
-
-			$active = class_exists( $add_on_core );
-			if ( $active ) {
-				$status = html(
-					'p class="ui-state-highlight"',
-					html( 'span', array( 'class' => 'ui-icon ui-icon-check' ) ),
-					__( 'Installed and Active', 'Postmatic' )
-				);
-			} else {
-				$status = html(
-					'a',
-					array( 'href' => $add_on['PluginURI'], 'class' => 'button', 'target' => '_blank' ),
-					__( 'Purchase', 'Postmatic' )
-				);
-			}
-
-			$content .= html(
-				'div class="add-on"',
-				html_link( $add_on['PluginURI'], html( 'h3', $add_on['Name'] ) ),
-				html( 'p', $add_on['Description'] ),
-				$status
-			);
-		}
-
-		return html( 'div class="add-on-group"', $content );
+		echo $content;
 	}
 
 	public function validate( $new_data, $old_data ) {
@@ -545,7 +469,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		if ( 401 == $response['response']['code'] ) {
 			$message = sprintf(
-				__( 'We didn\'t recognize the key "%s". Please make sure it matches the one we gave you.', 'Postmatic' ),
+				__( 'We didn\'t recognize the key "%s". Please make sure it exactly matches the key we supplied you. <a href="http://app.gopostmatic.com" target="_blank">Visit your Postmatic dashboard for assistance</a>. ', 'Postmatic' ),
 				$key
 			);
 			return new WP_Error( 'invalid_key', $message );
@@ -553,13 +477,13 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		$configuration = json_decode( $response['body'] );
 
-		if ( $configuration->site->url != admin_url( 'admin-ajax.php' ) ) {
+		if ( strpos( admin_url( 'admin-ajax.php' ), $configuration->site->url ) === false ) {
 			$message = sprintf(
 				__(
 					'Your key was registered for a different site. Please request a key for this site\'s dedicated use, or <a href="%s" target="_blank">contact us</a> for assistance. Thanks!',
 					'Postmatic'
 				),
-				'http://gopostmatic.com/bug/'
+				Prompt_Enum_Urls::BUG_REPORTS
 			);
 			return new WP_Error( 'wrong_key', $message );
 		}
@@ -574,14 +498,6 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	protected function submit_errors() {
 		$user = wp_get_current_user();
 
-		$email = new Prompt_Email();
-		$email->set_to_address( self::SUPPORT_EMAIL );
-		$email->set_from_address( $user->user_email );
-		$email->set_from_name( $user->display_name );
-		$email->set_subject( sprintf( 'Error submission from %s', get_option( 'blogname' ) ) );
-		$email->set_content_type( 'application/json' );
-		$email->set_template( '' );
-
 		$last_submit_time = absint( get_option( self::BUG_REPORT_OPTION_NAME ) );
 
 		update_option( self::BUG_REPORT_OPTION_NAME, time() );
@@ -592,7 +508,14 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		$message = array_merge( $message, $environment->to_array() );
 
-		$email->set_message( json_encode( $message ) );
+		$email = new Prompt_Email( array(
+			'to_address' => Prompt_Core::SUPPORT_EMAIL,
+			'from_address' => $user->user_email,
+			'from_name' => $user->display_name,
+			'subject' => sprintf( 'Error submission from %s', get_option( 'blogname' ) ),
+			'text' => json_encode( $message ),
+			'message_type' => Prompt_Enum_Message_Types::ADMIN,
+		));
 
 		$sent = Prompt_Factory::make_mailer( Prompt_Enum_Email_Transports::LOCAL )->send_one( $email );
 
@@ -602,7 +525,13 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		if ( is_wp_error( $sent ) ) {
 			Prompt_Logging::add_error(
 				'bug_submission_error',
-				__( 'We\'re even having trouble sending a bug report. Please copy the data to the right and send to support@gopostmatic.com.', 'Postmatic' ),
+				sprintf(
+					__(
+						'We\'re even having trouble sending a bug report. Please copy the data to the right and send to %s.',
+						'Postmatic'
+					),
+					Prompt_Core::SUPPORT_EMAIL
+				),
 				$sent
 			);
 			return;
@@ -611,36 +540,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		add_action( 'admin_notices', array( $this, 'submitted_errors_admin_msg' ) );
 	}
 
-	protected function send_beta_request() {
-
-		if ( !is_email( $_POST['email'] ) ) {
-			add_settings_error(
-				'send_beta_request',
-				'invalid_email',
-				__( 'Please enter a valid email address.', 'Postmatic' )
-			);
-			return;
-		}
-
-		wp_mail(
-			'postmatic@robot.zapier.com',
-			'Postmatic Beta Key Request',
-			sprintf(
-				"first: %s\nlast: %s\nurl: %s\nconcierge: %d",
-				$_POST['first_name'],
-				$_POST['last_name'],
-				site_url(),
-				isset( $_POST['concierge_install'] )
-			),
-			array(
-				'From: ' . $_POST['email'],
-				'Cc: jason@gopostmatic.com',
-			)
-		);
-
-		update_option( self::BETA_REQUEST_OPTION_NAME, time() );
-
-		add_action( 'admin_notices', array( $this, 'beta_request_sent_admin_msg' ) );
+	protected function reset_key() {
+		$this->key = $this->options->get( 'prompt_key' );
 	}
-
 }

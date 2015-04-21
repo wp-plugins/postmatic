@@ -3,7 +3,7 @@
 class Prompt_Admin_Jetpack_Import_Options_Tab extends Prompt_Admin_Import_Options_Tab {
 
 	public function name() {
-		return __( 'Import from Jetpack', 'Postmatic' );
+		return __( 'Migrate from Jetpack', 'Postmatic' );
 	}
 
 	public function slug() {
@@ -61,8 +61,10 @@ class Prompt_Admin_Jetpack_Import_Options_Tab extends Prompt_Admin_Import_Option
 					__( 'What happens if something goes wrong? Will my Jetpack subscribers be safe?', 'Postmatic' )
 				),
 				html( 'p',
-					'If something goes wrong with the import you will be notified of the error. Your Jetpack subscribers list lives on wordpress.com and will always be there in case you need it again.',
-					'Postmatic'
+					__(
+						'If something goes wrong with the import you will be notified of the error. Your Jetpack subscribers list lives on wordpress.com and will always be there in case you need it again.',
+						'Postmatic'
+					)
 				)
 			)
 		);

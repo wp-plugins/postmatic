@@ -7,7 +7,7 @@ class Prompt_User_Mailing {
 	 *
 	 * @param int|object $user
 	 * @param string $password
-	 * @param string $template
+	 * @param Prompt_Template $template
 	 */
 	public static function send_new_user_notification( $user, $password, $template ) {
 		$user = is_integer( $user ) ? get_userdata( $user ) : $user;
@@ -27,7 +27,8 @@ class Prompt_User_Mailing {
 		$email = new Prompt_Email( array(
 			'to_address' => $user->user_email,
 			'subject' => $subject,
-			'message' => Prompt_Template::render( $template, $template_data, false ),
+			'html' => $template->render( $template_data ),
+			'message_type' => Prompt_Enum_Message_Types::ADMIN,
 		) );
 
 		/**

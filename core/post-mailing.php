@@ -3,7 +3,9 @@
 class Prompt_Post_Mailing {
 
 	/** @var array */
-	protected static $shortcode_whitelist = array( 'gallery', 'caption', 'wpv-post-body', 'types', );
+	protected static $shortcode_whitelist = array( 'gallery', 'caption', 'wpv-post-body', 'types' );
+	/** @var  string */
+	protected static $featured_image_src;
 
 	/**
 	 * Send email notifications for a post.
@@ -46,10 +48,12 @@ class Prompt_Post_Mailing {
 
 		self::setup_postdata( $post );
 
-		$featured_image_src = wp_get_attachment_image_src( get_post_thumbnail_id(), 'prompt-post-featured' );
+		self::$featured_image_src = wp_get_attachment_image_src( get_post_thumbnail_id(), 'prompt-post-featured' );
 
 		if ( Prompt_Admin_Delivery_Metabox::suppress_featured_image( $post->ID ) )
-			$featured_image_src = false;
+			self::$featured_image_src = false;
+
+		$excerpt_only = Prompt_Admin_Delivery_Metabox::excerpt_only( $post->ID );
 
 		$emails = array();
 		foreach ( $chunk_ids as $user_id ) {
@@ -58,12 +62,19 @@ class Prompt_Post_Mailing {
 			if ( !is_email( $user->user_email ) )
 				continue;
 
+			$unsubscribe_link = new Prompt_Unsubscribe_Link( $user );
+
 			$template_data = array(
 				'prompt_author' => $prompt_author,
 				'recipient' => $user,
 				'prompt_post' => $prompt_post,
 				'subscribed_object' => $prompt_author->is_subscribed( $user_id ) ? $prompt_author : $prompt_site,
-				'featured_image_src' => $featured_image_src,
+				'featured_image_src' => self::$featured_image_src,
+				'excerpt_only' => $excerpt_only,
+				'the_text_content' => self::get_the_text_content(),
+				'subject' => html_entity_decode( $prompt_post->get_wp_post()->post_title, ENT_QUOTES ),
+				'unsubscribe_url' => $unsubscribe_link->url(),
+				'alternate_versions_menu' => self::alternate_versions_menu( $post ),
 			);
 			/**
 			 * Filter new post email template data.
@@ -74,6 +85,10 @@ class Prompt_Post_Mailing {
 			 *      @type Prompt_Post $prompt_post
 			 *      @type Prompt_Interface_Subscribable $subscribed_object
 			 *      @type array $featured_image_src url, width, height
+			 *      @type bool $excerpt_only whether to include only the post excerpt
+			 *      @type string $the_text_content
+			 *      @type string $subject
+			 *      @type string $unsubscribe_url
 			 * }
 			 */
 			$template_data = apply_filters( 'prompt/post_email/template_data', $template_data );
@@ -119,12 +134,20 @@ class Prompt_Post_Mailing {
 
 		the_post();
 
+		if ( class_exists( 'ET_Bloom' ) ) {
+			$bloom = ET_Bloom::get_this();
+			remove_filter( 'the_content', array( $bloom, 'display_below_post') );
+			remove_filter( 'the_content', array( $bloom, 'trigger_bottom_mark' ), 9999 );
+			// TODO: restore these?
+		}
+
 		remove_filter( 'the_content', 'do_shortcode', 11 );
 		remove_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
 		add_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
 		add_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
 		add_filter( 'the_content', array( __CLASS__, 'limit_image_width_attributes' ), 11 );
 		add_filter( 'the_content', array( __CLASS__, 'strip_incompatible_tags' ), 11 );
+		add_filter( 'the_content', array( __CLASS__, 'strip_duplicate_featured_images' ), 100 );
 		add_filter( 'embed_oembed_html', array( __CLASS__, 'use_original_oembed_url' ), 10, 2 );
 
 	}
@@ -141,9 +164,33 @@ class Prompt_Post_Mailing {
 		remove_filter( 'the_content', array( __CLASS__, 'limit_image_width_attributes' ), 11 );
 		remove_filter( 'the_content', array( __CLASS__, 'strip_image_height_attributes' ), 11 );
 		remove_filter( 'the_content', array( __CLASS__, 'do_whitelisted_shortcodes' ), 11 );
+		remove_filter( 'the_content', array( __CLASS__, 'strip_duplicate_featured_images' ), 100 );
 		add_filter( 'the_content', 'do_shortcode', 11 );
 		add_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
 
+	}
+
+	/**
+	 * Get Postmatic's text version of the current post content.
+	 * @return mixed|string
+	 */
+	public static function get_the_text_content() {
+
+		$prompt_post = new Prompt_Post( get_the_ID() );
+
+		$text = $prompt_post->get_custom_text();
+
+		if ( $text )
+			return $text;
+
+		if ( Prompt_Admin_Delivery_Metabox::excerpt_only( $prompt_post->id() ) )
+			return Prompt_Html_To_Markdown::convert( get_the_excerpt() );
+
+		$html = apply_filters( 'the_content', get_the_content() );
+
+		$html = str_replace( ']]>', ']]&gt;', $html );
+
+		return Prompt_Html_To_Markdown::convert( $html );
 	}
 
 	/**
@@ -153,29 +200,42 @@ class Prompt_Post_Mailing {
 	 */
 	public static function build_email( $template_data ) {
 
-		$template = Prompt_Template::locate( "new-post-email.php" );
+		/** @var Prompt_Interface_Subscribable $subscribed_object */
+		/** @var Prompt_Post $prompt_post */
+		/** @var Prompt_User $prompt_author */
+		/** @var WP_User $recipient */
+		/** @var string $subject */
+		/** @var bool $excerpt_only */
+		extract( $template_data );
+
+		$html_template = new Prompt_Email_Template( "new-post-email.php" );
+		$text_template = new Prompt_Text_Email_Template( "new-post-email-text.php" );
 
 		$from_name = get_option( 'blogname' );
-		if ( is_a( $template_data['subscribed_object'], 'Prompt_User' ) and $template_data['prompt_author']->id() )
-			$from_name .= ' [' . $template_data['prompt_author']->get_wp_user()->display_name . ']';
+		if ( is_a( $subscribed_object, 'Prompt_User' ) and $prompt_author->id() )
+			$from_name .= ' [' . $prompt_author->get_wp_user()->display_name . ']';
 
 		$email = new Prompt_Email( array(
-			'to_address' => $template_data['recipient']->user_email,
-			'subject' => $template_data['prompt_post']->get_wp_post()->post_title,
+			'to_address' => $recipient->user_email,
+			'subject' => $subject,
 			'from_name' => $from_name,
-			'message' => Prompt_Template::render( $template, $template_data, false ),
+			'text' => $text_template->render( $template_data ),
+			'message_type' => Prompt_Enum_Message_Types::POST,
 		) );
 
-		if ( comments_open( $template_data['prompt_post']->id() ) ) {
+		if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) )
+			$email->set_html( $html_template->render( $template_data ) );
+
+		if ( comments_open( $prompt_post->id() ) and ! $excerpt_only ) {
 
 			$command = new Prompt_New_Post_Comment_Command();
-			$command->set_post_id( $template_data['prompt_post']->id() );
-			$command->set_user_id( $template_data['recipient']->ID );
+			$command->set_post_id( $prompt_post->id() );
+			$command->set_user_id( $recipient->ID );
 			Prompt_Command_Handling::add_command_metadata( $command, $email );
 
 		} else {
 
-			$email->set_from_address( $template_data['prompt_author']->get_wp_user()->user_email );
+			$email->set_from_address( $prompt_author->get_wp_user()->user_email );
 
 		}
 
@@ -312,6 +372,55 @@ class Prompt_Post_Mailing {
 		return preg_replace( '#https?://[^"\']*#', $url, $html );
 	}
 
+	/**
+	 * @param WP_Post $post
+	 * @return string Menu HTML.
+	 */
+	public static function alternate_versions_menu( $post ) {
+		global $polylang;
+
+		if ( ! class_exists( 'PLL_Switcher' ) )
+			return '';
+
+		$switcher = new PLL_Switcher();
+
+		$languages = $switcher->the_languages(
+			$polylang->links,
+			array(
+				'post_id' => $post->ID,
+				'echo' => false,
+				'hide_if_no_translation' => true,
+				'hide_current' => true,
+			)
+		);
+
+		return empty( $languages ) ? '' : html( 'ul class="alternate-languages"', $languages );
+	}
+
+	/**
+	 * Remove featured images of any size if Postmatic is supplying one.
+	 *
+	 * @param string $content
+	 * @return string
+	 */
+	public static function strip_duplicate_featured_images( $content ) {
+
+		if ( empty( self::$featured_image_src[0] ) )
+			return $content;
+
+		$url = self::$featured_image_src[0];
+
+		$last_hyphen_pos = strrpos( $url, '-');
+
+		$match = $last_hyphen_pos ? substr( $url, 0, $last_hyphen_pos ) : $url;
+
+		return preg_replace(
+			'/<img[^>]*src=["\']' . preg_quote( $match, '/' ) . '[^>]*>/',
+			'',
+			$content
+		);
+	}
+
 	protected static function override_wp_gist_shortcode_tag( $m ) {
 		$defaults = array( 'file' => '', 'id' => '', 'url' => '' );
 
@@ -367,23 +476,22 @@ class Prompt_Post_Mailing {
 		if ( !$recipient or empty( $recipient->user_email ) )
 			return;
 
-		$email = new Prompt_Email();
-		$email->set_to_address( $recipient->user_email );
-		$email->set_from_address( $recipient->display_name );
-		$email->set_subject( sprintf( __( 'Delivery issue for %s', 'Postmatic' ), get_option( 'blogname' ) ) );
-		$email->set_message(
-			sprintf(
+		$message = sprintf(
 				__( 'Delivery of subscription notifications for the post "%s" may have failed.', 'Postmatic' ),
 				get_the_title( $post )
 			) .
 			' ' .
 			__( 'A site administrator can report this event to the development team from the Postmatic settings.', 'Postmatic' ) .
 			' ' .
-			__( 'The error message was: ', 'Postmatic' ) . $error->get_error_message()
-		);
+			__( 'The error message was: ', 'Postmatic' ) . $error->get_error_message();
 
-		$email->set_content_type( Prompt_Enum_Content_Types::TEXT );
-		$email->set_template( '' );
+		$email = new Prompt_Email( array(
+			'to_address' => $recipient->user_email,
+			'from_address' => $recipient->display_name,
+			'subject' => sprintf( __( 'Delivery issue for %s', 'Postmatic' ), get_option( 'blogname' ) ),
+			'text' => $message,
+			'message_type' => Prompt_Enum_Message_Types::ADMIN,
+		));
 
 		Prompt_Factory::make_mailer( Prompt_Enum_Email_Transports::LOCAL )->send_one( $email );
 
@@ -399,4 +507,5 @@ class Prompt_Post_Mailing {
 
 		return str_replace( '<img', '<img class="retina"', $tag );
 	}
+
 }

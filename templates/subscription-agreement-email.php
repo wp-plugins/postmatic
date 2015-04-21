@@ -91,10 +91,13 @@ $recipient = esc_html(
 	
 <p>
 	<?php
-	_e(
-		'If you did not initiate this subscription please ignore this email or forward it to abuse@gopostmatic.com.',
-		'Postmatic'
-	);
+	printf(
+		__(
+			'If you did not initiate this subscription please ignore this email or forward it to %s.',
+			'Postmatic'
+		),
+		Prompt_Core::ABUSE_EMAIL
+	)
 	?>
 </p>
 

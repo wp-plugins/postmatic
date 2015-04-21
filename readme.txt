@@ -1,76 +1,78 @@
-=== Postmatic - WordPress Subscriptions & Comments by Email ===
-Contributors: vernalcreative
-Tags: email, subscription, comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, fantasticallyamazing
+=== Postmatic - Post delivery & commenting by email for everyone ===
+Contributors: vernal
+Tags: email, subscribe to comments, subscription, subscribe, commenting, reply, email,  comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, mailchimp, mailgun, email comming, reply to email, email replies, engagement, invite, invitations, jetpack, subscribe2
 Requires at least: 3.9
-Tested up to: 4.1
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
- 
 Postmatic lets your readers subscribe to comments or new posts by email. And leave a comment by simply hitting reply. No forms. No browsers. Easy.
 
 == Description ==
+
+= Your posts delivered to their inbox. =
+= Their comments delivered through a simple reply. =
+= That’s how the conversation gets started. That’s how you increase engagement. =
+
+Your WordPress posts will be delivered to readers as a simple email.  
+And they can comment just by hitting reply. No accounts. No forms.  
+No browsers. Easy.
+
+= Engage your readers at their own pace with 100% email-based commenting =
+
+The days of one-way notifications are over. It’s time to let them hit reply.
+
+Postmatic lets your readers subscribe by email when they leave a comment. Subsequent comments and replies will land in their inbox, just like with _Mailpoet_, _Jetpack_ or _Subscribe to Comments_.**Except now with Postmatic, they can comment back and keep the conversation going just by hitting reply**. They never have to leave their inbox.
+
+Online or offline, everyone stays in the loop—regardless of desktop or mobile.
+
 [vimeo http://vimeo.com/108515948]
 
-What’s the one thing people all over the world do a gazillion times a day? Check their email.
-So that’s how Postmatic gets your content in front of your readers.
-It's the easiest way for readers of your WordPress blog to see your content and interact with you. And each other.
+= Key Features =
 
-Use Postmatic to let your users subscribe to comments. Instead of just being notified, they add a reply right from their inbox.
-
-Send newsletters and posts in a beautiful mobile-ready template and let your subscribers send back a comment just by writing an email.
-
-[Read our faq, play with a demo, and find out what you can do with Postmatic at gopostmatic.com](http://gopostmatic.com).
-
-
-### Postmatic is in limited-release beta
-> We are releasing a few hundred api keys per week. Download and install the plugin to join the waiting list, or jump right over to [our site](http://gopostmatic.com/beta) to join the list immediately. 
-
-= Post Subscriptions =
-Your content gets delivered to readers in an email. And they can comment just by hitting reply. No accounts. No forms. No browsers.
-
-= Commenting by email =
-Hit reply on any Postmatic email to comment on that post. You can send a reply on an existing post, too.
-
-= Subscribe to Comments =
-Email notifications for new comments? Sure! And just hit reply to leave a response. Everyone is in the loop—mobile and desktop. Or maybe just in Thunderbird.
-
-= Intelligent Invitations =
-Send subscription invitations to your existing commenters. Or, you can import your list from Feedburner, Mailchimp, Subscribe2 or Mailpoet.
-
-= Mobile-Ready Template =
-Your post will arrive in users' inbox as a beautiful, mobile-ready email. With support for images, galleries and shortcodes. You can even assign a header image and up to 3 native WordPress widgets for a totally customized footer.
-
-= Total Compatability =
-Postmatic comments are fully compatible with your existing WordPress discussion management workflow. Moderation, spam detection, comment voting and gravatars work right out of the box.
-
-== Installation ==
-Postmatic supports all the standard installation methods
-[described in the codex](http://codex.wordpress.org/Managing_Plugins).
-
-Once installed and activated, visit the plugin settings to:
-
-1. Get an API key
-2. Place the subscription widget
-3. Customize your email template
-3. Go Postmatic!
+* Posts are converted into fully responsive html emails on the fly. We support images, video, shortcodes, and oEmbed.
+* We handle email delivery through partnerships with Mailchimp and Rackspace. Lists with thousands of subscribers are no trouble atll.
+* Replies are posted as comments in as little as 6 seconds.
+* Intelligent comment templates provide conversational context and threaded commenting.
+* Comment moderation via email (approve, trash, spam) with a single reply.
+* Single-click migration tools for Jetpack, MailPoet, and Mailchimp lists.
+* An incredible invitation system that turns past commenters into subscribers.
+* Postmatic strictly adheres to WordPress best practices. It uses the native commenting and user systems. We’re just a magical email gateway.
+* We’re serious about privacy and doing the right thing. We do not profile users, run ads, or sell data in any way and maintain a very strict [privacy](/privacy) policy.
+* The basic version of Postmatic, which brings 100% email commenting to WordPress, is free without limits.
 
 == Frequently Asked Questions ==
 
-We have you covered in our [big FAQ](http://gopostmatic.com/faq/).
+= This is really free? Do you sell my data or run advertising? =
+
+Yes to free. [No to bad stuff](http://gopostmatic.com/privacy). We're not in the data brokering or advertising game. Instead we're in the business of making [Postmatic Premium](http://gopostmatic.com/premium) _so good_ and _so affordable_ that you'll happily upgrade.You can help fund our development while sending your engagement through the roof by subscribing to Postmatic Premium. We're even running [a launch special right now](http://gopostmatic.com/trial).
+
+= Is this a 3rd party commenting system? =
+Not at all. Postmatic uses native WordPress commenting. All we do is wire up some magic to turn emails into comments, then push them to your site via the WordPress api. You can [read all about](/technology) it here.
+
+= How quickly do email comments post to my website =
+It takes Postmatic **six to ten seconds** after you hit send to turn your email into a WordPress comment.
+
+Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Screenshots ==
-1. A sidebar widget lets users subscribe to all site content, or just authors they are interested in.
+1. A sidebar widget lets users subscribe to all site content, or just authors they are interested in. Postmatic also integrates with 3rd party email signup plugins such as Magic Action Box.
 2. New posts are sent as gorgeous mobile-ready emails. The user can just hit reply to send a comment. Nifty.
-3. The footer of the email invites the user to to leave a comment or manage their subscription settings. Users can subscribe to comments on this post, unsubscribe from comments on the post, or leave their own reply.
-4. Followup comments are also sent using a simpler email template. They are reply-enabled as well.
-5. The plugin settings allow you to define a header image as well as up to 3 native widgets to the footer.
-6. The plugin registers a sidebar for configuring footer widgets to use in your email template.
-7. The invitation system is fantastic. Postmatic will send invitations to an imported list or let you choose from your existing community. Users can reply to the invitation to subscribe to your site.
-8. A closeup of the invitation system. You can choose to send invites to an imported list, people who have commented recently, commented the most, or anyone that has ever commented.
-9. Using the invitation system to send invites to the most active commenters.
+3. Comments are sent as beautiful and context-sensitive email notifications. Just reply to chime in.
+4. The footer of the email invites the user to to leave a comment or manage their subscription settings. Users can subscribe to comments on this post, unsubscribe from comments on the post, or leave their own reply.
+5. Followup comments are also sent using a simpler email template. They are reply-enabled as well.
+6. All Postmatic emails are replyable and fully responsive.
+7. The plugin registers a sidebar for configuring footer widgets to use in your email template.
+8. The invitation system is fantastic. Postmatic will send invitations to an imported list or let you choose from your existing community. Users can reply to the invitation to subscribe to your site.
+9. We're serious about privacy. Your data is yours, and always will be. Postmatic uses fully-native commenting. Just think of us as a magical email > WordPress gateway.
+10. Postmatic is 100% compatible with all your favorite user and commenting plugins because it is fully WordPress native.
 
 == Changelog ==
+
+= 1.0 =
+
+So many good things there aren't enough bits in the universe to explain it all. Head on over to [our blog](http://gopostmatic.com/blog) for the big news. Special thanks to our wonderful beta testers! We love you!
+
 = 1.0 beta 19 =
 
 Mostly integrations with other plugins as we make our way to our public release very  soon!

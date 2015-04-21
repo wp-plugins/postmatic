@@ -38,6 +38,7 @@ class Prompt_Grab_Icon {
 				'size' => $this->size,
 				'domain' => $home_url_parts['host'],
 				'origin' => $home_url_parts['host'],
+				'reset' => 'true',
 			),
 			$grab_base_url
 		);

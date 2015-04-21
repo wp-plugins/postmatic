@@ -4,7 +4,6 @@
  * Pass significant occurrences on to the events API.
  */
 class Prompt_Event_Handling {
-	const URL = 'https://events.gopostmatic.com/api/v1';
 
 	public static function record_deactivation() {
 
@@ -12,7 +11,7 @@ class Prompt_Event_Handling {
 		if ( !$key )
 			return;
 
-		self::record_event( time(), 'activated', compact( 'key' ), $key, self::URL );
+		self::record_event( time(), 'activated', compact( 'key' ), $key );
 
 	}
 
@@ -29,7 +28,7 @@ class Prompt_Event_Handling {
 		if ( !$key )
 			return;
 
-		self::record_event( time(), 'activated', compact( 'key' ), $key, self::URL );
+		self::record_event( time(), 'activated', compact( 'key' ), $key );
 
 	}
 
@@ -45,7 +44,9 @@ class Prompt_Event_Handling {
 
 		$key = $key ? $key : Prompt_Core::$options->get( 'prompt_key' );
 
-		$url = $url ? $url : self::URL;
+		$default_url = defined( 'PROMPT_EVENT_API_URL' ) ? PROMPT_EVENT_API_URL : 'https://events.gopostmatic.com/api/v1';
+
+		$url = $url ? $url : $default_url;
 
 		$client = new Prompt_Api_Client( array(), $key, $url );
 

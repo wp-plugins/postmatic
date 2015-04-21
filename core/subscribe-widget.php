@@ -51,10 +51,10 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 	// Display Widget Control
 	public function form( $instance ) {
-		$template = Prompt_Template::locate( 'subscribe-widget-settings.php' );
+		$template = new Prompt_Template( 'subscribe-widget-settings.php' );
 		$template_data = array( 'widget' => $this, 'instance' => $instance );
-		Prompt_Template::render( $template, $template_data );
-	 }
+		$template->render( $template_data, $echo = true );
+	}
 
 	// Default value logic
 	public function get_default_value( $instance, $field, $fallback = '', $escape_callback = 'esc_attr' ) {
@@ -83,7 +83,7 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 	 * @param string $widget_id
 	 * @param array $instance {
 	 *      Widget options
-	 *      @type boolean $collect_name
+	 * @type boolean $collect_name
 	 * }
 	 * @param Prompt_Interface_Subscribable $object Target object for subscriptions
 	 */
@@ -105,14 +105,41 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 			$action = self::subscribe_action();
 		}
 
-		$template_data = compact( 'widget_id', 'instance', 'user', 'object', 'action', 'defaults' );
+		$loading_image_url = path_join( Prompt_Core::$url_path, 'media/ajax-loader.gif' );
+
+		if ( is_user_logged_in() ) {
+
+			$subscribe_prompt = sprintf( __( 'Subscribe to %s:', 'Postmatic' ), $object->subscription_object_label() );
+			$unsubscribe_prompt = '';
+
+		} else {
+
+			$subscribe_prompt = sprintf(
+				__( 'Enter your email to subscribe to %s:', 'Postmatic' ), $object->subscription_object_label()
+			);
+			$unsubscribe_prompt = html( 'h5', __( 'Want to unsubscribe?', 'Postmatic' ) ) .
+				__( 'Confirm your email:', 'Postmatic' );
+
+		}
+
+		$template_data = compact(
+			'widget_id',
+			'instance',
+			'user',
+			'object',
+			'action',
+			'defaults',
+			'loading_image_url',
+			'subscribe_prompt',
+			'unsubscribe_prompt'
+		);
 
 		if ( is_null( $template_id ) )
-			$template = Prompt_Template::locate( 'subscribe-form.php' );
+			$template = new Prompt_Template( 'subscribe-form.php' );
 		else
-			$template = self::template_path( $template_id );
+			$template = new Prompt_Template( self::template_path( $template_id ) );
 
-		Prompt_Template::render( $template, $template_data );
+		$template->render( $template_data, $echo = true );
 	}
 
 	protected function enqueue_widget_assets() {

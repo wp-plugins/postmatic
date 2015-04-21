@@ -62,7 +62,8 @@ class Prompt_Subscription_Mailing {
 			$command->save_subscription_data( $object, $email_address, $user_data );
 		}
 
-		$template = Prompt_Template::locate( 'subscription-agreement-email.php' );
+		$html_template = new Prompt_Email_Template( 'subscription-agreement-email.php' );
+		$text_template = new Prompt_Text_Email_Template( 'subscription-agreement-email-text.php' );
 
 		$message_data = array_merge( compact( 'email_address', 'object', 'user_data', 'resending' ), $message_data );
 		/**
@@ -75,17 +76,25 @@ class Prompt_Subscription_Mailing {
 		 */
 		$message_data = apply_filters( 'prompt/subscription_agreement_email/template_data', $message_data );
 
-		if ( !empty( $message_data['subject'] ) )
-			$subject = $message_data['subject'];
-		else
-			$subject = sprintf( __( 'Please verify your subscription to %s', 'Postmatic' ), $object->subscription_object_label() );
-
 		$email = new Prompt_Email( array(
 			'to_address' => $email_address,
-			'subject' => $subject,
-			'message' => Prompt_Template::render( $template, $message_data, false ),
-			'template' => 'html-email-no-widgets.php',
+			'subject' => sprintf(
+				__( 'Please verify your subscription to %s', 'Postmatic' ),
+				$object->subscription_object_label()
+			),
+			'message_type' => Prompt_Enum_Message_Types::SUBSCRIPTION,
 		) );
+
+		if ( !empty( $message_data['subject'] ) )
+			$email->set_subject( $message_data['subject'] );
+
+		if ( !empty( $message_data['message_type'] ) )
+			$email->set_message_type( $message_data['message_type'] );
+
+		if ( !empty( $message_data['from_name'] ) )
+			$email->set_from_name( $message_data['from_name'] );
+
+		self::render_email( $email, $text_template, $html_template, $message_data );
 
 		Prompt_Command_Handling::add_command_metadata( $command, $email );
 
@@ -125,7 +134,7 @@ class Prompt_Subscription_Mailing {
 
 		$email = new Prompt_Email( array(
 			'to_address' => $subscriber->user_email,
-			'template' => 'html-email-no-widgets.php',
+			'message_type' => Prompt_Enum_Message_Types::SUBSCRIPTION,
 		) );
 
 		if ( $un ) {
@@ -133,7 +142,7 @@ class Prompt_Subscription_Mailing {
 			$email->set_subject(
 				sprintf( __( 'You\'re unsubscribed from %s', 'Postmatic' ), $object->subscription_object_label() )
 			);
-			$template = "unsubscribed-email.php";
+			$template_file = "unsubscribed-email.php";
 			$filter = 'prompt/unsubscribed_email';
 			$latest_post = null;
 			$comments = array();
@@ -143,19 +152,22 @@ class Prompt_Subscription_Mailing {
 			$email->set_subject(
 				sprintf( __( 'You\'re subscribed to %s', 'Postmatic' ), $object->subscription_object_label() )
 			);
-			$template = "subscribed-email.php";
+			$template_file = "subscribed-email.php";
 			$filter = 'prompt/subscribed_email';
-			$latest_post = self::get_latest_post( $object );
-			$comments = self::get_comments( $object );
+			$latest_post = self::latest_post( $object );
+			$comments = self::comments( $object );
 
 		}
 
-		$template = Prompt_Template::locate( $template );
+		$html_template = new Prompt_Email_Template( $template_file );
+		$text_template = new Prompt_Text_Email_Template( str_replace( '.php', '-text.php', $template_file ) );
+
 		$template_data = array(
 			'subscriber' => $prompt_subscriber->get_wp_user(),
 			'object' => $object,
 			'latest_post' => $latest_post,
 			'comments' => $comments,
+			'subject' => $email->get_subject(),
 		);
 		/**
 		 * Filter template data for subscription notification email.
@@ -176,13 +188,10 @@ class Prompt_Subscription_Mailing {
 
 		if ( $latest_post or $comments ) {
 			$post = $latest_post ? $latest_post : $object->get_wp_post();
-			$command = new Prompt_Comment_Command();
-			$command->set_post_id( $post->ID );
-			$command->set_user_id( $subscriber->ID );
-			Prompt_Command_Handling::add_command_metadata( $command, $email );
+			self::add_comment_command( $email, $post->ID, $subscriber->ID );
 		}
 
-		$email->set_message( Prompt_Template::render( $template, $template_data, false ) );
+		self::render_email( $email, $text_template, $html_template, $template_data );
 
 		if ( $latest_post )
 			wp_reset_postdata();
@@ -192,21 +201,95 @@ class Prompt_Subscription_Mailing {
 		 *
 		 * @param Prompt_Email $email
 		 * @param array $template_data @see prompt/subscribed_email/template_data
-		 * @type Prompt_Interface_Subscribable $object The object subscribed to
-		 * }
 		 */
 		$email = apply_filters( $filter, $email, $template_data );
 
-		$mailer = Prompt_Factory::make_mailer();
+		Prompt_Factory::make_mailer()->send_one( $email );
+	}
 
-		$mailer->send_one( $email );
+	/**
+	 * Send a rejoin confirmation email.
+	 *
+	 * @param int $subscriber
+	 * @param Prompt_Post $prompt_post
+	 */
+	public static function send_rejoin_notification( $subscriber, $prompt_post ) {
+
+		$prompt_subscriber = new Prompt_User( $subscriber );
+		$subscriber = $prompt_subscriber->get_wp_user();
+
+		$email = new Prompt_Email( array(
+			'to_address' => $subscriber->user_email,
+			'message_type' => Prompt_Enum_Message_Types::SUBSCRIPTION,
+		) );
+
+		$email->set_subject(
+			sprintf( __( 'You\'ve rejoined %s', 'Postmatic' ), $prompt_post->subscription_object_label() )
+		);
+		$comments = self::comments( $prompt_post );
+
+		$html_template = new Prompt_Email_Template( 'rejoined-email.php' );
+		$text_template = new Prompt_Text_Email_Template( 'rejoined-email-text.php' );
+
+		$template_data = array(
+			'subscriber' => $subscriber,
+			'object' => $prompt_post,
+			'comments' => $comments,
+			'subject' => $email->get_subject(),
+		);
+		/**
+		 * Filter template data for subscription notification email.
+		 *
+		 * @param array $template_data {
+		 *      Data supplied to the subscription notification email template.
+		 *
+		 *      @type WP_User $subscriber
+		 *      @type Prompt_Interface_Subscribable $prompt_post The object subscribed to
+		 *      @type array $comments The comments since flood control was triggered.
+		 *      @type string $subject
+		 * }
+		 */
+		$template_data = apply_filters( 'prompt/rejoined_email/template_data', $template_data );
+
+		self::add_comment_command( $email, $prompt_post->id(), $subscriber->ID );
+
+		self::render_email( $email, $text_template, $html_template, $template_data );
+
+		/**
+		 * Filter subscription notification email.
+		 *
+		 * @param Prompt_Email $email
+		 * @param array $template_data @see prompt/rejoined_email/template_data
+		 */
+		$email = apply_filters( 'prompt/rejoined_email', $email, $template_data );
+
+		Prompt_Factory::make_mailer()->send_one( $email );
+	}
+
+	protected static function add_comment_command( Prompt_Email $email, $post_id, $subscriber_id ) {
+		$command = new Prompt_Comment_Command();
+		$command->set_post_id( $post_id );
+		$command->set_user_id( $subscriber_id );
+		Prompt_Command_Handling::add_command_metadata( $command, $email );
+	}
+
+	protected static function render_email(
+		Prompt_Email $email,
+		Prompt_Text_Email_Template $text_template,
+		Prompt_Email_Template $html_template,
+		$template_data
+	) {
+		$email->set_text( $text_template->render( $template_data ) );
+
+		if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) )
+			$email->set_html( $html_template->render( $template_data ) );
 	}
 
 	/**
 	 * @param Prompt_Interface_Subscribable $object
 	 * @return WP_Post
 	 */
-	protected static function get_latest_post( Prompt_Interface_Subscribable $object ) {
+	protected static function latest_post( Prompt_Interface_Subscribable $object ) {
 
 		if ( is_a( $object, 'Prompt_Post' ) )
 			return null;
@@ -214,6 +297,9 @@ class Prompt_Subscription_Mailing {
 		$query = array(
 			'posts_per_page' => 1,
 			'post_type' => Prompt_Core::$options->get( 'site_subscription_post_types' ),
+			'meta_query' => array(
+				Prompt_Post::sent_posts_meta_clause(),
+			)
 		);
 
 		if ( is_a( $object, 'Prompt_User' ) )
@@ -227,28 +313,16 @@ class Prompt_Subscription_Mailing {
 		return $posts[0];
 	}
 
-	protected static function get_comments( Prompt_Interface_Subscribable $object ) {
+	protected static function comments( Prompt_Interface_Subscribable $object ) {
 
 		if ( ! is_a( $object, 'Prompt_Post' ) )
 			return array();
-
-		$include_count = 20;
-		$offset = 0;
-
-		$count = get_comments( array( 'post_id' => $object->id(), 'status' => 'approve', 'count' => true ) );
-
-		if ( $count === 0 )
-			return array();
-
-		if ( $count > $include_count )
-			$offset = $count - $include_count;
 
 		return get_comments( array(
 			'post_id' => $object->id(),
 			'status' => 'approve',
 			'order' => 'ASC',
-			'offset' => $offset,
-			'number' => $include_count,
 		) );
 	}
+
 }
