@@ -1,4 +1,4 @@
-=== Postmatic - Post delivery & commenting by email for everyone ===
+=== Postmatic - Engagement through email ===
 Contributors: vernal
 Tags: email, subscribe to comments, subscription, subscribe, commenting, reply, email,  comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, mailchimp, mailgun, email comming, reply to email, email replies, engagement, invite, invitations, jetpack, subscribe2
 Requires at least: 3.9
@@ -10,7 +10,7 @@ Postmatic lets your readers subscribe to comments or new posts by email. And lea
 
 == Description ==
 
-= [Read about how we are revolutionizing WordPress commenting on our site] (http://gopostmatic.com)
+[Read about how we are revolutionizing WordPress commenting on our site](http://gopostmatic.com)
 
 = Your posts delivered to their inbox. =
 = Their comments delivered through a simple reply. =
@@ -30,10 +30,10 @@ Online or offline, everyone stays in the loop—regardless of desktop or mobile.
 
 [vimeo http://vimeo.com/108515948]
 
-= [Visit gopostmatic.com to learn more] (http://gopostmatic.com)
+[Visit gopostmatic.com to learn more](http://gopostmatic.com)
 
 = Key Features =
-
+		
 * Posts are converted into fully responsive html emails on the fly. We support images, video, shortcodes, and oEmbed.
 * We handle email delivery through partnerships with Mailchimp and Rackspace. Lists with thousands of subscribers are no trouble atll.
 * Replies are posted as comments in as little as 6 seconds.
@@ -42,20 +42,20 @@ Online or offline, everyone stays in the loop—regardless of desktop or mobile.
 * Single-click migration tools for Jetpack, MailPoet, and Mailchimp lists.
 * An incredible invitation system that turns past commenters into subscribers.
 * Postmatic strictly adheres to WordPress best practices. It uses the native commenting and user systems. We’re just a magical email gateway.
-* We’re serious about privacy and doing the right thing. We do not profile users, run ads, or sell data in any way and maintain a very strict [privacy](/privacy) policy.
+* We’re serious about privacy and doing the right thing. We do not profile users, run ads, or sell data in any way and maintain a very strict [privacy](http://gopostmatic.com/privacy) policy.
 * The basic version of Postmatic, which brings 100% email commenting to WordPress, is free without limits.
 
 == Frequently Asked Questions ==
 
 = This is really free? Do you sell my data or run advertising? =
 
-Yes to free. [No to bad stuff](http://gopostmatic.com/privacy). We're not in the data brokering or advertising game. Instead we're in the business of making [Postmatic Premium](http://gopostmatic.com/premium) _so good_ and _so affordable_ that you'll happily upgrade.You can help fund our development while sending your engagement through the roof by subscribing to Postmatic Premium. We're even running [a launch special right now](http://gopostmatic.com/trial).
+Yes to free. [No to bad stuff](http://gopostmatic.com/privacy). We're not in the data brokering or advertising game. Instead we're in the business of making [Postmatic Premium](http://gopostmatic.com/premium) _so good_ and _so affordable_ that you'll happily upgrade.You can help fund our development while sending your engagement through the roof by subscribing to Postmatic Premium. We're even running [a launch special right now](http://gopostmatic.com/trial).
 
 = Is this a 3rd party commenting system? =
-Not at all. Postmatic uses native WordPress commenting. All we do is wire up some magic to turn emails into comments, then push them to your site via the WordPress api. You can [read all about](/technology) it here.
+Not at all. Postmatic uses native WordPress commenting. All we do is wire up some magic to turn emails into comments, then push them to your site via the WordPress api. You can [read all about](http://gopostmatic.com/technology) it here.
 
 = How quickly do email comments post to my website =
-It takes Postmatic **six to ten seconds** after you hit send to turn your email into a WordPress comment.
+It takes Postmatic **six to ten seconds** after you hit send to turn your email into a WordPress comment.
 
 Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
@@ -225,4 +225,3 @@ Just a quick fix to address a couple of outstanding issues.
 - We've added an option to disable widgets in the footer and instead display definable text
 - Moved the advanced options to their own tab in the settings screen
 - Lots of little bugs squashed
-
