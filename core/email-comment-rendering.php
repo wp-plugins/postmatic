@@ -19,7 +19,7 @@ class Prompt_Email_Comment_Rendering {
 		echo html( 'div class="comment-header"',
 			get_avatar( $comment ),
 			html( 'div class="author-name"',
-				get_comment_author( '', $comment )
+				get_comment_author_link( $comment->comment_ID )
 			),
 			html( 'div class="comment-body"',
 				apply_filters( 'comment_text', get_comment_text( $comment->comment_ID ), $comment )

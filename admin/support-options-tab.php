@@ -45,7 +45,7 @@ class Prompt_Admin_Support_Options_Tab extends Prompt_Admin_Options_Tab {
 			html( 'p', __( 'Find answers to the most common questions and ask your own.', 'Postmatic' ) ),
 			html( 'p',
 				html( 'a',
-					array( 'href' => Prompt_Enum_Urls::DOCS ),
+					array( 'href' => Prompt_Enum_Urls::DOCS, 'target' => '_blank' ),
 					__( 'Find Answers', 'Postmatic' )
 				)
 			)

@@ -18,7 +18,7 @@ echo Prompt_Html_To_Markdown::h1(
 
 <?php
 _e(
-	'You love email. But maybe not this much. We\'re going shut things down from this point on to prevent a flood in your inbox. You will no longer receive new comments on this post.',
+	'You love email. But maybe not this much. We\'re going to shut things down from this point on to prevent a flood in your inbox. You will no longer receive new comments on this post.',
 	'Postmatic'
 );
 ?>

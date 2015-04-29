@@ -10,6 +10,8 @@ Postmatic lets your readers subscribe to comments or new posts by email. And lea
 
 == Description ==
 
+= [Read about how we are revolutionizing WordPress commenting on our site] (http://gopostmatic.com)
+
 = Your posts delivered to their inbox. =
 = Their comments delivered through a simple reply. =
 = That’s how the conversation gets started. That’s how you increase engagement. =
@@ -27,6 +29,8 @@ Postmatic lets your readers subscribe by email when they leave a comment. Subseq
 Online or offline, everyone stays in the loop—regardless of desktop or mobile.
 
 [vimeo http://vimeo.com/108515948]
+
+= [Visit gopostmatic.com to learn more] (http://gopostmatic.com)
 
 = Key Features =
 
@@ -70,6 +74,13 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 == Changelog ==
 
 = 1.0 =
+
+- Moved the subscribe to comments by email checkbox. It now sits above the submit button and is more visible across all themes.
+- Improvements to comment moderation language.
+- Added more patterns to the signature stripping library, including the new gmail timestamps.
+- We now support comment author urls and link to the author websites from the email-based comment template.
+
+= 1.0 RC1 =
 
 So many good things there aren't enough bits in the universe to explain it all. Head on over to [our blog](http://gopostmatic.com/blog) for the big news. Special thanks to our wonderful beta testers! We love you!
 

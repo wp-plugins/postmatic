@@ -16,7 +16,7 @@ $recipient = esc_html(
 	<h3><?php printf( __( 'An invitation from %s', 'Postmatic' ), get_bloginfo( 'name' ) ); ?></h3>
 	<p><?php echo $invite_introduction; ?></p>
 <?php else : ?>
-	<h4 class="alert">
+	<h4>
 		<strong>
 			<?php
 			printf(
@@ -29,7 +29,7 @@ $recipient = esc_html(
 <?php endif; ?>
 
 <?php if ( $resending ) : ?>
-	<h2><?php _e( 'Important Notice', 'Postmatic' ); ?></h2>
+	<h3><?php _e( 'Important Notice', 'Postmatic' ); ?></h2>
 	<p>
 		<?php
 		printf(
@@ -44,7 +44,7 @@ $recipient = esc_html(
 <?php endif; ?>
 
 
-<h1><?php _e( 'First, there are some important things you should know', 'Postmatic' ); ?></h1>
+<h2><?php _e( 'First, there are some important things you should know', 'Postmatic' ); ?></h1>
 <ol>
 	<li>
 		<?php

@@ -445,6 +445,9 @@ class Prompt_Post_Mailing {
 		$gist = json_decode( $json, $associative_arrays = true );
 		$files = $gist['files'];
 
+		if ( empty( $files ) )
+			return '';
+
 		if ( empty( $atts['file'] ) or empty( $files[$atts['file'] ] ) ) {
 			$file_keys = array_keys( $files );
 			$atts['file'] = $file_keys[0];

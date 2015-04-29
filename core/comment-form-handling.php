@@ -67,7 +67,10 @@ class Prompt_Comment_Form_Handling {
 
 		if ( !$user_id ) {
 
-			$user_data = array( 'display_name' => $comment->comment_author );
+			$user_data = array(
+				'display_name' => $comment->comment_author,
+				'user_url' => $comment->comment_author_url,
+			);
 
 			Prompt_Subscription_Mailing::send_agreement(
 				$prompt_post,

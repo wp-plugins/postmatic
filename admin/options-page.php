@@ -153,15 +153,20 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	}
 
 	public function page_header() {
-		if ( $this->key )
-			echo '<div class="wrap">';
-		else
-			echo '<div class="wrap signup">';
 
+		$wrapper = '<div class="wrap signup">';
+		$account_url = Prompt_Enum_Urls::MANAGE;
+
+		if ( $this->key ) {
+			$wrapper = '<div class="wrap">';
+			$account_url .= '/login';
+		}
+
+		echo $wrapper;
 		echo html( 'div id="manage-account"',
 			html( 'p',
 				html( 'a',
-					array( 'href' => Prompt_Enum_Urls::MANAGE ),
+					array( 'href' => $account_url ),
 					__( '&#9998; Manage your account', 'Postmatic' )
 				)
 			)
@@ -332,7 +337,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			html( 'p',
 				sprintf(
 					__(
-						'Heads up! We noticed Akismet is not active on your site. Akismet is free, bundled with WordPress, and stops the vast majority of comment spam. Please be sure that you are using it or a similar product to keep from spamming your subscribers. <a href="%s">Learn more</a>.',
+						'Heads up! We noticed Akismet is not active on your site. Akismet is free, bundled with WordPress, and stops the vast majority of comment spam. Please be sure that you are using it or a similar product to keep from spamming your subscribers. <a href="%s" target="_blank">Learn more</a>.',
 						'Postmatic'
 					),
 					Prompt_Enum_Urls::SPAM_DOC

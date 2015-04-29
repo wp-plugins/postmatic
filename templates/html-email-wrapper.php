@@ -478,7 +478,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .inreply {font-weight: normal; font-size: 120%; color: #737373; margin-bottom: 15px;}
 .inreply a {color: black; text-decoration: none !important; font-style: italic;}
 .author-name,.comment-date,.comment-body { margin-left: 60px;}
-.author-name {color: #DF623B; font-style: italic; font-family: serif; line-height: normal;}
+.author-name, .author-name a {color: #DF623B; font-style: italic; font-family: serif; line-height: normal;}
 .comment {font-size: 100%; line-height:normal; min-height: 55px; clear: left !important;}
 .comment-date {color: gray; font-size: 90%;}
 .comment-header {padding-bottom: 0; font-size: 100%;margin-bottom: 15px !important; }
@@ -603,7 +603,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
                       <?php
                       printf(
                           __(
-                              'To stop receiving all posts and comments from %s you can <a href="%s">unsubscribe with a single click</a>.',
+                              'To immediately stop receiving all posts and comments from %s you can <a href="%s">unsubscribe with a single click</a>.',
                               'Postmatic'
                           ),
                           get_bloginfo( 'name' ),

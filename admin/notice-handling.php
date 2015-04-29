@@ -49,7 +49,7 @@ class Prompt_Admin_Notice_Handling {
 
 		$message = sprintf(
 			__(
-				'Heads up: We noticed there is an activate Jetpack module which is not compatible with Postmatic. You\'ll need to fix that. <a href="%s">Learn how to do so here</a>.',
+				'Heads up: We noticed there is an activate Jetpack module which is not compatible with Postmatic. You\'ll need to fix that. <a href="%s" target="_blank">Learn how to do so here</a>.',
 				'Postmatic'
 			),
 			Prompt_Enum_Urls::JETPACK_HOWTO

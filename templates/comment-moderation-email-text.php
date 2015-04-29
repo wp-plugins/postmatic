@@ -37,7 +37,7 @@ echo Prompt_Html_To_Markdown::h1(
 
 <?php echo Prompt_Html_To_Markdown::h2( __( 'Approve?', 'Postmatic' ) ); ?>
 
-<?php _e( 'Reply to this email with a blank message or the word \'approve.\'', 'Postmatic' ); ?>
+<?php _e( 'Reply to this email with a blank message or the word \'approve.\'. You can also approve and reply at the same time by just writing your reply.', 'Postmatic' ); ?>
 
 <?php echo admin_url( 'comment.php?action=approve&c=' . $comment->comment_ID ); ?>
 
