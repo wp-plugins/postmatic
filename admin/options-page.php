@@ -482,7 +482,7 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		$configuration = json_decode( $response['body'] );
 
-		if ( strpos( admin_url( 'admin-ajax.php' ), $configuration->site->url ) === false ) {
+		if ( ! self::site_matches( $configuration->site->url ) ) {
 			$message = sprintf(
 				__(
 					'Your key was registered for a different site. Please request a key for this site\'s dedicated use, or <a href="%s" target="_blank">contact us</a> for assistance. Thanks!',
@@ -498,6 +498,13 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$configurator->update_configuration( $configuration );
 
 		return $key;
+	}
+
+	protected function site_matches( $url ) {
+		$schemeless_url = substr( $url, strpos( $url, ':' ) );
+		$ajax_url = admin_url( 'admin-ajax.php' );
+		$schemeless_ajax_url = substr( $ajax_url, strpos( $ajax_url, ':' ) );
+		return ( $schemeless_ajax_url == $schemeless_url );
 	}
 
 	protected function submit_errors() {

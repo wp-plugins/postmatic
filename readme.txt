@@ -73,6 +73,11 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.0.1 =
+
+- Nothing crazy exciting. The Mailchimp importer was unhappy but is better now. 
+- Improved flexibility with sites that use both http and https
+
 = 1.0 =
 
 - Moved the subscribe to comments by email checkbox. It now sits above the submit button and is more visible across all themes.
