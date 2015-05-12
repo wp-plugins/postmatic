@@ -28,10 +28,10 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 		if ( isset( $_POST[self::$no_email_name] ) and isset( $_POST['post_ID'] ) and $_POST['post_ID'] == $post_id )
 			return true; // Meta hasn't been saved yet but will be
 
-		$meta_value = get_post_meta( $post_id, self::$no_email_name, true );
+		$meta_values = get_post_meta( $post_id, self::$no_email_name );
 
-		if ( '' !== $meta_value )
-			return (bool) $meta_value;
+		if ( !empty( $meta_values ) )
+			return (bool) $meta_values[0];
 
 		return Prompt_Core::$options->get( 'no_post_email_default' );
 	}
@@ -54,10 +54,10 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 			return true; // Meta hasn't been saved yet but will be
 		}
 
-		$meta_value = get_post_meta( $post_id, self::$no_featured_image_name, true );
+		$meta_values = get_post_meta( $post_id, self::$no_featured_image_name );
 
-		if ( '' != $meta_value )
-			return (bool) $meta_value;
+		if ( !empty( $meta_values ) )
+			return (bool) $meta_values[0];
 
 		return Prompt_Core::$options->get( 'no_post_featured_image_default' );
 	}
@@ -80,10 +80,10 @@ class Prompt_Admin_Delivery_Metabox extends scbPostMetabox {
 			return true; // Meta will be saved by our parent class
 		}
 
-		$meta_value = get_post_meta( $post_id, self::$excerpt_only_name, true );
+		$meta_values = get_post_meta( $post_id, self::$excerpt_only_name );
 
-		if ( '' != $meta_value )
-			return (bool) $meta_value;
+		if ( !empty( $meta_values ) )
+			return (bool) $meta_values[0];
 
 		return Prompt_Core::$options->get( 'excerpt_default' );
 	}

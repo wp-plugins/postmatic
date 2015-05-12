@@ -141,11 +141,9 @@ class Prompt_Comment_Flood_Controller {
 				'to_address' => $subscriber->user_email,
 				'subject' => $template_data['subject'],
 				'text' => $text_template->render( $template_data ),
+				'html' => $html_template->render( $template_data ),
 				'message_type' => Prompt_Enum_Message_Types::SUBSCRIPTION,
 			) );
-
-			if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) )
-				$email->set_html( $html_template->render( $template_data ) );
 
 			$command = new Prompt_Comment_Flood_Command();
 			$command->set_post_id( $this->prompt_post->id() );

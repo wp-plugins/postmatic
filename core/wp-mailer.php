@@ -68,11 +68,12 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 			$this->local_mailer->addReplyTo( $email->get_reply_address(), $email->get_reply_name() );
 
 		$this->local_mailer->Subject = $email->get_subject();
-		$this->local_mailer->Body = $email->get_text();
+
+		$this->local_mailer->Body = $email->get_html();
+		$this->local_mailer->AltBody = $email->get_text();
+		$this->local_mailer->ContentType = Prompt_Enum_Content_Types::HTML;
 
 		$this->local_mailer->isMail();
-
-		$this->local_mailer->ContentType = Prompt_Enum_Content_Types::TEXT;
 
 		$this->local_mailer->CharSet = 'UTF-8';
 
@@ -107,7 +108,8 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 
 		$actions = $this->implied_actions( $emails );
 
-		$actions = array_diff( $actions, array( 'inline-styles' ) );
+		// currently we only track replies locally
+		$actions = in_array( 'track-replies', $actions ) ? array( 'track-replies' ) : array();
 
 		$results = $this->prompt_outbound( $emails, $actions );
 

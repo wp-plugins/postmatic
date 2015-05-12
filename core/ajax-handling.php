@@ -170,24 +170,31 @@ class Prompt_Ajax_Handling {
 
 		$post = get_post( $post_id );
 
-		Prompt_Post_Mailing::setup_postdata( $post );
+		$context = new Prompt_Post_Rendering_Context( $post );
+
+		$context->setup();
+
+		$is_api_delivery = ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) );
+		$will_strip_content = ( !$is_api_delivery and $context->has_fancy_content() );
 
 		$email = Prompt_Post_Mailing::build_email( array(
 			'prompt_author' => new Prompt_User( $post->post_author ),
 			'recipient' => wp_get_current_user(),
 			'prompt_post' => new Prompt_Post( $post ),
 			'subscribed_object' => new Prompt_Site(),
-			'featured_image_src' => self::featured_image_src( $post_id ),
+			'featured_image_src' => $context->get_the_featured_image_src(),
 			'excerpt_only' => Prompt_Admin_Delivery_Metabox::excerpt_only( $post->ID ),
-			'the_text_content' => Prompt_Post_Mailing::get_the_text_content(),
+			'the_text_content' => $context->get_the_text_content(),
 			'subject' => sprintf(
 				__( 'PREVIEW of %s', 'Postmatic' ),
 				html_entity_decode( $post->post_title, ENT_QUOTES )
 			),
-			'alternate_versions_menu' => Prompt_Post_Mailing::alternate_versions_menu( $post ),
+			'alternate_versions_menu' => $context->alternate_versions_menu(),
+			'is_api_delivery' => $is_api_delivery,
+			'will_strip_content' => $will_strip_content,
 		) );
 
-		Prompt_Post_Mailing::reset_postdata();
+		$context->reset();
 
 		Prompt_Factory::make_mailer()->send_one( $email );
 
@@ -224,7 +231,8 @@ class Prompt_Ajax_Handling {
 			wp_send_json_error( array( 'error' => __( 'An API Key is required', 'Postmatic' ) ) );
 		}
 		// pull in the lib
-		require_once dirname( dirname( __FILE__ ) ) . '/vendor/mailchimp/mailchimp/src/Mailchimp.php';
+		if ( !class_exists( 'Mailchimp' ) )
+			require_once dirname( dirname( __FILE__ ) ) . '/vendor/mailchimp/mailchimp/src/Mailchimp.php';
 		
 		$api_key = sanitize_text_field( $_POST['api_key'] );
 
@@ -257,8 +265,8 @@ class Prompt_Ajax_Handling {
 		);
 
 		wp_send_json_success( $content );
-
 	}
+
 	/**
 	 * @param $post_id
 	 * @return array|bool

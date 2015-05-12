@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.0.1\n"
+"Email 1.1.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
-"plugin/1.0.1-20150504-1305\n"
-"POT-Creation-Date: 2015-05-04 13:05:17+00:00\n"
+"plugin/1.1.0-20150512-0346\n"
+"POT-Creation-Date: 2015-05-12 03:46:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -537,11 +537,11 @@ msgstr ""
 msgid "MailChimp API Key: "
 msgstr ""
 
-#: admin/mailchimp-import-options-tab.php:151
+#: admin/mailchimp-import-options-tab.php:159
 msgid "Load lists"
 msgstr ""
 
-#: admin/mailchimp-import-options-tab.php:161
+#: admin/mailchimp-import-options-tab.php:172
 msgid "Evaluate and import list"
 msgstr ""
 
@@ -706,7 +706,7 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: admin/options-options-tab.php:39 core/core.php:253
+#: admin/options-options-tab.php:39 core/core.php:254
 msgid "Postmatic Delivery"
 msgstr ""
 
@@ -749,7 +749,7 @@ msgid ""
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.1)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.1.0)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:138
 msgid "Postmatic"
@@ -759,50 +759,51 @@ msgstr ""
 msgid "&#9998; Manage your account"
 msgstr ""
 
-#: admin/options-page.php:205
+#: admin/options-page.php:218
 msgid "Already have a key?"
 msgstr ""
 
-#: admin/options-page.php:208
+#: admin/options-page.php:221
 msgid "Postmatic Key"
 msgstr ""
 
-#: admin/options-page.php:212
+#: admin/options-page.php:225
 msgid "Once you have your key, enter it here to blast off!."
 msgstr ""
 
-#: admin/options-page.php:289
+#: admin/options-page.php:304
 msgid ""
 "<strong>Attention:</strong> There have been some recent errors in your "
 "configuration. An error log can be found here: "
 msgstr ""
 
-#: admin/options-page.php:295 admin/options-page.php:307
-#: admin/options-page.php:348 admin/options-page.php:372
+#: admin/options-page.php:310 admin/options-page.php:322
+#: admin/options-page.php:363 admin/options-page.php:387
+#: admin/options-page.php:602
 msgid "Dismiss"
 msgstr ""
 
-#: admin/options-page.php:296
+#: admin/options-page.php:311
 msgid "Submit A Bug Report"
 msgstr ""
 
-#: admin/options-page.php:312
+#: admin/options-page.php:327
 msgid ""
 "Your current theme is missing widget areas. This means you'll have to use "
 "the template tag to display the Postmatic Subscription widget."
 msgstr ""
 
-#: admin/options-page.php:320
+#: admin/options-page.php:335
 msgid ""
 "To get started now, place the Postmatic Subscribe widget where people can "
 "use it to subscribe!"
 msgstr ""
 
-#: admin/options-page.php:322
+#: admin/options-page.php:337
 msgid "Visit Your Widgets"
 msgstr ""
 
-#: admin/options-page.php:339
+#: admin/options-page.php:354
 msgid ""
 "Heads up! We noticed Akismet is not active on your site. Akismet is free, "
 "bundled with WordPress, and stops the vast majority of comment spam. Please "
@@ -810,36 +811,42 @@ msgid ""
 "your subscribers. <a href=\"%s\" target=\"_blank\">Learn more</a>."
 msgstr ""
 
-#: admin/options-page.php:363
+#: admin/options-page.php:378
 msgid ""
 "Did you know there is an excellent and free way to keep spam comments from "
 "ever getting submitted? We heartily recommend installing <a href=\"%s"
 "\">WordPress Zero Spam</a>."
 msgstr ""
 
-#: admin/options-page.php:470
+#: admin/options-page.php:485
 msgid ""
 "There's a problem verifying your key. Please try later or report this error."
 msgstr ""
 
-#: admin/options-page.php:477
+#: admin/options-page.php:492
 msgid ""
 "We didn't recognize the key \"%s\". Please make sure it exactly matches the "
-"key we supplied you. <a href=\"http://app.gopostmatic.com\" target=\"_blank"
-"\">Visit your Postmatic dashboard for assistance</a>. "
+"key we supplied you. <a href=\"%s\" target=\"_blank\">Visit your Postmatic "
+"dashboard for assistance</a>. "
 msgstr ""
 
-#: admin/options-page.php:487
+#: admin/options-page.php:506
 msgid ""
 "Your key was registered for a different site. Please request a key for this "
 "site's dedicated use, or <a href=\"%s\" target=\"_blank\">contact us</a> for "
 "assistance. Thanks!"
 msgstr ""
 
-#: admin/options-page.php:541
+#: admin/options-page.php:560
 msgid ""
 "We're even having trouble sending a bug report. Please copy the data to the "
 "right and send to %s."
+msgstr ""
+
+#: admin/options-page.php:596
+msgid ""
+"We detected that your host is unable to send email. You'll have to contact "
+"them for help, or upgrade Postmatic to use our awesome delivery services."
 msgstr ""
 
 #: admin/support-options-tab.php:8 admin/support-options-tab.php:66
@@ -907,19 +914,19 @@ msgstr ""
 msgid "No news available at the moment."
 msgstr ""
 
-#: admin/text-metabox.php:57
+#: admin/text-metabox.php:60
 msgid "This was the text version sent to subscribers."
 msgstr ""
 
-#: admin/text-metabox.php:69
+#: admin/text-metabox.php:72
 msgid "Customize"
 msgstr ""
 
-#: admin/text-metabox.php:82
+#: admin/text-metabox.php:85
 msgid ""
-"Upgrade to <a href=\"%s\">Postmatic Premium</a>.<br />You can kiss plain "
-"text email goodbye and dazzle your readers with a beautiful HTML version "
-"instead</a>."
+"This post will be sent as a multipart message. We have automatically "
+"generated a plaintext version for older email clients. You can adjust it if "
+"you need to."
 msgstr ""
 
 #: admin/users-handling.php:24
@@ -950,49 +957,49 @@ msgstr[1] ""
 msgid "%s is not subscribed to %s."
 msgstr ""
 
-#: core/ajax-handling.php:144 core/ajax-handling.php:381
+#: core/ajax-handling.php:144 core/ajax-handling.php:389
 msgid "You have unsubscribed."
 msgstr ""
 
-#: core/ajax-handling.php:184
+#: core/ajax-handling.php:189
 msgid "PREVIEW of %s"
 msgstr ""
 
-#: core/ajax-handling.php:194
+#: core/ajax-handling.php:201
 msgid "Preview email sent."
 msgstr ""
 
-#: core/ajax-handling.php:224
+#: core/ajax-handling.php:231
 msgid "An API Key is required"
 msgstr ""
 
-#: core/ajax-handling.php:252
+#: core/ajax-handling.php:260
 msgid "Choose a list to import to Postmatic: "
 msgstr ""
 
-#: core/ajax-handling.php:323
+#: core/ajax-handling.php:331
 msgid "Sorry, that email address is not valid."
 msgstr ""
 
-#: core/ajax-handling.php:347
+#: core/ajax-handling.php:355
 msgid ""
 "Almost done - you'll receive an email with instructions to complete your "
 "subscription."
 msgstr ""
 
-#: core/ajax-handling.php:362
+#: core/ajax-handling.php:370
 msgid "Are you sure you want to unsubscribe %s?"
 msgstr ""
 
-#: core/ajax-handling.php:364
+#: core/ajax-handling.php:372
 msgid "Not you? Click here to start over"
 msgstr ""
 
-#: core/ajax-handling.php:366 core/comment-form-handling.php:166
+#: core/ajax-handling.php:374 core/comment-form-handling.php:166
 msgid "Unsubscribe"
 msgstr ""
 
-#: core/ajax-handling.php:395
+#: core/ajax-handling.php:403
 msgid ""
 "<strong>Confirmation email sent. Please check your email for further "
 "instructions.</strong>"
@@ -1026,7 +1033,7 @@ msgstr ""
 msgid "unsubscribe"
 msgstr ""
 
-#: core/comment-command.php:176 core/comment-moderation-command.php:166
+#: core/comment-command.php:176 core/comment-moderation-command.php:182
 msgid "rejected comment on unqualified post %s"
 msgstr ""
 
@@ -1046,21 +1053,20 @@ msgstr ""
 msgid "You are subscribed to new comments on this post."
 msgstr ""
 
-#: core/comment-mailer.php:64 core/comment-mailer.php:70
-#: core/comment-mailer.php:78 core/moderation-mailing.php:20
-#: templates/new-comment-email.php:13
+#: core/comment-mailer.php:66 core/comment-mailer.php:72
+#: core/comment-mailer.php:80 core/moderation-mailing.php:20
 msgid "Anonymous"
 msgstr ""
 
-#: core/comment-mailer.php:351
+#: core/comment-mailer.php:353
 msgid "%s replied to your comment on %s."
 msgstr ""
 
-#: core/comment-mailer.php:358
+#: core/comment-mailer.php:360
 msgid "%s replied to %s on %s"
 msgstr ""
 
-#: core/comment-mailer.php:365
+#: core/comment-mailer.php:367
 msgid "%s commented on %s"
 msgstr ""
 
@@ -1082,6 +1088,22 @@ msgid ""
 "capabilities."
 msgstr ""
 
+#. translators: this is the response used to approve a moderated comment
+#: core/comment-moderation-command.php:119
+msgid "approve"
+msgstr ""
+
+#. translators: this is the response used to flag a moderated comment as spam
+#: core/comment-moderation-command.php:125
+msgid "spam"
+msgstr ""
+
+#. translators: this is the response used to put a moderated comment in the
+#. trash
+#: core/comment-moderation-command.php:131
+msgid "trash"
+msgstr ""
+
 #: core/configurator.php:22
 msgid "A request for site configuration failed."
 msgstr ""
@@ -1101,12 +1123,12 @@ msgid ""
 "respond."
 msgstr ""
 
-#: core/core.php:65 templates/core-options-beta.php:9
+#: core/core.php:66 templates/core-options-beta.php:9
 #: templates/core-options-premium.php:9
 msgid "Welcome!"
 msgstr ""
 
-#: core/core.php:277
+#: core/core.php:274
 msgid "Postmatic Text Version"
 msgstr ""
 
@@ -1117,7 +1139,7 @@ msgid ""
 "com/widgets."
 msgstr ""
 
-#: core/email-template.php:27
+#: core/email-template.php:33
 msgid "Email by Postmatic"
 msgstr ""
 
@@ -1161,31 +1183,31 @@ msgstr ""
 msgid "Refusing to subscribe an invalid user ID."
 msgstr ""
 
-#: core/post-mailing.php:466
-msgid "This content is not compatible with your email client. "
-msgstr ""
-
-#: core/post-mailing.php:469
-msgid "Click here to view this content in your browser."
-msgstr ""
-
-#: core/post-mailing.php:483
+#: core/post-mailing.php:182
 msgid ""
 "Delivery of subscription notifications for the post \"%s\" may have failed."
 msgstr ""
 
-#: core/post-mailing.php:487
+#: core/post-mailing.php:186
 msgid ""
 "A site administrator can report this event to the development team from the "
 "Postmatic settings."
 msgstr ""
 
-#: core/post-mailing.php:489
+#: core/post-mailing.php:188
 msgid "The error message was: "
 msgstr ""
 
-#: core/post-mailing.php:494
+#: core/post-mailing.php:193
 msgid "Delivery issue for %s"
+msgstr ""
+
+#: core/post-rendering-context.php:402
+msgid "This content is not compatible with your email client. "
+msgstr ""
+
+#: core/post-rendering-context.php:405
+msgid "Click here to view this content in your browser."
 msgstr ""
 
 #: core/post.php:100
@@ -1358,7 +1380,7 @@ msgid ""
 "Rejected an inbound request with an invalid signature. Could be bot activity."
 msgstr ""
 
-#: core/wp-mailer.php:88
+#: core/wp-mailer.php:89
 msgid ""
 "Failed sending an email locally. Did you know Postmatic can deliver email "
 "for you?"
@@ -1383,7 +1405,7 @@ msgid ""
 msgstr ""
 
 #: templates/comment-flood-email-text.php:35
-#: templates/new-post-email-text.php:20 templates/new-post-email.php:30
+#: templates/new-post-email-text.php:20 templates/new-post-email.php:34
 #: templates/subscribed-email-text.php:46 templates/subscribed-email.php:37
 msgid "View this post online"
 msgstr ""
@@ -1516,12 +1538,12 @@ msgid "More Information"
 msgstr ""
 
 #: templates/comment-reply-email-text.php:22
-#: templates/comment-reply-email.php:27
+#: templates/comment-reply-email.php:28
 msgid "%s replied to your comment on %s:"
 msgstr ""
 
 #: templates/comment-reply-email-text.php:32
-#: templates/comment-reply-email.php:39
+#: templates/comment-reply-email.php:40
 msgid "%s left a reply to a comment by %s on %s:"
 msgstr ""
 
@@ -1533,13 +1555,13 @@ msgid "* Reply to this email to reply to %s. *"
 msgstr ""
 
 #: templates/comment-reply-email-text.php:50
-#: templates/comment-reply-email.php:81
+#: templates/comment-reply-email.php:82
 msgid "Here's a recap of this post and conversation:"
 msgstr ""
 
 #. translators: %1$s is post title, %2$s date, %3$s time, %4$s author
 #: templates/comment-reply-email-text.php:55
-#: templates/comment-reply-email.php:87
+#: templates/comment-reply-email.php:88
 msgid "%1$s was published on %2$s by %4$s."
 msgstr ""
 
@@ -1548,24 +1570,24 @@ msgid "There were %d comments previous to this. Here is this reply in context:"
 msgstr ""
 
 #: templates/comment-reply-email-text.php:88
-#: templates/comment-reply-email.php:131
+#: templates/comment-reply-email.php:132
 msgid ""
 "To no longer receive other comments or replies in this discussion reply with "
 "the word 'unsubscribe'."
 msgstr ""
 
-#: templates/comment-reply-email.php:73 templates/comment-reply-email.php:122
-#: templates/new-comment-email.php:55 templates/new-comment-email.php:110
+#: templates/comment-reply-email.php:74 templates/comment-reply-email.php:123
+#: templates/new-comment-email.php:51 templates/new-comment-email.php:106
 msgid "Reply to this email to reply to %s."
 msgstr ""
 
-#: templates/comment-reply-email.php:102
+#: templates/comment-reply-email.php:103
 msgid ""
 "There were <a href=\"%1$s\">%2$d comments</a> previous to this. Here is this "
 "reply in context:"
 msgstr ""
 
-#: templates/comment-reply-email.php:127
+#: templates/comment-reply-email.php:128
 msgid "Leave this conversation"
 msgstr ""
 
@@ -1573,18 +1595,28 @@ msgstr ""
 msgid "Manage your account"
 msgstr ""
 
-#: templates/html-email-wrapper.php:590
+#: templates/html-email-wrapper.php:592
+#: templates/html-local-email-wrapper.php:66
 msgid "Sent from %s."
 msgstr ""
 
-#: templates/html-email-wrapper.php:596
+#: templates/html-email-wrapper.php:598
 msgid "Delivered by <a href=\"%s\">Postmatic</a>."
 msgstr ""
 
-#: templates/html-email-wrapper.php:605
+#: templates/html-email-wrapper.php:607
+#: templates/html-local-email-wrapper.php:82
 msgid ""
 "To immediately stop receiving all posts and comments from %s you can <a href="
 "\"%s\">unsubscribe with a single click</a>."
+msgstr ""
+
+#: templates/html-local-email-wrapper.php:54
+msgid "Click here to view the full post in your browser"
+msgstr ""
+
+#: templates/html-local-email-wrapper.php:72
+msgid "Delivered by <a href=\"%s\">Postmatic</a>. "
 msgstr ""
 
 #: templates/new-comment-email-text.php:15
@@ -1599,38 +1631,38 @@ msgid ""
 "Please note: Your reply will be published publicly and immediately on %s."
 msgstr ""
 
-#: templates/new-comment-email-text.php:41 templates/new-comment-email.php:74
+#: templates/new-comment-email-text.php:41 templates/new-comment-email.php:70
 msgid "Recently in this conversation..."
 msgstr ""
 
-#: templates/new-comment-email-text.php:67 templates/new-comment-email.php:132
+#: templates/new-comment-email-text.php:67 templates/new-comment-email.php:128
 msgid ""
 "To no longer receive other comments on this thread reply with the word "
 "'unsubscribe'."
 msgstr ""
 
-#: templates/new-comment-email.php:19
-msgid "<span class=\"capitalize\">%s</span> added a comment "
+#: templates/new-comment-email.php:18
+msgid ""
+"<span style=\"text-tranform: capitalize;\" class=\"capitalize\">%s</span> "
+"added a comment "
 msgstr ""
 
-#: templates/new-comment-email.php:22
+#: templates/new-comment-email.php:21
 msgid "in reply to %s."
 msgstr ""
 
-#: templates/new-comment-email.php:59 templates/new-comment-email.php:114
-#: templates/new-post-email.php:43 templates/rejoined-email.php:43
-#: templates/subscribed-email.php:72
+#: templates/new-comment-email.php:55 templates/new-comment-email.php:110
 msgid ""
-"<strong>Please note</strong>: Your reply will be published publicly and "
-"immediately on %s."
+"<br /><strong>Please note</strong>: Your reply will be published publicly "
+"and immediately on %s."
 msgstr ""
 
 #. translators: word between date and time
-#: templates/new-comment-email.php:93
+#: templates/new-comment-email.php:89
 msgid "at"
 msgstr ""
 
-#: templates/new-comment-email.php:128
+#: templates/new-comment-email.php:124
 msgid "Want to leave this conversation?"
 msgstr ""
 
@@ -1648,7 +1680,7 @@ msgid ""
 "* subscribe *."
 msgstr ""
 
-#: templates/new-post-email-text.php:48 templates/new-post-email.php:68
+#: templates/new-post-email-text.php:48 templates/new-post-email.php:73
 msgid "Manage your subscription"
 msgstr ""
 
@@ -1656,32 +1688,39 @@ msgstr ""
 msgid "To unsubscribe to %s reply with the word * unsubscribe *."
 msgstr ""
 
-#: templates/new-post-email.php:39 templates/rejoined-email.php:38
+#: templates/new-post-email.php:44 templates/rejoined-email.php:38
 #: templates/subscribed-email.php:68
 msgid ""
 "Reply to this email to add a comment. Your email address will not be shown."
 msgstr ""
 
-#: templates/new-post-email.php:57
+#: templates/new-post-email.php:48 templates/rejoined-email.php:43
+#: templates/subscribed-email.php:72
+msgid ""
+"<strong>Please note</strong>: Your reply will be published publicly and "
+"immediately on %s."
+msgstr ""
+
+#: templates/new-post-email.php:62
 msgid "Get the latest comments and stay in the loop"
 msgstr ""
 
-#: templates/new-post-email.php:61
+#: templates/new-post-email.php:66
 msgid ""
 "To subscribe to comments on this post and receive a copy of the conversation "
 "so far reply with the word <strong>subscribe</strong>."
 msgstr ""
 
-#: templates/new-post-email.php:72
+#: templates/new-post-email.php:77
 msgid ""
 "To <strong>unsubscribe</strong> to %s reply with the word 'unsubscribe'."
 msgstr ""
 
-#: templates/new-post-email.php:81
+#: templates/new-post-email.php:86
 msgid "Comments on this post are closed"
 msgstr ""
 
-#: templates/new-post-email.php:83
+#: templates/new-post-email.php:88
 msgid "You can reply to this email to send a note directly to the post author."
 msgstr ""
 

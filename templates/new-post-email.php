@@ -10,13 +10,17 @@
  * @var bool                            $excerpt_only
  * @var string                          $alternate_versions_menu
  * @var Prompt_Interface_Subscribable   $subscribed_object
+ * @var bool                            $is_api_delivery
+ * @var bool                            $will_strip_content
  */
 ?>
+
+
 
 <h1 class="padded" id="the_title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
 <?php echo $alternate_versions_menu; ?>
 
-<?php if ( $featured_image_src ) : ?>
+<?php if ( $featured_image_src and $is_api_delivery ) : ?>
 	<img src="<?php echo $featured_image_src[0]; ?>"
 	     width="<?php echo intval( $featured_image_src[1] / 2 ); ?>"
 	     alt="featured image"
@@ -30,11 +34,12 @@
 	                  class="btn-secondary"><?php _e( 'View this post online', 'Postmatic' ); ?></a></p>
 </div>
 
+<?php if ( $will_strip_content ) : ?><hr /><?php endif; ?>
 
 <?php if ( comments_open() and ! $excerpt_only ) : ?>
 
 	<div class="reply-prompt">
-		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
+		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" align="left" style="float: left; margin-right: 10px;"/>
 		<h3 class="reply">
 			<?php _e( 'Reply to this email to add a comment. Your email address will not be shown.', 'Postmatic' ); ?><br />
 			<small>

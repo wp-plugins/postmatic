@@ -115,9 +115,25 @@ class Prompt_Comment_Moderation_Command implements Prompt_Interface_Command {
 		if ( preg_match( '/^\s*$/i', $message_text, $matches ) )
 			return self::$approve_method;
 
-		if ( preg_match( '/^\s*(approve|spam|trash)\s*$/i', $message_text, $matches ) )
-			return trim( $matches[1] );
+		/* translators: this is the response used to approve a moderated comment */
+		$approve_command = preg_quote( __( 'approve', 'Postmatic' ), '/' );
 
+		if ( preg_match( "/^\\s*$approve_command\\s*$/i", $message_text ) )
+			return self::$approve_method;
+
+		/* translators: this is the response used to flag a moderated comment as spam */
+		$spam_command = preg_quote( __( 'spam', 'Postmatic' ), '/' );
+
+		if ( preg_match( "/\\s*$spam_command\\s*$/i", $message_text ) )
+			return self::$spam_method;
+
+		/* translators: this is the response used to put a moderated comment in the trash */
+		$trash_command = preg_quote( __( 'trash', 'Postmatic' ), '/' );
+
+		if ( preg_match( "/\\s*$trash_command\\s*$/i", $message_text ) )
+			return self::$trash_method;
+
+		// English misspellings
 		if ( preg_match( '/^\s*(ap[pr]..ve|ap..ve)\s*$/i', $message_text, $matches ) )
 			return self::$approve_method;
 

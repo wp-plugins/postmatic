@@ -396,6 +396,8 @@ img.featured {
   height: 90%;
 }
 
+.et_social_inline {display: none !important;}
+
 /*Mobile syles*/
     @media only screen and (max-width: 480px) {
      table.wrap {

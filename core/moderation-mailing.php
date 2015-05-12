@@ -51,6 +51,7 @@ class Prompt_Moderation_Mailing {
 		$template_data = apply_filters( 'prompt/comment_moderation_email/template_data', $template_data );
 
 		$html_template = new Prompt_Email_Template( 'comment-moderation-email.php' );
+
 		$text_template = new Prompt_Text_Email_Template( 'comment-moderation-email-text.php' );
 
 		$emails = array();
@@ -66,11 +67,9 @@ class Prompt_Moderation_Mailing {
 				'to_address' => $recipient_address,
 				'subject' => $subject,
 				'text' => $text_template->render( $template_data ),
+				'html' => $html_template->render( $template_data ),
 				'message_type' => Prompt_Enum_Message_Types::COMMENT_MODERATION,
 			) );
-
-			if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) )
-				$email->set_html( $html_template->render( $template_data ) );
 
 			$command = new Prompt_Comment_Moderation_Command();
 			$command->set_comment_id( $comment->comment_ID );

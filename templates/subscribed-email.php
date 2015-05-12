@@ -63,7 +63,7 @@
 
 
 		<div class="reply-prompt">
-		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" />
+		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png' ;?>" width="30" height="30" align="left" style="float: left; margin-right: 10px;" />
 		<p class="reply">
 			<?php _e( 'Reply to this email to add a comment. Your email address will not be shown.', 'Postmatic' ); ?><br />
 			<small>

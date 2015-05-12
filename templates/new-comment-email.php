@@ -3,20 +3,19 @@
  * comment notification email template
  * variables in scope:
  * @var {WP_User} $comment_author
+ * @var string $commenter_name
  * @var {WP_User} $subscriber
  * @var object $comment
  * @var Prompt_Post $subscribed_post
  * @var array $previous_comments
+ * @var bool $is_api_delivery
  */
-
-$commenter_name = $comment_author ? $comment_author->display_name : $comment->comment_author;
-$commenter_name = $commenter_name ? $commenter_name : __( 'Anonymous' );
 
 $previous_index = count( $previous_comments );
 ?>
 <div class="padded">
 	<p>
-		<?php printf( __( '<span class="capitalize">%s</span> added a comment ', 'Postmatic' ), $commenter_name ); ?>
+		<?php printf( __( '<span style="text-tranform: capitalize;" class="capitalize">%s</span> added a comment ', 'Postmatic' ), $commenter_name ); ?>
 		<?php
 		printf(
 			__( 'in reply to %s.', 'Postmatic' ),
@@ -24,17 +23,15 @@ $previous_index = count( $previous_comments );
 		);
 		?>
 	</p>
-
+	
 	<div class="primary-comment comment">
 		<div class="comment-header">
-			<?php echo get_avatar( $comment ); ?>
+			<?php echo $is_api_delivery ? get_avatar( $comment ) : ''; ?>
 			<div class="author-name">
-				<?php if ( $comment->comment_author_url ) : ?>
+				<?php if ( $is_api_delivery and $comment->comment_author_url ) : ?>
 					<a href="<?php echo esc_url( $comment->comment_author_url ); ?>">
 						<?php echo $commenter_name; ?>
 					</a>
-				<?php else : ?>
-					<?php echo $commenter_name; ?>
 				<?php endif; ?>
 			</div>
 			<div class="comment-body">
@@ -43,13 +40,12 @@ $previous_index = count( $previous_comments );
 		</div>
 	</div>
 
+	<?php if ( ! $is_api_delivery ) : ?><hr /><?php endif; ?>
 
-
-
-	<?php if (count( $previous_comments ) > 1) : ?>
+	<?php if ( count( $previous_comments ) > 1 and $is_api_delivery ) : ?>
 
 		<div class="reply-prompt">
-			<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png'; ?>" width="30" height="30"/>
+			<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png'; ?>" width="30" height="30" align="left" style="float: left; margin-right: 10px;"/>
 
 			<h3 class="reply">
 				<?php printf( __( 'Reply to this email to reply to %s.', 'Postmatic' ), $commenter_name ); ?>
@@ -57,7 +53,7 @@ $previous_index = count( $previous_comments );
 					<?php
 					printf(
 						__(
-							'<strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
+							'<br /><strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
 							'Postmatic'
 						),
 						'<a href="' . get_permalink( $comment->comment_post_ID ) . '">' . get_the_title( $comment->comment_post_ID ) . '</a>'
@@ -104,7 +100,7 @@ $previous_index = count( $previous_comments );
 	<?php endif; ?>
 
 	<div class="reply-prompt">
-		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png'; ?>" width="30" height="30"/>
+		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png'; ?>" width="30" height="30" align="left" style="float: left; margin-right: 10px;"/>
 
 		<h3 class="reply">
 			<?php printf( __( 'Reply to this email to reply to %s.', 'Postmatic' ), $commenter_name ); ?>
@@ -112,7 +108,7 @@ $previous_index = count( $previous_comments );
 				<?php
 				printf(
 					__(
-						'<strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
+						'<br /><strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
 						'Postmatic'
 					),
 					'<a href="' . get_permalink( $comment->comment_post_ID ) . '">' .

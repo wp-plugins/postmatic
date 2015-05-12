@@ -12,6 +12,13 @@
 			}
 		} );
 
+		$( 'input.no-submit' ).keypress( function( e ) {
+			if ( ( e.keyCode && e.keyCode === 13 ) || ( e.which && e.which === 13 ) ) {
+				$( this ).select();
+				return false;
+			}
+		} );
+
 		init_email_tab();
 		init_invite_tab();
 		init_import_tab();

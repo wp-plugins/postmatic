@@ -52,6 +52,8 @@ class Prompt_Comment_Mailer {
 
 		$comment_author = $this->comment_author_user();
 
+		$is_api_delivery = ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) );
+
 		$parent_comment = $parent_author = null;
 		$parent_author_name = '';
 		$template_file = 'new-comment-email.php';
@@ -63,7 +65,7 @@ class Prompt_Comment_Mailer {
 			$parent_author_name = $parent_author ? $parent_author->display_name : $parent_comment->comment_author;
 			$parent_author_name = $parent_author_name ? $parent_author_name : __( 'Anonymous', 'Postmatic' );
 
-			$template_file = 'comment-reply-email.php';
+			$template_file = $is_api_delivery ? 'comment-reply-email.php' : $template_file;
 		}
 
 		$commenter_name = $comment_author ? $comment_author->display_name : $this->comment->comment_author;
@@ -98,6 +100,7 @@ class Prompt_Comment_Mailer {
 				'parent_author_name' => $parent_author_name,
 				'parent_comment' => $parent_comment,
 				'comment_header' => true,
+				'is_api_delivery' => $is_api_delivery,
 			);
 
 			$template_data['subject'] = $this->subject( $template_data );
@@ -118,6 +121,7 @@ class Prompt_Comment_Mailer {
 			 * @type object $parent_comment
 			 * @type bool $comment_header
 			 * @type string $subject
+			 * @type bool $is_api_delivery
 			 * }
 			 */
 			$template_data = apply_filters( 'prompt/comment_email/template_data', $template_data );
@@ -130,11 +134,9 @@ class Prompt_Comment_Mailer {
 				'from_name' => $commenter_name,
 				'subject' => $template_data['subject'],
 				'text' => $text_template->render( $template_data ),
+				'html' => $html_template->render( $template_data ),
 				'message_type' => Prompt_Enum_Message_Types::COMMENT,
 			) );
-
-			if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) )
-				$email->set_html( $html_template->render( $template_data ) );
 
 			$command = new Prompt_Comment_Command();
 			$command->set_post_id( $prompt_post->id() );

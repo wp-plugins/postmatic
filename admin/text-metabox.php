@@ -43,6 +43,9 @@ class Prompt_Admin_Text_Metabox extends scbPostMetabox {
 		$script->localize( 'prompt_text_metabox_env', $env );
 	}
 
+	/**
+	 * @param WP_Post $post
+	 */
 	public function display( $post ) {
 
 		if ( ! $this->prompt_post )
@@ -70,16 +73,16 @@ class Prompt_Admin_Text_Metabox extends scbPostMetabox {
 			);
 
 		if ( empty( $text ) and 'auto-draft' != $post->post_status ) {
-			Prompt_Post_Mailing::setup_postdata( $post );
-			$text = Prompt_Post_Mailing::get_the_text_content();
-			Prompt_Post_Mailing::reset_postdata();
+			$context = new Prompt_Post_Rendering_Context( $post );
+			$text = $context->get_the_text_content();
+			$context->reset();
 		}
 
 		echo html( 'pre class="prompt-custom-text"', $text );
 
 		echo html( 'div class="prompt-custom-text-upgrade"',
 			sprintf(
-				__( 'Upgrade to <a href="%s">Postmatic Premium</a>.<br />You can kiss plain text email goodbye and dazzle your readers with a beautiful HTML version instead</a>.', 'Postmatic' ),
+				__( 'This post will be sent as a multipart message. We have automatically generated a plaintext version for older email clients. You can adjust it if you need to.', 'Postmatic' ),
 				Prompt_Enum_Urls::PREMIUM
 			)
 		);

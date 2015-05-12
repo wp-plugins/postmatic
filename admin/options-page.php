@@ -181,13 +181,26 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			return false;
 
 		$subscribe_widget_in_use = false;
-		foreach( $sidebars_widgets as $sidebar => $widgets ) {
-			foreach ( $widgets as $widget ) {
-				if ( strpos( $widget, 'prompt_subscribe_widget' ) === 0 )
-					$subscribe_widget_in_use = true;
-			}
+		foreach( $sidebars_widgets as $widgets ) {
+
+			if ( $this->contains_subscribe_widget( $widgets ) )
+				$subscribe_widget_in_use = true;
+
 		}
 		return $subscribe_widget_in_use;
+	}
+
+	protected function contains_subscribe_widget( $widgets ) {
+
+		if ( !is_array( $widgets ) )
+			return false;
+
+		foreach ( $widgets as $widget ) {
+			if ( strpos( $widget, 'prompt_subscribe_widget' ) === 0 )
+				return true;
+		}
+
+		return false;
 	}
 
 	function page_content() {
@@ -222,6 +235,9 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			return;
 		}
 
+		if ( !$this->options->get( 'skip_local_mail_intro' ) )
+			echo $this->local_mail_intro();
+
 		if ( !$this->options->get( 'skip_widget_intro' ) )
 			echo $this->widget_intro();
 
@@ -230,7 +246,6 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		if ( !$this->options->get( 'skip_zero_spam_intro' ) )
 			echo $this->zero_spam_intro();
-
 
 		list( $tabs, $panels ) = $this->tabs_content();
 
@@ -474,8 +489,12 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		if ( 401 == $response['response']['code'] ) {
 			$message = sprintf(
-				__( 'We didn\'t recognize the key "%s". Please make sure it exactly matches the key we supplied you. <a href="http://app.gopostmatic.com" target="_blank">Visit your Postmatic dashboard for assistance</a>. ', 'Postmatic' ),
-				$key
+				__(
+					'We didn\'t recognize the key "%s". Please make sure it exactly matches the key we supplied you. <a href="%s" target="_blank">Visit your Postmatic dashboard for assistance</a>. ',
+					'Postmatic'
+				),
+				$key,
+				Prompt_Enum_Urls::MANAGE
 			);
 			return new WP_Error( 'invalid_key', $message );
 		}
@@ -554,5 +573,35 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 	protected function reset_key() {
 		$this->key = $this->options->get( 'prompt_key' );
+	}
+
+	protected function local_mail_intro() {
+
+		if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) )
+			return '';
+
+		$mail_result = wp_mail(
+			'null@email.gopostmatic.com',
+			'Check wp_mail() on ' . get_option( 'blogname' ),
+			'This is just a test that no one will read.'
+		);
+
+		if ( $mail_result ) {
+			Prompt_Core::$options->set( 'skip_local_mail_intro', true );
+			return '';
+		}
+
+		return html( 'div class="error"',
+			html( 'p',
+				__(
+					'We detected that your host is unable to send email. You\'ll have to contact them for help, or upgrade Postmatic to use our awesome delivery services.',
+					'Postmatic'
+				),
+				html( 'a',
+					array( 'href' => esc_url( add_query_arg( 'skip_widget_intro', 'true' ) ), 'class' => 'button' ),
+					__( 'Dismiss' )
+				)
+			)
+		);
 	}
 }

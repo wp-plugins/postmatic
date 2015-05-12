@@ -53,7 +53,7 @@ class Prompt_Api {
 
 		if ( ! $user ) {
 
-			$options['user_data']['display_name'] = self::display_name( $subscriber_data );
+			self::ensure_display_name( $subscriber_data );
 
 			Prompt_Subscription_Mailing::send_agreement( $list, $email_address, $subscriber_data );
 
@@ -99,7 +99,7 @@ class Prompt_Api {
 		return self::CONFIRMATION_SENT;
 	}
 
-	protected static function display_name( $data ) {
+	protected static function ensure_display_name( &$data ) {
 
 		$name = isset( $data['display_name'] ) ? $data['display_name'] : '';
 
@@ -114,6 +114,8 @@ class Prompt_Api {
 		if ( isset( $data['last_name'] ) )
 			$names[] = $data['last_name'];
 
-		return implode( ' ', $names );
+		$data['display_name'] = implode( ' ', $names );
+
+		return $data['display_name'];
 	}
 }

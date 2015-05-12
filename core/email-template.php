@@ -4,7 +4,13 @@ class Prompt_Email_Template extends Prompt_Template {
 	/** @var  Prompt_Template */
 	protected $wrapper_template;
 
-	public function __construct( $name, $dir = null, $wrapper = 'html-email-wrapper.php' ) {
+	public function __construct( $name, $dir = null, $wrapper = null ) {
+
+		if ( !$wrapper ) {
+			$is_api_delivery = ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) );
+			$wrapper = $is_api_delivery ? 'html-email-wrapper.php' : 'html-local-email-wrapper.php';
+		}
+
 		$this->wrapper = new Prompt_Template( $wrapper, $dir );
 		parent::__construct( $name, $dir );
 	}

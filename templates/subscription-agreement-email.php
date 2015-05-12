@@ -44,7 +44,7 @@ $recipient = esc_html(
 <?php endif; ?>
 
 
-<h2><?php _e( 'First, there are some important things you should know', 'Postmatic' ); ?></h1>
+<h2><?php _e( 'First, there are some important things you should know', 'Postmatic' ); ?></h2>
 <ol>
 	<li>
 		<?php

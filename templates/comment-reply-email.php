@@ -13,6 +13,7 @@
  * @var WP_User $parent_author
  * @var string $parent_author_name
  * @var object $parent_comment
+ * @var bool $is_api_delivery
  */
 
 ?>
@@ -67,7 +68,7 @@
 	</div>
 
 	<div class="reply-prompt">
-		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png'; ?>" width="30" height="30"/>
+		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png'; ?>" width="30" height="30" align="left" style="float: left; margin-right: 10px;"/>
 
 		<h3 class="reply">
 			<?php printf( __( 'Reply to this email to reply to %s.', 'Postmatic' ), $commenter_name ); ?>
@@ -116,7 +117,7 @@
 	</div>
 
 	<div class="reply-prompt">
-		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png'; ?>" width="30" height="30"/>
+		<img src="<?php echo Prompt_Core::$url_path . '/media/reply-comment-2x.png'; ?>" width="30" height="30" align="left" style="float: left; margin-right: 10px;"/>
 
 		<h3 class="reply">
 			<?php printf( __( 'Reply to this email to reply to %s.', 'Postmatic' ), $commenter_name ); ?>

@@ -280,9 +280,7 @@ class Prompt_Subscription_Mailing {
 		$template_data
 	) {
 		$email->set_text( $text_template->render( $template_data ) );
-
-		if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) )
-			$email->set_html( $html_template->render( $template_data ) );
+		$email->set_html( $html_template->render( $template_data ) );
 	}
 
 	/**
@@ -314,6 +312,9 @@ class Prompt_Subscription_Mailing {
 	}
 
 	protected static function comments( Prompt_Interface_Subscribable $object ) {
+
+		if ( Prompt_Enum_Email_Transports::LOCAL == Prompt_Core::$options->get( 'email_transport' ) )
+			return array();
 
 		if ( ! is_a( $object, 'Prompt_Post' ) )
 			return array();

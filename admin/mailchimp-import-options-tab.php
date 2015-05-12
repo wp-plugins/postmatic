@@ -146,10 +146,21 @@ class Prompt_Admin_MailChimp_Import_Options_Tab extends Prompt_Admin_Import_Opti
 		$content .= html( 'label for="mailchimp_api_key"',
 			__( 'MailChimp API Key: ', 'Postmatic' ),
 			html( 'input',
-				array( 'name' => 'mailchimp_api_key', 'type' => 'text', 'id' => 'mailchimp_api_key', 'style' => 'width: 300px;' )
+				array(
+					'name' => 'mailchimp_api_key',
+					'type' => 'text',
+					'id' => 'mailchimp_api_key',
+					'class' => 'no-submit',
+					'style' => 'width: 300px;',
+				)
+			),
+			html( 'button',
+				array( 'id' => 'mail_chimp_load_lists', 'class' => 'button button-small', 'type' => 'button' ),
+				__( 'Load lists', 'Postmatic' )
+			),
+			html( 'span',
+				array( 'id' => 'mail_chimp_spinner', 'class' => 'spinner', 'style' => 'float: none;margin: -5px 5px;' )
 			)
-			.html( 'button', array( 'id' => 'mail_chimp_load_lists', 'class' => 'button button-small', 'type' => 'button' ), __( 'Load lists', 'Postmatic' ) )
-			.html( 'span', array( 'id' => 'mail_chimp_spinner', 'class' => 'spinner', 'style' => 'float: none;margin: -5px 5px;' ) )
 		);
 
 		$content .= html( 'div',

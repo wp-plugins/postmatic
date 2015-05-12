@@ -53,6 +53,7 @@ class Prompt_Core {
 			'skip_widget_intro' => false,
 			'skip_akismet_intro' => false,
 			'skip_zero_spam_intro' => false,
+			'skip_local_mail_intro' => false,
 			'augment_comment_form' => true,
 			'send_login_info' => false,
 			'email_header_type' => Prompt_Enum_Email_Header_Types::TEXT,
@@ -265,10 +266,6 @@ class Prompt_Core {
 	 * @return Prompt_Admin_Delivery_Metabox
 	 */
 	public static function text_metabox() {
-
-		// No text customization for API users
-		if ( Prompt_Enum_Email_Transports::API == self::$options->get( 'email_transport' ) )
-			return null;
 
 		if ( !self::$text_metabox ) {
 

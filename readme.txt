@@ -73,7 +73,16 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.1 =
+
+- Big news for anyone on the free plan: all posts and comments are now sent in html mode. This is a big improvement over our purely-text based markdown implementation of 1.0. Upgrade to premium for even better image, video, audio, shortcode, and embed support.
+- Premium users can now edit the contents of the multipart text version of each post before sending. Great for fine-tuning for older devices.
+- Updated Italian translation
+- Misc Mailchimp importer bug fixes
+- Misc widget fixes
+- Plenty of small bugs squashed
+
+= 1.0.1 = 
 
 - Nothing crazy exciting. The Mailchimp importer was unhappy but is better now. 
 - Improved flexibility with sites that use both http and https
