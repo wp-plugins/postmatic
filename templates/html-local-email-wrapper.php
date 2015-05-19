@@ -26,7 +26,9 @@
 		<style>
 		body {line-height: 150%; font-family: sans-serif;}
 		a {color: #2980b9;}
-		h1 {font-weight: normal;}
+		h1 {font-weight: normal; line-height: normal;}
+		h1 a { text-decoration: none;}
+		p.padded {font-size: 85%;}
     .btn-secondary {
       text-decoration: none;
       color: #FFF !important;

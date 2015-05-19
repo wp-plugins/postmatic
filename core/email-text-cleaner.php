@@ -14,7 +14,7 @@ class Prompt_Email_Text_Cleaner {
 			'/\r\n\r\n  \[image: photo\]\r\n.*/s',                                  // Wisestamp
 			'/\n\s*Subject: [^\r\n]*$/s',                                           // Hotmail subject footer
 			'/[\r\n]Sent from Mailbird \[http:\/\/www\.getmailbird.*/s',            // Mailbird signature
-			"/[\r\n]From: [^\r\n]*$from_address.*/s"                                // Text email inclusion
+			"/[\r\n]\\s*From: [^\r\n]*$from_address.*/s"                            // Text email inclusion
 		);
 
 		foreach ( $strip_patterns as $pattern ) {

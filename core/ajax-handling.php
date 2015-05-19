@@ -208,7 +208,7 @@ class Prompt_Ajax_Handling {
 
 		$widget_id = sanitize_title( $_GET['widget_id'] );
 
-		$instance = array( 'collect_name' => !empty( $_GET['collect_name'] ) );
+		$instance = self::get_widget_instance( $widget_id );
 
 		$template_id = is_numeric( $_GET['template'] ) ? intval( $_GET['template'] ) : null;
 
@@ -403,4 +403,21 @@ class Prompt_Ajax_Handling {
 		return __( '<strong>Confirmation email sent. Please check your email for further instructions.</strong>', 'Postmatic' );
 	}
 
+	/**
+	 * @param $widget_id
+	 * @return array
+	 */
+	protected static function get_widget_instance( $widget_id ) {
+		global $wp_registered_widgets;
+
+		if ( empty( $wp_registered_widgets[$widget_id]['callback'] ) )
+			return array();
+
+		/** @var WP_Widget $widget */
+		$widget = $wp_registered_widgets[$widget_id]['callback'][0];
+
+		$settings = $widget->get_settings();
+
+		return ! empty( $settings[$widget->number] ) ? $settings[$widget->number] : array();
+	}
 }

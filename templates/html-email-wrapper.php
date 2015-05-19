@@ -398,6 +398,25 @@ img.featured {
 
 .et_social_inline {display: none !important;}
 
+/*zemanta related posts*/
+div.zem_rp_wrap {
+  background: #eee;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+ul.related_post {
+  margin: 0;
+  padding: 0;
+}
+
+ul.related_post li {
+  list-style: none;
+  float: left;
+  text-align: center;
+  font-size: 85%;
+}
+
 /*Mobile syles*/
     @media only screen and (max-width: 480px) {
      table.wrap {

@@ -9,10 +9,8 @@ class Prompt_Post_Rendering_Context {
 	protected $is_setup = false;
 	/** @var WP_Post */
 	protected $post;
-	/** @var  array */
-	protected $removed_filters;
-	/** @var  array */
-	protected $removed_merged_filters;
+	/** @var  string */
+	protected $original_content;
 	/** @var  array */
 	protected $featured_image_src = null;
 
@@ -25,7 +23,6 @@ class Prompt_Post_Rendering_Context {
 	 * @var WP_Post $post
 	 */
 	public function setup() {
-		global $wp_filter, $merged_filters;
 
 		query_posts( array(
 			'p' => $this->post->ID,
@@ -38,9 +35,7 @@ class Prompt_Post_Rendering_Context {
 		$this->is_setup = true;
 
 		if ( Prompt_Enum_Email_Transports::LOCAL == Prompt_Core::$options->get( 'email_transport' ) ) {
-			$this->removed_filters = isset( $wp_filter['the_content'] ) ? $wp_filter['the_content'] : array();
-			$this->removed_merged_filters = isset( $merged_filters['the_content'] ) ? $merged_filters['the_content'] : array();
-			add_filter( 'the_content', array( $this, 'strip_fancy_content' ) );
+			add_filter( 'the_content', array( $this, 'override_content_filters' ), 9999 );
 			return;
 		}
 
@@ -65,15 +60,13 @@ class Prompt_Post_Rendering_Context {
 	 * Reset the global environment after rendering post emails.
 	 */
 	public function reset() {
-		global $wp_filter, $merged_filters;
 
 		wp_reset_query();
 
 		$this->is_setup = false;
 
 		if ( Prompt_Enum_Email_Transports::LOCAL == Prompt_Core::$options->get( 'email_transport' ) ) {
-			$wp_filter['the_content'] = $this->removed_filters;
-			$merged_filters['the_content'] = $this->removed_merged_filters;
+			remove_filter( 'the_content', array( $this, 'override_content_filters' ), 9999 );
 			return;
 		}
 
@@ -87,6 +80,13 @@ class Prompt_Post_Rendering_Context {
 		add_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
 	}
 
+	/**
+	 * @param $content
+	 * @return string content with only our own filters applied
+	 */
+	public function override_content_filters( $content ) {
+		return wpautop( wptexturize( $this->strip_fancy_content( $this->post->post_content ) ) );
+	}
 
 	/**
 	 * Get Postmatic's text version of the current post content.
@@ -94,8 +94,7 @@ class Prompt_Post_Rendering_Context {
 	 */
 	public function get_the_text_content() {
 
-		if ( !$this->is_setup )
-			$this->setup();
+		$this->ensure_setup();
 
 		$prompt_post = new Prompt_Post( $this->post );
 
@@ -119,8 +118,7 @@ class Prompt_Post_Rendering_Context {
 	 */
 	public function get_the_featured_image_src() {
 
-		if ( !$this->is_setup )
-			$this->setup();
+		$this->ensure_setup();
 
 		if ( !is_null( $this->featured_image_src ) )
 			return $this->featured_image_src;
@@ -355,6 +353,20 @@ class Prompt_Post_Rendering_Context {
 		$sans_shortcodes = strip_shortcodes( $this->post->post_content );
 
 		return ( $sans_shortcodes != $this->post->post_content );
+	}
+
+	protected function ensure_setup() {
+
+		if ( ! $this->is_setup ) {
+			$this->setup();
+			return;
+		}
+
+		if ( get_the_ID() != $this->post->ID ) {
+			// A widget or something has messed up the global query - redo it
+			$this->setup();
+		}
+
 	}
 
 	protected function override_wp_gist_shortcode_tag( $m ) {

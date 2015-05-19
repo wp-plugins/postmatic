@@ -289,12 +289,6 @@ class Prompt_Core {
 		if ( self::$options->get( 'site_icon' ) )
 			return;
 
-		// Make extra sure we're checking current options
-		wp_cache_delete( self::$options->get_key(), 'options' );
-
-		if ( self::$options->get( 'site_icon' ) )
-			return;
-
 		self::set_site_icon();
 	}
 
@@ -302,6 +296,11 @@ class Prompt_Core {
 	 * Get a site icon from grabicon.com.
 	 */
 	public static function set_site_icon() {
+
+		$current_attachment_id = self::$options->get( 'site_icon' );
+		if ( $current_attachment_id )
+			wp_delete_attachment( $current_attachment_id, $full_delete = true );
+
 		$icon = new Prompt_Grab_Icon();
 		self::$options->set( 'site_icon', $icon->get_attachment_id() );
 	}

@@ -27,7 +27,6 @@ jQuery( function( $ ) {
 			data: {
 			action: 'prompt_subscribe_widget_content',
 				widget_id: $widget.data( 'widgetId' ),
-				collect_name: $widget.data( 'collectName' ),
 				template: $widget.data( 'template' ),
 				object_type: prompt_subscribe_form_env.object_type,
 				object_id: prompt_subscribe_form_env.object_id

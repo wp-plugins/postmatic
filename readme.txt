@@ -73,6 +73,15 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.1.1 =
+
+- All subscribe widget text is now customizable
+- Added support for Zemanta Related Posts
+- Made some readability adjustments to the new comment template on the free plan
+- Better repression of post-content hooks so things like Jetpack sharing don't mess up the end of posts on the free plan
+- Added more diagnostics code for troubleshooting missed cron jobs
+- Whenever you refresh your favicon we'll delete the previous version from your media library
+
 = 1.1 =
 
 - Big news for anyone on the free plan: all posts and comments are now sent in html mode. This is a big improvement over our purely-text based markdown implementation of 1.0. Upgrade to premium for even better image, video, audio, shortcode, and embed support.

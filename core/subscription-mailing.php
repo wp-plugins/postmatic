@@ -292,6 +292,9 @@ class Prompt_Subscription_Mailing {
 		if ( is_a( $object, 'Prompt_Post' ) )
 			return null;
 
+		if ( Prompt_Enum_Email_Transports::LOCAL == Prompt_Core::$options->get( 'email_transport' ) )
+			return null;
+
 		$query = array(
 			'posts_per_page' => 1,
 			'post_type' => Prompt_Core::$options->get( 'site_subscription_post_types' ),

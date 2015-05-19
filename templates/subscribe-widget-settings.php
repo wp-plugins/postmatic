@@ -15,6 +15,16 @@
 			 type="text"
 			 value="<?php echo $widget->get_default_value( $instance, 'title' ); ?>" />
 	</label>
+	<label for="<?php echo $widget->get_field_id( 'subscribe_prompt' ); ?>"
+		 title="<?php _e( 'Custom message above subscription fields, leave blank for default.', 'Postmatic' ); ?>">
+		 <?php _e( 'Description Text:', 'Postmatic' ); ?>
+		<span class="help-tip">?</span>
+		<input class="widefat"
+			 id="<?php echo $widget->get_field_id( 'subscribe_prompt' ); ?>"
+			 name="<?php echo $widget->get_field_name( 'subscribe_prompt' ); ?>"
+			 type="text"
+			 value="<?php echo $widget->get_default_value( $instance, 'subscribe_prompt' ); ?>" />
+	</label>
 	<label for="<?php echo $widget->get_field_id( 'collect_name' ); ?>">
 		<input class="widefat"
 			 id="<?php echo $widget->get_field_id( 'collect_name' ); ?>"

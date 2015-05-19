@@ -17,6 +17,7 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 			'title' => '',
 			'collect_name' => true,
 			'template_path' => null,
+			'subscribe_prompt' => null,
 		);
 
 		$instance = wp_parse_args( $instance, $instance_defaults );
@@ -28,9 +29,9 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 		$container_attributes = array(
 			'class' => 'prompt-subscribe-widget-content',
-			'data-collect-name' => $instance['collect_name'],
 			'data-widget-id' => $this->id,
 			'data-template' => self::template_id( $instance['template_path'] ),
+			'data-subscribe-prompt' => $instance['subscribe_prompt'],
 		);
 
 		echo html( 'div',$container_attributes );
@@ -44,6 +45,7 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		$instance['collect_name'] = isset( $new_instance['collect_name'] ) ? true : false;
+		$instance['subscribe_prompt'] = sanitize_text_field( $new_instance['subscribe_prompt'] );
 
 		return $instance;
 	}
@@ -86,6 +88,7 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 	 * @type boolean $collect_name
 	 * }
 	 * @param Prompt_Interface_Subscribable $object Target object for subscriptions
+	 * @param string $template_id
 	 */
 	public static function render_dynamic_content( $widget_id, $instance, $object, $template_id = null ) {
 
@@ -107,20 +110,8 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 		$loading_image_url = path_join( Prompt_Core::$url_path, 'media/ajax-loader.gif' );
 
-		if ( is_user_logged_in() ) {
-
-			$subscribe_prompt = sprintf( __( 'Subscribe to %s:', 'Postmatic' ), $object->subscription_object_label() );
-			$unsubscribe_prompt = '';
-
-		} else {
-
-			$subscribe_prompt = sprintf(
-				__( 'Enter your email to subscribe to %s:', 'Postmatic' ), $object->subscription_object_label()
-			);
-			$unsubscribe_prompt = html( 'h5', __( 'Want to unsubscribe?', 'Postmatic' ) ) .
-				__( 'Confirm your email:', 'Postmatic' );
-
-		}
+		$subscribe_prompt = self::subscribe_prompt( $instance, $object );
+		$unsubscribe_prompt = self::unsubscribe_prompt();
 
 		$template_data = compact(
 			'widget_id',
@@ -222,5 +213,26 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 		$templates = Prompt_Core::$options->get( 'custom_widget_templates' );
 
 		return isset( $templates[$template_id] ) ? $templates[$template_id] : null;
+	}
+
+	protected static function subscribe_prompt( $instance, Prompt_Interface_Subscribable $object ) {
+
+		if ( !empty( $instance['subscribe_prompt'] ) )
+			return $instance['subscribe_prompt'];
+
+		if ( is_user_logged_in() )
+			return sprintf( __( 'Subscribe to %s:', 'Postmatic' ), $object->subscription_object_label() );
+
+		return sprintf(
+			__( 'Enter your email to subscribe to %s:', 'Postmatic' ), $object->subscription_object_label()
+		);
+	}
+
+	protected static function unsubscribe_prompt() {
+
+		if ( is_user_logged_in() )
+			return '';
+
+		return html( 'h5', __( 'Want to unsubscribe?', 'Postmatic' ) ) . __( 'Confirm your email:', 'Postmatic' );
 	}
  }

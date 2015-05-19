@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
 "plugin/1.0.2-20150511-1343\n"
 "POT-Creation-Date: 2015-05-11 20:43:17+00:00\n"
-"PO-Revision-Date: 2015-05-11 13:49-0800\n"
+"PO-Revision-Date: 2015-05-15 12:33-0800\n"
 "Last-Translator: LANGUAGE <LL@li.org>\n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -1271,7 +1271,7 @@ msgstr "approvare"
 #. translators: this is the response used to flag a moderated comment as spam
 #: core/comment-moderation-command.php:125
 msgid "spam"
-msgstr ""
+msgstr "spam"
 
 #. translators: this is the response used to put a moderated comment in the
 #. trash
@@ -1362,7 +1362,7 @@ msgstr "Respinto un tentativo di iscrivere un ID utente non valido."
 
 #: core/moderation-mailing.php:24
 msgid "Please moderate \"%s\""
-msgstr "Per favore moderare \"%s\""
+msgstr "C'è un commento in attesa di moderazione su \"%s\""
 
 #: core/option-subscribable-object.php:29
 msgid "Refusing to subscribe an invalid user ID."
@@ -1726,7 +1726,7 @@ msgid ""
 "to both approve this comment and reply to it."
 msgstr ""
 "<strong>Approvalo e rispondi</strong>: rispondi a questa email con un tuo "
-"commento; il commento in moderazione vero approvato automaticamente."
+"commento; il commento in moderazione verrà approvato automaticamente."
 
 #: templates/comment-moderation-email.php:56
 msgid "Approve"
@@ -1789,7 +1789,9 @@ msgstr "%s ha risposto a un commento di %s su %s:"
 #: templates/new-comment-email-text.php:27
 #: templates/new-comment-email-text.php:53
 msgid "* Reply to this email to reply to %s. *"
-msgstr "* Rispondi a questa email per rispondere al commento di %s. *"
+msgstr ""
+"* Vuoi rispondere al commento di %s? Invialo via email semplicemente "
+"rispondendo a questo messaggio. *"
 
 #: templates/comment-reply-email-text.php:50
 #: templates/comment-reply-email.php:81
@@ -1816,13 +1818,15 @@ msgid ""
 "To no longer receive other comments or replies in this discussion reply with "
 "the word 'unsubscribe'."
 msgstr ""
-"Per non ricevere più commenti riguardanti questa discussione rispondi a "
-"questa email con la parola 'annullare'."
+"Per non ricevere più le notifiche di commenti riguardanti questa discussione "
+"rispondi a questa email con la parola 'annullare'."
 
 #: templates/comment-reply-email.php:73 templates/comment-reply-email.php:122
 #: templates/new-comment-email.php:55 templates/new-comment-email.php:110
 msgid "Reply to this email to reply to %s."
-msgstr "Rispondi a questa email per rispondere a %s."
+msgstr ""
+"Vuoi rispondere al commento di %s? Invialo via email semplicemente "
+"rispondendo a questo messaggio."
 
 #: templates/comment-reply-email.php:102
 msgid ""
@@ -1834,7 +1838,7 @@ msgstr ""
 
 #: templates/comment-reply-email.php:127
 msgid "Leave this conversation"
-msgstr "Abbandona questa conversazione"
+msgstr "Esci da questa conversazione"
 
 #: templates/core-options-premium.php:13
 msgid "Manage your account"
@@ -1853,8 +1857,8 @@ msgid ""
 "To immediately stop receiving all posts and comments from %s you can <a href="
 "\"%s\">unsubscribe with a single click</a>."
 msgstr ""
-"Per smettere di ricevere all'istante articoli e commenti da %s puoi <a href="
-"\"%s\">annullare l'iscrizione con un singolo click</a>."
+"Per non ricevere più articoli e commenti da %s puoi <a href=\"%s\">annullare "
+"l'iscrizione con un singolo click</a>."
 
 #: templates/new-comment-email-text.php:15
 msgid "%s added a comment on %s"
@@ -1878,16 +1882,12 @@ msgid ""
 "To no longer receive other comments on this thread reply with the word "
 "'unsubscribe'."
 msgstr ""
-"Per non ricevere ulteriori commenti relativi a questa discussione rispondi "
-"con la parola 'annullare'."
+"Per non ricevere ulteriori commenti relativi a questa discussione rispondi a "
+"questa mail con la parola 'annullare'."
 
-#: templates/new-comment-email.php:19
-msgid "<span class=\"capitalize\">%s</span> added a comment "
-msgstr "<span class=\"capitalize\">%s</span> ha commentato "
-
-#: templates/new-comment-email.php:22
-msgid "in reply to %s."
-msgstr "in risposta a %s."
+#: templates/new-comment-email.php:21
+msgid "%1$s added a comment in reply to %s."
+msgstr "%1$s ha commentato in risposta a %s."
 
 #: templates/new-comment-email.php:59 templates/new-comment-email.php:114
 #: templates/new-post-email.php:43 templates/rejoined-email.php:43
@@ -1906,7 +1906,7 @@ msgstr "alle"
 
 #: templates/new-comment-email.php:128
 msgid "Want to leave this conversation?"
-msgstr "Vuoi abbandonare questa conversazione?"
+msgstr "Vuoi uscire da questa conversazione?"
 
 #: templates/new-post-email-text.php:24
 msgid "* Reply to this email to add a comment. * "

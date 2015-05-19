@@ -118,7 +118,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 			html(
 				'td',
 				$this->input(
-					array( 'name' => 'email_header_text', 'type' => 'text' ),
+					array( 'name' => 'email_header_text', 'type' => 'text', 'extra' => 'class=last-submit' ),
 					$this->options->get()
 				)
 			)
@@ -200,7 +200,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 			html(
 				'td',
 				$this->input(
-					array( 'name' => 'email_footer_text', 'type' => 'text' ),
+					array( 'name' => 'email_footer_text', 'type' => 'text', 'extra' => 'class=last-submit' ),
 					$this->options->get()
 				)
 			)
@@ -216,6 +216,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 						'type' => 'text',
 						'name' => 'test_email_address',
 						'value' => wp_get_current_user()->user_email,
+						'extra' => 'class=no-submit',
 					),
 					$_POST
 				),

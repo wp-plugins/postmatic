@@ -15,10 +15,11 @@ $previous_index = count( $previous_comments );
 ?>
 <div class="padded">
 	<p>
-		<?php printf( __( '<span style="text-tranform: capitalize;" class="capitalize">%s</span> added a comment ', 'Postmatic' ), $commenter_name ); ?>
 		<?php
+		/* translators: %1$s is commenter name, %2$s is post title */
 		printf(
-			__( 'in reply to %s.', 'Postmatic' ),
+			__( '%1$s added a comment in reply to %2$s.', 'Postmatic' ),
+			'<span style="text-tranform: capitalize;" class="capitalize">' . $commenter_name . '</span>',
 			'<a href="' . get_permalink( $comment->comment_post_ID ) . '">' . get_the_title( $comment->comment_post_ID ) . '</a>'
 		);
 		?>
@@ -40,7 +41,6 @@ $previous_index = count( $previous_comments );
 		</div>
 	</div>
 
-	<?php if ( ! $is_api_delivery ) : ?><hr /><?php endif; ?>
 
 	<?php if ( count( $previous_comments ) > 1 and $is_api_delivery ) : ?>
 
@@ -50,10 +50,11 @@ $previous_index = count( $previous_comments );
 			<h3 class="reply">
 				<?php printf( __( 'Reply to this email to reply to %s.', 'Postmatic' ), $commenter_name ); ?>
 				<small>
+					<br/>
 					<?php
 					printf(
 						__(
-							'<br /><strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
+							'<strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
 							'Postmatic'
 						),
 						'<a href="' . get_permalink( $comment->comment_post_ID ) . '">' . get_the_title( $comment->comment_post_ID ) . '</a>'

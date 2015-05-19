@@ -48,6 +48,9 @@ class Prompt_Grab_Icon {
 			'tmp_name' => download_url( $grab_url ),
 		);
 
+		if ( is_wp_error( $file_info['tmp_name'] ) )
+			return;
+
 		$id = media_handle_sideload( $file_info, 0 );
 
 		if ( !is_wp_error( $id ) )
