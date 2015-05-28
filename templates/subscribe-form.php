@@ -8,7 +8,6 @@
  * @var string               $action            'subscribe' or 'unsubscribe'
  * @var array                $defaults          Default form values
  * @var string               $loading_image_url
- * @var string               $subscribe_prompt
  * @var string               $unsubscribe_prompt
  */
 
@@ -45,7 +44,7 @@
 			<input id="<?php echo $widget_id; ?>-confirm-unsubscribe" name="confirm_unsubscribe" type="hidden" value="1" />
 		<?php endif; ?>
 
-		<div class="subscribe prompt"><?php echo $subscribe_prompt; ?></div>
+		<div class="subscribe primary prompt"></div>
 
 		<div class="unsubscribe prompt"><?php echo $unsubscribe_prompt; ?></div>
 

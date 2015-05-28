@@ -82,7 +82,7 @@
 <?php endif; ?>
 
 <p>
-	<?php printf( __( 'To unsubscribe at any time visit %s or reply with the word <strong>unsubscribe</strong>.', 'Postmatic' ), $object->subscription_url() ); ?>
+	<?php printf( __( 'To unsubscribe at any time reply with the word <strong>unsubscribe</strong>.', 'Postmatic' ), $object->subscription_url() ); ?>
 </p>
 
 </div>

@@ -6,14 +6,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/1.0.0-"
 "beta19-20150304-1117\n"
 "POT-Creation-Date: 2015-03-04 19:17:10+00:00\n"
-"PO-Revision-Date: 2015-03-04 12:14-0800\n"
+"PO-Revision-Date: 2015-05-27 12:01-0800\n"
 "Last-Translator: LANGUAGE <LL@li.org>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.5.4\n"
+"Language: es_ES\n"
+"Language-Team: \n"
 
 #: admin/core-options-tab.php:6
 msgid "General"
@@ -21,11 +22,11 @@ msgstr "General"
 
 #: admin/core-options-tab.php:12
 msgid "Postmatic Api Key"
-msgstr "Clave Api Postmatic"
+msgstr "Clave API de Postmatic"
 
 #: admin/core-options-tab.php:24
 msgid "Improve your site by making Postmatic even better"
-msgstr "Mejorar su sitio al hacer Postmatic aún mejor"
+msgstr "Mejora tu web ayudándonos a hacer Postmatic aún mejor"
 
 #: admin/core-options-tab.php:26
 msgid ""
@@ -33,25 +34,25 @@ msgid ""
 "the box below you will be helping us know more about your site and how we "
 "can make Postmatic even better."
 msgstr ""
-"Dependemos de usuarios como usted para ayudar a dar forma a nuestro plan de "
-"desarrollo. Al marcar la casilla de abajo usted estará ayudándonos a saber "
-"más acerca de su sitio y cómo podemos mejorar aún más Postmatic."
+"Dependemos de usuarios como tú para darle forma a nuestros planes de "
+"desarrollo. Marcando la casilla de debajo nos estarás ayudando a saber más "
+"sobre tu sitio web y sobre cómo podemos hacer Postmatic aún mejor."
 
 #: admin/core-options-tab.php:36
 msgid "Yes, send periodic usage statistics to Postmatic."
-msgstr "Sí, enviar estadísticas de uso periódicas a Postmatic."
+msgstr "Sí, enviar periódicamente estadísticas de uso a Postmatic."
 
 #: admin/delivery-metabox.php:99
 msgid "Do not deliver this post via email."
-msgstr "No entregar este mensaje por correo electrónico"
+msgstr "No enviar este mensaje por correo electrónico"
 
 #: admin/delivery-metabox.php:110
 msgid "Do not use the featured image in email."
-msgstr "No utilice la imagen ofrecida en el correo electrónico."
+msgstr "No usar la imagen destacada en el correo electrónico."
 
 #: admin/delivery-metabox.php:121
 msgid "Send me a preview email"
-msgstr "Envíame un correo electrónico de previsualización"
+msgstr "Enviar correo de prueba"
 
 #: admin/email-options-tab.php:6
 msgid "Email Template"
@@ -60,11 +61,11 @@ msgstr "Plantilla de correo electrónico"
 #: admin/email-options-tab.php:22
 msgid "Test email was <strong>not sent</strong> to an invalid address."
 msgstr ""
-"Mensaje de prueba <strong>no enviado</strong> a una dirección no válida."
+"El correo de prueba <strong>no ha sido enviado</strong> (dirección inválida)."
 
 #: admin/email-options-tab.php:35
 msgid "Test email <strong>sent</strong>."
-msgstr "Mensaje de prueba <strong>enviado</strong>."
+msgstr "Correo de prueba <strong>enviado</strong>."
 
 #: admin/email-options-tab.php:58
 msgid "Email header type"
@@ -80,13 +81,15 @@ msgstr "Texto"
 
 #: admin/email-options-tab.php:74
 msgid "Email header image"
-msgstr "Imagen del cabecera por correo electrónico"
+msgstr "Imagen de cabecera del correo electrónico"
 
 #: admin/email-options-tab.php:77
 msgid ""
 "Will be displayed at half the size of your uploaded image to support retina "
 "displays. The ideal width to fill the full header area is 1440px wide."
 msgstr ""
+"La imagen se mostrará a la mitad de su tamaño real. El tamaño ideal para "
+"usar todo el espacio disponible es 1440px de ancho."
 
 #: admin/email-options-tab.php:102
 msgid "Change"
@@ -94,25 +97,27 @@ msgstr "Cambiar"
 
 #: admin/email-options-tab.php:109
 msgid "Email header text"
-msgstr "Texto del cabecera por correo electrónico"
+msgstr "Texto de cabecera del correo electrónico"
 
 #: admin/email-options-tab.php:121
 msgid "Site icon"
-msgstr ""
+msgstr "Icono del sitio"
 
 #: admin/email-options-tab.php:124
 msgid ""
 "This is generated from your site's favicon, and used in comment "
 "notifications in place of the header image."
 msgstr ""
+"Este icono se genera a partir del favicon de tu sitio, y se utiliza en las "
+"notificaciones de comentarios en lugar de la imagen de cabecera."
 
 #: admin/email-options-tab.php:149
 msgid "Refresh"
-msgstr ""
+msgstr "Actualizar"
 
 #: admin/email-options-tab.php:155
 msgid "Email footer type"
-msgstr "Tipo de cabecera del mensaje"
+msgstr "Tipo de pie del mensaje"
 
 #: admin/email-options-tab.php:161
 msgid "Widgets"
@@ -120,19 +125,19 @@ msgstr "Widgets"
 
 #: admin/email-options-tab.php:170
 msgid "Footer Widgets"
-msgstr "Widgets Pie de Página"
+msgstr "Widgets del pie de página"
 
 #: admin/email-options-tab.php:173
 msgid "You can define widgets for your footer at "
-msgstr "Puede definir widgets para el pie de página en"
+msgstr "Puedes definir los widgets del pie de página en"
 
 #: admin/email-options-tab.php:177
 msgid "Appearance > Widgets"
-msgstr "Apariencia> Widgets"
+msgstr "Apariencia > Widgets"
 
 #: admin/email-options-tab.php:183
 msgid "Email footer text"
-msgstr "Texto de pie de página por correo electrónico"
+msgstr "Texto del pie de página del correo electrónico"
 
 #: admin/email-options-tab.php:194
 msgid "Send a test HTML email to"
@@ -148,7 +153,7 @@ msgstr "Importar Usuarios"
 
 #: admin/import-options-tab.php:22
 msgid "Import results are below."
-msgstr "Los resultados de la importación están abajo."
+msgstr "Los resultados de la importación se muestran debajo."
 
 #: admin/import-options-tab.php:30
 msgid "Important:"
@@ -163,53 +168,52 @@ msgid ""
 "you would like to disable these notifications please do so in the Options "
 "tab above."
 msgstr ""
-"Tiene notificaciones de Cuenta de Usuario permitidas en la etiqueta de "
-"Opciones, que significa que cada nuevo suscriptor importado recibirá un "
-"correo electrónico con sus referencias. No es necesario a enviar estas "
-"referencias a suscriptores de Postmatic como todas las funciones de "
-"suscriptor pueden ser hechas directamente a través de correo electrónico. Si "
-"querría incapacitar estas notificaciones hacen así en la etiqueta de "
-"Opciones arriba."
+"Las notificaciones de cuentas de usuario están activadas en la pestaña de "
+"\"Opciones\", lo que significa que cada suscriptor importado recibirá un "
+"correo electrónico con sus credenciales. No es necesario enviar estos "
+"credenciales a los subscriptores de Postmatic, ya que todas las funciones se "
+"pueden gestionar directamente a través del correo electrónico. Si quieres "
+"desactivar las notificaciones puedes hacerlo en la misma pestaña de "
+"\"Opciones\"."
 
 #: admin/invite-options-tab.php:8
 msgid "Invite Subscribers"
 msgstr "Invitar Suscriptores"
 
 #: admin/invite-options-tab.php:42
-#, fuzzy
 msgid "Duplicate email address"
-msgstr "Dirección de correo electrónico no válida"
+msgstr "La dirección de correo electrónico ya existe en la base de datos"
 
 #: admin/invite-options-tab.php:47
 msgid "Invalid email address"
-msgstr "Dirección de correo electrónico no válida"
+msgstr "La dirección de correo electrónico no es válida"
 
 #: admin/invite-options-tab.php:53
 msgid "Already subscribed"
-msgstr "Ya suscrito"
+msgstr "Ya está suscrito."
 
 #: admin/invite-options-tab.php:80
 msgid "Success. %d invite sent."
 msgid_plural "Success. %d invites sent."
-msgstr[0] "Éxito. %d invitación enviada."
-msgstr[1] "Éxito. %d invitaciones enviadas."
+msgstr[0] "¡Conseguido! %d invitación enviada."
+msgstr[1] "¡Conseguido! %d invitaciones enviadas."
 
 #: admin/invite-options-tab.php:85
 msgid "Something went wrong and these invites were not sent: "
-msgstr "Algo salió mal y estas invitaciones no fueron enviadas:"
+msgstr "Algo ha salido mal y estas invitaciones no han sido enviadas: "
 
 #: admin/invite-options-tab.php:94
 msgid "Send email invitations to subscribe to your site"
-msgstr "Envíe invitaciones por correo electrónico para abonarse a su sitio"
+msgstr ""
+"Envía invitaciones por correo electrónico para suscribirse a tu sitio web"
 
 #: admin/invite-options-tab.php:96
 msgid ""
 "Use this tool to reach out to your community of past or current commenters. "
 "Be sure to check the subject and introductory text below."
 msgstr ""
-"Utilice esta herramienta para acercarse a su comunidad de comentaristas "
-"pasados o actuales. Asegúrese de revisar el asunto y el texto introductorio "
-"a continuación."
+"Utiliza esta herramienta para comunicarte con quienes cometan en tu sitio "
+"web. Asegúrate de revisar el asunto y el texto de introducción."
 
 #: admin/invite-options-tab.php:103
 msgid "Email Subject"
@@ -217,7 +221,7 @@ msgstr "Asunto del correo"
 
 #: admin/invite-options-tab.php:108
 msgid "You're invited to subscribe to %s"
-msgstr "Le invitamos a suscribirse a  %s"
+msgstr "Esto es una invitación para suscribirte a %s"
 
 #: admin/invite-options-tab.php:113
 msgid "Email Introduction"
@@ -228,12 +232,12 @@ msgid ""
 "This text will be placed at the top of invitation message. Make it as "
 "friendly and personalized as you can."
 msgstr ""
-"Este texto se colocará en la parte superior del mensaje de invitación. Que "
-"sea lo más amable y personalizado que pueda."
+"Este texto aparecerá en la parte superior del mensaje de invitación. Trata "
+"de escribir algo que sea lo más simpático y personalizado posible."
 
 #: admin/invite-options-tab.php:130
 msgid "Who should we send this invite to?"
-msgstr "¿A quién debemos enviar esta invitación?"
+msgstr "¿A quién quieres enviar esta invitación?"
 
 #: admin/invite-options-tab.php:137
 msgid "A list of email addresses"
@@ -241,7 +245,7 @@ msgstr "Una lista de direcciones de correo electrónico"
 
 #: admin/invite-options-tab.php:138
 msgid "People who have recently commented"
-msgstr "Las personas que han comentado recientemente"
+msgstr "Todas las personas que hayan comentado recientemente"
 
 #: admin/invite-options-tab.php:139
 msgid "People who comment the most"
@@ -249,16 +253,15 @@ msgstr "Las personas que más comentan"
 
 #: admin/invite-options-tab.php:140
 msgid "Anyone that has ever commented"
-msgstr "Cualquier persona que alguna vez haya comentado"
+msgstr "Cualquier persona que haya comentado alguna vez"
 
 #: admin/invite-options-tab.php:141
-#, fuzzy
 msgid "WordPress users who are not subscribed"
-msgstr "Ha cancelado su suscripción."
+msgstr "Usuarios de WordPress que no están suscritos"
 
 #: admin/invite-options-tab.php:156
 msgid "Please separate addresses with commas."
-msgstr "Por favor separe las direcciones con comas."
+msgstr "Por favor, separa las diferentes direcciones con comas."
 
 #: admin/invite-options-tab.php:169
 msgid ""
@@ -266,7 +269,7 @@ msgid ""
 "last"
 msgstr ""
 "Enviar esta invitación a las personas que han tenido un comentario aprobado "
-"en el último"
+"en los últimos"
 
 #: admin/invite-options-tab.php:175
 msgid "months."
@@ -290,23 +293,23 @@ msgstr "Cargando..."
 
 #: admin/invite-options-tab.php:208
 msgid "If you have many commenters, this could take some time."
-msgstr ""
+msgstr "Si tienes mucha gente comentando, esto puede tardar un poco."
 
 #: admin/invite-options-tab.php:211
 msgid ""
 "Based on the above your invite will be sent to <span class=\"recipient-count"
 "\">0</span> people."
 msgstr ""
-"Con base en lo anterior su invitación será enviada a <span class=\"recipient-"
-"count\">0</span> personas."
+"Vas a enviar esta invitación a <span class=\"recipient-count\">0</span> "
+"personas."
 
 #: admin/invite-options-tab.php:219
 msgid ""
 "Wow, that's a lot of invitations! This tool is currently limited to %d "
 "invites. You can contact support if you need to arrange more."
 msgstr ""
-"¡Ah, que muchas invitaciones! Esta herramienta es limitada actualmente a %d "
-"invita. Puede contactar apoyo si debe arreglar más."
+"¡Demasiada gente! Con esta herramienta puedes enviar un máximo de %d "
+"invitaciones. Contacta con el soporte técnico si necesitas enviar más."
 
 #: admin/invite-options-tab.php:239
 msgid "Send Invites"
@@ -330,32 +333,32 @@ msgid ""
 "what you do best. Your Jetpack subscribers will be left in tact should you "
 "ever need to access them again."
 msgstr ""
-"Emigrar a sus usuarios de Jetpack a Postmatic toman sólo segundos. Hemos "
-"construido un importador seguro que copiará en total de sus suscriptores de "
-"notificación de poste Jetpack con un clic único. Una vez que la importación "
-"ha completado puede incapacitar sin peligro Suscripciones de Jetpack y "
-"continuar hacer lo que usted hace mejor. Sus suscriptores de Jetpack serán "
-"dejados en tacto por lo caso que se debe acceder a los otra vez."
+"Importar los usuarios de Jetpack a Postmatic tarda sólo unos segundos. Hemos "
+"desarrollado una herramienta de importación segura que copiará todos los "
+"suscriptores de Jetpack en un solo click. Una vez que la importación se haya "
+"completado, puedes desactivar sin peligro las Suscripciones de Jetpack. La "
+"lista de suscriptores de Jetpack será conservada por si la necesitas en el "
+"futuro."
 
 #: admin/jetpack-import-options-tab.php:38
 msgid "Jetpack Import FAQ"
-msgstr "Importación de Jetpack preguntas frecuentes"
+msgstr "Importación de Jetpack: preguntas frecuentes"
 
 #: admin/jetpack-import-options-tab.php:39
 msgid "Will my subscribers be alerted to the change?"
-msgstr "¿Mis suscriptores serán alertados al cambio?"
+msgstr "¿Serán avisados del cambio mis suscriptores?"
 
 #: admin/jetpack-import-options-tab.php:41
 msgid ""
 "No. The import process is invisible to subscribers. They will not be alerted "
 "nor will they need to opt-in again."
 msgstr ""
-"No. El proceso de la importación es invisible a los suscriptores. Ellos no "
-"serán alertados ni necesitan optar-en otra vez."
+"No. El proceso de importación es invisible para los suscriptores. No serán "
+"avisados, ni necesitan suscribirse de nuevo."
 
 #: admin/jetpack-import-options-tab.php:46
 msgid "What kind of subscribers are imported?"
-msgstr "¿Qué clase de suscriptores son importados?"
+msgstr "¿Qué clase de suscriptores serán importados?"
 
 #: admin/jetpack-import-options-tab.php:48
 msgid ""
@@ -363,13 +366,13 @@ msgid ""
 "this time it's not going to be in the cards to import people that have "
 "subscribed only to comments on individual posts."
 msgstr ""
-"Las personas que se han abonado a nuevos postes en su sitio serán "
-"importadas. En este momento no es posible de importar a los personas que se "
-"han abonado sólo a los comentarios en postes individuales."
+"Los usuarios que se han suscrito a nuevas entradas en tu sitio web serán "
+"importados. En este momento no es posible importar los usuarios que se han "
+"suscrito sólo a los comentarios en entradas individuales."
 
 #: admin/jetpack-import-options-tab.php:53
 msgid "Who isn't imported?"
-msgstr "¿Quién no es importado?"
+msgstr "¿Quién no será importado?"
 
 #: admin/jetpack-import-options-tab.php:55
 msgid ""
@@ -379,12 +382,12 @@ msgid ""
 "of a user which subscribed with their wordpress.com identity. This will in "
 "most cases be a very small percentage of your audience."
 msgstr ""
-"Jetpack apoya dos clases de usuarios: personas que se abonan a su sitio con "
-"su dirección correo electrónico, y con las personas que se abonan a su sitio "
-"con su identidad de usuario de wordpress.com. En este momento nosotros no "
-"podemos acceder a la dirección correo electrónico de un usuario que se abonó "
-"con su identidad de wordpress.com. Esto en la mayoría de los casos sera un "
-"porcentaje muy pequeño de su audiencia."
+"Jetpack gestiona dos clases de usuarios: personas que se suscriben a tu blog "
+"con su dirección de correo electrónico, y personas que se suscriben con su "
+"identidad de usuario de Wordpress.com. En este momento no podemos acceder a "
+"la dirección de correo electrónico de un usuario que se haya suscrito con su "
+"identidad de Wordpress.com. De todas formas, en la mayoría de los casos esto "
+"representa un porcentaje muy pequeño de los suscriptores."
 
 #: admin/jetpack-import-options-tab.php:61
 msgid ""
@@ -397,11 +400,10 @@ msgid ""
 "Everything on your server looks good. We are ready to import your Jetpack "
 "subscribers."
 msgstr ""
-"Todo en su servidor parece bueno. Estamos listos para importar a sus "
+"El servidor parece estar preparado. Estamos listos para importar tus "
 "suscriptores de Jetpack."
 
 #: admin/jetpack-import-options-tab.php:90
-#, fuzzy
 msgid ""
 "We have imported one subscriber. It is now safe to disable Jetpack "
 "commenting and subscriptions."
@@ -409,37 +411,38 @@ msgid_plural ""
 "Imported %1$s subscribers. It is now safe to disable Jetpack commenting and "
 "subscriptions."
 msgstr[0] ""
-"Hemos importado a un suscriptor. Es ahora seguro incapacitar comentarios y "
+"Hemos importado un suscriptor. Ahora puedes desactivar los comentarios y "
 "suscripciones de Jetpack."
 msgstr[1] ""
-"Suscriptores importados %1$s . Es ahora seguro incapacitar comentarios y "
+"Hemos importado %1$s suscriptores. Ahora puedes desactivar los comentarios y "
 "suscripciones de Jetpack."
 
 #: admin/jetpack-import-options-tab.php:98
 msgid "The one user we found was already subscribed."
 msgid_plural "The %2$s users we found were already subscribed."
-msgstr[0] "El un usuario que encontramos ya fue abonado."
-msgstr[1] "Los %2$s usuarios que encontramos ya fueron abonados."
+msgstr[0] "El único usuario que hemos encontrado ya está suscrito."
+msgstr[1] "Los %2$s usuarios que hemos encontrados ya están suscritos."
 
 #: admin/jetpack-import.php:44
 msgid ""
 "The Jetpack import requires a common PHP extension called \"libxml\" that is "
 "not present. Please check with your hosting provider."
 msgstr ""
-"La importación de Jetpack requiere una extensión común de PHP llamado "
-"\"libxml\" que no es presente. Verifique por favor con su proveedor."
+"La importación de Jetpack requiere una extensión común de PHP llamada "
+"\"libxml\" que no hemos encontrado en el servidor. Contacta con tu proveedor "
+"de alojamiento."
 
 #: admin/jetpack-import.php:50
 msgid ""
 "Before you can import Jetpack subscribers, the Jetpack plugin and its Stats "
 "module must be active."
 msgstr ""
-"Antes que pueda importar suscriptores de Jetpack, el plugin de Jetpack y su "
-"módulo de estadísticas deben ser activos."
+"Para importar suscriptores de Jetpack, el plugin de Jetpack y su módulo de "
+"estadísticas deben estar activados."
 
 #: admin/jetpack-import.php:183
 msgid "A request to the Jetpack servers failed."
-msgstr "Una petición a los servidores de Jetpack falló."
+msgstr "La petición a los servidores de Jetpack ha fallado."
 
 #: admin/mailpoet-import-options-tab.php:10
 #: admin/mailpoet-import-options-tab.php:232
@@ -454,35 +457,33 @@ msgstr "Importación de Mailpoet"
 msgid ""
 "If you would like to import Mailpoet users please activate the Mailpoet "
 "plugin."
-msgstr ""
-"Si querría importar usuarios de Mailpoet activan por favor el plugin de "
-"Mailpoet."
+msgstr "Si quieres importar usuarios de Mailpoet activa el plugin de Mailpoet."
 
 #: admin/mailpoet-import-options-tab.php:49
 msgid "Here's how it went:"
-msgstr "Aquí es cómo fue:"
+msgstr "Resultados:"
 
 #: admin/mailpoet-import-options-tab.php:53
 msgid "Imported one subscriber."
 msgid_plural "Imported %1$s subscribers."
-msgstr[0] "Importado a un suscriptor."
-msgstr[1] "Suscriptores importados %1$s ."
+msgstr[0] "Suscriptores importados: %1$s."
+msgstr[1] "Suscriptores importados: %1$s."
 
 #: admin/mailpoet-import-options-tab.php:61
 msgid "The one valid user we found was already subscribed."
 msgid_plural "The %2$s valid users we found were already subscribed."
-msgstr[0] "El un usuario válido que encontramos ya fue abonado."
-msgstr[1] "Los %2$s usuarios válidos que encontramos ya fueron abonados."
+msgstr[0] "El único usuario que hemos encontrado ya está suscrito."
+msgstr[1] "Los %2$s usuarios que hemos encontrados ya están suscritos."
 
 #: admin/mailpoet-import-options-tab.php:74
 msgid "One user didn't qualify for importing."
 msgid_plural "There were %3$s users which didn't qualify for importing."
-msgstr[0] "Un usuario no ha calificado para importación."
-msgstr[1] "Había %3$s usuarios que no han calificado para importación."
+msgstr[0] "Un usuario no cumplía con los requisitos para la importación."
+msgstr[1] "%3$s usuarios no cumplían con los requisitos para la importación."
 
 #: admin/mailpoet-import-options-tab.php:82
 msgid "Why weren't more of my users imported?"
-msgstr "¿Por qué más de mis usuarios no han sido importados?"
+msgstr "¿Por qué no han sido importados más usuarios?"
 
 #: admin/mailpoet-import-options-tab.php:84
 #: admin/mailpoet-import-options-tab.php:172
@@ -493,30 +494,29 @@ msgid ""
 "spamming). Because of this we will not import any Mailpoet subscribers "
 "unless the following two conditions are true:"
 msgstr ""
-"Tenemos una política muy estricta con respecto a importaciones de usuarios: "
-"<em>Nosotros nunca permitiremos nadie ser abonado a un blog con Postmatic "
-"sin ellos habiendo optado-en</em> (como listas de suscriptor compró e "
-"importó a granel para enviar spam). A causa de este nosotros no importaremos "
-"a los suscriptores de Mailpoet a menos que el siguiente dos condiciones sean "
-"verdad:"
+"Tenemos una política muy estricta con respecto a la importación de usuarios: "
+"<em>No permitimos que un usuario sea suscrito a un blog con Postmatic sin su "
+"consentimiento expreso</em>. Por tanto, no importamos suscriptores de "
+"Mailpoet a menos que se cumplan dos condiciones:"
 
 #: admin/mailpoet-import-options-tab.php:90
 #: admin/mailpoet-import-options-tab.php:178
 msgid "The user has opened an email you sent through Mailpoet"
 msgstr ""
-"El usuario ha abierto un correo electrónico que usted envió por Mailpoet"
+"El usuario ha abierto un correo electrónico enviado por ti a través de "
+"Mailpoet"
 
 #: admin/mailpoet-import-options-tab.php:91
 #: admin/mailpoet-import-options-tab.php:179
 msgid "The user has clicked a link within an email you sent through Mailpoet"
 msgstr ""
-"El usuario ha hecho clic en un lazo dentro de un correo electrónico que "
-"envió por Mailpoet"
+"El usuario ha hecho clic en un enlace dentro de un correo electrónico "
+"enviado por ti a través de Mailpoet"
 
 #: admin/mailpoet-import-options-tab.php:93
 #: admin/mailpoet-import-options-tab.php:181
 msgid "Why so strict?"
-msgstr "¿Por qué tan estricto?"
+msgstr "¿Por qué tiene Postmatic una política tan estricta?"
 
 #: admin/mailpoet-import-options-tab.php:98
 msgid "But we do have good news"
@@ -527,8 +527,8 @@ msgid ""
 "You can send an email to your remaining users. They will be invited to join "
 "your site by simply replying."
 msgstr ""
-"Puede enviar un correo electrónico a sus usuarios restantes. Serán invitados "
-"a abonarse a su sitio para simplemente contestando."
+"Puedes enviar un correo electrónico al resto de usuarios. Serán invitados a "
+"suscribirse a tu sitio web simplemente contestando al correo electrónico."
 
 #: admin/mailpoet-import-options-tab.php:120
 msgid "Preview and send the invitations"
@@ -537,23 +537,25 @@ msgstr "Previsualizar y enviar las invitaciones"
 #: admin/mailpoet-import-options-tab.php:146
 msgid ""
 "There are no lists available from MailPoet. Are you sure it is activated?"
-msgstr "No hay listas disponibles de MailPoet. ¿Está seguro que es activado?"
+msgstr ""
+"No hay listas disponibles de MailPoet. ¿Estás seguro de que el plugin está "
+"activado?"
 
 #: admin/mailpoet-import-options-tab.php:149
 msgid ""
 "Mailpoet is detected. We are ready to import active subscribers from "
 "Mailpoet."
 msgstr ""
-"Mailpoet es discernido. Estamos listos para importar a suscriptores activos "
-"de Mailpoet."
+"Mailpoet ha sido detectado. Estamos listos para importar tus suscriptores "
+"activos de Mailpoet."
 
 #: admin/mailpoet-import-options-tab.php:167
 msgid "Mailpoet Import FAQ"
-msgstr "Importación de Mailpoet preguntas frecuentes"
+msgstr "Importación de Mailpoet: preguntas frecuentes"
 
 #: admin/mailpoet-import-options-tab.php:168
 msgid "Will my subscribers be sent a notification?"
-msgstr "¿Serán enviados mis suscriptores una notificación?"
+msgstr "¿Recibirán mis suscriptores una notificación?"
 
 #: admin/mailpoet-import-options-tab.php:169
 msgid "No. The import process is invisible to subscribers."
@@ -561,7 +563,7 @@ msgstr "No. El proceso de la importación es invisible a los suscriptores."
 
 #: admin/mailpoet-import-options-tab.php:170
 msgid "Which of my subscribers will be imported?"
-msgstr "¿Cuál de mis suscriptores serán importados?"
+msgstr "¿Qué suscriptores serán importados?"
 
 #: admin/mailpoet-import-options-tab.php:183
 msgid ""
@@ -573,33 +575,34 @@ msgid ""
 "aren't all that good of a match anyway, right? Think of it as spring "
 "cleaning."
 msgstr ""
-"Importar de bulto a usuarios no dispuestos y los marcando como optado-en es "
-"fácil en Mailpoet. Si nosotros no tuvimos nuestra importación a un estándar "
-"más alto el botón mágico debajo permitiría a esos usuarios no dispuestos a "
-"ser importados en Postmatic. Y entonces enviarían spam a su abuela. Nadie "
-"desea eso. ¿Más, si un suscriptor no abre ni interactúa con sus correos "
-"electrónicos quizá ellos no son que bueno de todos modos, correcto? Piense "
-"en ello como limpieza de primavera."
+"Importar usuarios que no han dado su consentimiento pero marcarlos como si "
+"sí lo hubieran hecho es bastante fácil en Mailpoet. Si no fuésemos estrictos "
+"con este tema, el botón de debajo permitiría importar también a Postmatic "
+"todos esos usuarios que no han dado su consentimiento expreso. Y eso se "
+"llama SPAM, y a nadie le gusta. En cualquier caso, si tus suscriptores no "
+"abren tus correos electrónicos tampoco es una gran pérdida, ¿no? Es como "
+"hacer limpieza para quedarte con los suscriptores que de verdad importan."
 
 #: admin/mailpoet-import-options-tab.php:188
 msgid "Can I import multiple lists?"
-msgstr "¿Puedo importar múltiples listas?"
+msgstr "¿Puedo importar más de una lista?"
 
 #: admin/mailpoet-import-options-tab.php:190
 msgid ""
 "Yes. Re-run this importer with as many lists as you like. Postmatic will not "
 "create duplicate subscribers."
 msgstr ""
-"Sí. Reponga a este importador con tantas listas como quiere. Postmatic no "
-"creará a suscriptores duplicados."
+"Sí. Puedes utilizar la herramienta de importación tantas veces como quieras "
+"para importar todas tus listas. Postmatic evitará crear suscriptores "
+"duplicados."
 
 #: admin/mailpoet-import-options-tab.php:196
 msgid ""
 "Does Postmatic have lists like Mailpoet does? Is there any way to organize "
 "subscribers?"
 msgstr ""
-"¿Tiene listas Postmatic como Mailpoet? ¿Hay cualquier manera de organizar a "
-"suscriptores?"
+"¿Tiene Postmatic listas de suscriptores como las de Mailpoet? ¿Hay alguna "
+"manera de organizar a los suscriptores?"
 
 #: admin/mailpoet-import-options-tab.php:202
 msgid ""
@@ -607,14 +610,14 @@ msgid ""
 "Postmatic. If list segmentation is important to you please let us know by "
 "visiting our support site. You'll find the link to the right."
 msgstr ""
-"No, nosotros no tenemos un concepto de múltiples listas. Todos los usuarios "
-"son el mismo en Postmatic. Si segmentación de lista es importante a usted "
-"sepamos por favor visitando nuestro sitio de apoyo. Encuentra el lazo a la "
-"derecha."
+"No, en Postmatic no hay listas de suscriptores. Todos los usuarios están al "
+"mismo nivel. Si la segmentación de suscriptores es importante para ti, por "
+"favor mándanos un mensaje a través de nuestra web de soporte. El enlace está "
+"a la derecha."
 
 #: admin/mailpoet-import-options-tab.php:207
 msgid "What will happen to my Mailpoet subscribers?"
-msgstr "¿Qué sucederá a mis suscriptores de Mailpoet?"
+msgstr "¿Qué sucederá con mis suscriptores de Mailpoet?"
 
 #: admin/mailpoet-import-options-tab.php:209
 msgid ""
@@ -622,9 +625,9 @@ msgid ""
 "WordPress database. Your Mailpoet subscribers will always be available to "
 "you provided you have Mailpoet activated."
 msgstr ""
-"Mailpoet y Postmatic almacenan a suscriptores en lugares diferentes dentro "
-"de su base de datos de WordPress. Sus suscriptores de Mailpoet siempre "
-"estarán disponibles a usted si tiene Mailpoet activado."
+"Mailpoet y Postmatic guardan las listas de suscriptores en diferentes partes "
+"dentro de la base de datos de WordPress. Tus listas de Mailpoet estarán "
+"seguras si mantienes Mailpoet activado."
 
 #: admin/mailpoet-import-options-tab.php:221
 msgid "List to import: "
@@ -636,13 +639,13 @@ msgstr "Opciones"
 
 #: admin/options-options-tab.php:13
 msgid "Author Subscriptions"
-msgstr "Suscripciones Autor"
+msgstr "Suscripciones de Autor"
 
 #: admin/options-options-tab.php:16
 msgid ""
 "Subscribe authors to comments on their own posts.<small>(Recommended)</small>"
 msgstr ""
-"Suscribir los autores a los comentarios de sus propios mensajes..<small>"
+"Suscribir a los autores a los comentarios en sus propias entradas. <small>"
 "(Recomendado)</small>"
 
 #: admin/options-options-tab.php:20
@@ -651,9 +654,9 @@ msgid ""
 "on their posts. This works well to keep the author up to date with the "
 "latest comments and discussion."
 msgstr ""
-"Esto se abonará automáticamente autores de poste a nuevas notificaciones del "
-"comentario en sus postes. Esto notifica al autor de los últimos comentarios "
-"y la discusión."
+"Esta opción suscribe a los autores del sitio web a las notificaciones de "
+"comentarios en sus propias entradas. Así los autores están siempre al tanto "
+"de las conversaciones que generan."
 
 #: admin/options-options-tab.php:27
 msgid "User Accounts"
@@ -662,7 +665,7 @@ msgstr "Cuentas de usuario"
 #: admin/options-options-tab.php:30
 msgid "Email subscribers WordPress account credentials when they subscribe."
 msgstr ""
-"Enviar suscriptores credenciales de la cuenta de WordPress por correo "
+"Enviar a los suscriptores sus credenciales de WordPress por correo "
 "electrónico cuando se suscriban."
 
 #: admin/options-options-tab.php:32
@@ -671,24 +674,26 @@ msgid ""
 "possible via email. If enabled we recommend using a good front end login "
 "plugin."
 msgstr ""
-"Sólo es necesario en algunas situaciones como todos los comandes de los "
-"usuarios son de otra manera posible mediante correo electrónico. Si está "
-"activado se recomienda utilizar un buen plugin front-end de inicio de sesión."
+"Sólo es necesario en algunos casos, ya que toda la gestión de las opciones "
+"de usuarios se puede realizar mediante correo electrónico. Si activas esta "
+"opción, te recomendamos utilizar un buen plugin de inicio de sesión."
 
 #: admin/options-options-tab.php:39 core/core.php:233
 msgid "Postmatic Delivery"
 msgstr "Entrega Postmatic"
 
 #: admin/options-options-tab.php:42
-#, fuzzy
 msgid "Do not send new posts via email."
-msgstr "No entregar este mensaje por correo electrónico"
+msgstr "No enviar entradas nuevas por correo electrónico."
 
 #: admin/options-options-tab.php:44
 msgid ""
 "You can still uncheck the \"Do not deliver this post via email\" checkbox "
 "for a specific post, but delivery will be disabled by default."
 msgstr ""
+"Siempre puedes desmarcar la casilla de \"No enviar esta entrada por correo "
+"electrónico\" para una entrada específica, pero la opción de envío estará "
+"desactivada por defecto."
 
 #: admin/options-page.php:86
 msgid "Settings <strong>saved</strong>."
@@ -696,9 +701,7 @@ msgstr "Configuración <strong>guardada</strong>."
 
 #: admin/options-page.php:92
 msgid "Report sent! Our bug munchers thank you for the meal."
-msgstr ""
-"Informe enviado! Nuestros masticadores de errores dan las gracias por la "
-"comida."
+msgstr "¡Informe enviado! Nuestros cazadores de errores te agradecen tu ayuda."
 
 #: admin/options-page.php:96
 msgid ""
@@ -706,11 +709,10 @@ msgid ""
 "to receive yours within 1-2 days. You can safely leave Postmatic activated "
 "but it is not necessary to do so."
 msgstr ""
-"Solicitud enviada. Estamos enviando actualmente unos cientos de fichas por "
-"semana. Esperar a recibir la suya dentro de 1-2 días. Puede dejar Postmatic "
-"activado pero no es necesario hacerlo."
+"Solicitud enviada. Estamos enviando varios cientos de claves cada semana, "
+"así que deberías recibir la tuya en uno o dos días. Mientras esperas puedes "
+"dejar el plugin de Postmatic activado o desactivado."
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.0.0-beta19)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:131
 msgid "Postmatic"
@@ -718,7 +720,7 @@ msgstr "Postmatic"
 
 #: admin/options-page.php:181
 msgid "Have a key?"
-msgstr "Tiene una clave?"
+msgstr "¿Tienes una clave?"
 
 #: admin/options-page.php:184
 msgid "Postmatic Key"
@@ -726,12 +728,11 @@ msgstr "Clave Postmatic"
 
 #: admin/options-page.php:189
 msgid "Once you have your key, enter it here to blast off!"
-msgstr "¡Una vez que tenga su clave, ingrese aquí para despegar!"
+msgstr "Cuando tengas tu clave, entra aquí para despegar ;)"
 
 #: admin/options-page.php:190
 msgid "By entering a valid api key and activating Postmatic you agree to the"
-msgstr ""
-"Al ingresar una clave de API y activando Postmatic está de acuerdo con la"
+msgstr "Al ingresar una clave API y activar Postmatic estás aceptando los"
 
 #: admin/options-page.php:191
 msgid "terms of service"
@@ -742,8 +743,8 @@ msgid ""
 "<strong>Attention:</strong> There have been some recent errors in your "
 "configuration. An error log can be found here: "
 msgstr ""
-"<strong>Atención:</strong> Se han producido algunos errores recientes en su "
-"configuración. Un registro de errores se puede encontrar aquí: :"
+"<strong>Atención:</strong> Se han producido errores en tu configuración. "
+"Puedes encontrar un registro de errores aquí:"
 
 #: admin/options-page.php:270 admin/options-page.php:280
 #: admin/options-page.php:320 admin/options-page.php:344
@@ -752,28 +753,28 @@ msgstr "Cerrar"
 
 #: admin/options-page.php:271
 msgid "Submit A Bug Report"
-msgstr "Presentar un informe de error"
+msgstr "Enviar un informe de errores"
 
 #: admin/options-page.php:284
 msgid ""
 "Your current theme has no widget areas. This means you'll have to use the "
 "template tag to display the Postmatic Subscription widget."
 msgstr ""
-"Su tema actual no tiene áreas de widget. Esto significa que tiene que "
-"utilizar la etiqueta de plantilla para mostrar el widget Postmatic "
-"Suscripción."
+"Tu tema actual no tiene áreas de widget. Si quieres mostrar el widget de "
+"Subscripción de Postmatic, puedes añadirlo a tu plantilla de diseño "
+"directamente."
 
 #: admin/options-page.php:292
 msgid ""
 "To get started now, place the Postmatic Subscribe widget where people can "
 "use it to subscribe!"
 msgstr ""
-"¡Para empezar ahora, coloque el widget Postmatic Suscripción donde la gente "
-"puede utilizarlo para suscribirse!"
+"Para empezar ahora, coloca el widget de Suscripción de Postmatic donde la "
+"gente pueda verlo."
 
 #: admin/options-page.php:294
 msgid "Visit Your Widgets"
-msgstr "Visita sus widgets"
+msgstr "Ver Widgets"
 
 #: admin/options-page.php:311
 msgid ""
@@ -782,6 +783,11 @@ msgid ""
 "be sure that you are using it or a similar product to keep from spamming "
 "your subscribers. <a href=\"%s\">Learn more</a>."
 msgstr ""
+"¡Atención! Akismet no está activado en tu sitio web. Akismet es gratis y se "
+"integra a la perfección con WordPress para detener casi todo el SPAM en los "
+"comentarios. Asegúrate de estar usando Akismet o un sistema similar para "
+"evitar que tus suscriptores reciban todo ese SPAM por correo electrónico. <a "
+"href=\"%s\">Más información</a>."
 
 #: admin/options-page.php:335
 msgid ""
@@ -789,6 +795,9 @@ msgid ""
 "ever getting submitted? We heartily recommend installing <a href=\"%s"
 "\">WordPress Zero Spam</a>."
 msgstr ""
+"¿Sabes que hay una manera gratuita y eficaz de evitar que los comentarios de "
+"SPAM sean enviados? Te recomendamos instalar <a href=\"%s\">WordPress Zero "
+"Spam</a>."
 
 #: admin/options-page.php:390
 msgid "Welcome to Postmatic. Let's get started."
@@ -802,7 +811,7 @@ msgstr ""
 
 #: admin/options-page.php:399
 msgid "Key request sent."
-msgstr "Petición clave envió."
+msgstr "Solicitud de clave enviada."
 
 #: admin/options-page.php:406
 msgid "First Name"
@@ -814,19 +823,19 @@ msgstr "Apellido"
 
 #: admin/options-page.php:428 templates/subscribe-form.php:78
 msgid "Email"
-msgstr "Email"
+msgstr "Correo Electrónico"
 
 #: admin/options-page.php:465
 msgid "Need a key?"
-msgstr "¿Necesitas una clave?"
+msgstr "¿Necesitas una clave de activación?"
 
 #: admin/options-page.php:470
 msgid "Request a free Postmatic Api Key"
-msgstr "Solicite una clave Api Postmatic gratis"
+msgstr "Solicita una clave API de Postmatic, es gratis"
 
 #: admin/options-page.php:489
 msgid "Installed and Active"
-msgstr "Instalado y Active"
+msgstr "Instalado y activado"
 
 #: admin/options-page.php:495
 msgid "Purchase"
@@ -836,16 +845,16 @@ msgstr "Comprar"
 msgid ""
 "There's a problem verifying your key. Please try later or report this error."
 msgstr ""
-"Hay un problema con la verificación de su clave. Por favor, intente más "
-"tarde o informe de este error."
+"Hay algún problema con la verificación de tu clave. Por favor, inténtalo de "
+"nuevo más tarde o envía un informe de error."
 
 #: admin/options-page.php:548
 msgid ""
 "We didn't recognize the key \"%s\". Please make sure it matches the one we "
 "gave you."
 msgstr ""
-"No reconocimos la clave \"%s\". Por favor, asegúrese de que coincide con el "
-"que nosotros le dimos."
+"La clave \"%s\" no está registrada. Por favor, asegúrate de que coincide con "
+"la que te hemos enviado desde Postmatic."
 
 #: admin/options-page.php:558
 msgid ""
@@ -853,39 +862,44 @@ msgid ""
 "site's dedicated use, or <a href=\"%s\" target=\"_blank\">contact us</a> for "
 "assistance. Thanks!"
 msgstr ""
+"Esta clave ya está registrada para otro sitio web. Por favor, solicita una "
+"clave nueva para este sitio, o <a href=\"%s\" target=\"_blank\">ponte en "
+"contacto con nosotros</a> para recibir ayuda. ¡Gracias!"
 
 #: admin/options-page.php:605
 msgid ""
 "We're even having trouble sending a bug report. Please copy the data to the "
 "right and send to support@gopostmatic.com."
 msgstr ""
-"Hay problemas con el envío de un informe de bicho. Copie por favor los datos "
-"a la derecha y envíe a support@gopostmatic.com."
+"Se ha producido un error en el envío del informe de errores. Por favor, "
+"copia los datos de la derecha y envíalos por correo electrónico a "
+"support@gopostmatic.com."
 
 #: admin/options-page.php:620
 msgid "Please enter a valid email address."
-msgstr "Por favor, ingrese una dirección de correo electrónico valida."
+msgstr "Por favor, utiliza una dirección de correo electrónico válida."
 
 #: admin/support-options-tab.php:11 admin/support-options-tab.php:70
 msgid "Get Support"
-msgstr "Obtener soporte"
+msgstr "Soporte Técnico"
 
 #: admin/support-options-tab.php:24
 msgid "Diagnostics from %s"
-msgstr "Diagnóstica de %s"
+msgstr "Diagnóstico de %s"
 
 #: admin/support-options-tab.php:35
 msgid "Diagnostics could not be sent, please try a bug report."
 msgstr ""
-"Diagnóstica no podría ser enviada, trata por favor un informe de bicho."
+"No se ha podido enviar el informe de diagnóstico. Por favor, inténtalo con "
+"un informe de errores."
 
 #: admin/support-options-tab.php:41
 msgid "Diagnostics <strong>sent</strong>."
-msgstr "Diagnóstica <strong>enviado</strong>."
+msgstr "Informe de diagnóstico <strong>enviado</strong>."
 
 #: admin/support-options-tab.php:45
 msgid "Support, News, and Documentation"
-msgstr "Apoyo, Noticias, y Documentación"
+msgstr "Soporte Técnico, Noticias, y Documentación"
 
 #: admin/support-options-tab.php:48
 msgid "Documentation"
@@ -894,50 +908,51 @@ msgstr "Documentación"
 #: admin/support-options-tab.php:49
 msgid "Find answers to the most common questions and ask your own."
 msgstr ""
-"Encuentre las respuestas a las preguntas más comunes y pregunta su propio."
+"Encuentra respuestas a las cuestiones más comunes y haz tus propias "
+"preguntas."
 
 #: admin/support-options-tab.php:53
 msgid "Find Answers"
-msgstr "Encuentre Respuestas"
+msgstr "Buscar Respuestas"
 
 #: admin/support-options-tab.php:59
 msgid "Widget Directory"
-msgstr "Directorio Widget"
+msgstr "Directorio de Widgets"
 
 #: admin/support-options-tab.php:60
 msgid ""
 "We've hand curated dozen of widgets. Get the most out of your email template."
 msgstr ""
-"Hemos creado por mano docena de widgets. Obtener el máximo rendimiento de su "
-"plantilla de correo electrónico.."
+"Hemos seleccionado una docena de widgets para que le puedas sacar el máximo "
+"partido a tu plantilla de correo electrónico."
 
 #: admin/support-options-tab.php:64
 msgid "Research Widgets"
-msgstr "Investigue Widgets"
+msgstr "Buscar Widgets"
 
 #: admin/support-options-tab.php:71
 msgid "Let us know if something isn't right. We'll fix it right away."
-msgstr "Háganos saber si algo no está bien. Lo arreglaremos de inmediato."
+msgstr "Si algo no funciona bien, dínoslo. Lo arreglaremos lo antes posible."
 
 #: admin/support-options-tab.php:75
 msgid "Submit a Ticket"
-msgstr "Sométase un Billete"
+msgstr "Enviar un ticket"
 
 #: admin/support-options-tab.php:80
 msgid "The Latest Postmatic News:"
-msgstr "Las Ultimas Noticias de Postmatic:"
+msgstr "Últimas Noticias de Postmatic:"
 
 #: admin/support-options-tab.php:84
 msgid "Advanced: Send Diagnostic Info to Support"
-msgstr "Avanzado: Envíe Información Diagnóstica a Apoyo"
+msgstr "Avanzado: Enviar informes de diagnóstico al soporte técnico"
 
 #: admin/support-options-tab.php:95
 msgid "No news available at the moment."
-msgstr "No hay noticias por el momento."
+msgstr "No hay noticias nuevas."
 
 #: admin/users-handling.php:24
 msgid "Export Postmatic Subscribers"
-msgstr "Exporte Suscriptores Postmatic"
+msgstr "Exportar Suscriptores de Postmatic"
 
 #: admin/users-handling.php:38
 msgid "Postmatic Subscriptions"
@@ -945,7 +960,7 @@ msgstr "Suscripciones de Postmatic"
 
 #: admin/users-handling.php:70
 msgid "New Posts"
-msgstr "Nuevos Postes"
+msgstr "Nuevas Entradas"
 
 #: admin/users-handling.php:79
 msgid "%d Author"
@@ -956,7 +971,7 @@ msgstr[1] "%d autores"
 #: admin/users-handling.php:90
 msgid "%d Conversations"
 msgid_plural "%d Conversations"
-msgstr[0] "%d Conversaciones"
+msgstr[0] "%d Conversación"
 msgstr[1] "%d Conversaciones"
 
 #: core/ajax-handling.php:38 core/ajax-handling.php:58
@@ -965,23 +980,23 @@ msgstr "%s no está suscrito a %s."
 
 #: core/ajax-handling.php:140 core/ajax-handling.php:355
 msgid "You have unsubscribed."
-msgstr "Ha cancelado su suscripción."
+msgstr "Has cancelado tu suscripción."
 
 #: core/ajax-handling.php:162
 msgid "No emails will be sent for this post."
-msgstr "Ningún mensaje será enviado para este poste."
+msgstr "No se enviarán mensajes para esta entrada."
 
 #: core/ajax-handling.php:167
 msgid "This post will be sent to %d subscribers."
-msgstr "Este poste será enviado a %d suscriptores."
+msgstr "Esta entrada será enviada a %d suscriptores."
 
 #: core/ajax-handling.php:173
 msgid "No emails have been sent for this post."
-msgstr "Ningún mensaje ha sido enviado para este poste."
+msgstr "No se ha enviado ningún mensaje para esta entrada."
 
 #: core/ajax-handling.php:178
 msgid "This post has been sent to %d subscribers."
-msgstr "Este poste ha sido enviado a %d suscriptores."
+msgstr "Esta entrada se ha enviado a %d suscriptores."
 
 #: core/ajax-handling.php:212
 msgid "Preview email sent."
@@ -996,66 +1011,69 @@ msgid ""
 "Almost done - you'll receive an email with instructions to complete your "
 "subscription."
 msgstr ""
-"Casi terminado - recibirá un correo electrónico con las instrucciones para "
-"completar la suscripción."
+"Casi has terminado; en breve recibirás un correo electrónico con las "
+"instrucciones para completar tu suscripción."
 
 #: core/ajax-handling.php:336
 msgid "Are you sure you want to unsubscribe %s?"
-msgstr "¿Seguro que quiere cancelar su suscripción ?"
+msgstr "¿Seguro que quieres cancelar tu suscripción?"
 
 #: core/ajax-handling.php:338
 msgid "Not you? Click here to start over"
-msgstr "¿No es usted? Haga clic aquí para empezar de nuevo"
+msgstr "¿No eres tú? Haz clic aquí para empezar de nuevo"
 
 #: core/ajax-handling.php:340 core/comment-form-handling.php:163
 msgid "Unsubscribe"
-msgstr "Cancelar su suscripción"
+msgstr "Cancelar Suscripción"
 
 #: core/ajax-handling.php:369
 msgid ""
 "<strong>Confirmation email sent. Please check your email for further "
 "instructions.</strong>"
 msgstr ""
-"<strong>Mensaje de confirmación enviado. Por favor ver a su correo "
-"electrónico para obtener más instrucciones.</strong>"
+"<strong>Mensaje de confirmación enviado. Por favor, comprueba la bandeja de "
+"entrada de tu correo electrónico, te hemos enviado más instrucciones.</"
+"strong>"
 
 #: core/command-handling.php:30
 msgid "Received a reply with invalid command data."
-msgstr "Recibido una respuesta con datos de comandos no válidos."
+msgstr "Se ha recibido una respuesta con datos de comandos inválidos."
 
 #: core/command-handling.php:53
 msgid "Tried to create an email with an unrecognized reply command."
 msgstr ""
-"Intentado de crear un correo electrónico con un comando de respuesta no "
-"reconocido."
+"Se ha producido un intento de crear un correo electrónico con un comando de "
+"respuesta desconocido."
 
 #: core/comment-command.php:67
 msgid "Invalid comment keys"
-msgstr "Claves comentario no válidas"
+msgstr "Claves de comentario inválidas"
 
 #: core/comment-command.php:76
 msgid "Invalid message"
-msgstr "Mensaje no válido"
+msgstr "Mensaje inválido"
 
 #. translators: this word should match "reply with the word 'subscribe'"
 #. translations
 #: core/comment-command.php:124 core/subscribe-widget.php:73
 msgid "subscribe"
-msgstr "suscribirse"
+msgstr "activar suscripción"
 
 #. translators: this word should match "reply with the word 'unsubscribe'"
 #. translations
 #: core/comment-command.php:132 core/subscribe-widget.php:77
 msgid "unsubscribe"
-msgstr ""
+msgstr "cancelar suscripción"
 
 #: core/comment-command.php:179
 msgid "rejected comment on unqualified post %s"
-msgstr "comentario rechazado en poste no calificado %s"
+msgstr ""
+"comentario rechazado en la entrada \"%s\". La entrada no cumple los "
+"requisitos necesarios."
 
 #: core/comment-command.php:188
 msgid "rejected duplicate comment on %s"
-msgstr "comentario duplicado rechazado en %s"
+msgstr "comentario duplicado rechazado en \"%s\""
 
 #: core/comment-form-handling.php:136
 msgid "Participate in this conversation via e-mail"
@@ -1063,7 +1081,7 @@ msgstr "Participar en esta conversación mediante correo electrónico"
 
 #: core/comment-form-handling.php:158
 msgid "You are subscribed to new comments on this post."
-msgstr "Está suscrito a los nuevos comentarios de esta entrada."
+msgstr "Te has suscrito a los comentarios de esta entrada."
 
 #: core/comment-mailing.php:75 core/comment-mailing.php:81
 #: core/comment-mailing.php:89 templates/new-comment-email.php:13
@@ -1072,33 +1090,31 @@ msgstr "Anónimo"
 
 #: core/comment-mailing.php:188
 msgid "a deleted post"
-msgstr "un poste eliminado"
+msgstr "una entrada eliminada"
 
 #: core/comment-mailing.php:202
 msgid "Unable to publish your reply to \"%s\""
-msgstr "Incapaz de publicar su respuesta a \"%s\""
+msgstr "No se ha podido publicar tu respuesta a \"%s\""
 
 #: core/comment-mailing.php:426
-#, fuzzy
 msgid "%s replied to your comment on %s."
-msgstr "%s respondió a su comentario."
+msgstr "%s ha respondido a tu comentario en \"%s\"."
 
 #: core/comment-mailing.php:433
-#, fuzzy
 msgid "%s replied to %s on %s"
-msgstr "%s respondió a su comentario."
+msgstr "%s ha respondido a %s en \"%s\"."
 
 #: core/comment-mailing.php:440
 msgid "%s commented on %s"
-msgstr ""
+msgstr "%s han comentado en \"%s\""
 
 #: core/configurator.php:22
 msgid "A request for site configuration failed."
-msgstr "Una solicitud de la configuración del sitio fracasó."
+msgstr "Se ha producido un error con la configuración del sitio."
 
 #: core/configurator.php:31
 msgid "Configuration data arrived in an unrecognized format."
-msgstr "Los datos de configuración llegaron en un formato no reconocido."
+msgstr "Los datos de configuración han llegado en un formato desconocido."
 
 #: core/core.php:39
 msgid ""
@@ -1106,9 +1122,10 @@ msgid ""
 "hope it is welcome, but we promise we won't contact you again unless you "
 "respond."
 msgstr ""
-"Esta es una invitación para suscribirse a alertas de este sitio web. "
-"Esperamos que sea bienvenido, pero prometemos que no pondremos en contacto "
-"con usted de nuevo a menos que responda."
+"Esta es una invitación para suscribirte a las notificaciones por correo "
+"electrónico de este sitio web. Esperamos que te guste la idea, pero si no "
+"quieres suscribirte no pasa nada: si no respondes a este mensaje no "
+"recibirás más correos electrónicos de este sitio web."
 
 #: core/core.php:57
 msgid "Welcome!"
@@ -1120,58 +1137,58 @@ msgid ""
 "emails. Need inspiration? Try our widgets directory at http://gopostmatic."
 "com/widgets."
 msgstr ""
-"Estos widgets serán incluidos en el pie de página correos electrónicos de "
-"suscripción de Postmatic. ¿Necesita inspiración? Trate nuestra guía de "
-"widget en http://gopostmatic.com/widgets."
+"Estos widgets serán incluidos en el pie de página de los correos "
+"electrónicos de suscripción de Postmatic. ¿Necesitas inspiración? Échale un "
+"ojo a nuestra guía de widgets: http://gopostmatic.com/widgets."
 
 #: core/email.php:109
 msgid "This is a test email. By Postmatic."
-msgstr "Este es un mensaje de prueba. Por Postmatic."
+msgstr "Este es un mensaje de prueba enviado por Postmatic."
 
 #: core/inbound-messenger.php:22
 msgid "A request for inbound messages failed."
-msgstr "Una solicitud para los mensajes entrantes falló."
+msgstr "Una solicitud para mensajes entrantes ha fallado."
 
 #: core/inbound-messenger.php:31
 msgid "Inbound messages arrived in an unrecognized format."
-msgstr "Los mensajes entrantes llegaron en un formato no reconocido."
+msgstr "Los mensajes entrantes han llegado en un formato desconocido."
 
 #: core/inbound-messenger.php:57
 msgid "Failed to acknowledge receipt of messages - they may arrive again."
 msgstr ""
-"No se ha podido acusar recibo de los mensajes - pueden llegar de nuevo."
+"No se ha podido comprobar el acuse de recibo de los mensajes: pueden que "
+"lleguen más de una vez."
 
 #: core/inbound-messenger.php:77
 msgid "Unable to deliver a message of unknown type."
-msgstr "No se puede entregar un mensaje de tipo desconocido."
+msgstr "No se ha podido entregar un mensaje de tipo desconocido."
 
 #: core/mailer.php:77
 msgid "An email sending operation encountered a problem."
 msgstr ""
-"Una operación de envío de correo electrónico se encontró con un problema."
+"Se ha producido un error en una operación de envío de correo electrónico."
 
 #: core/mailer.php:86
 msgid "An email sending operation behaved erratically and may have failed."
 msgstr ""
-"Una operación de envío de correo electrónico se comportó de forma errática y "
-"puede haber fallado."
+"Hemos detectado una anomalía durante la operación de envío de correo "
+"electrónico, y puede que haya fallado."
 
 #: core/meta-subscribable-object.php:33
 msgid "Refused an attempt to subscribe an invalid user ID."
-msgstr "Se negó un intento de suscribir un ID de usuario inválido."
+msgstr "Se ha rechazado un intento de suscribir una ID de usuario inválida."
 
 #: core/option-subscribable-object.php:29
 msgid "Refusing to subscribe an invalid user ID."
-msgstr "Negarse a suscribir un ID de usuario inválido."
+msgstr "Rechazando la suscripción de una ID de usuario inválida."
 
 #: core/post-mailing.php:354
 msgid "This content is not compatible with your email client. "
 msgstr "Este contenido no es compatible con tu cliente de correo electrónico."
 
 #: core/post-mailing.php:357
-#, fuzzy
 msgid "Click here to view this content in your browser."
-msgstr "Haga clic aquí para ver este poste en su navegador."
+msgstr "Pincha aquí para ver esta entrada en el navegador."
 
 #: core/post-mailing.php:373
 msgid "Delivery issue for %s"
@@ -1189,12 +1206,12 @@ msgid ""
 "A site administrator can report this event to the development team from the "
 "Postmatic settings."
 msgstr ""
-"Un administrador del sitio puede reportar este evento para el equipo de "
-"desarrollo de la configuración de Postmatic."
+"Un administrador del sitio puede informar de este evento al equipo de "
+"desarrollo desde el panel de configuración de Postmatic."
 
 #: core/post-mailing.php:382
 msgid "The error message was: "
-msgstr "El mensaje de error fue:"
+msgstr "El mensaje de error:"
 
 #: core/post.php:76
 msgid "discussion of <em>%s</em>"
@@ -1205,75 +1222,74 @@ msgid ""
 "You have successfully subscribed and will receive an email when there is a "
 "new comment on <em>%s</em>."
 msgstr ""
-"Se ha suscrito con éxito y recibirá un correo electrónico cuando hay un "
-"nuevo mensaje en <em>%s</em>."
+"Te has suscrito con éxito y recibirás un correo electrónico cuando haya un "
+"comentario nuevo en <em>%s</em>."
 
 #: core/register-subscribe-command.php:39
 msgid "Couldn't find the original registration information for a new user."
 msgstr ""
-"No se pudo encontrar la información de registro original para un nuevo "
-"usuario."
+"No se ha podido encontrar la información de registro original para un "
+"usuario nuevo."
 
 #: core/register-subscribe-command.php:49
 msgid "Couldn't find the original object subscribed to for a new user."
 msgstr ""
-"No se pudo encontrar el objeto original suscrito para un nuevo usuario."
+"No se ha podido encontrar el objeto original al que se suscribió un nuevo "
+"usuario."
 
 #. translators: this should match "reply with the word 'agree'" translations
 #: core/register-subscribe-command.php:66
 msgid "agree"
-msgstr ""
+msgstr "aceptar"
 
 #: core/register-subscribe-command.php:88
 msgid "Failed to create a new user from an agreement reply email."
 msgstr ""
-"Error al crear un nuevo usuario de un correo electrónico respuesta de "
-"acuerdo."
+"No se ha podido crear un usuario nuevo a partir de una respuesta al correo "
+"electrónico de acuerdo de suscripción."
 
 #: core/register-subscribe-command.php:146
 #: core/register-subscribe-command.php:157
 msgid "Received invalid metadata with a subscription agreement."
-msgstr "Recibido metadatos inválidos con un acuerdo de suscripción."
+msgstr "Se han recibido metadatos inválidos con un acuerdo de suscripción."
 
 #: core/register-subscribe-command.php:166
 msgid "Received no message with a subscription agreement."
-msgstr "Recibido ningún mensaje con un acuerdo de suscripción."
+msgstr "No se ha recibido ningún mensaje con un acuerdo de suscripción."
 
 #: core/site-comments.php:19
-#, fuzzy
 msgid "All comments on %s"
-msgstr "comentario duplicado rechazado en %s"
+msgstr "Todos los comentarios en %s"
 
 #: core/site-comments.php:24
-#, fuzzy
 msgid ""
 "You have successfully subscribed to all comments on %s and will receive new "
 "comments as soon as they are published."
 msgstr ""
-"Se ha suscrito correctamente a %s y recibirá nuevos mensajes tan pronto como "
-"se publiquen."
+"Te has suscrito a los comentarios de la entrada %s. Recibirás los "
+"comentarios nuevos tan pronto como se publiquen."
 
 #: core/site.php:25
 msgid ""
 "You have successfully subscribed to %s and will receive new posts as soon as "
 "they are published."
 msgstr ""
-"Se ha suscrito correctamente a %s y recibirá nuevos mensajes tan pronto como "
-"se publiquen."
+"Tu suscripción a %s ha sido confirmada. A partir de ahora recibirás las "
+"entradas en cuanto se publiquen."
 
 #: core/subscribe-widget.php:8
 msgid "Get visitors subscribed to a user, post, or site with minimal fuss."
 msgstr ""
-"Suscribirse a sus visitantes a un usuario, correo, o el sitio sin que ocupe "
-"apenas."
+"Haz que tus visitantes se suscriban a un autor, una entrada o un sitio web "
+"de forma sencilla."
 
 #: core/subscribe-widget.php:10
 msgid "Postmatic Subscribe"
-msgstr "Postmatic Suscribirse"
+msgstr "Suscribirse con Postmatic"
 
 #: core/subscribe-widget.php:145
 msgid "Sorry, there was a problem reaching the server"
-msgstr "Lo sentimos, hubo un problema de llegar al servidor"
+msgstr "Lo sentimos, se ha producido un problema con el servidor"
 
 #: core/subscriber-origin.php:18
 msgid "Unknown source."
@@ -1281,15 +1297,15 @@ msgstr "Fuente desconocida."
 
 #: core/subscription-mailing.php:81
 msgid "Please verify your subscription to %s"
-msgstr "Verifique por favor su suscripción a %s"
+msgstr "Por favor, verifica tu suscripción a %s"
 
 #: core/subscription-mailing.php:134
 msgid "You're unsubscribed from %s"
-msgstr "Ha cancelado su suscripción a %s"
+msgstr "Has cancelado tu suscripción a %s"
 
 #: core/subscription-mailing.php:144
 msgid "You're subscribed to %s"
-msgstr "Está suscrito a %s"
+msgstr "Te has suscrito a %s"
 
 #: core/user-mailing.php:26
 msgid "Welcome to %s"
@@ -1297,105 +1313,104 @@ msgstr "Bienvenido a %s"
 
 #: core/user.php:81
 msgid "Postmatic Subscription Information"
-msgstr "Información de Suscripción Postmatic"
+msgstr "Información de Suscripción con Postmatic"
 
 #: core/user.php:115
 msgid "posts by %s"
-msgstr "postes de %s"
+msgstr "entradas de %s"
 
 #: core/user.php:122
 msgid ""
 "You have successfully subscribed and will receive posts by %s directly in "
 "your inbox."
 msgstr ""
-"Se ha suscrito con éxito y recibirá los mensajes de %s directamente en su "
-"bandeja de entrada."
+"La suscripción se ha realizado con éxito. Recibirás todas las entradas de %s "
+"directamente en tu bandeja de entrada."
 
 #: core/user.php:153
 msgid "People that subscribe to you:"
-msgstr "Las personas que se abonan a usted:"
+msgstr "Tus suscriptores:"
 
 #: core/user.php:163
 msgid "Site Subscriptions:"
-msgstr "Suscripciones Sitios"
+msgstr "Suscripciones a Sitios Web:"
 
 #: core/user.php:168
 msgid "Please send all new posts to me by email."
-msgstr ""
+msgstr "Deseo recibir las entradas por correo electrónico."
 
 #: core/user.php:178
 msgid ""
 "Please send me all new comments by email. Even ones on posts to which I have "
 "not subscribed."
 msgstr ""
+"Deseo recibir los comentarios por correo electrónico, incluso los de "
+"entradas a las que no estoy suscrito."
 
 #: core/user.php:204
 msgid "Authors you subscribe to:"
-msgstr "Los autores a que usted se abona:"
+msgstr "Los autores a los que estás suscrito:"
 
 #: core/user.php:226
 msgid "Discussions you are subscribed to:"
-msgstr "Las discusiones a que usted es abonado:"
+msgstr "Las discusiones a las que estás suscrito:"
 
 #: core/web-api-handling.php:53
 msgid ""
 "Rejected an inbound request with an invalid timestamp. Could be bot activity."
 msgstr ""
-"Rechazada una petición de entrada con una marca de tiempo inválida. Podría "
-"ser la actividad bot."
+"Se ha rechazado una petición de entrada con una marca de tiempo inválida. "
+"Podría ser un robot."
 
 #: core/web-api-handling.php:62
 msgid ""
 "Rejected an inbound request with an invalid token. Could be bot activity."
 msgstr ""
-"Rechazada una petición de entrada con un token inválido. Podría ser la "
-"actividad bot."
+"Se ha rechazado una petición de entrada con una clave inválida. Podría ser "
+"un robot."
 
 #: core/web-api-handling.php:72 core/web-api-handling.php:82
 msgid ""
 "Rejected an inbound request with an invalid signature. Could be bot activity."
 msgstr ""
-"Rechazada una petición de entrada con una firma inválida. Podría ser la "
-"actividad bot."
+"Se ha rechazado una petición de entrada con una firma inválida. Podría ser "
+"un robot."
 
 #: core/wp-mailer.php:88
-#, fuzzy
 msgid ""
 "Failed sending an email locally. Did you know Postmatic can deliver email "
 "for you?"
 msgstr ""
-"WordPress ha fallado al envío de un correo electrónico. ¿Sabías que "
-"Postmatic puede entregar el correo electrónico para usted?"
+"WordPress no ha podido enviar un correo electrónico. ¿Sabías que Postmatic "
+"puede entregar el correo electrónico directamente?"
 
 #: templates/comment-rejected-email.php:11
 msgid "We're sorry."
-msgstr "Lo sentamos."
+msgstr "Lo sentimos."
 
 #: templates/comment-rejected-email.php:15
 msgid ""
 "Your reply to <em>%s</em> cannot be published because the post cannot be "
 "found or the discussion has been closed."
 msgstr ""
-"Su respuesta a <em>%s</em> no es publicada porque el poste no puede ser "
-"encontrado o la discusión ha sido cerrada."
+"Tu respuesta a <em>%s</em> no ha sido publicada porque la entrada no se "
+"puede encontrar o la discusión ha sido cerrada."
 
 #: templates/comment-rejected-email.php:28
 msgid "Please visit %s for more information."
-msgstr "Visite %s para más información."
+msgstr "Visita %s para más información."
 
 #: templates/comment-rejected-email.php:34
 msgid "More Information"
 msgstr "Más Información"
 
 #: templates/comment-reply-email.php:27
-#, fuzzy
 msgid "%s replied to your comment on %s:"
-msgstr "%s respondió a su comentario."
+msgstr "%s ha respondido a tu comentario en %s:"
 
 #: templates/comment-reply-email.php:39
-#, fuzzy
 msgid "%s left a reply to a comment by %s on %s:"
-msgstr "%s dejó una respuesta a un comentario por %s"
+msgstr "%s ha respondido a un comentario de %s en %s:"
 
 #: templates/comment-reply-email.php:66 templates/comment-reply-email.php:113
 #: templates/new-comment-email.php:46 templates/new-comment-email.php:91
@@ -1403,37 +1418,37 @@ msgid "Reply to this email to reply to %s."
 msgstr "Responde a este correo electrónico para contestar a %s."
 
 #: templates/comment-reply-email.php:74
-#, fuzzy
 msgid "Here's a recap of this post and conversation:"
-msgstr "Deje esta conversación"
+msgstr "Este es un resumen de esta entrada y los comentarios:"
 
 #. translators: %1$s is post title, %2$s date, %3$s time, %4$s author
 #: templates/comment-reply-email.php:79
 msgid "%1$s was published on %2$s by %4$s."
-msgstr ""
+msgstr "%1$s, publicado el %2$s por %4$s."
 
 #: templates/comment-reply-email.php:94
 msgid ""
 "There were <a href=\"%1$s\">%2$d comments</a> previous to this. Here is this "
 "reply in context:"
 msgstr ""
+"Hay <a href=\"%1$s\">%2$d comentarios</a> anteriores a este. Esta es la "
+"respuesta puesta en contexto:"
 
 #: templates/comment-reply-email.php:118
 msgid "Leave this conversation"
-msgstr "Deje esta conversación"
+msgstr "Abandonar esta conversación"
 
 #: templates/comment-reply-email.php:121
-#, fuzzy
 msgid ""
 "To no longer receive other comments or replies in this discussion reply with "
 "the word 'unsubscribe'."
 msgstr ""
-"Para no recibir otros comentarios o las respuestas en esta discusión "
-"contesta con la palabra 'unsubscribe'."
+"Para no recibir comentarios o respuestas en esta discusión, contesta a este "
+"correo electrónico con la frase 'cancelar suscripción'."
 
 #: templates/html-email-wrapper.php:581
 msgid "Sent from %s."
-msgstr "Enviado de %s."
+msgstr "Enviado desde %s."
 
 #: templates/html-email-wrapper.php:588
 msgid "Delivered by %s."
@@ -1451,21 +1466,20 @@ msgid ""
 "\">Sign Up</a> Thanks for being a willing test pilot! <a href=\"%s\">Share "
 "your thoughts in this short survey.</a>"
 msgstr ""
-"Postmatic envía sus postes a sus lectores donde son cómodos: su bandeja de "
-"entrada. Pueden enviar comentarios con el botón de respuesta. Como puede con "
-"este correo electrónico. Somos actualmente en beta pública. <a href=\"%s"
-"\">Inscribirse</a> ¡Gracias por ser a un piloto de prueba complaciente! <a "
-"href=\"%s\">Comparta sus pensamientos en esta encuesta corta.</a>"
+"Postmatic permite a tus lectores recibir tus posts como más les gusta: a "
+"través de su correo electrónico. Pueden enviar comentarios a tus entradas "
+"simplemente contestando al correo electrónico, igual que tú puedes hacer con "
+"este correo. Postmatic está en beta abierta, <a href=\"%s\">puedes apuntarte "
+"aquí</a>. ¡Gracias por ser uno de nuestros probadores! <a href=\"%s"
+"\">Comparte tu opinión en esta encuesta.</a>"
 
 #: templates/new-comment-email.php:19
-#, fuzzy
 msgid "<span class=\"capitalize\">%s</span> added a comment "
-msgstr "<span class=\"capitalize\">%s</span> he agregado un comentario."
+msgstr "<span class=\"capitalize\">%s</span> ha añadido un comentario."
 
 #: templates/new-comment-email.php:22
-#, fuzzy
 msgid "in reply to %s."
-msgstr "En respuesta a: %s."
+msgstr "en respuesta a %s."
 
 #: templates/new-comment-email.php:50 templates/new-comment-email.php:95
 #: templates/new-post-email.php:39 templates/subscribed-email.php:72
@@ -1473,8 +1487,8 @@ msgid ""
 "<strong>Please note</strong>: Your reply will be published publicly and "
 "immediately on %s."
 msgstr ""
-"<strong>Favor de notar</strong>: Su respuesta será publicada públicamente e "
-"inmediatamente en %s."
+"<strong>Recuerda</strong>: Tu respuesta será publicada inmediatamente en %s, "
+"y cualquier usuario podrá leerla."
 
 #: templates/new-comment-email.php:65
 msgid "Recently in this conversation..."
@@ -1483,58 +1497,58 @@ msgstr "Recientemente en esta conversación..."
 #. translators: word between date and time
 #: templates/new-comment-email.php:75
 msgid "at"
-msgstr "a"
+msgstr "a las"
 
 #: templates/new-comment-email.php:109
-#, fuzzy
 msgid "Want to leave this conversation?"
-msgstr "Deje esta conversación"
+msgstr "¿Quieres abandonar esta conversación?"
 
 #: templates/new-comment-email.php:112
-#, fuzzy
 msgid ""
 "To no longer receive other comments on this thread reply with the word "
 "'unsubscribe'."
 msgstr ""
-"Para no recibir otros comentarios en este hilo conteste con la palabra "
-"'unsubscribe'."
+"Para dejar de recibir los comentarios en esta discusión, contesta a este "
+"correo electrónico con la palabra 'cancelar suscripción'."
 
 #: templates/new-post-email.php:26 templates/subscribed-email.php:37
 msgid "View this post online"
-msgstr "Vea este poste en línea"
+msgstr "Leer este post en la web"
 
 #: templates/new-post-email.php:35 templates/subscribed-email.php:68
-#, fuzzy
 msgid ""
 "Reply to this email to add a comment. Your email address will not be shown."
-msgstr "Conteste a este correo electrónico para agregar un comentario."
+msgstr ""
+"Contesta a este correo electrónico para agregar un comentario. Tu dirección "
+"de correo electrónico no se mostrará."
 
 #: templates/new-post-email.php:53
 msgid "Get the latest comments and stay in the loop"
-msgstr ""
+msgstr "Recibe los últimos comentarios y entérate de todo"
 
 #: templates/new-post-email.php:57
 msgid ""
 "To subscribe to comments on this post and receive a copy of the conversation "
 "so far reply with the word <strong>subscribe</strong>."
 msgstr ""
-"Para recibir comentarios en este poste directamente en su bandeja de entrada "
-"conteste con la palabra <strong>suscribirse</strong>."
+"Para recibir los comentarios en esta entrada directamente en tu bandeja de "
+"entrada, contesta a este mensaje con la frase <strong>activar suscripción</"
+"strong>."
 
 #: templates/new-post-email.php:64
 msgid "Manage your subscription"
-msgstr "Maneje su suscripción"
+msgstr "Edita tu suscripción"
 
 #: templates/new-post-email.php:68
 msgid ""
 "To <strong>unsubscribe</strong> to %s reply with the word 'unsubscribe'."
 msgstr ""
-" <strong>Para cancelar la suscripción</strong> a %s conteste con la palabra "
-"'unsubscribe'."
+"Para <strong>cancelar tu suscripción</strong> a %s, contesta con la frase "
+"'cancelar suscripción'."
 
 #: templates/new-post-email.php:73
 msgid "Please do not forward this email"
-msgstr ""
+msgstr "Por favor, no re-envíes este mensaje."
 
 #: templates/new-post-email.php:77
 msgid ""
@@ -1542,15 +1556,19 @@ msgid ""
 "post as a comment in your name. If you would like to share this post please "
 "use this url: %s."
 msgstr ""
+"Este mensaje está conectado con tu cuenta de correo electrónico y todas las "
+"respuestas se publicarán con tu nombre. Si quieres compartir este artículo "
+"utiliza la URL: %s."
 
 #: templates/new-post-email.php:89
 msgid "Comments on this post are closed"
-msgstr ""
+msgstr "Los comentarios están cerrados."
 
 #: templates/new-post-email.php:91
-#, fuzzy
 msgid "You can reply to this email to send a note directly to the post author."
-msgstr "Responde a este correo electrónico para contestar a %s."
+msgstr ""
+"Puedes contestar a este correo electrónico para enviar un mensaje al autor "
+"de la entrada."
 
 #: templates/new-user-email.php:9
 msgid "Welcome to %s."
@@ -1561,12 +1579,12 @@ msgid ""
 "It's not required, but you can access some extra features on our site by <a "
 "href=\"%s\">logging in</a>."
 msgstr ""
-"No es obligatorio, pero se puede conseguir acceso a algunas características "
-"extra en nuestro sitio en <a href=\"%s\">iniciando la sesión</a>."
+"No es obligatorio, pero puedes acceder a más opciones <a href=\"%s"
+"\">iniciando sesión en nuestro sitio web </a>."
 
 #: templates/new-user-email.php:21
 msgid "Your Account Information:"
-msgstr "Su Información de Cuenta:"
+msgstr "Información de tu cuenta:"
 
 #: templates/new-user-email.php:23
 msgid "Username"
@@ -1578,7 +1596,7 @@ msgstr "Contraseña"
 
 #: templates/new-user-email.php:28
 msgid "You may log in by visiting %s."
-msgstr "Puede iniciar la sesión en visitando %s."
+msgstr "Puedes iniciar sesión visitando %s."
 
 #: templates/subscribe-form.php:16
 msgid "Subscribe to %s:"
@@ -1586,23 +1604,23 @@ msgstr "Suscribirse a %s:"
 
 #: templates/subscribe-form.php:21
 msgid "Enter your email to subscribe to %s:"
-msgstr "Ingrese su correo electrónico para suscribirse a %s:"
+msgstr "Escribe tu correo electrónico para suscribirte a %s:"
 
 #: templates/subscribe-form.php:22 templates/subscribe-form.php:87
 msgid "Want to unsubscribe?"
-msgstr "¿Quiere cancelar su suscripción?"
+msgstr "¿Quieres cancelar tu suscripción?"
 
 #: templates/subscribe-form.php:22
 msgid "Confirm your email:"
-msgstr "Confirme su correo electrónico:"
+msgstr "Confirma tu correo electrónico:"
 
 #: templates/subscribe-form.php:49
 msgid "This field is intentionally empty"
-msgstr "Este campo es intencionalmente vacío"
+msgstr "Este campo está vació a propósito"
 
 #: templates/subscribe-form.php:55
 msgid "You are already subscribed to %s."
-msgstr "Usted ya es abonado a %s."
+msgstr "Ya estás suscrito a %s."
 
 #: templates/subscribe-form.php:71
 msgid "Name (optional)"
@@ -1615,16 +1633,16 @@ msgstr "Cancelar"
 #: templates/subscribe-form.php:100
 msgid "You have %1$s current subscriber."
 msgid_plural "You have %1$s current subscribers."
-msgstr[0] "Tiene %1$s suscriptor actual."
-msgstr[1] "Tiene %1$s suscriptores actuales."
+msgstr[0] "Ahora mismo tienes %1$s suscriptor."
+msgstr[1] "Ahora mismo tienes %1$s suscriptores."
 
 #: templates/subscribe-form.php:111
 msgid "Your Subscribers:"
-msgstr "Sus Suscriptores:"
+msgstr "Tus Suscriptores:"
 
 #: templates/subscribe-widget-settings.php:9
 msgid "Widget heading, leave blank to omit."
-msgstr "Encabezamiento Widget, dejar en blanco para omitir."
+msgstr "Encabezamiento del widget (déjalo en blanco para omitirlo)."
 
 #: templates/subscribe-widget-settings.php:10
 msgid "Title:"
@@ -1632,7 +1650,7 @@ msgstr "Título:"
 
 #: templates/subscribe-widget-settings.php:25
 msgid "Collect name (in addition to email)"
-msgstr "Recoge nombre (además de correo electrónico)"
+msgstr "Solicitar el nombre (además del correo electrónico)"
 
 #: templates/subscribed-email.php:12
 msgid "Welcome, <span class=\"capitalize\">%s</span>."
@@ -1644,27 +1662,30 @@ msgid ""
 "The latest post, <em>%1$s</em> from %2$s, below. Reply to this email to "
 "leave a comment."
 msgstr ""
+"Aquí tienes la última entrada: <em>%1$s</em>, publicada el %2$s. Responde a "
+"este correo electrónico para dejar un comentario."
 
 #: templates/subscribed-email.php:27
 msgid "Here is what others have to say. Reply to add your thoughts."
 msgstr ""
+"Esto es lo que se está diciendo. Contesta a este mensaje para añadir tus "
+"comentarios."
 
 #: templates/subscribed-email.php:42 templates/subscribed-email.php:58
-#, fuzzy
 msgid "View this conversation online"
-msgstr "Vea este poste en línea"
+msgstr "Ver la conversación en línea"
 
 #: templates/subscribed-email.php:46
 msgid "Want to catch up? Here are the 30 most recent comments:"
-msgstr ""
+msgstr "¿Quieres ponerte al día? Aquí tienes los 30 comentarios más recientes."
 
 #: templates/subscribed-email.php:85
 msgid ""
 "To unsubscribe at any time visit %s or reply with the word "
 "<strong>unsubscribe</strong>."
 msgstr ""
-"Para cancelar comentarios en este poste directamente en su bandeja de "
-"entrada conteste con la palabra <strong>unsubscribe</strong>."
+"Para cancelar tu suscripción visita %s o contesta a este mensaje con la "
+"frase <strong>cancelar suscripción</strong>."
 
 #: templates/subscription-agreement-email.php:16
 msgid "An invitation from %s"
@@ -1672,44 +1693,46 @@ msgstr "Una invitación de %s"
 
 #: templates/subscription-agreement-email.php:23
 msgid "There’s one more step to finish your subscription to %s."
-msgstr "Hay un paso más para terminar su suscripción a %s."
+msgstr "Estás a un click de confirmar tu suscripción a %s."
 
 #: templates/subscription-agreement-email.php:32
 msgid "Important Notice"
-msgstr "Nota Importante"
+msgstr "Nota importante"
 
 #: templates/subscription-agreement-email.php:36
 msgid ""
 "You recently signed up for updates from %s. We sent you an email asking for "
 "verification but you did not reply correctly. Please read the following:"
 msgstr ""
-"Usted se inscribió recientemente para actualizaciones de %s. Le enviamos un "
-"correo electrónico que pide comprobación pero usted no contestó "
-"correctamente. Lea por favor lo siguiente:"
+"Te has suscrito recientemente a las actualizaciones de %s. Te hemos enviado "
+"un correo electrónico para confirmar la suscripción, pero no hemos recibido "
+"la respuesta que esperábamos. Por favor, lee estas instrucciones:"
 
 #: templates/subscription-agreement-email.php:47
 msgid "First, there are some important things you should know"
-msgstr "Primero, hay algunas cosas importantes que usted debe saber"
+msgstr "Antes de confirmar tu suscripción, debes saber que:"
 
 #: templates/subscription-agreement-email.php:52
 msgid ""
 "As a subscriber to %s, you'll receive new posts or comments directly to your "
 "inbox as soon as they are published."
 msgstr ""
-"Como un suscriptor a %s, usted recibe nuevos postes o los comentarios "
-"directamente a su bandeja de entrada tan pronto como ellos son publicados."
+"Al suscribirte a %s recibirás las entradas o comentarios directamente en tu "
+"bandeja de entrada tan pronto como se publiquen."
 
 #: templates/subscription-agreement-email.php:60
 msgid "You will be invited to reply to these emails."
-msgstr "Será invitado a contestar a estos correos electrónicos."
+msgstr ""
+"Si quieres dejar un comentario en una entrada, o contestar a un comentario, "
+"sólo tienes que responder a los correos electrónicos."
 
 #: templates/subscription-agreement-email.php:63
 msgid ""
 "Your reply to those emails will be immediately published to the web as a "
 "comment."
 msgstr ""
-"Su respuesta a esos correos electrónicos será publicada inmediatamente a la "
-"web como un comentario."
+"Los mensajes que envíes como respuestas por correo electrónico se publicarán "
+"automáticamente en la web como comentarios, a la vista de todos."
 
 #: templates/subscription-agreement-email.php:70
 msgid ""
@@ -1717,14 +1740,16 @@ msgid ""
 "on %s. That means your email replies are subject to the privacy policy and "
 "terms of service of %s. We just wanted to make sure you knew :)"
 msgstr ""
-"Por favor nota que sus respuestas correo electrónico serán vistas por "
-"cualquiera visitando el poste en %s. Eso significa de que sus respuestas "
-"correo electrónico son susceptibles a la política de privacidad y términos "
-"de servicio de %s. Sólo queríamos hacer seguro de que sabía :)"
+"Por favor, recuerda que tus respuestas por correo electrónico serán "
+"públicas. Cualquier persona que visite la entrada %s puede leerlas. Eso "
+"significa que tus respuestas por correo electrónico deben cumplir con la "
+"política de privacidad y términos de servicio de %s. Queremos estar seguros "
+"de que lo sabes :)"
 
 #: templates/subscription-agreement-email.php:79
 msgid "Now it’s time to confirm your subscription"
-msgstr "Ahora es tiempo de confirmar su suscripción"
+msgstr ""
+"Ahora que sabes a qué te estás apuntando, puedes confirmar tu suscripción"
 
 #: templates/subscription-agreement-email.php:82
 msgid ""
@@ -1732,17 +1757,18 @@ msgid ""
 "subscription, please <strong class=\"alert\">reply to this email with the "
 "word agree</strong>."
 msgstr ""
-"Si comprende estas pautas y está listo para completar su suscripción, por "
-"favor <strong class=\"alert\">conteste a este correo electrónico con la "
-"palabra 'agree'</strong>."
+"Si entiendes cómo funciona este sistema y estás listo para completar tu "
+"suscripción, <strong class=\"alert\">contesta a este correo electrónico con "
+"la palabra 'agree'</strong>."
 
 #: templates/subscription-agreement-email.php:94
 msgid ""
 "If you did not initiate this subscription please ignore this email or "
 "forward it to abuse@gopostmatic.com."
 msgstr ""
-"Si usted no inició esta suscripción ignora por favor este correo electrónico "
-"o lo adelanta a abuse@gopostmatic.com."
+"Si no sabes por qué has recibido este mensaje puedes ignorarlo y no "
+"recibirás más notificaciones. Si quieres ayudarnos a acabar con el maldito "
+"SPAM, reenvíalo a abuse@gopostmatic.com."
 
 #: templates/subscription-agreement-email.php:101
 msgid "Thanks!"
@@ -1750,20 +1776,20 @@ msgstr "¡Gracias!"
 
 #: templates/unsubscribed-email.php:9
 msgid "You have unsubscribed"
-msgstr "Ha cancelado su suscripción."
+msgstr "Has cancelado tu suscripción."
 
 #: templates/unsubscribed-email.php:13
 msgid "You'll no longer receive email notices for %s."
-msgstr "Usted no recibe notas correo electrónico para %s."
+msgstr "No recibirás más correos electrónicos de %s."
 
 #: templates/unsubscribed-email.php:18
 msgid "To re-subscribe visit:"
-msgstr "Para suscribirse de nuevo visite"
+msgstr "Para suscribirte de nuevo, visita:"
 
 #. Plugin Name of the plugin/theme
 msgid "Postmatic - WordPress Subscriptions & Commenting by Email"
 msgstr ""
-"Postmatic - WordPress Suscripciones y Comentarios por correo electrónico"
+"Postmatic - Suscripciones y Comentarios en WordPress por correo electrónico"
 
 #. Author URI of the plugin/theme
 msgid "http://gopostmatic.com/"

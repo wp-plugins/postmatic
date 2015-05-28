@@ -1,6 +1,6 @@
-=== Postmatic - Engagement through email ===
+=== Postmatic - Post and comment subscriptions that invite you to hit reply ===
 Contributors: vernal
-Tags: email, subscribe to comments, subscription, subscribe, commenting, reply, email,  comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, mailchimp, mailgun, email comming, reply to email, email replies, engagement, invite, invitations, jetpack, subscribe2
+Tags: email, notification, notify, posts, subscribe, subscription, email, subscribe to comments, commenting, reply, email,  comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, mailchimp, mailgun, email comming, reply to email, email replies, engagement, invite, invitations, jetpack, subscribe2
 Requires at least: 3.9
 Tested up to: 4.2
 Stable tag: trunk
@@ -72,6 +72,17 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 10. Postmatic is 100% compatible with all your favorite user and commenting plugins because it is fully WordPress native.
 
 == Changelog ==
+
+= 1.1.2 =
+
+- Fixed a bug with the widget description text. All widget text is cutomizable now. We mean it this time.
+- Some small tweaks to support [Conductor](http://conductorplugin.com) widget
+- Tweaked some ui to be compatible with Yoast SEO
+- Added support for oembedding multi-file gists
+- We now use the List-Unsubscribe email header so fancy little unsubscribe buttons will show up in supporting email clients such as Gmail
+- Some fixes to the italian translation
+- A brand new from-the-bottom-up Spanish translation by Andrés De Rojas. What a guy.
+
 
 = 1.1.1 =
 

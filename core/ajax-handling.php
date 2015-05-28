@@ -206,9 +206,12 @@ class Prompt_Ajax_Handling {
 	 */
 	public static function action_wp_ajax_prompt_subscribe_widget_content() {
 
-		$widget_id = sanitize_title( $_GET['widget_id'] );
+		$widget_id = filter_input( INPUT_GET, 'widget_id', FILTER_SANITIZE_URL );
 
-		$instance = self::get_widget_instance( $widget_id );
+		$instance = array(
+			'collect_name' => filter_input( INPUT_GET, 'collect_name', FILTER_VALIDATE_BOOLEAN ),
+			'subscribe_prompt' => filter_input( INPUT_GET, 'subscribe_prompt', FILTER_SANITIZE_STRING ),
+		);
 
 		$template_id = is_numeric( $_GET['template'] ) ? intval( $_GET['template'] ) : null;
 
@@ -403,21 +406,4 @@ class Prompt_Ajax_Handling {
 		return __( '<strong>Confirmation email sent. Please check your email for further instructions.</strong>', 'Postmatic' );
 	}
 
-	/**
-	 * @param $widget_id
-	 * @return array
-	 */
-	protected static function get_widget_instance( $widget_id ) {
-		global $wp_registered_widgets;
-
-		if ( empty( $wp_registered_widgets[$widget_id]['callback'] ) )
-			return array();
-
-		/** @var WP_Widget $widget */
-		$widget = $wp_registered_widgets[$widget_id]['callback'][0];
-
-		$settings = $widget->get_settings();
-
-		return ! empty( $settings[$widget->number] ) ? $settings[$widget->number] : array();
-	}
 }

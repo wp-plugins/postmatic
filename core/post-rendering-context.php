@@ -13,6 +13,8 @@ class Prompt_Post_Rendering_Context {
 	protected $original_content;
 	/** @var  array */
 	protected $featured_image_src = null;
+	/** @var  array */
+	protected $gist_cache;
 
 	public function __construct( $post_object_or_id ) {
 		$this->post = get_post( $post_object_or_id );
@@ -382,15 +384,11 @@ class Prompt_Post_Rendering_Context {
 			$atts['id'] = basename( $url_parts['path'] );
 		}
 
-		$api_url = 'https://api.github.com/gists/' . $atts['id'];
+		$gist = $this->fetch_gist( $atts['id'] );
 
-		$response = wp_remote_get( $api_url );
-		$json = wp_remote_retrieve_body( $response );
-
-		if ( !$json )
+		if ( !$gist )
 			return '';
 
-		$gist = json_decode( $json, $associative_arrays = true );
 		$files = $gist['files'];
 
 		if ( empty( $files ) )
@@ -404,6 +402,21 @@ class Prompt_Post_Rendering_Context {
 		$content = $files[$atts['file']]['content'];
 
 		return html( 'pre class="wp-gist"', esc_html( $content ) );
+	}
+
+	protected function fetch_gist( $id ) {
+
+		if ( !empty( $this->gist_cache[$id] ) )
+			return $this->gist_cache[$id];
+
+		$api_url = 'https://api.github.com/gists/' . $id;
+
+		$response = wp_remote_get( $api_url );
+		$json = wp_remote_retrieve_body( $response );
+
+		$this->gist_cache[$id] = json_decode( $json, $associative_arrays = true );
+
+		return $this->gist_cache[$id];
 	}
 
 	protected function incompatible_placeholder( $class = '', $url = null ) {

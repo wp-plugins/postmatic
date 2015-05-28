@@ -67,6 +67,15 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 		if ( $email->get_reply_address() )
 			$this->local_mailer->addReplyTo( $email->get_reply_address(), $email->get_reply_name() );
 
+		$unsubscribe_types = array( Prompt_Enum_Message_Types::COMMENT, Prompt_Enum_Message_Types::POST );
+
+		if ( $email->get_reply_address() and in_array( $email->get_message_type(), $unsubscribe_types ) ) {
+			$this->local_mailer->addCustomHeader(
+				'List-Unsubscribe',
+				'<mailto:' . $email->get_reply_address() . '?body=unsubscribe>'
+			);
+		}
+
 		$this->local_mailer->Subject = $email->get_subject();
 
 		$this->local_mailer->Body = $email->get_html();

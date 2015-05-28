@@ -31,6 +31,7 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 			'class' => 'prompt-subscribe-widget-content',
 			'data-widget-id' => $this->id,
 			'data-template' => self::template_id( $instance['template_path'] ),
+			'data-collect-name' => (int) $instance['collect_name'],
 			'data-subscribe-prompt' => $instance['subscribe_prompt'],
 		);
 
@@ -110,7 +111,6 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 		$loading_image_url = path_join( Prompt_Core::$url_path, 'media/ajax-loader.gif' );
 
-		$subscribe_prompt = self::subscribe_prompt( $instance, $object );
 		$unsubscribe_prompt = self::unsubscribe_prompt();
 
 		$template_data = compact(
@@ -121,7 +121,6 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 			'action',
 			'defaults',
 			'loading_image_url',
-			'subscribe_prompt',
 			'unsubscribe_prompt'
 		);
 
@@ -218,7 +217,7 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 	protected static function subscribe_prompt( $instance, Prompt_Interface_Subscribable $object ) {
 
 		if ( !empty( $instance['subscribe_prompt'] ) )
-			return $instance['subscribe_prompt'];
+			return esc_html( $instance['subscribe_prompt'] );
 
 		if ( is_user_logged_in() )
 			return sprintf( __( 'Subscribe to %s:', 'Postmatic' ), $object->subscription_object_label() );

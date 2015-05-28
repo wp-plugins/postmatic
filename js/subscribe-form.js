@@ -28,6 +28,7 @@ jQuery( function( $ ) {
 			action: 'prompt_subscribe_widget_content',
 				widget_id: $widget.data( 'widgetId' ),
 				template: $widget.data( 'template' ),
+				collect_name: $widget.data( 'collectName' ),
 				object_type: prompt_subscribe_form_env.object_type,
 				object_id: prompt_subscribe_form_env.object_id
 			},
@@ -52,6 +53,7 @@ jQuery( function( $ ) {
 			$nonce_input.val( prompt_subscribe_form_env.nonce );
 
 			$cancel_link.hide();
+			$prompts.filter( '.primary.subscribe' ).text( $widget.data( 'subscribePrompt' ) );
 			$prompts.filter( '.' + $submit_input.val() ).show();
 
 			$show_unsubscribe_link.click( switch_to_unsubscribe );

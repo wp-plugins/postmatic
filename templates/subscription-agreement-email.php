@@ -29,7 +29,7 @@ $recipient = esc_html(
 <?php endif; ?>
 
 <?php if ( $resending ) : ?>
-	<h3><?php _e( 'Important Notice', 'Postmatic' ); ?></h2>
+	<h3><?php _e( 'Important Notice', 'Postmatic' ); ?></h3>
 	<p>
 		<?php
 		printf(

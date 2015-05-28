@@ -12,7 +12,7 @@ class Prompt_Email_Text_Cleaner {
 			'/[\r\n]?Links:[\r\n]*\s*1\..*/s',                                      // Fastmail links list
 			'/[\r\n]?>\s*$/s',                                                      // Trailing bracket quotes
 			'/\r\n\r\n  \[image: photo\]\r\n.*/s',                                  // Wisestamp
-			'/\n\s*Subject: [^\r\n]*$/s',                                           // Hotmail subject footer
+			'/\n\s*Subject: [^\r\n]*([\r\n]*To: [^\r\n]*)?$/s',                     // Hotmail subject footer
 			'/[\r\n]Sent from Mailbird \[http:\/\/www\.getmailbird.*/s',            // Mailbird signature
 			"/[\r\n]\\s*From: [^\r\n]*$from_address.*/s"                            // Text email inclusion
 		);

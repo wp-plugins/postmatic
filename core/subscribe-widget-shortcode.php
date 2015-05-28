@@ -8,6 +8,7 @@ class Prompt_Subscribe_Widget_Shortcode {
 			'title' => '',
 			'collect_name' => true,
 			'template_path' => null,
+			'subscribe_prompt' => null,
 		);
 
 		$attributes = shortcode_atts( $defaults, $attributes );

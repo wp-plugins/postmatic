@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.1.1\n"
+"Email 1.1.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
-"plugin/1.1.1-20150519-1648\n"
-"POT-Creation-Date: 2015-05-19 16:48:37+00:00\n"
+"plugin/1.1.2-20150528-0231\n"
+"POT-Creation-Date: 2015-05-28 02:31:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -749,7 +749,7 @@ msgid ""
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.1.1)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.1.2)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:138
 msgid "Postmatic"
@@ -957,7 +957,7 @@ msgstr[1] ""
 msgid "%s is not subscribed to %s."
 msgstr ""
 
-#: core/ajax-handling.php:144 core/ajax-handling.php:389
+#: core/ajax-handling.php:144 core/ajax-handling.php:392
 msgid "You have unsubscribed."
 msgstr ""
 
@@ -969,37 +969,37 @@ msgstr ""
 msgid "Preview email sent."
 msgstr ""
 
-#: core/ajax-handling.php:231
+#: core/ajax-handling.php:234
 msgid "An API Key is required"
 msgstr ""
 
-#: core/ajax-handling.php:260
+#: core/ajax-handling.php:263
 msgid "Choose a list to import to Postmatic: "
 msgstr ""
 
-#: core/ajax-handling.php:331
+#: core/ajax-handling.php:334
 msgid "Sorry, that email address is not valid."
 msgstr ""
 
-#: core/ajax-handling.php:355
+#: core/ajax-handling.php:358
 msgid ""
 "Almost done - you'll receive an email with instructions to complete your "
 "subscription."
 msgstr ""
 
-#: core/ajax-handling.php:370
+#: core/ajax-handling.php:373
 msgid "Are you sure you want to unsubscribe %s?"
 msgstr ""
 
-#: core/ajax-handling.php:372
+#: core/ajax-handling.php:375
 msgid "Not you? Click here to start over"
 msgstr ""
 
-#: core/ajax-handling.php:374 core/comment-form-handling.php:166
+#: core/ajax-handling.php:377 core/comment-form-handling.php:166
 msgid "Unsubscribe"
 msgstr ""
 
-#: core/ajax-handling.php:403
+#: core/ajax-handling.php:406
 msgid ""
 "<strong>Confirmation email sent. Please check your email for further "
 "instructions.</strong>"
@@ -1023,13 +1023,13 @@ msgstr ""
 
 #. translators: this word should match "reply with the word 'subscribe'"
 #. translations
-#: core/comment-command.php:117 core/subscribe-widget.php:75
+#: core/comment-command.php:117 core/subscribe-widget.php:76
 msgid "subscribe"
 msgstr ""
 
 #. translators: this word should match "reply with the word 'unsubscribe'"
 #. translations
-#: core/comment-command.php:125 core/subscribe-widget.php:79
+#: core/comment-command.php:125 core/subscribe-widget.php:80
 msgid "unsubscribe"
 msgstr ""
 
@@ -1202,11 +1202,11 @@ msgstr ""
 msgid "Delivery issue for %s"
 msgstr ""
 
-#: core/post-rendering-context.php:414
+#: core/post-rendering-context.php:427
 msgid "This content is not compatible with your email client. "
 msgstr ""
 
-#: core/post-rendering-context.php:417
+#: core/post-rendering-context.php:430
 msgid "Click here to view this content in your browser."
 msgstr ""
 
@@ -1270,23 +1270,23 @@ msgstr ""
 msgid "Postmatic Subscribe"
 msgstr ""
 
-#: core/subscribe-widget.php:163
+#: core/subscribe-widget.php:162
 msgid "Sorry, there was a problem reaching the server"
 msgstr ""
 
-#: core/subscribe-widget.php:224
+#: core/subscribe-widget.php:223
 msgid "Subscribe to %s:"
 msgstr ""
 
-#: core/subscribe-widget.php:227
+#: core/subscribe-widget.php:226
 msgid "Enter your email to subscribe to %s:"
 msgstr ""
 
-#: core/subscribe-widget.php:236 templates/subscribe-form.php:74
+#: core/subscribe-widget.php:235 templates/subscribe-form.php:73
 msgid "Want to unsubscribe?"
 msgstr ""
 
-#: core/subscribe-widget.php:236
+#: core/subscribe-widget.php:235
 msgid "Confirm your email:"
 msgstr ""
 
@@ -1380,7 +1380,7 @@ msgid ""
 "Rejected an inbound request with an invalid signature. Could be bot activity."
 msgstr ""
 
-#: core/wp-mailer.php:89
+#: core/wp-mailer.php:98
 msgid ""
 "Failed sending an email locally. Did you know Postmatic can deliver email "
 "for you?"
@@ -1438,7 +1438,7 @@ msgid "Author"
 msgstr ""
 
 #: templates/comment-moderation-email-text.php:31
-#: templates/subscribe-form.php:65
+#: templates/subscribe-form.php:64
 msgid "Email"
 msgstr ""
 
@@ -1778,23 +1778,22 @@ msgstr ""
 
 #: templates/rejoined-email.php:58 templates/subscribed-email.php:85
 msgid ""
-"To unsubscribe at any time visit %s or reply with the word "
-"<strong>unsubscribe</strong>."
+"To unsubscribe at any time reply with the word <strong>unsubscribe</strong>."
 msgstr ""
 
-#: templates/subscribe-form.php:36
+#: templates/subscribe-form.php:35
 msgid "This field is intentionally empty"
 msgstr ""
 
-#: templates/subscribe-form.php:42
+#: templates/subscribe-form.php:41
 msgid "You are already subscribed to %s."
 msgstr ""
 
-#: templates/subscribe-form.php:58
+#: templates/subscribe-form.php:57
 msgid "Name (optional)"
 msgstr ""
 
-#: templates/subscribe-form.php:77
+#: templates/subscribe-form.php:76
 msgid "Cancel"
 msgstr ""
 

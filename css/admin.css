@@ -9,7 +9,7 @@
     .add-on-group .add-on .ui-icon {
       float: left; }
 
-.ui-widget-header, .ui-widget-content {
+#prompt-sidebar .ui-widget-header, #prompt-sidebar .ui-widget-content {
   padding: 10px;
   border: none;
   color: #fff;
