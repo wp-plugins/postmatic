@@ -48,6 +48,9 @@ class Prompt_Post_Rendering_Context {
 			// TODO: restore these?
 		}
 
+		remove_shortcode( 'gallery' );
+		add_shortcode( 'gallery', array( $this, 'suppress_jetpack_tiled_gallery' ) );
+
 		remove_filter( 'the_content', 'do_shortcode', 11 );
 		remove_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
 		add_filter( 'the_content', array( $this, 'do_whitelisted_shortcodes' ), 11 );
@@ -71,6 +74,9 @@ class Prompt_Post_Rendering_Context {
 			remove_filter( 'the_content', array( $this, 'override_content_filters' ), 9999 );
 			return;
 		}
+
+		remove_shortcode( 'gallery' );
+		add_shortcode( 'gallery', 'gallery_shortcode' );
 
 		remove_filter( 'embed_oembed_html', array( $this, 'use_original_oembed_url' ), 10, 2 );
 		remove_filter( 'the_content', array( $this, 'strip_incompatible_tags' ), 11 );
@@ -257,6 +263,19 @@ class Prompt_Post_Rendering_Context {
 			return do_shortcode_tag( $m );
 
 		return $m[1] . $this->incompatible_placeholder( $tag ) . $m[6];
+	}
+
+	/**
+	 * @param array $atts
+	 * @return string
+	 */
+	public function suppress_jetpack_tiled_gallery( $atts ) {
+
+		// Jetpack adds the type attribute
+		if ( isset( $atts['type'] ) )
+			return '';
+
+		return gallery_shortcode( $atts );
 	}
 
 	/**

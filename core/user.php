@@ -217,7 +217,10 @@ class Prompt_User extends Prompt_Meta_Subscribable_Object {
 			$post = get_post( $post_id );
 			$post_items .= html(
 				'li',
-				html( 'a', array( 'href' => get_permalink( $post_id ) ), $post->post_title )
+				html( 'a', array( 'href' => get_permalink( $post_id ) ), $post->post_title ),
+				' ',
+				/* translators: indicates that comments are closed on a post */
+				comments_open( $post_id ) ? '' : __( '(closed)', 'Postmatic' )
 			);
 		}
 

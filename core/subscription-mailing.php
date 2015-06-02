@@ -186,10 +186,17 @@ class Prompt_Subscription_Mailing {
 		if ( $latest_post )
 			setup_postdata( $GLOBALS['post'] = $latest_post );
 
-		if ( $latest_post or $comments ) {
-			$post = $latest_post ? $latest_post : $object->get_wp_post();
-			self::add_comment_command( $email, $post->ID, $subscriber->ID );
-		}
+		$post_id = 0;
+		if ( $latest_post or is_a( $object, 'Prompt_Post' ) )
+			$post_id = $latest_post ? $latest_post->ID : $object->id();
+
+		$command = new Prompt_Confirmation_Command();
+		$command->set_post_id( $post_id );
+		$command->set_user_id( $subscriber->ID );
+		$command->set_object_type( get_class( $object ) );
+		$command->set_object_id( $object->id() );
+
+		Prompt_Command_Handling::add_command_metadata( $command, $email );
 
 		self::render_email( $email, $text_template, $html_template, $template_data );
 

@@ -132,6 +132,7 @@ class Prompt_Comment_Form_Handling {
 					'type' => 'checkbox',
 					'name' => self::SUBSCRIBE_CHECKBOX_NAME,
 					'value' => '1',
+					'checked' => Prompt_Core::$options->get( 'comment_opt_in_default' ),
 				)
 			),
 			'&nbsp;',

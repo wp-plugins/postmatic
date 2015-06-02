@@ -2,13 +2,13 @@
 /*
   Plugin Name: Postmatic - WordPress Subscriptions & Commenting by Email
   Description:
-  Version: 1.1.2
+  Version: 1.2.0
   License: GPL2+
   Author: Postmatic
   Author URI: http://gopostmatic.com/
   Text Domain: Postmatic
   Domain Path: /lang
-  Minimum WordPress Version Required: 3.8
+  Minimum WordPress Version Required: 3.9
  */
 
 /*

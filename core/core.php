@@ -74,6 +74,7 @@ class Prompt_Core {
 			'enabled_message_types' => array(),
 			'excerpt_default' => false,
 			'custom_widget_templates' => array(),
+			'comment_opt_in_default' => false,
 		);
 		self::$options = new scbOptions( 'prompt_options', __FILE__, $default_options );
 

@@ -73,6 +73,13 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.2 =
+
+- Added a default setting to have *engage in this conversation via email* checked by default. Please note that this setting may place you in violation of European and Canadian spam laws.
+- Fixed a bug keeping unsubscribes from working in certain cases on the free plan
+- Better filtering of Jetpack tile galleries
+- The list of subscribed posts in profile.php now indicates if comments are closed on any given post
+
 = 1.1.2 =
 
 - Fixed a bug with the widget description text. All widget text is cutomizable now. We mean it this time.

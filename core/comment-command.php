@@ -6,7 +6,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 	protected static $unsubscribe_method = 'unsubscribe';
 
 	/** @var array */
-	protected $keys = array( 0 );
+	protected $keys = array( 0, 0 );
 	/** @var  int */
 	protected $post_id;
 	/** @var  int */

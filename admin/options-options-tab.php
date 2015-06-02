@@ -59,6 +59,18 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 						)
 					),
 			),
+			array(
+				'title' => __( 'Comment form opt-in', 'Postmatic' ),
+				'type' => 'checkbox',
+				'name' => 'comment_opt_in_default',
+				'desc' => __( 'Subscribe commenters to the conversation by default.', 'Postmatic' ) .
+					html( 'p',
+						__(
+							'Please note this may place you in violation of European and Canadian spam laws. Be sure to do your homework.',
+							'Postmatic'
+						)
+					),
+			)
 		);
 
 		$this->override_entries( $table_entries );
@@ -86,7 +98,13 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 		$valid_data = $this->validate_checkbox_fields(
 			$new_data,
 			$old_data,
-			array( 'send_login_info', 'auto_subscribe_authors', 'no_post_email_default', 'excerpt_default' )
+			array(
+				'send_login_info',
+				'auto_subscribe_authors',
+				'no_post_email_default',
+				'excerpt_default',
+				'comment_opt_in_default',
+			)
 		);
 
 		return $valid_data;

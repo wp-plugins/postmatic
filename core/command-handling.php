@@ -8,6 +8,7 @@ class Prompt_Command_Handling {
 		3 => 'Prompt_New_Post_Comment_Command',
 		4 => 'Prompt_Comment_Moderation_Command',
 		5 => 'Prompt_Comment_Flood_Command',
+		6 => 'Prompt_Confirmation_Command',
 	);
 
 	/**
