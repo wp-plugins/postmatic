@@ -73,6 +73,12 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.2.1 =
+
+- A quick fix to resolve issues with favicon generation. Congrats to Jaime from grabicon.com for simultaneously becoming a father while breaking our api integration in the very same day! ;p
+- Fixed a bug which would cause header images to not render when using Jetpack Photon
+- Added some style to better handle Reward Style scripts
+
 = 1.2 =
 
 - Added a default setting to have *engage in this conversation via email* checked by default. Please note that this setting may place you in violation of European and Canadian spam laws.

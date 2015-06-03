@@ -53,12 +53,14 @@ class Prompt_Post_Rendering_Context {
 
 		remove_filter( 'the_content', 'do_shortcode', 11 );
 		remove_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
+		remove_filter( 'the_content', 'hammy_replace_images', 999 );
 		add_filter( 'the_content', array( $this, 'do_whitelisted_shortcodes' ), 11 );
 		add_filter( 'the_content', array( $this, 'strip_image_height_attributes' ), 11 );
 		add_filter( 'the_content', array( $this, 'limit_image_width_attributes' ), 11 );
 		add_filter( 'the_content', array( $this, 'strip_incompatible_tags' ), 11 );
 		add_filter( 'the_content', array( $this, 'strip_duplicate_featured_images' ), 100 );
 		add_filter( 'embed_oembed_html', array( $this, 'use_original_oembed_url' ), 10, 2 );
+		add_filter( 'jetpack_photon_override_image_downsize', '__return_true' );
 	}
 
 	/**
@@ -78,6 +80,7 @@ class Prompt_Post_Rendering_Context {
 		remove_shortcode( 'gallery' );
 		add_shortcode( 'gallery', 'gallery_shortcode' );
 
+		remove_filter( 'jetpack_photon_override_image_downsize', '__return_true' );
 		remove_filter( 'embed_oembed_html', array( $this, 'use_original_oembed_url' ), 10, 2 );
 		remove_filter( 'the_content', array( $this, 'strip_incompatible_tags' ), 11 );
 		remove_filter( 'the_content', array( $this, 'limit_image_width_attributes' ), 11 );
@@ -86,6 +89,8 @@ class Prompt_Post_Rendering_Context {
 		remove_filter( 'the_content', array( $this, 'strip_duplicate_featured_images' ), 100 );
 		add_filter( 'the_content', 'do_shortcode', 11 );
 		add_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
+		if ( function_exists( 'hammy_replace_images' ) )
+			add_filter( 'the_content', 'hammy_replace_images', 999 );
 	}
 
 	/**

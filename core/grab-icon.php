@@ -2,6 +2,9 @@
 
 class Prompt_Grab_Icon {
 
+	/** @var string */
+	protected static $api_key = '1819c1c696999cb5';
+
 	/** @var  int */
 	protected $size;
 	/** @var  int */
@@ -39,6 +42,7 @@ class Prompt_Grab_Icon {
 				'domain' => $home_url_parts['host'],
 				'origin' => $home_url_parts['host'],
 				'reset' => 'true',
+				'key' => self::$api_key,
 			),
 			$grab_base_url
 		);

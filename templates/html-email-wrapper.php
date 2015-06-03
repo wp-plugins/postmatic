@@ -417,6 +417,10 @@ ul.related_post li {
   font-size: 85%;
 }
 
+.shopthepost-widget {
+  display: none !important;
+}
+
 /*Mobile syles*/
     @media only screen and (max-width: 480px) {
      table.wrap {
@@ -466,32 +470,7 @@ ul.related_post li {
     }
 
 
-/*Demo Styles*/
-  #demo {
-  float: right;
-  width: 31%;
-  padding: 0;
-  font-style: normal;
-  font-size: 85%;
-  background: #f4feff;
-  margin-left: 20px;
-  border: 1px dashed #698688;
-  line-height: normal !important;
-  }
-
-  #demo h2 {
-    padding: 2px;
-    text-align: center;
-    color:#fff;
-    font-weight: bold;
-    background: #21bfc7;
-    margin-top: 0 !important;
-    font-size: 145%;
-  }
-
-  #demo p, #demo h3, #demo h4 {
-    margin: 2px 10px;
-}
+/
 
 /*Comments Template*/
 img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !important;float: left !important;  padding-bottom: 15px; border-radius: 5px;}
