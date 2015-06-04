@@ -73,6 +73,10 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.2.2 =
+
+- Very sorry for another update. A typo snuck into the css, causing gravatars to display much larger than they should have. Happy Thursday.
+
 = 1.2.1 =
 
 - A quick fix to resolve issues with favicon generation. Congrats to Jaime from grabicon.com for simultaneously becoming a father while breaking our api integration in the very same day! ;p

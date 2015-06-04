@@ -469,9 +469,6 @@ ul.related_post li {
     #demo p, #demo h3, #demo h4 { margin: 5px 0;}
     }
 
-
-/
-
 /*Comments Template*/
 img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !important;float: left !important;  padding-bottom: 15px; border-radius: 5px;}
 
