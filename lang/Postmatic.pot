@@ -3,16 +3,28 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.2.2\n"
+"Email 1.2.3\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
-"plugin/1.2.2-20150604-1602\n"
-"POT-Creation-Date: 2015-06-04 16:02:13+00:00\n"
+"plugin/1.2.3-20150612-2034\n"
+"POT-Creation-Date: 2015-06-12 20:34:54+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: admin/akismet-notice.php:24
+msgid ""
+"Heads up! We noticed Akismet is not active on your site. Akismet is free, "
+"bundled with WordPress, and stops the vast majority of comment spam. Please "
+"be sure that you are using it or a similar product to keep from spamming "
+"your subscribers. <a href=\"%s\" target=\"_blank\">Learn more</a>."
+msgstr ""
+
+#: admin/conditional-notice.php:92 admin/options-page.php:266
+msgid "Dismiss"
+msgstr ""
 
 #: admin/core-options-tab.php:6
 msgid "General"
@@ -447,6 +459,12 @@ msgstr ""
 msgid "A request to the Jetpack servers failed."
 msgstr ""
 
+#: admin/local-mail-notice.php:34
+msgid ""
+"We detected that your host is unable to send email. You'll have to contact "
+"them for help, or upgrade Postmatic to use our awesome delivery services."
+msgstr ""
+
 #: admin/mailchimp-import-options-tab.php:11
 msgid "Import from MailChimp"
 msgstr ""
@@ -560,6 +578,7 @@ msgid ""
 msgstr ""
 
 #: admin/mailpoet-import-options-tab.php:49
+#: admin/subscribe-reloaded-import-options-tab.php:73
 msgid "Here's how it went:"
 msgstr ""
 
@@ -664,6 +683,15 @@ msgstr ""
 msgid "Import from Mailpoet"
 msgstr ""
 
+#: admin/moderation-user-notice.php:34
+msgid ""
+"The email address in Settings / General / E-mail Address does not match any "
+"user. Postmatic is great for moderating comments via email, but it must act "
+"on behalf of a user with permission to do this. You can either create an "
+"admin user with email address %s, or change the site E-mail address setting "
+"to the address of the user who will moderate comments."
+msgstr ""
+
 #: admin/notice-handling.php:51
 msgid ""
 "Heads up: We noticed there is an active Jetpack module which is not "
@@ -706,7 +734,7 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: admin/options-options-tab.php:39 core/core.php:255
+#: admin/options-options-tab.php:39 core/core.php:260
 msgid "Postmatic Delivery"
 msgstr ""
 
@@ -748,119 +776,134 @@ msgid ""
 "laws. Be sure to do your homework."
 msgstr ""
 
-#: admin/options-page.php:93
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.2.3)  #-#-#-#-#
+#. Author of the plugin/theme
+#: admin/options-page.php:46
+msgid "Postmatic"
+msgstr ""
+
+#: admin/options-page.php:105 vendor/scribu/scb-framework/AdminPage.php:261
 msgid "Settings <strong>saved</strong>."
 msgstr ""
 
-#: admin/options-page.php:99
+#: admin/options-page.php:111
 msgid "Report sent! Our bug munchers thank you for the meal."
 msgstr ""
 
-#: admin/options-page.php:103
+#: admin/options-page.php:115
 msgid ""
 "Request sent. We are currently sending a few hundred tokens per week. Expect "
 "to receive yours within 1-2 days. You can safely leave Postmatic activated "
 "but it is not necessary to do so."
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.2.2)  #-#-#-#-#
-#. Author of the plugin/theme
-#: admin/options-page.php:138
-msgid "Postmatic"
-msgstr ""
-
-#: admin/options-page.php:170
+#: admin/options-page.php:163
 msgid "&#9998; Manage your account"
 msgstr ""
 
-#: admin/options-page.php:218
+#: admin/options-page.php:182
 msgid "Already have a key?"
 msgstr ""
 
-#: admin/options-page.php:221
+#: admin/options-page.php:185
 msgid "Postmatic Key"
 msgstr ""
 
-#: admin/options-page.php:225
+#: admin/options-page.php:189
 msgid "Once you have your key, enter it here to blast off!."
 msgstr ""
 
-#: admin/options-page.php:304
+#: admin/options-page.php:260
 msgid ""
 "<strong>Attention:</strong> There have been some recent errors in your "
 "configuration. An error log can be found here: "
 msgstr ""
 
-#: admin/options-page.php:310 admin/options-page.php:322
-#: admin/options-page.php:363 admin/options-page.php:387
-#: admin/options-page.php:602
-msgid "Dismiss"
-msgstr ""
-
-#: admin/options-page.php:311
+#: admin/options-page.php:267
 msgid "Submit A Bug Report"
 msgstr ""
 
-#: admin/options-page.php:327
-msgid ""
-"Your current theme is missing widget areas. This means you'll have to use "
-"the template tag to display the Postmatic Subscription widget."
-msgstr ""
-
-#: admin/options-page.php:335
-msgid ""
-"To get started now, place the Postmatic Subscribe widget where people can "
-"use it to subscribe!"
-msgstr ""
-
-#: admin/options-page.php:337
-msgid "Visit Your Widgets"
-msgstr ""
-
-#: admin/options-page.php:354
-msgid ""
-"Heads up! We noticed Akismet is not active on your site. Akismet is free, "
-"bundled with WordPress, and stops the vast majority of comment spam. Please "
-"be sure that you are using it or a similar product to keep from spamming "
-"your subscribers. <a href=\"%s\" target=\"_blank\">Learn more</a>."
-msgstr ""
-
-#: admin/options-page.php:378
-msgid ""
-"Did you know there is an excellent and free way to keep spam comments from "
-"ever getting submitted? We heartily recommend installing <a href=\"%s"
-"\">WordPress Zero Spam</a>."
-msgstr ""
-
-#: admin/options-page.php:485
+#: admin/options-page.php:364
 msgid ""
 "There's a problem verifying your key. Please try later or report this error."
 msgstr ""
 
-#: admin/options-page.php:492
+#: admin/options-page.php:371
 msgid ""
 "We didn't recognize the key \"%s\". Please make sure it exactly matches the "
 "key we supplied you. <a href=\"%s\" target=\"_blank\">Visit your Postmatic "
 "dashboard for assistance</a>. "
 msgstr ""
 
-#: admin/options-page.php:506
+#: admin/options-page.php:385
 msgid ""
 "Your key was registered for a different site. Please request a key for this "
 "site's dedicated use, or <a href=\"%s\" target=\"_blank\">contact us</a> for "
 "assistance. Thanks!"
 msgstr ""
 
-#: admin/options-page.php:560
+#: admin/options-page.php:467
 msgid ""
 "We're even having trouble sending a bug report. Please copy the data to the "
 "right and send to %s."
 msgstr ""
 
-#: admin/options-page.php:596
+#: admin/subscribe-reloaded-import-options-tab.php:10
+msgid "Migrate Comment Subscriptions"
+msgstr ""
+
+#: admin/subscribe-reloaded-import-options-tab.php:22
+msgid "Migrate Comment subscriptions"
+msgstr ""
+
+#: admin/subscribe-reloaded-import-options-tab.php:24
 msgid ""
-"We detected that your host is unable to send email. You'll have to contact "
-"them for help, or upgrade Postmatic to use our awesome delivery services."
+"This utilitly will migrate comment subscriptions from Subscribe to Comments, "
+"Subscribe to Comments Reloaded, and Subscribe to Double-Opt-In Comments."
+msgstr ""
+
+#: admin/subscribe-reloaded-import-options-tab.php:29
+msgid ""
+"Subscribers are imported silently and without notice sent. When the import "
+"has finished you can disable your legacy subscription plugin."
+msgstr ""
+
+#: admin/subscribe-reloaded-import-options-tab.php:33
+msgid "Important information before you get started:"
+msgstr ""
+
+#: admin/subscribe-reloaded-import-options-tab.php:36
+msgid ""
+"You must be running Subscribe to Comments <strong>Reloaded</strong> to use "
+"this migration tool. Please upgrade to Reloaded if you have not already. "
+"View <a href=\"%s\" target=\"_blank\">this support article</a> for more "
+"information."
+msgstr ""
+
+#: admin/subscribe-reloaded-import-options-tab.php:59
+msgid ""
+"If you would like to import from Subscribe To Comments Reloaded  please "
+"activate that plugin."
+msgstr ""
+
+#: admin/subscribe-reloaded-import-options-tab.php:77
+msgid "We have migrated one subscription.<br />"
+msgid_plural ""
+"We have migrated %1$s subscriptions.<br /> You can disable Subscribe to "
+"Comments Reloaded at this time.<br />"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/subscribe-reloaded-import-options-tab.php:85
+msgid ""
+"There was one other subscription found but it had already been imported."
+msgid_plural ""
+"There were %2$s other subscriptions found but they had already been imported."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/subscribe-reloaded-import-options-tab.php:133
+msgid "Import from Subscribe To Comments Reloaded"
 msgstr ""
 
 #: admin/support-options-tab.php:8 admin/support-options-tab.php:66
@@ -967,6 +1010,29 @@ msgid_plural "%d Conversations"
 msgstr[0] ""
 msgstr[1] ""
 
+#: admin/widget-notice.php:31
+msgid ""
+"Your current theme is missing widget areas. This means you'll have to use "
+"the template tag to display the Postmatic Subscription widget."
+msgstr ""
+
+#: admin/widget-notice.php:42
+msgid ""
+"To get started now, place the Postmatic Subscribe widget where people can "
+"use it to subscribe!"
+msgstr ""
+
+#: admin/widget-notice.php:48
+msgid "Visit Your Widgets"
+msgstr ""
+
+#: admin/zero-spam-notice.php:24
+msgid ""
+"Did you know there is an excellent and free way to keep spam comments from "
+"ever getting submitted? We heartily recommend installing <a href=\"%s"
+"\">WordPress Zero Spam</a>."
+msgstr ""
+
 #: core/ajax-handling.php:38 core/ajax-handling.php:58
 msgid "%s is not subscribed to %s."
 msgstr ""
@@ -1068,7 +1134,7 @@ msgid "You are subscribed to new comments on this post."
 msgstr ""
 
 #: core/comment-mailer.php:66 core/comment-mailer.php:72
-#: core/comment-mailer.php:80 core/moderation-mailing.php:20
+#: core/comment-mailer.php:80 core/moderation-mailing.php:21
 msgid "Anonymous"
 msgstr ""
 
@@ -1130,23 +1196,23 @@ msgstr ""
 msgid "Invalid confirmation keys"
 msgstr ""
 
-#: core/core.php:43
+#: core/core.php:44
 msgid "You're invited to subscribe to %s"
 msgstr ""
 
-#: core/core.php:44
+#: core/core.php:45
 msgid ""
 "This is an invitation to subscribe to email updates from this website. We "
 "hope it is welcome, but we promise we won't contact you again unless you "
 "respond."
 msgstr ""
 
-#: core/core.php:66 templates/core-options-beta.php:9
+#: core/core.php:69 templates/core-options-beta.php:9
 #: templates/core-options-premium.php:9
 msgid "Welcome!"
 msgstr ""
 
-#: core/core.php:275
+#: core/core.php:280
 msgid "Postmatic Text Version"
 msgstr ""
 
@@ -1193,7 +1259,7 @@ msgstr ""
 msgid "Refused an attempt to subscribe an invalid user ID."
 msgstr ""
 
-#: core/moderation-mailing.php:24
+#: core/moderation-mailing.php:25
 msgid "Please moderate \"%s\""
 msgstr ""
 
@@ -1220,11 +1286,11 @@ msgstr ""
 msgid "Delivery issue for %s"
 msgstr ""
 
-#: core/post-rendering-context.php:451
+#: core/post-rendering-context.php:453
 msgid "This content is not compatible with your email client. "
 msgstr ""
 
-#: core/post-rendering-context.php:454
+#: core/post-rendering-context.php:456
 msgid "Click here to view this content in your browser."
 msgstr ""
 
@@ -1407,6 +1473,16 @@ msgstr ""
 msgid ""
 "Failed sending an email locally. Did you know Postmatic can deliver email "
 "for you?"
+msgstr ""
+
+#: templates/activate-account-notice.php:11
+msgid ""
+"<strong style=\"color:red\">Important:</strong> - You need to complete your "
+"Postmatic configuration."
+msgstr ""
+
+#: templates/activate-account-notice.php:14
+msgid "Get an API key and activate Postmatic"
 msgstr ""
 
 #: templates/comment-flood-email-text.php:12
@@ -1618,16 +1694,16 @@ msgstr ""
 msgid "Manage your account"
 msgstr ""
 
-#: templates/html-email-wrapper.php:587
+#: templates/html-email-wrapper.php:647
 #: templates/html-local-email-wrapper.php:68
 msgid "Sent from %s."
 msgstr ""
 
-#: templates/html-email-wrapper.php:593
+#: templates/html-email-wrapper.php:653
 msgid "Delivered by <a href=\"%s\">Postmatic</a>."
 msgstr ""
 
-#: templates/html-email-wrapper.php:602
+#: templates/html-email-wrapper.php:662
 #: templates/html-local-email-wrapper.php:84
 msgid ""
 "To immediately stop receiving all posts and comments from %s you can <a href="
@@ -2005,6 +2081,10 @@ msgstr ""
 #: templates/unsubscribed-email-text.php:18
 #: templates/unsubscribed-email.php:18
 msgid "To re-subscribe visit:"
+msgstr ""
+
+#: vendor/scribu/scb-framework/AdminPage.php:519
+msgid "Settings"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

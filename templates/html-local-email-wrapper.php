@@ -24,7 +24,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title><?php bloginfo( 'name' ); ?> | <?php echo esc_html( $subject ); ?></title>
 		<style>
-		body {line-height: 150%; font-family: sans-serif;}
+		body {line-height: 150%; font-family: sans-serif; background-color: #ffffff;}
 		a {color: #2980b9;}
 		h1 {font-weight: normal; line-height: normal;}
 		h1 a { text-decoration: none;}
@@ -48,9 +48,9 @@
     .comment-body {font-size: 110%; padding-bottom: 10px; border-bottom: 1px solid #ddd;}
 		</style>
 </head>
-<body bgcolor="#fff">
+<body bgcolor="#ffffff">
 <?php if ( !empty( $will_strip_content ) ) : ?>
-	<p style="background:#F6F6F6; padding: 5px; border: 1px dotted #ddd; margin-bottom: 15px; font-size: 90%;">This post
+	<p style="background:#F6F6F6; padding: 5px; border: 1px dotted #dddddd; margin-bottom: 15px; font-size: 90%;">This post
 		contains images and other content which are not available in the email version. <br/>
 		<a href="<?php the_permalink(); ?>">
 			<?php _e( 'Click here to view the full post in your browser', 'Postmatic' ); ?>

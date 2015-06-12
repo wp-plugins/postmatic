@@ -6,19 +6,11 @@ Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Postmatic lets your readers subscribe to comments or new posts by email. And leave a comment by simply hitting reply. No forms. No browsers. Easy.
+Postmatic lets your readers subscribe to comments or new posts by email. And leave a comment by simply hitting reply. No forms. No browsers. Online or offline.
 
 == Description ==
 
 [Read about how we are revolutionizing WordPress commenting on our site](http://gopostmatic.com)
-
-= Your posts delivered to their inbox. =
-= Their comments delivered through a simple reply. =
-= That’s how the conversation gets started. That’s how you increase engagement. =
-
-Your WordPress posts will be delivered to readers as a simple email.  
-And they can comment just by hitting reply. No accounts. No forms.  
-No browsers. Easy.
 
 = Engage your readers at their own pace with 100% email-based commenting =
 
@@ -27,6 +19,14 @@ The days of one-way notifications are over. It’s time to let them hit reply.
 Postmatic lets your readers subscribe by email when they leave a comment. Subsequent comments and replies will land in their inbox, just like with _Mailpoet_, _Jetpack_ or _Subscribe to Comments_.**Except now with Postmatic, they can comment back and keep the conversation going just by hitting reply**. They never have to leave their inbox.
 
 Online or offline, everyone stays in the loop—regardless of desktop or mobile.
+
+= Your posts and comments delivered to their inbox. =
+= Their comments delivered through a simple reply. =
+= That’s how the conversation gets started. That’s how you increase engagement. =
+
+Postmatic can also deliver your WordPress posts to readers as a beautiful mobile-ready html email.  
+And they can comment just by hitting reply. No accounts. No forms.  
+No browsers. Easy.
 
 [vimeo http://vimeo.com/108515948]
 
@@ -72,6 +72,19 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 10. Postmatic is 100% compatible with all your favorite user and commenting plugins because it is fully WordPress native.
 
 == Changelog ==
+
+= 1.2.3 =
+
+- OMG this release includes an importer for Subscribe to Comments / Subscribe to Comments Reloaded. Move all of your old comment subscriptions over to shiny new Postmatic land. See [our blog](https://gopostmatic.com/blog) for detailed instructions.
+- Added some new signature patterns to the filter library
+- Improved the workflow for installing, activating, and getting and api key
+- Some new css to support a bunch of popular widgets
+- Added support for Yumprint recipes plugin
+- Added support for WP Ultimate Recipes
+- Added support for Hupso social sharing
+- Added support for the official Twitter plugin
+- Fixed a bug in which Windows Phone 8 would render emails with a black background because it can't handle 3-digit hex codes. Go figure. #ffffff it is.
+
 
 = 1.2.2 =
 
@@ -148,7 +161,6 @@ Mostly integrations with other plugins as we make our way to our public release 
 - Added support for Hupso social sharing
 - Added support for the official Twitter plugin
 - HTML entities in post and site titles are now translated to UTF-8
-
 
 = 1.0 beta 18 =
 

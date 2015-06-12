@@ -3,7 +3,9 @@
 class Prompt_Post_Rendering_Context {
 
 	/** @var array */
-	protected static $shortcode_whitelist = array( 'gallery', 'caption', 'wpv-post-body', 'types' );
+	protected static $shortcode_whitelist = array(
+		'gallery', 'caption', 'wpv-post-body', 'types', 'yumprint-recipe', 'ultimate-recipe', 'table'
+	);
 
 	/** @var bool */
 	protected $is_setup = false;

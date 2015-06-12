@@ -20,13 +20,31 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	/** @var  string shortcut for $this->options->get( 'prompt_key' ) */
 	protected $key;
 
-	public function __construct( $file = false, $options = null, $overrides = null, $tabs = null ) {
+	/** @var  Prompt_Admin_Conditional_Notice[]  */
+	protected $notices;
+
+	/** @var  boolean */
+	protected $is_current_page = false;
+
+	public function __construct( $file = false, $options = null, $overrides = null, $tabs = null, $notices = null ) {
 		parent::__construct( $file, $options );
 		$this->_overridden_options = $overrides;
-
 		$this->key = $options->get( 'prompt_key' );
 
+		$this->maybe_auto_load();
+
 		$this->tabs = $tabs;
+
+		$this->notices = $notices;
+	}
+
+	/**
+	 * Set any values used in the parent class.
+	 */
+	public function setup() {
+		$this->args = array(
+			'page_title' => __( 'Postmatic', 'Postmatic' ),
+		);
 	}
 
 	public function add_tab( Prompt_Admin_Options_Tab $tab ) {
@@ -36,28 +54,22 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$this->tabs[$tab->slug()] = $tab;
 	}
 
-	protected function add_tabs() {
-
-		$this->add_tab( new Prompt_Admin_Core_Options_Tab( $this->options, $this->_overridden_options ) );
-		$this->add_tab( new Prompt_Admin_Email_Options_Tab( $this->options, $this->_overridden_options ) );
-		$this->add_tab( new Prompt_Admin_Invite_Options_Tab( $this->options, $this->_overridden_options ) );
-		$this->add_tab( new Prompt_Admin_Options_Options_Tab( $this->options, $this->_overridden_options ) );
-		if ( class_exists( 'Jetpack' ) )
-			$this->add_tab( new Prompt_Admin_Jetpack_Import_Options_Tab( $this->options, $this->_overridden_options ) );
-		if ( class_exists( 'WYSIJA' ) )
-			$this->add_tab( new Prompt_Admin_Mailpoet_Import_Options_Tab( $this->options, $this->_overridden_options ) );
-		$this->add_tab( new Prompt_Admin_MailChimp_Import_Options_Tab( $this->options, $this->_overridden_options ) );
-		$this->add_tab( new Prompt_Admin_Support_Options_Tab( $this->options, $this->_overridden_options ) );
-
-	}
-
 	/**
 	 * Before there is any output, add tabs and handle any posted options.
 	 */
 	public function page_loaded() {
 
+		$this->is_current_page = true;
+
+		if ( is_null( $this->notices ) )
+			$this->add_notices();
+
 		if ( ! $this->tabs )
 			$this->add_tabs();
+
+		foreach( $this->notices as $notice ) {
+			$notice->process_dismissal();
+		}
 
 		if ( isset( $_POST['tab'] ) and isset( $this->tabs[$_POST['tab']] ) ) {
 			$this->submitted_tab = $this->tabs[$_POST['tab']];
@@ -133,25 +145,6 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 	}
 
-	public function setup() {
-		$this->args = array(
-			'page_title' => __( 'Postmatic', 'Postmatic' ),
-		);
-
-		if (
-			!$this->options->get( 'skip_widget_intro' ) and
-			( !empty( $_GET['skip_widget_intro'] ) or self::is_subscribe_widget_in_use() )
-		) {
-			$this->options->set( 'skip_widget_intro', true );
-		}
-
-		if ( isset( $_GET['skip_akismet_intro'] ) )
-			$this->options->set( 'skip_akismet_intro', true );
-
-		if ( isset( $_GET['skip_zero_spam_intro'] ) )
-			$this->options->set( 'skip_zero_spam_intro', true );
-	}
-
 	public function page_header() {
 
 		$wrapper = '<div class="wrap signup">';
@@ -172,35 +165,6 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			)
 		);
 		echo html( 'h2 id="prompt-settings-header"', html( 'span', $this->args['page_title'] ) );
-	}
-
-	protected function is_subscribe_widget_in_use() {
-		$sidebars_widgets = wp_get_sidebars_widgets();
-
-		if ( !$sidebars_widgets )
-			return false;
-
-		$subscribe_widget_in_use = false;
-		foreach( $sidebars_widgets as $widgets ) {
-
-			if ( $this->contains_subscribe_widget( $widgets ) )
-				$subscribe_widget_in_use = true;
-
-		}
-		return $subscribe_widget_in_use;
-	}
-
-	protected function contains_subscribe_widget( $widgets ) {
-
-		if ( !is_array( $widgets ) )
-			return false;
-
-		foreach ( $widgets as $widget ) {
-			if ( strpos( $widget, 'prompt_subscribe_widget' ) === 0 )
-				return true;
-		}
-
-		return false;
 	}
 
 	function page_content() {
@@ -235,17 +199,9 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			return;
 		}
 
-		if ( !$this->options->get( 'skip_local_mail_intro' ) )
-			echo $this->local_mail_intro();
-
-		if ( !$this->options->get( 'skip_widget_intro' ) )
-			echo $this->widget_intro();
-
-		if ( !$this->options->get( 'skip_akismet_intro' ) )
-			echo $this->akismet_intro();
-
-		if ( !$this->options->get( 'skip_zero_spam_intro' ) )
-			echo $this->zero_spam_intro();
+		foreach( $this->notices as $notice ) {
+			$notice->maybe_display();
+		}
 
 		list( $tabs, $panels ) = $this->tabs_content();
 
@@ -309,83 +265,6 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 				html( 'input', array( 'type' => 'hidden', 'name' => 'error_alert',  'value' => '1' ) ),
 				get_submit_button( __( 'Dismiss', 'Postmatic' ), 'primary large', 'dismiss_errors' ),
 				get_submit_button( __( 'Submit A Bug Report', 'Postmatic' ), 'left', 'submit_errors' )
-			)
-		);
-	}
-
-	protected function widget_intro() {
-
-		$sidebars = wp_get_sidebars_widgets();
-
-		$dismiss_link = html( 'a',
-			array( 'href' => esc_url( add_query_arg( 'skip_widget_intro', 'true' ) ), 'class' => 'button' ),
-			__( 'Dismiss' )
-		);
-		if ( empty( $sidebars ) ) {
-			$content = html(
-				'p',
-				__( 'Your current theme is missing widget areas. This means you\'ll have to use the template tag to display the Postmatic Subscription widget.', 'Postmatic' ),
-				html( 'pre class="code"', htmlentities( '<?php the_widget( \'Prompt_Subscribe_Widget\', array( \'title\' => \'Subscribe by email\', \'collect_name\' => false ) ); ?>' ) ),
-				'&nbsp;',
-				$dismiss_link
-			);
-		} else {
-			$content = html(
-				'p',
-				__( 'To get started now, place the Postmatic Subscribe widget where people can use it to subscribe!', 'Postmatic' ),
-				'&nbsp;',
-				html( 'a', array( 'href' => admin_url( 'widgets.php' ), 'class' => 'button' ), __( 'Visit Your Widgets' ) ),
-				'&nbsp;',
-				$dismiss_link
-			);
-		}
-
-		return html( 'div class="error"', $content );
-	}
-
-	protected function akismet_intro() {
-
-		if ( is_plugin_active( 'akismet/akismet.php' ) )
-			return '';
-
-		return html( 'div class="notice error"',
-			html( 'p',
-				sprintf(
-					__(
-						'Heads up! We noticed Akismet is not active on your site. Akismet is free, bundled with WordPress, and stops the vast majority of comment spam. Please be sure that you are using it or a similar product to keep from spamming your subscribers. <a href="%s" target="_blank">Learn more</a>.',
-						'Postmatic'
-					),
-					Prompt_Enum_Urls::SPAM_DOC
-				),
-				'&nbsp;',
-				html( 'a',
-					array( 'href' => esc_url( add_query_arg( 'skip_akismet_intro', 'true' ) ), 'class' => 'button' ),
-					__( 'Dismiss', 'Postmatic' )
-				)
-			)
-		);
-
-	}
-
-	protected function zero_spam_intro() {
-
-		if ( is_plugin_active( 'zero-spam/zero-spam.php' ) )
-			return '';
-
-		return html( 'div class="notice error"',
-			html( 'p',
-				sprintf(
-					__(
-						'Did you know there is an excellent and free way to keep spam comments from ever getting submitted? We heartily recommend installing <a href="%s">WordPress Zero Spam</a>.',
-						'Postmatic'
-					),
-					'https://wordpress.org/plugins/zero-spam/'
-				),
-				'&nbsp;',
-				html( 'a',
-					array( 'href' => esc_url( add_query_arg( 'skip_zero_spam_intro', 'true' ) ), 'class' => 'button' ),
-					__( 'Dismiss', 'Postmatic' )
-				)
 			)
 		);
 	}
@@ -519,6 +398,34 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		return $key;
 	}
 
+	/**
+	 * Get the URL of the options page.
+	 *
+	 * @since 1.2.3
+	 *
+	 * @return string
+	 */
+	public function url() {
+		return add_query_arg( 'page', $this->args['page_slug'], admin_url( $this->args['parent'] ) );
+	}
+
+	/**
+	 * Whether the current request is for the options page.
+	 *
+	 * Only available after the load-(page) action.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @return bool
+	 */
+	public function is_current_page() {
+
+		if ( ! did_action( 'current_screen' ) )
+			trigger_error( 'is_current_page() is not available until after the load-(page) action' );
+
+		return $this->is_current_page;
+	}
+
 	protected function site_matches( $url ) {
 		$schemeless_url = substr( $url, strpos( $url, ':' ) );
 		$ajax_url = admin_url( 'admin-ajax.php' );
@@ -575,33 +482,55 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$this->key = $this->options->get( 'prompt_key' );
 	}
 
-	protected function local_mail_intro() {
+	protected function add_tabs() {
 
-		if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) )
-			return '';
+		$this->add_tab( new Prompt_Admin_Core_Options_Tab( $this->options, $this->_overridden_options ) );
+		$this->add_tab( new Prompt_Admin_Email_Options_Tab( $this->options, $this->_overridden_options ) );
+		$this->add_tab( new Prompt_Admin_Invite_Options_Tab( $this->options, $this->_overridden_options ) );
+		$this->add_tab( new Prompt_Admin_Options_Options_Tab( $this->options, $this->_overridden_options ) );
+		if ( class_exists( 'Jetpack' ) )
+			$this->add_tab( new Prompt_Admin_Jetpack_Import_Options_Tab( $this->options, $this->_overridden_options ) );
+		if ( class_exists( 'WYSIJA' ) )
+			$this->add_tab( new Prompt_Admin_Mailpoet_Import_Options_Tab( $this->options, $this->_overridden_options ) );
+		$this->add_tab( new Prompt_Admin_MailChimp_Import_Options_Tab( $this->options, $this->_overridden_options ) );
 
-		$mail_result = wp_mail(
-			'null@email.gopostmatic.com',
-			'Check wp_mail() on ' . get_option( 'blogname' ),
-			'This is just a test that no one will read.'
+		$subscribe_reloaded_import_tab = new Prompt_Admin_Subscribe_Reloaded_Import_Options_Tab(
+			$this->options,
+			$this->_overridden_options
 		);
+		if ( $subscribe_reloaded_import_tab->is_available() )
+			$this->add_tab( $subscribe_reloaded_import_tab );
 
-		if ( $mail_result ) {
-			Prompt_Core::$options->set( 'skip_local_mail_intro', true );
-			return '';
-		}
+		$this->add_tab( new Prompt_Admin_Support_Options_Tab( $this->options, $this->_overridden_options ) );
+	}
 
-		return html( 'div class="error"',
-			html( 'p',
-				__(
-					'We detected that your host is unable to send email. You\'ll have to contact them for help, or upgrade Postmatic to use our awesome delivery services.',
-					'Postmatic'
-				),
-				html( 'a',
-					array( 'href' => esc_url( add_query_arg( 'skip_widget_intro', 'true' ) ), 'class' => 'button' ),
-					__( 'Dismiss' )
-				)
-			)
+	protected function add_notices() {
+		$this->notices = array(
+			new Prompt_Admin_Local_Mail_Notice(),
+			new Prompt_Admin_Widget_Notice(),
+			new Prompt_Admin_Moderation_User_Notice(),
+			new Prompt_Admin_Akismet_Notice(),
+			new Prompt_Admin_Zero_Spam_Notice(),
 		);
 	}
+
+	/**
+	 * When there isn't a key and the user can add one, direct them here.
+	 */
+	protected function maybe_auto_load() {
+
+		if ( $this->key )
+			return;
+
+		if ( ! current_user_can( $this->args['capability'] ) )
+			return;
+
+		if ( ! $this->options->get( 'redirect_to_options_page' ) )
+			return;
+
+		$this->options->set( 'redirect_to_options_page', false );
+
+		wp_redirect( $this->url() );
+	}
+
 }

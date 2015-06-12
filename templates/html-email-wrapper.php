@@ -304,7 +304,7 @@ img.featured {
     .widgets li, .widgets ul {list-style: none !important; margin-left: 0 !important; padding-left: 0 !important;}
     .alignright {float: right !important; margin: 0 0 10px 10px !important;}
 
-/*Sharedaddy Support*/
+/*Sharedaddy by Jetpack*/
 .sd-content ul li {
   list-style: none;
   display: inline;
@@ -313,10 +313,12 @@ img.featured {
 .sd-title { clear: both !important;}
 
 .content .sd-content ul li {
-  margin: 0 5px 0 0 !important;
+  margin: 0 5px 10px 0 !important;
+  display: block;
+  float: left;
 }
 .content .sd-content ul li a {
-  color: #555;
+  color: #555 !important;
   font-size: 12px;
   padding: 5px 8px;
   -webkit-border-radius: 4px;
@@ -349,7 +351,7 @@ img.featured {
 .right {margin-left:50%; width:45%;}
 
 /*Plugin and shortcode specific*/
-   .gallery, .ngg-galleryoverview {
+.gallery, .ngg-galleryoverview {
       margin: 10px 0; padding: 15px 5px 0 5px; border: 1px solid #ddd; background: #eee; width: 100%; float: left;
     }
 
@@ -359,6 +361,8 @@ img.featured {
     padding: 15px;
     margin: 20px 0;
   }
+
+/*oembed placeholders*/
 
 .www-youtube-com,.animoto-com,.blip-tv,.www-collegehumor-com,.www-dailymotion-com,.flickr-com,.www-flickr-com,.www-funnyordie-com,.www-hulu-com,.embed-revision3-com,.www-ted-com,.vimeo-com,.vine-co,.wordpress-tv{
   background-image: url(<?php echo Prompt_Core::$url_path . '/media/video.jpg' ;?>);
@@ -417,8 +421,64 @@ ul.related_post li {
   font-size: 85%;
 }
 
+.socialmedia-buttons a {
+  float: left;
+  display: block;
+  margin-right: 5px;
+}
+
+/*flexible posts widget*/
+ul.dpe-flexible-posts li {
+  clear: left;
+  margin-bottom: 10px;
+}
+
+ul.dpe-flexible-posts li a img {
+  width: 50px;
+  height: auto;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 .shopthepost-widget {
   display: none !important;
+}
+
+/*yumrecipes*/
+.blog-yumprint-recipe-published,.blog-yumprint-header,.blog-yumprint-adapted-print,.blog-yumprint-recipe-source {display: none;}
+.blog-yumprint-recipe {border: 1px dashed #ddd; border-radius: 5px; padding: 25px; margin: 10px;}
+
+/*wp ultimate recipes*/
+.wpurp-responsive-desktop,.wpurp-recipe-image,.wpurp-recipe-servings-changer {display: none;}
+
+/*Hupso social*/
+.hupso_toolbar {display: none;}
+
+/*Official twitter plugin*/
+.twitter-share .twitter-share-button {
+  color: #555 !important;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 5px 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  background: #F8F8F8;
+  text-decoration: none; 
+}
+
+
+  .widgets-list-layout li {
+    clear: left !important;
+  }
+
+.widgets-list-layout li img {
+  width: 35px !important;
+  height: 35px !important;
+  float: left !important;
+  margin: 0 10px 10px 0 !important;
 }
 
 /*Mobile syles*/

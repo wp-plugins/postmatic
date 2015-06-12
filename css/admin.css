@@ -301,3 +301,7 @@ div#manage-account a {
   -moz-border-radius: 5px;
   border-radius: 5px;
   text-decoration: none; }
+
+.ui-tabs .ui-tabs-nav li a {
+  font-size: 85% !important;
+}

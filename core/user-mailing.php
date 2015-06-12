@@ -26,6 +26,7 @@ class Prompt_User_Mailing {
 		$subject = sprintf( __( 'Welcome to %s', 'Postmatic' ), get_option( 'blogname' ) );
 		$email = new Prompt_Email( array(
 			'to_address' => $user->user_email,
+			'reply_address' => get_option( 'admin_email' ),
 			'subject' => $subject,
 			'html' => $template->render( $template_data ),
 			'message_type' => Prompt_Enum_Message_Types::ADMIN,

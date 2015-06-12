@@ -20,6 +20,7 @@ class Prompt_Core {
 	static protected $settings_page = null;
 	static protected $delivery_metabox = null;
 	static protected $text_metabox = null;
+	static protected $activate_notice = null;
 
 	static private $overridden_options;
 
@@ -54,6 +55,8 @@ class Prompt_Core {
 			'skip_akismet_intro' => false,
 			'skip_zero_spam_intro' => false,
 			'skip_local_mail_intro' => false,
+			'skip_moderation_user_intro' => false,
+			'redirect_to_options_page' => true,
 			'augment_comment_form' => true,
 			'send_login_info' => false,
 			'email_header_type' => Prompt_Enum_Email_Header_Types::TEXT,
@@ -90,13 +93,15 @@ class Prompt_Core {
 			self::$options->set( self::$overridden_options );
 
 		// Until we have a key we won't do much
-		if ( self::$options->get( 'prompt_key' ) )
+		$key = self::$options->get( 'prompt_key' );
+		if ( $key )
 			self::add_hooks();
 
 		if ( is_admin() ) {
 			self::settings_page();
 			self::delivery_metabox();
 			self::text_metabox();
+			self::$activate_notice = new Prompt_Admin_Activate_Notice( $key, self::$settings_page );
 		}
 
 		do_action( 'prompt/core_loaded' );
@@ -306,4 +311,14 @@ class Prompt_Core {
 		self::$options->set( 'site_icon', $icon->get_attachment_id() );
 	}
 
+	/**
+	 * When we don't have a key and aren't on the options page, put up a notice to activate us.
+	 */
+	protected static function activate_notice() {
+
+		if ( self::$options->get( 'prompt_key' ) )
+			return;
+
+
+	}
 } // end Prompt_Core class

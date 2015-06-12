@@ -6,6 +6,7 @@ class Prompt_Moderation_Mailing {
 
 		$comment = get_comment( $comment_id_or_object );
 
+		// Auto-approve comments from moderators
 		if ( in_array( $comment->comment_author_email, $recipient_addresses ) ) {
 			wp_set_comment_status( $comment->comment_ID, 'approve' );
 			return;
