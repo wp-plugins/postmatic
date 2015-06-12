@@ -6,7 +6,7 @@ Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Postmatic lets your readers subscribe to comments or new posts by email. And leave a comment by simply hitting reply. No forms. No browsers. Online or offline.
+Postmatic lets your readers subscribe to comments or posts by email. And comment by simply hitting reply. From wherever they are.
 
 == Description ==
 
