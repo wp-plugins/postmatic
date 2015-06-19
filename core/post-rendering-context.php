@@ -45,7 +45,10 @@ class Prompt_Post_Rendering_Context {
 
 		if ( class_exists( 'ET_Bloom' ) ) {
 			$bloom = ET_Bloom::get_this();
-			remove_filter( 'the_content', array( $bloom, 'display_below_post') );
+			// For Bloom < 1.0.5
+			remove_filter( 'the_content', array( $bloom, 'display_below_post' ) );
+			// For Bloom 1.0.5 and hopefully later
+			remove_filter( 'the_content', array( $bloom, 'display_below_post' ), 9999 );
 			remove_filter( 'the_content', array( $bloom, 'trigger_bottom_mark' ), 9999 );
 			// TODO: restore these?
 		}
@@ -61,6 +64,7 @@ class Prompt_Post_Rendering_Context {
 		add_filter( 'the_content', array( $this, 'limit_image_width_attributes' ), 11 );
 		add_filter( 'the_content', array( $this, 'strip_incompatible_tags' ), 11 );
 		add_filter( 'the_content', array( $this, 'strip_duplicate_featured_images' ), 100 );
+		add_filter( 'the_content', array( $this, 'include_noscript_content' ), 100 );
 		add_filter( 'embed_oembed_html', array( $this, 'use_original_oembed_url' ), 10, 2 );
 		add_filter( 'jetpack_photon_override_image_downsize', '__return_true' );
 	}
@@ -89,6 +93,7 @@ class Prompt_Post_Rendering_Context {
 		remove_filter( 'the_content', array( $this, 'strip_image_height_attributes' ), 11 );
 		remove_filter( 'the_content', array( $this, 'do_whitelisted_shortcodes' ), 11 );
 		remove_filter( 'the_content', array( $this, 'strip_duplicate_featured_images' ), 100 );
+		remove_filter( 'the_content', array( $this, 'include_noscript_content' ), 100 );
 		add_filter( 'the_content', 'do_shortcode', 11 );
 		add_filter( 'the_content', array( $GLOBALS['wp_embed'], 'run_shortcode' ), 8 );
 		if ( function_exists( 'hammy_replace_images' ) )
@@ -337,6 +342,17 @@ class Prompt_Post_Rendering_Context {
 			'',
 			$content
 		);
+	}
+
+	/**
+	 * Remove noscript tags, but retain their content.
+	 *
+	 * @param string $content
+	 * @return string
+	 */
+	public function include_noscript_content( $content ) {
+		$content = str_replace( '<noscript>', '', $content );
+		return str_replace( '</noscript>', '', $content );
 	}
 
 	/**

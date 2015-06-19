@@ -63,20 +63,16 @@ class Prompt_Mailer {
 
 		$response = $this->client->post( '/outbound_messages', $request );
 
-		if ( $this->ignore_timeouts and
-			is_wp_error( $response ) and
-			strpos( $response->get_error_message(), 'timed out' ) !== false
-		) {
-			trigger_error( 'Prompt outbound mail request timed out: ' . $response->get_error_message(), E_USER_NOTICE );
-			return $email_data;
-		}
+		if ( is_wp_error( $response ) )
+			return $response;
 
-		if ( is_wp_error( $response ) or 200 != $response['response']['code'] )
-			return Prompt_Logging::add_error(
-				'outbound_error',
-				__( 'An email sending operation encountered a problem.', 'Postmatic' ),
-				compact( 'response', 'email_data' )
+		if ( 200 != wp_remote_retrieve_response_code( $response ) ) {
+			return new WP_Error(
+				Prompt_Enum_Error_Codes::API,
+				wp_remote_retrieve_response_message( $response ),
+				$response
 			);
+		}
 
 		$results = json_decode( $response['body'] );
 

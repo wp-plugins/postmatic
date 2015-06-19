@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
 "Email 1.2.3\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
-"plugin/1.2.3-20150612-2105\n"
-"POT-Creation-Date: 2015-06-12 21:05:30+00:00\n"
+"plugin/1.2.3-20150619-1535\n"
+"POT-Creation-Date: 2015-06-19 15:35:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -225,127 +225,127 @@ msgstr ""
 msgid "Already subscribed"
 msgstr ""
 
-#: admin/invite-options-tab.php:87
+#: admin/invite-options-tab.php:83
 msgid "Success. %d invite sent."
 msgid_plural "Success. %d invites sent."
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/invite-options-tab.php:92
+#: admin/invite-options-tab.php:88
 msgid "Something went wrong and these invites were not sent: "
 msgstr ""
 
-#: admin/invite-options-tab.php:101
+#: admin/invite-options-tab.php:97
 msgid "Send email invitations to subscribe to your site"
 msgstr ""
 
-#: admin/invite-options-tab.php:103
+#: admin/invite-options-tab.php:99
 msgid ""
 "Use this tool to reach out to your community of past or current commenters. "
 "Be sure to check the subject and introductory text below."
 msgstr ""
 
-#: admin/invite-options-tab.php:110
+#: admin/invite-options-tab.php:106
 msgid "Email Subject"
 msgstr ""
 
-#: admin/invite-options-tab.php:120
+#: admin/invite-options-tab.php:116
 msgid "Email Introduction"
 msgstr ""
 
-#: admin/invite-options-tab.php:123
+#: admin/invite-options-tab.php:119
 msgid ""
 "This text will be placed at the top of invitation message. Make it as "
 "friendly and personalized as you can."
 msgstr ""
 
-#: admin/invite-options-tab.php:137
+#: admin/invite-options-tab.php:133
 msgid "Who should we send this invite to?"
 msgstr ""
 
-#: admin/invite-options-tab.php:144
+#: admin/invite-options-tab.php:140
 msgid "A list of email addresses"
 msgstr ""
 
-#: admin/invite-options-tab.php:145
+#: admin/invite-options-tab.php:141
 msgid "People who have recently commented"
 msgstr ""
 
-#: admin/invite-options-tab.php:146
+#: admin/invite-options-tab.php:142
 msgid "People who comment the most"
 msgstr ""
 
-#: admin/invite-options-tab.php:147
+#: admin/invite-options-tab.php:143
 msgid "Anyone that has ever commented"
 msgstr ""
 
-#: admin/invite-options-tab.php:148
+#: admin/invite-options-tab.php:144
 msgid "WordPress users who are not subscribed"
 msgstr ""
 
-#: admin/invite-options-tab.php:149
+#: admin/invite-options-tab.php:145
 msgid "WordPress users subscribed to a comment thread but not new posts"
 msgstr ""
 
-#: admin/invite-options-tab.php:167
+#: admin/invite-options-tab.php:163
 msgid "Please separate addresses with commas."
 msgstr ""
 
-#: admin/invite-options-tab.php:180
+#: admin/invite-options-tab.php:176
 msgid ""
 "Send this invitation to people who have had an approved comment within the "
 "last"
 msgstr ""
 
-#: admin/invite-options-tab.php:186
+#: admin/invite-options-tab.php:182
 msgid "months."
 msgstr ""
 
-#: admin/invite-options-tab.php:197
+#: admin/invite-options-tab.php:193
 msgid "Send this invitation to people who have at least"
 msgstr ""
 
-#: admin/invite-options-tab.php:204
+#: admin/invite-options-tab.php:200
 msgid "approved comments."
 msgstr ""
 
-#: admin/invite-options-tab.php:215
+#: admin/invite-options-tab.php:211
 msgid "Send this invitation to "
 msgstr ""
 
-#: admin/invite-options-tab.php:222
+#: admin/invite-options-tab.php:218
 msgid "users who are not subscribed."
 msgstr ""
 
-#: admin/invite-options-tab.php:227
+#: admin/invite-options-tab.php:223
 msgid "Recipients"
 msgstr ""
 
-#: admin/invite-options-tab.php:233
+#: admin/invite-options-tab.php:229
 msgid "Loading..."
 msgstr ""
 
-#: admin/invite-options-tab.php:237
+#: admin/invite-options-tab.php:233
 msgid "If you have many commenters, this could take some time."
 msgstr ""
 
-#: admin/invite-options-tab.php:240
+#: admin/invite-options-tab.php:236
 msgid ""
 "Based on the above your invite will be sent to <span class=\"recipient-count"
 "\">0</span> people."
 msgstr ""
 
-#: admin/invite-options-tab.php:248
+#: admin/invite-options-tab.php:244
 msgid ""
 "Wow, that's a lot of invitations! This tool is currently limited to %d "
 "invites. You can contact support if you need to arrange more."
 msgstr ""
 
-#: admin/invite-options-tab.php:268
+#: admin/invite-options-tab.php:264
 msgid "Send Invites"
 msgstr ""
 
-#: admin/invite-options-tab.php:273
+#: admin/invite-options-tab.php:269
 msgid "All"
 msgstr ""
 
@@ -734,7 +734,7 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: admin/options-options-tab.php:39 core/core.php:260
+#: admin/options-options-tab.php:39 core/core.php:262
 msgid "Postmatic Delivery"
 msgstr ""
 
@@ -1133,28 +1133,33 @@ msgstr ""
 msgid "You are subscribed to new comments on this post."
 msgstr ""
 
-#: core/comment-mailer.php:66 core/comment-mailer.php:72
-#: core/comment-mailer.php:80 core/moderation-mailing.php:21
+#: core/comment-mailer.php:71 core/comment-mailer.php:77
+#: core/comment-mailer.php:85 core/moderation-mailing.php:21
 msgid "Anonymous"
 msgstr ""
 
-#: core/comment-mailer.php:353
+#: core/comment-mailer.php:187 core/post-mailing.php:123
+#: core/subscription-mailing.php:82
+msgid "An email sending operation encountered a problem."
+msgstr ""
+
+#: core/comment-mailer.php:394
 msgid "%s replied to your comment on %s."
 msgstr ""
 
-#: core/comment-mailer.php:360
+#: core/comment-mailer.php:401
 msgid "%s replied to %s on %s"
 msgstr ""
 
-#: core/comment-mailer.php:367
+#: core/comment-mailer.php:408
 msgid "%s commented on %s"
 msgstr ""
 
-#: core/comment-mailing.php:37
+#: core/comment-mailing.php:43
 msgid "a deleted post"
 msgstr ""
 
-#: core/comment-mailing.php:51
+#: core/comment-mailing.php:57
 msgid "Unable to publish your reply to \"%s\""
 msgstr ""
 
@@ -1212,7 +1217,7 @@ msgstr ""
 msgid "Welcome!"
 msgstr ""
 
-#: core/core.php:280
+#: core/core.php:282
 msgid "Postmatic Text Version"
 msgstr ""
 
@@ -1231,27 +1236,19 @@ msgstr ""
 msgid "This is a test email. By Postmatic."
 msgstr ""
 
-#: core/inbound-messenger.php:22
-msgid "A request for inbound messages failed."
-msgstr ""
-
-#: core/inbound-messenger.php:31
+#: core/inbound-messenger.php:36
 msgid "Inbound messages arrived in an unrecognized format."
 msgstr ""
 
-#: core/inbound-messenger.php:57
+#: core/inbound-messenger.php:71
 msgid "Failed to acknowledge receipt of messages - they may arrive again."
 msgstr ""
 
-#: core/inbound-messenger.php:77
+#: core/inbound-messenger.php:91
 msgid "Unable to deliver a message of unknown type."
 msgstr ""
 
-#: core/mailer.php:77
-msgid "An email sending operation encountered a problem."
-msgstr ""
-
-#: core/mailer.php:86
+#: core/mailer.php:82
 msgid "An email sending operation behaved erratically and may have failed."
 msgstr ""
 
@@ -1267,30 +1264,11 @@ msgstr ""
 msgid "Refusing to subscribe an invalid user ID."
 msgstr ""
 
-#: core/post-mailing.php:182
-msgid ""
-"Delivery of subscription notifications for the post \"%s\" may have failed."
-msgstr ""
-
-#: core/post-mailing.php:186
-msgid ""
-"A site administrator can report this event to the development team from the "
-"Postmatic settings."
-msgstr ""
-
-#: core/post-mailing.php:188
-msgid "The error message was: "
-msgstr ""
-
-#: core/post-mailing.php:193
-msgid "Delivery issue for %s"
-msgstr ""
-
-#: core/post-rendering-context.php:453
+#: core/post-rendering-context.php:469
 msgid "This content is not compatible with your email client. "
 msgstr ""
 
-#: core/post-rendering-context.php:456
+#: core/post-rendering-context.php:472
 msgid "Click here to view this content in your browser."
 msgstr ""
 
@@ -1378,19 +1356,19 @@ msgstr ""
 msgid "Unknown source."
 msgstr ""
 
-#: core/subscription-mailing.php:82
+#: core/subscription-mailing.php:189
 msgid "Please verify your subscription to %s"
 msgstr ""
 
-#: core/subscription-mailing.php:143
+#: core/subscription-mailing.php:250
 msgid "You're unsubscribed from %s"
 msgstr ""
 
-#: core/subscription-mailing.php:153
+#: core/subscription-mailing.php:260
 msgid "You're subscribed to %s"
 msgstr ""
 
-#: core/subscription-mailing.php:234
+#: core/subscription-mailing.php:341
 msgid "You've rejoined %s"
 msgstr ""
 
@@ -1694,16 +1672,16 @@ msgstr ""
 msgid "Manage your account"
 msgstr ""
 
-#: templates/html-email-wrapper.php:647
+#: templates/html-email-wrapper.php:653
 #: templates/html-local-email-wrapper.php:68
 msgid "Sent from %s."
 msgstr ""
 
-#: templates/html-email-wrapper.php:653
+#: templates/html-email-wrapper.php:659
 msgid "Delivered by <a href=\"%s\">Postmatic</a>."
 msgstr ""
 
-#: templates/html-email-wrapper.php:662
+#: templates/html-email-wrapper.php:668
 #: templates/html-local-email-wrapper.php:84
 msgid ""
 "To immediately stop receiving all posts and comments from %s you can <a href="

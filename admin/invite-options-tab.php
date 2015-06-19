@@ -78,11 +78,7 @@ class Prompt_Admin_Invite_Options_Tab extends Prompt_Admin_Options_Tab {
 				'from_name' => $current_user->display_name . ' - ' . get_option( 'blogname' ),
 			);
 
-			wp_schedule_single_event(
-				time(),
-				'prompt/subscription_mailing/send_agreements',
-				array( $prompt_site, $users_data, $message_data )
-			);
+			Prompt_Subscription_Mailing::schedule_agreements( $prompt_site, $users_data, $message_data );
 
 			$confirmation_format = _n( 'Success. %d invite sent.', 'Success. %d invites sent.', count( $users_data ), 'Postmatic' );
 			$this->add_notice( sprintf( $confirmation_format, count( $users_data ) ) );

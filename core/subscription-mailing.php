@@ -1,6 +1,9 @@
 <?php
-
 class Prompt_Subscription_Mailing {
+
+	protected static $delivery_option = 'prompt_agreement_delivery';
+	/** @var  array */
+	protected static $delivery_index;
 
 	/**
 	 * Send an email to verify a subscription from a non-existent user.
@@ -23,24 +26,67 @@ class Prompt_Subscription_Mailing {
 	/**
 	 * Send emails to verify subscriptions from non-existent users.
 	 *
+	 * Try to be idempotent, so only the first of repeated calls sends mail.
+	 *
 	 * @param Prompt_Interface_Subscribable $object
-	 * @param array $users_data An array of user_data arrays that include the user_email filed.
+	 * @param array $users_data An array of user_data arrays that include the user_email field.
 	 * @param array $template_data An array of data to provide to the subscription agreement template.
 	 * @param int $chunk
+	 * @param int $retry_wait_seconds Minimum time to wait if a retry is necessary, or null to disable retry
 	 */
-	public static function send_agreements( $object, $users_data, $template_data = array(), $chunk = 0 ) {
+	public static function send_agreements(
+		$object,
+		$users_data,
+		$template_data = array(),
+		$chunk = 0,
+		$retry_wait_seconds = 60
+	) {
 
-		$emails = array();
+		// Bail if we've already sent this chunk
+		if ( $chunk <= self::get_delivered_chunk( $users_data ) )
+			return;
+
+		// Block other processes from sending this chunk
+		self::set_delivered_chunk( $users_data, $chunk );
 
 		$chunks = array_chunk( $users_data, 30 );
+
+		$emails = array();
 
 		foreach ( $chunks[$chunk] as $user_data ) {
 			$emails[] = self::make_agreement_email( $object, $user_data, null, $template_data );
 		}
 
-		Prompt_Factory::make_mailer()->send_many( $emails );
+		$result = Prompt_Factory::make_mailer()->send_many( $emails );
 
-		if ( !empty( $chunks[$chunk + 1] ) ) {
+		$rescheduler = new Prompt_Rescheduler( $result, $retry_wait_seconds );
+
+		if ( $rescheduler->found_temporary_error() ) {
+
+			self::set_delivered_chunk( $users_data, $chunk - 1 );
+
+			$rescheduler->reschedule(
+				'prompt/post_mailing/send_notifications',
+				array( $object, $users_data, $template_data, $chunk )
+			);
+
+			return;
+		}
+
+		if ( is_wp_error( $result ) ) {
+
+			self::set_delivered_chunk( $users_data, $chunk - 1 );
+
+			Prompt_Logging::add_error(
+				Prompt_Enum_Error_Codes::OUTBOUND,
+				__( 'An email sending operation encountered a problem.', 'Postmatic' ),
+				$result->get_error_data()
+			);
+
+			return;
+		}
+
+		if ( ! empty( $chunks[$chunk + 1] ) ) {
 
 			wp_schedule_single_event(
 				time(),
@@ -49,6 +95,67 @@ class Prompt_Subscription_Mailing {
 			);
 
 		}
+	}
+
+	/**
+	 * @since 1.3.0
+	 *
+	 * @param array $users_data
+	 * @return int
+	 */
+	protected static function get_delivered_chunk( $users_data ) {
+
+		if ( ! self::$delivery_index )
+			self::$delivery_index = get_option( self::$delivery_option, array() );
+
+		$key = md5( serialize( $users_data ) );
+
+		return empty( $delivery[$key] ) ? -1 : $delivery[$key];
+	}
+
+	/**
+	 * @since 1.3.0
+	 *
+	 * @param array $users_data
+	 * @param int $chunk
+	 */
+	protected static function set_delivered_chunk( $users_data, $chunk ) {
+
+		if ( ! self::$delivery_index )
+			self::$delivery_index = get_option( self::$delivery_option, array() );
+
+		$key = md5( serialize( $users_data ) );
+
+		self::$delivery_index[$key] = $chunk;
+
+		update_option( self::$delivery_option, self::$delivery_index, $autoload = false );
+	}
+
+	/**
+	 * Schedule a batch of agreements to be sent.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param Prompt_Interface_Subscribable $object
+	 * @param array $users_data An array of user_data arrays that include the user_email field.
+	 * @param array $template_data An array of data to provide to the subscription agreement template.
+	 */
+	public static function schedule_agreements( $object, $users_data, $template_data = array() ) {
+
+		$key = md5( serialize( $users_data ) );
+
+		$delivery = get_option( self::$delivery_option, array() );
+
+		// set to less than first chunk, 0
+		$delivery[$key] = -1;
+
+		update_option( self::$delivery_option, $delivery, $autoload = false );
+
+		wp_schedule_single_event(
+			time(),
+			'prompt/subscription_mailing/send_agreements',
+			array( $object, $users_data, $template_data, $chunk = 0 )
+		);
 	}
 
 	protected static function make_agreement_email( $object, $user_data, $resend_command = null, $message_data = array() ) {

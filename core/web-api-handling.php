@@ -9,9 +9,9 @@ class Prompt_Web_Api_Handling {
 
 		self::validate_or_die();
 
-		$messenger = Prompt_Factory::make_inbound_messenger();
+		$result = Prompt_Inbound_Handling::pull_updates();
 
-		self::set_return_code_and_die( $messenger->pull_updates() );
+		self::set_return_code_and_die( $result );
 	}
 
 	public static function receive_pull_configuration() {

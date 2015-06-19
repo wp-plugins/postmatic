@@ -4,6 +4,22 @@ class Prompt_Logging {
 	const OPTION_NAME = 'prompt_log';
 
 	/**
+	 * Shortcut to add a WP_Error to the log.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param WP_Error $error
+	 * @return WP_Error
+	 */
+	public static function add_wp_error( WP_Error $error ) {
+		return self::add_error(
+			$error->get_error_code(),
+			$error->get_error_message(),
+			$error->get_error_data()
+		);
+	}
+
+	/**
 	 * Save the most recent errors for review.
 	 * @param string $code
 	 * @param string $message

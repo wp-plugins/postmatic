@@ -201,14 +201,11 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 			'comment_author_url' => $user->user_url,
 			'comment_author_email' => $user->user_email,
 			'comment_parent' => $this->parent_comment_id,
+			'comment_type' => '',
+			'comment_approved' => '1',
 		);
 
-		$comment_data['comment_approved'] = get_option( 'comment_moderation' ) ? 0 : 1;
-
-		$comment_data = apply_filters( 'prompt_preprocess_comment', $comment_data );
-		$comment_data = wp_filter_comment( $comment_data );
-
-		$comment_id = wp_insert_comment( $comment_data );
+		$comment_id = wp_new_comment( $comment_data );
 
 		if ( 0 == $comment_data['comment_approved'] )
 			wp_notify_moderator( $comment_id );

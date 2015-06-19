@@ -8,9 +8,10 @@ class Prompt_Post_Mailing {
 	 * Sends up to 25 unsent notifications, and schedules another batch if there are more.
 	 *
 	 * @param WP_Post|int $post
-	 * @param string $signature Optional identifier for this batch.
+	 * @param string $signature Optional identifier for this batch
+	 * @param int $retry_wait_seconds Minimum time to wait if a retry is necessary, or null to disable retry
 	 */
-	public static function send_notifications( $post, $signature = '' ) {
+	public static function send_notifications( $post, $signature = '', $retry_wait_seconds = 60 ) {
 
 		$post = get_post( $post );
 
@@ -107,8 +108,23 @@ class Prompt_Post_Mailing {
 
 		$result = Prompt_Factory::make_mailer()->send_many( $emails );
 
-		if ( is_wp_error( $result ) )
-			self::send_error_notifications( $post, $result );
+		$rescheduler = new Prompt_Rescheduler( $result, $retry_wait_seconds );
+
+		if ( $rescheduler->found_temporary_error() ) {
+			$prompt_post->remove_sent_recipient_ids( $chunk_ids );
+			$rescheduler->reschedule( 'prompt/post_mailing/send_notifications', array( $post->ID, $signature ) );
+			return;
+		}
+
+		if ( is_wp_error( $result ) ) {
+			$prompt_post->remove_sent_recipient_ids( $chunk_ids );
+			Prompt_Logging::add_error(
+				Prompt_Enum_Error_Codes::OUTBOUND,
+				__( 'An email sending operation encountered a problem.', 'Postmatic' ),
+				$result->get_error_data()
+			);
+			return;
+		}
 
 		if ( !empty( $chunks[1] ) ) {
 
@@ -167,36 +183,6 @@ class Prompt_Post_Mailing {
 		}
 
 		return $email;
-	}
-
-	protected static function send_error_notifications( $post, $error ) {
-
-		$recipient_id = get_current_user_id() ? get_current_user_id() : $post->post_author;
-
-		$recipient = get_userdata( $recipient_id );
-
-		if ( !$recipient or empty( $recipient->user_email ) )
-			return;
-
-		$message = sprintf(
-				__( 'Delivery of subscription notifications for the post "%s" may have failed.', 'Postmatic' ),
-				get_the_title( $post )
-			) .
-			' ' .
-			__( 'A site administrator can report this event to the development team from the Postmatic settings.', 'Postmatic' ) .
-			' ' .
-			__( 'The error message was: ', 'Postmatic' ) . $error->get_error_message();
-
-		$email = new Prompt_Email( array(
-			'to_address' => $recipient->user_email,
-			'from_address' => $recipient->display_name,
-			'subject' => sprintf( __( 'Delivery issue for %s', 'Postmatic' ), get_option( 'blogname' ) ),
-			'text' => $message,
-			'message_type' => Prompt_Enum_Message_Types::ADMIN,
-		));
-
-		Prompt_Factory::make_mailer( Prompt_Enum_Email_Transports::LOCAL )->send_one( $email );
-
 	}
 
 }

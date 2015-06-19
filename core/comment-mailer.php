@@ -8,14 +8,19 @@ class Prompt_Comment_Mailer {
 	protected $comment;
 	/** @var  Prompt_Comment_Flood_Controller */
 	protected $flood_controller;
+	/** @var  int */
+	protected $retry_wait_seconds;
 
-	public function __construct( $comment, $flood_controller = null ) {
+	public function __construct( $comment, $flood_controller = null, $retry_wait_seconds = null ) {
 		$this->comment = $comment;
+
+		$this->retry_wait_seconds = $retry_wait_seconds;
 
 		if ( $flood_controller )
 			$this->flood_controller = $flood_controller;
 		else
 			$this->flood_controller = new Prompt_Comment_Flood_Controller( $comment );
+
 	}
 
 	/**
@@ -157,7 +162,34 @@ class Prompt_Comment_Mailer {
 		if ( empty( $emails ) )
 			return;
 
-		Prompt_Factory::make_mailer()->send_many( $emails );
+		$response = Prompt_Factory::make_mailer()->send_many( $emails );
+
+		$rescheduler = new Prompt_Rescheduler( $response, $this->retry_wait_seconds );
+
+		if ( $rescheduler->found_temporary_error() ) {
+
+			$this->remove_sent_recipient_ids( $chunk_ids );
+
+			$rescheduler->reschedule(
+				'prompt/comment_mailing/send_notifications',
+				array( $this->comment->comment_ID, implode( '', $chunk_ids ), null )
+			);
+
+			return;
+		}
+
+		if ( is_wp_error( $response ) ) {
+
+			$this->remove_sent_recipient_ids( $chunk_ids );
+
+			Prompt_Logging::add_error(
+				Prompt_Enum_Error_Codes::OUTBOUND,
+				__( 'An email sending operation encountered a problem.', 'Postmatic' ),
+				$response->get_error_data()
+			);
+
+			return;
+		}
 
 		if ( !empty( $chunks[1] ) ) {
 
@@ -219,6 +251,15 @@ class Prompt_Comment_Mailer {
 	 */
 	protected function add_sent_recipient_ids( $ids ) {
 		$sent_ids = array_unique( array_merge( $this->sent_recipient_ids(), $ids ) );
+		update_comment_meta( $this->comment->comment_ID, self::$sent_meta_key, $sent_ids );
+	}
+
+	/**
+	 * Remove the IDs of users who were not sent an email notification for this comment.
+	 * @param array $ids
+	 */
+	protected function remove_sent_recipient_ids( $ids ) {
+		$sent_ids = array_diff( $this->sent_recipient_ids(), $ids );
 		update_comment_meta( $this->comment->comment_ID, self::$sent_meta_key, $sent_ids );
 	}
 

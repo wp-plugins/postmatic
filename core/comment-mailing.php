@@ -10,14 +10,20 @@ class Prompt_Comment_Mailing {
 	 * @param object|int $comment_id_or_object
 	 * @param string $signature Optional identifier for this batch. Just distinguishes cron jobs, ignored here.
 	 * @param Prompt_Comment_Mailer $mailer Optional object to use for sending notifications.
+	 * @param int $retry_wait_seconds Minimum time to wait if a retry is necessary, or null to disable retry
 	 */
-	public static function send_notifications( $comment_id_or_object, $signature = '', $mailer = null ) {
+	public static function send_notifications(
+		$comment_id_or_object,
+		$signature = '',
+		$mailer = null,
+		$retry_wait_seconds = 60
+	) {
 
 		$comment = get_comment( $comment_id_or_object );
 
 		self::handle_new_subscriber( $comment );
 
-		$mailer = $mailer ? $mailer : new Prompt_Comment_Mailer( $comment );
+		$mailer = $mailer ? $mailer : new Prompt_Comment_Mailer( $comment, null, $retry_wait_seconds );
 
 		$mailer->send_notifications();
 	}

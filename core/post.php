@@ -182,6 +182,17 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 	}
 
 	/**
+	 * Remove the IDs of users for whom an email notification mailing failed.
+	 * @param array $ids
+	 * @return $this
+	 */
+	public function remove_sent_recipient_ids( $ids ) {
+		$sent_ids = array_diff( $this->sent_recipient_ids(), $ids );
+		update_post_meta( $this->id, self::$sent_meta_key, $sent_ids );
+		return $this;
+	}
+
+	/**
 	 * Get the IDs of users who have been NOT yet been sent an email notification for this post.
 	 * @return array
 	 */

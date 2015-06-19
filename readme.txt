@@ -73,6 +73,16 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.3.0 =
+
+- Restored compatability with Bloom to ensure forms do not show up in mailed posts. Note this is not an integration with Bloom - You'll still need to harass Elegant Themes to get that done. Please do.
+- Added support for simplesharebutton icons.
+- Postmatic is now compatible with *all* lazy load plugins. Let us know if you see otherwise.
+- Added another obligatory batch of signature patterns. Or removed them. You know what we mean.
+- Fixed a horrible bug in which multiple invittions would be sent to the same address in certain cases when using the MailPoet importer. Very sorry @dannybrown.
+- Postmatic now respects the moderation blacklist field in settings > discussion. This is great for fine-tuning out of office replies and other detritus. See [this support article](http://docs.gopostmatic.com/article/136-how-to-block-out-of-office-notices-that-sneak-through-our-filters) for more info.
+- We improved persistent retries between the plugin and our servers. If our servers burp (or we update them to our fancy new 2.0 api soon) your mail will queue up locally until we come back online. The same is true for incoming. 
+
 = 1.2.3 =
 
 - OMG this release includes an importer for Subscribe to Comments / Subscribe to Comments Reloaded. Move all of your old comment subscriptions over to shiny new Postmatic land. See [our blog](https://gopostmatic.com/blog) for detailed instructions.

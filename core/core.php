@@ -134,6 +134,8 @@ class Prompt_Core {
 		add_action( 'prompt/post_mailing/send_notifications',      array( 'Prompt_Post_Mailing', 'send_notifications' ) );
 		add_action( 'prompt/comment_mailing/send_notifications',   array( 'Prompt_Comment_Mailing', 'send_notifications' ) );
 		add_action( 'prompt/subscription_mailing/send_agreements', array( 'Prompt_Subscription_Mailing', 'send_agreements' ), 10, 4 );
+		add_action( 'prompt/inbound_handling/pull_updates',        array( 'Prompt_Inbound_Handling', 'pull_updates' ) );
+		add_action( 'prompt/inbound_handling/acknowledge_updates', array( 'Prompt_Inbound_Handling', 'acknowledge_updates' ) );
 
 		add_action( 'wp_ajax_prompt_subscribe',                       array( 'Prompt_Ajax_Handling', 'action_wp_ajax_prompt_subscribe' ) );
 		add_action( 'wp_ajax_nopriv_prompt_subscribe',                array( 'Prompt_Ajax_Handling', 'action_wp_ajax_prompt_subscribe' ) );

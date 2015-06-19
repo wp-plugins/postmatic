@@ -427,6 +427,11 @@ ul.related_post li {
   margin-right: 5px;
 }
 
+.ssba a {
+  float: left;
+  margin-right: 5px;
+}
+
 /*flexible posts widget*/
 ul.dpe-flexible-posts li {
   clear: left;
@@ -448,6 +453,7 @@ ul.dpe-flexible-posts li a img {
 /*yumrecipes*/
 .blog-yumprint-recipe-published,.blog-yumprint-header,.blog-yumprint-adapted-print,.blog-yumprint-recipe-source {display: none;}
 .blog-yumprint-recipe {border: 1px dashed #ddd; border-radius: 5px; padding: 25px; margin: 10px;}
+.blog-yumprint-subheader {font-size: 150%;border-bottom: 1px solid #eee;}
 
 /*wp ultimate recipes*/
 .wpurp-responsive-desktop,.wpurp-recipe-image,.wpurp-recipe-servings-changer {display: none;}

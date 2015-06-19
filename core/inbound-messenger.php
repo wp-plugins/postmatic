@@ -10,30 +10,35 @@ class Prompt_Inbound_Messenger {
 
 	/**
 	 * Check for new messages.
-	 * @return boolean|WP_Error status
+	 *
+	 * @return array|WP_Error Array of new messages or error.
 	 */
 	public function pull_updates() {
 
 		$response = $this->client->get( '/updates/undelivered' );
 
-		if ( is_wp_error( $response ) or 200 != $response['response']['code'] )
-			return Prompt_Logging::add_error(
-				'pull_updates_http',
-				__( 'A request for inbound messages failed.', 'Postmatic' ),
+		if ( is_wp_error( $response ) )
+			return $response;
+
+		if ( 200 != wp_remote_retrieve_response_code( $response ) ) {
+			return new WP_Error(
+				Prompt_Enum_Error_Codes::INBOUND,
+				wp_remote_retrieve_response_message( $response ),
 				$response
 			);
+		}
 
 		$data = json_decode( $response['body'] );
 
 		if ( !isset( $data->updates ) )
-			return Prompt_Logging::add_error(
-				'pull_updates_empty',
+			return new WP_Error(
+				Prompt_Enum_Error_Codes::INBOUND,
 				__( 'Inbound messages arrived in an unrecognized format.', 'Postmatic' ),
 				$data
 			);
 
-		if ( empty( $data->updates ) )
-			return true;
+		if ( ! $data->updates )
+			$data->updates = array();
 
 		$result_updates = array();
 		foreach ( $data->updates as $update ) {
@@ -41,19 +46,28 @@ class Prompt_Inbound_Messenger {
 			$result['status'] = $this->process_update( $update );
 			$result_updates[] = $result;
 		}
-		$results = array( 'updates' => $result_updates );
+		return array( 'updates' => $result_updates );
+	}
 
+	/**
+	 * Tell the server we have received and processed these updates.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param array $updates
+	 * @return bool|WP_Error
+	 */
+	public function acknowledge_updates( $updates ) {
 		$request = array(
 			'headers' => array( 'Content-Type' => 'application/json' ),
-			'body' => json_encode( $results ),
+			'body' => json_encode( $updates ),
 		);
 
 		$response = $this->client->put( '/updates', $request );
 
 		if ( is_wp_error( $response ) or 200 != $response['response']['code'] ) {
-			//TODO: schedule a retry
-			return Prompt_Logging::add_error(
-				'updates_put_http',
+			return new WP_Error(
+				Prompt_Enum_Error_Codes::INBOUND_ACKNOWLEDGE,
 				__( 'Failed to acknowledge receipt of messages - they may arrive again.', 'Postmatic' ),
 				compact( 'response', 'results' )
 			);
