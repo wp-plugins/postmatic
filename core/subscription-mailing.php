@@ -2,8 +2,6 @@
 class Prompt_Subscription_Mailing {
 
 	protected static $delivery_option = 'prompt_agreement_delivery';
-	/** @var  array */
-	protected static $delivery_index;
 
 	/**
 	 * Send an email to verify a subscription from a non-existent user.
@@ -105,8 +103,7 @@ class Prompt_Subscription_Mailing {
 	 */
 	protected static function get_delivered_chunk( $users_data ) {
 
-		if ( ! self::$delivery_index )
-			self::$delivery_index = get_option( self::$delivery_option, array() );
+		$delivery = get_option( self::$delivery_option, array() );
 
 		$key = md5( serialize( $users_data ) );
 
@@ -121,14 +118,13 @@ class Prompt_Subscription_Mailing {
 	 */
 	protected static function set_delivered_chunk( $users_data, $chunk ) {
 
-		if ( ! self::$delivery_index )
-			self::$delivery_index = get_option( self::$delivery_option, array() );
+		$delivery = get_option( self::$delivery_option, array() );
 
 		$key = md5( serialize( $users_data ) );
 
-		self::$delivery_index[$key] = $chunk;
+		$delivery[$key] = $chunk;
 
-		update_option( self::$delivery_option, self::$delivery_index, $autoload = false );
+		update_option( self::$delivery_option, $delivery, $autoload = false );
 	}
 
 	/**
