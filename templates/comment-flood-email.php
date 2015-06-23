@@ -11,7 +11,7 @@
 	<h3>
 		<?php
 		printf(
-			__( 'Heads up: the conversation around %s is getting out of hand.', 'Postmatic' ),
+			__( 'Heads up: the conversation around %s is heating up.', 'Postmatic' ),
 			html( 'a',
 				array( 'href' => get_permalink( $post->id() ) ),
 				get_the_title( $post->id() )
@@ -23,7 +23,7 @@
 	<p>
 		<?php
 		_e(
-			'You love email. But maybe not this much. We\'re going to shut things down from this point on to prevent a flood in your inbox. You will no longer receive new comments on this post.',
+			'You love email -- but maybe not this much. We\'re going to pause notifications for you to prevent a flood in your inbox.',
 			'Postmatic'
 		);
 		?>
@@ -32,7 +32,7 @@
 	<p>
 		<?php
 		_e(
-			'If you really do want to keep up with this thread, reply to this email with the word <strong>rejoin</strong>. We\'ll send you a recap and renew your subscription.',
+			'You won\'t receive new comments on this post, unless you reply to this email with the word \'rejoin\'. We\'ll send you a recap and renew your subscription.',
 			'Postmatic'
 		);
 		?>

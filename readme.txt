@@ -73,11 +73,17 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.3.1 =
+
+- Improved comatability with a wider variety of antispam plugins and techniques. If you experienced any missing comments (which came via email) on your site today this will fix that bug as well as let those comments in (they were waiting on our server). Sorry about that. It looks like only a handful of sites were affected.
+- Baked in compatibility with WP Rocket lazyload. You can view a full list of supported lazyload plugins [on our support site](http://docs.gopostmatic.com/article/140-which-lazy-load-plugins-work-with-postmatic)
+- Improved the language on the comment flood notification email. Ten percent less snark. 
+
 = 1.3.0 =
 
 - Restored compatability with Bloom to ensure forms do not show up in mailed posts. Note this is not an integration with Bloom - You'll still need to harass Elegant Themes to get that done. Please do.
 - Added support for simplesharebutton icons.
-- Postmatic is now compatible with *all* lazy load plugins. Let us know if you see otherwise.
+- Postmatic is now compatible with many [lazy load plugins](http://docs.gopostmatic.com/article/140-which-lazy-load-plugins-work-with-postmatic). Let us know if you see otherwise.
 - Added another obligatory batch of signature patterns. Or removed them. You know what we mean.
 - Fixed a horrible bug in which multiple invittions would be sent to the same address in certain cases when using the MailPoet importer. Very sorry @dannybrown.
 - Postmatic now respects the moderation blacklist field in settings > discussion. This is great for fine-tuning out of office replies and other detritus. See [this support article](http://docs.gopostmatic.com/article/136-how-to-block-out-of-office-notices-that-sneak-through-our-filters) for more info.

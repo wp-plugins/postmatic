@@ -202,10 +202,14 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 			'comment_author_email' => $user->user_email,
 			'comment_parent' => $this->parent_comment_id,
 			'comment_type' => '',
-			'comment_approved' => '1',
+			'comment_date_gmt' => current_time( 'mysql', 1 ),
 		);
 
-		$comment_id = wp_new_comment( $comment_data );
+		remove_all_actions( 'check_comment_flood' );
+
+		$comment_data['comment_approved'] = wp_allow_comment( $comment_data );
+
+		$comment_id = wp_insert_comment( $comment_data );
 
 		if ( 0 == $comment_data['comment_approved'] )
 			wp_notify_moderator( $comment_id );

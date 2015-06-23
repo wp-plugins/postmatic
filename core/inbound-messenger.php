@@ -58,6 +58,19 @@ class Prompt_Inbound_Messenger {
 	 * @return bool|WP_Error
 	 */
 	public function acknowledge_updates( $updates ) {
+
+		if ( !isset( $updates['updates'] ) ) {
+			return new WP_Error(
+				Prompt_Enum_Error_Codes::INBOUND_ACKNOWLEDGE,
+				__( 'Failed to acknowledge unrecognized updates response.', 'Postmatic' ),
+				array( $updates )
+			);
+		}
+
+		// No need for a request if there were no updates
+		if ( empty( $updates['updates'] ) )
+			return true;
+
 		$request = array(
 			'headers' => array( 'Content-Type' => 'application/json' ),
 			'body' => json_encode( $updates ),

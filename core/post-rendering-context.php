@@ -67,6 +67,7 @@ class Prompt_Post_Rendering_Context {
 		add_filter( 'the_content', array( $this, 'include_noscript_content' ), 100 );
 		add_filter( 'embed_oembed_html', array( $this, 'use_original_oembed_url' ), 10, 2 );
 		add_filter( 'jetpack_photon_override_image_downsize', '__return_true' );
+		add_filter( 'do_rocket_lazyload', '__return_false' );
 	}
 
 	/**
@@ -86,6 +87,7 @@ class Prompt_Post_Rendering_Context {
 		remove_shortcode( 'gallery' );
 		add_shortcode( 'gallery', 'gallery_shortcode' );
 
+		remove_filter( 'do_rocket_lazyload', '__return_false' );
 		remove_filter( 'jetpack_photon_override_image_downsize', '__return_true' );
 		remove_filter( 'embed_oembed_html', array( $this, 'use_original_oembed_url' ), 10, 2 );
 		remove_filter( 'the_content', array( $this, 'strip_incompatible_tags' ), 11 );

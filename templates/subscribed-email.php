@@ -19,7 +19,7 @@
 	if ( $latest_post ) :
 		/* translators: %1$s is title, %2$s date */
 		printf(
-			__( 'The latest post, <em>%1$s</em> from %2$s, below. Reply to this email to leave a comment.', 'Postmatic' ),
+			__( 'The most recent post is below. Reply to this email to leave a comment.', 'Postmatic' ),
 			get_the_title(),
 			get_the_date()
 		);
@@ -30,7 +30,7 @@
 </h3>
 
 <?php if ( $latest_post ) : ?>
-	<h2><?php the_title(); ?><br /><small><?php the_date(); ?></small></h2>
+	<h2><?php the_title(); ?></h2>
 	<div>
 		<?php the_content(); ?>
 		<p class="aligncenter">
