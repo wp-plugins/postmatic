@@ -1,4 +1,4 @@
-=== Postmatic - Post and comment subscriptions that invite you to hit reply ===
+=== Postmatic - Subscribe to comments with replies ===
 Contributors: vernal
 Tags: email, notification, notify, posts, subscribe, subscription, email, subscribe to comments, commenting, reply, email,  comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, mailchimp, mailgun, email comming, reply to email, email replies, engagement, invite, invitations, jetpack, subscribe2
 Requires at least: 3.9
@@ -72,6 +72,18 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 10. Postmatic is 100% compatible with all your favorite user and commenting plugins because it is fully WordPress native.
 
 == Changelog ==
+
+= 1.3.2 =
+
+- We've added an option to let you adjust how many comments per hour it takes to trigger the flood control
+- We fixed up comment notification images in certain versions of gmail on android
+- Improvments to the Subscribe to Comments/Reloaded importer
+- If you are on the free plan and sending only excerpts we now display them more cleanly
+- We now support even more ways to mispell unsubscribe
+- Fixed a bug in which subscribes would not receive a new post in rare circumstances
+- Added some international signature patterns to the library - Enviado desde mi iPad!
+- Squashed a bug in which the widget description field would not show properly on non-english sites
+- Did you know that this whole time the shortcode was broken if you were requesting names using the collect_name=true parameter? Well not anymore!
 
 = 1.3.1 =
 

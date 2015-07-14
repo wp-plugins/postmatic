@@ -124,7 +124,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 		/* translators: this word should match "reply with the word 'unsubscribe'" translations */
 		$unsubscribe_command = __( 'unsubscribe', 'Postmatic' );
 		$unsubscribe_pattern = '/^[\s\*\_]*(' . $unsubscribe_command .
-			'|un..bscribe?|sunsubscribe|unsusbscribe|un..scribe|unsusribe?|unsubcribe)[\s\*\_]*/i';
+			'|un..[bn]scribe?|sunsubscribe|unsusbscribe|un..scribe|unsusribe?|unsubcribe)[\s\*\_]*/i';
 
 		if ( preg_match( $unsubscribe_pattern, $stripped_text, $matches ) )
 			return self::$unsubscribe_method;

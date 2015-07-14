@@ -578,7 +578,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .context {font-size: 90%; line-height: normal; margin-bottom: 45px;}
 .context .excerpt {font-style: italic;}
 .context h4 {margin-bottom: 10px;}
-.context img {float: left; margin-right: 15px; padding: 1px; border: 1px solid #ddd; width: 50%; margin-bottom: 25px;}
+.context img {float: left; margin-right: 15px; padding: 0px; border: 1px solid #ddd; margin-bottom: 25px;}
 
     </style>
     <!-- body -->

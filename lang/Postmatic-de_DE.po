@@ -380,14 +380,14 @@ msgstr[0] ""
 "Wir haben einen Abonnenten importiert. Es ist jetzt sicher, Jetpack "
 "Commenting und Registrierung zu deaktivieren."
 msgstr[1] ""
-"Es wurden %$s Abonnenten importiert. Es ist jetzt sicher, Jetpack Commenting "
+"Es wurden %1$s Abonnenten importiert. Es ist jetzt sicher, Jetpack Commenting "
 "und Registrierung zu deaktivieren."
 
 #: admin/jetpack-import-options-tab.php:98
 msgid "The one user we found was already subscribed."
 msgid_plural "The %2$s users we found were already subscribed."
 msgstr[0] "Der gefundene Nutzer ist bereits eingeschrieben."
-msgstr[1] "Die gefundenen %$s Nutzer sind bereits eingeschrieben."
+msgstr[1] "Die gefundenen %2$s Nutzer sind bereits eingeschrieben."
 
 #: admin/jetpack-import.php:44
 msgid ""

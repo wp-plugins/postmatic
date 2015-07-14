@@ -78,6 +78,7 @@ class Prompt_Core {
 			'excerpt_default' => false,
 			'custom_widget_templates' => array(),
 			'comment_opt_in_default' => false,
+			'comment_flood_control_trigger_count' => 6,
 		);
 		self::$options = new scbOptions( 'prompt_options', __FILE__, $default_options );
 
@@ -154,6 +155,7 @@ class Prompt_Core {
 		add_action( 'show_user_profile',        array( 'Prompt_User_Handling', 'render_profile_options' ) );
 		add_action( 'edit_user_profile_update', array( 'Prompt_User_Handling', 'update_profile_options' ) );
 		add_action( 'personal_options_update',  array( 'Prompt_User_Handling', 'update_profile_options' ) );
+		add_filter( 'allow_password_reset',     array( 'Prompt_User_Handling', 'filter_allow_password_reset' ), 10, 2 );
 
 		add_action( 'comment_form',         array( 'Prompt_Comment_Form_Handling', 'form_content' ) );
 		add_action( 'comment_post',         array( 'Prompt_Comment_Form_Handling', 'handle_form' ), 10, 2 );

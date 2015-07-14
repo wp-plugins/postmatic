@@ -13,6 +13,8 @@ class Prompt_Post_Rendering_Context {
 	protected $post;
 	/** @var  string */
 	protected $original_content;
+	/** @var  string */
+	protected $original_excerpt;
 	/** @var  array */
 	protected $featured_image_src = null;
 	/** @var  array */
@@ -39,7 +41,10 @@ class Prompt_Post_Rendering_Context {
 		$this->is_setup = true;
 
 		if ( Prompt_Enum_Email_Transports::LOCAL == Prompt_Core::$options->get( 'email_transport' ) ) {
+			add_filter( 'the_content', array( $this, 'set_original_content' ), 1 );
+			add_filter( 'the_excerpt', array( $this, 'set_original_excerpt' ), 1 );
 			add_filter( 'the_content', array( $this, 'override_content_filters' ), 9999 );
+			add_filter( 'the_excerpt', array( $this, 'override_excerpt_filters' ), 9999 );
 			return;
 		}
 
@@ -80,6 +85,7 @@ class Prompt_Post_Rendering_Context {
 		$this->is_setup = false;
 
 		if ( Prompt_Enum_Email_Transports::LOCAL == Prompt_Core::$options->get( 'email_transport' ) ) {
+			remove_filter( 'the_excerpt', array( $this, 'override_excerpt_filters' ), 9999 );
 			remove_filter( 'the_content', array( $this, 'override_content_filters' ), 9999 );
 			return;
 		}
@@ -103,11 +109,43 @@ class Prompt_Post_Rendering_Context {
 	}
 
 	/**
+	 * @since 1.3.2
+	 *
+	 * @param string $content
+	 * @return string
+	 */
+	public function set_original_content( $content ) {
+		$this->original_content = $content;
+		return $content;
+	}
+
+	/**
+	 * @since 1.3.2
+	 *
+	 * @param string $excerpt
+	 * @return string
+	 */
+	public function set_original_excerpt( $excerpt ) {
+		$this->original_excerpt = $excerpt;
+		return $excerpt;
+	}
+
+	/**
 	 * @param $content
 	 * @return string content with only our own filters applied
 	 */
 	public function override_content_filters( $content ) {
-		return wpautop( wptexturize( $this->strip_fancy_content( $this->post->post_content ) ) );
+		return wpautop( wptexturize( $this->strip_fancy_content( $this->original_content ) ) );
+	}
+
+	/**
+	 * @since 1.3.2
+	 *
+	 * @param $excerpt
+	 * @return string
+	 */
+	public function override_excerpt_filters( $excerpt ) {
+		return wp_trim_excerpt( wpautop( wptexturize( $this->original_excerpt ) ) );
 	}
 
 	/**

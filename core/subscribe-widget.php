@@ -104,8 +104,10 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 			$user = get_user_by( 'email', $defaults['subscribe_email'] );
 
 		if ( $user and $object->is_subscribed( $user->ID ) ) {
+			$mode = 'unsubscribe';
 			$action = self::unsubscribe_action();
 		} else {
+			$mode = 'subscribe';
 			$action = self::subscribe_action();
 		}
 
@@ -118,6 +120,7 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 			'instance',
 			'user',
 			'object',
+			'mode',
 			'action',
 			'defaults',
 			'loading_image_url',

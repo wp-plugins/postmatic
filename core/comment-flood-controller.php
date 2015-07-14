@@ -2,17 +2,19 @@
 
 class Prompt_Comment_Flood_Controller {
 
-	protected static $last_hour_comment_count_max = 6;
 	protected static $flood_meta_key = 'prompt_flood_comment';
 
 	/** @var  object */
 	protected $comment;
 	/** @var  Prompt_Post */
 	protected $prompt_post;
+	/** @var  array */
+	protected $trigger_count;
 
 	function __construct( $comment ) {
 		$this->comment = $comment;
 		$this->prompt_post = new Prompt_Post( $comment->comment_post_ID );
+		$this->trigger_count = Prompt_Core::$options->get( 'comment_flood_control_trigger_count' );
 	}
 
 	/**
@@ -71,7 +73,7 @@ class Prompt_Comment_Flood_Controller {
 	 */
 	protected function is_flood() {
 
-		if ( get_comment_count( $this->prompt_post->id() ) < self::$last_hour_comment_count_max )
+		if ( get_comment_count( $this->prompt_post->id() ) < $this->trigger_count )
 			return false;
 
 		if ( $this->prompt_post->get_flood_control_comment_id() )
@@ -89,7 +91,7 @@ class Prompt_Comment_Flood_Controller {
 			)
 		) );
 
-		if ( $last_hour_comment_count <= self::$last_hour_comment_count_max )
+		if ( $last_hour_comment_count <= $this->trigger_count )
 			return false;
 
 		return true;

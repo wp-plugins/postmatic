@@ -110,6 +110,23 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 	}
 
 	/**
+	 * Return cached recipient ids for published posts, otherwise clear cached recipients.
+	 *
+	 * When a post is unpublished, this allows recipients to change when published again.
+	 *
+	 * @return array|mixed
+	 */
+	protected function cached_recipient_ids() {
+		if ( 'publish' == $this->get_wp_post()->post_status )
+			return get_post_meta( $this->id, self::$recipient_ids_meta_key, true );
+
+		// Clear cache for unpublished posts
+		delete_post_meta( $this->id, self::$recipient_ids_meta_key );
+
+		return array();
+	}
+
+	/**
 	 * Get the IDs of users who should receive an email when this post is published.
 	 *
 	 * This includes both subscribers to the author and to the site.
@@ -125,10 +142,7 @@ class Prompt_Post extends Prompt_Meta_Subscribable_Object {
 		if ( ! in_array( $post->post_type, Prompt_Core::$options->get( 'site_subscription_post_types' ) ) )
 			return array();
 
-		$recipient_ids = array();
-
-		if ( 'publish' == $post->post_status )
-			$recipient_ids = get_post_meta( $post->ID, self::$recipient_ids_meta_key, true );
+		$recipient_ids = $this->cached_recipient_ids();
 
 		if ( ! $recipient_ids ) {
 

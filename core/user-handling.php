@@ -91,4 +91,29 @@ class Prompt_User_Handling {
 		return $user;
 	}
 
+	/**
+	 * Prevent subscribers who were not sent credentials from resetting their password.
+	 *
+	 * Hooks allow_password_reset
+	 *
+	 * @since 1.3.2
+	 *
+	 * @param int $user_id
+	 * @return boolean
+	 */
+	public static function filter_allow_password_reset( $allow, $user_id ) {
+
+		$prompt_user = new Prompt_User( $user_id );
+
+		if ( ! $prompt_user->get_wp_user()->has_cap( 'subscriber' ) )
+			return $allow;
+
+		if ( ! $prompt_user->get_subscriber_origin() )
+			return $allow;
+
+		if ( Prompt_Core::$options->get( 'send_login_info' ) )
+			return $allow;
+
+		return false;
+	}
 }

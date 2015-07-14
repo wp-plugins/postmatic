@@ -13,14 +13,23 @@ class Prompt_Subscribe_Widget_Shortcode {
 
 		$attributes = shortcode_atts( $defaults, $attributes );
 
-		if ( in_array( $attributes['collect_name'], array( 'false', 'FALSE', 'no', 'NO' ) ) )
-			$attributes['collect_name'] = false;
+		$attributes['collect_name'] = self::attribute_boolean_value( $attributes['collect_name'] );
 
 		ob_start();
 
 		the_widget( 'Prompt_Subscribe_Widget', $attributes );
 
 		return ob_get_clean();
+	}
+
+	protected static function attribute_boolean_value( $text ) {
+		if ( ! $text )
+			return false;
+
+		if ( preg_match( '/^(false|no)$/i', $text ) )
+			return false;
+
+		return true;
 	}
 
 }

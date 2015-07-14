@@ -81,7 +81,7 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 					'<br/>',
 					html( 'small',
 						__(
-							'Will be displayed at half the size of your uploaded image to support retina displays. The ideal width to fill the full header area is 1440px wide.',
+							'Choose a header image to be used when sending new posts, invitations, and subscription confirmations. Will be displayed at half the size of your uploaded image to support retina displays. The ideal width to fill the full header area is 1440px wide.',
 							'Postmatic'
 						)
 					)

@@ -33,7 +33,7 @@ class Prompt_Rescheduler {
 		if ( 'http_request_failed' != $this->job_result->get_error_code() )
 			return false;
 
-		$error_message_pattern = '/(Failed to connect|Couldn\'t resolve host|name lookup timed out)/';
+		$error_message_pattern = '/(Failed to connect|Couldn\'t resolve host|name lookup timed out|couldn\'t connect to host)/';
 		if ( ! preg_match( $error_message_pattern, $this->job_result->get_error_message() ) )
 			return false;
 

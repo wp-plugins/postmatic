@@ -18,6 +18,7 @@ jQuery( function( $ ) {
 			$prompts,
 			$show_unsubscribe_link,
 			$submit_input,
+			$mode_input,
 			$cancel_link,
 			$confirm_unsubscribe_input = $( '<input name="confirm_unsubscribe" type="hidden" value="1" />' );
 
@@ -48,13 +49,14 @@ jQuery( function( $ ) {
 			$prompts = $form.find( '.prompt' ).hide();
 			$show_unsubscribe_link = $form.find( 'a.show-unsubscribe' );
 			$submit_input = $form.find( 'input[name=subscribe_submit]' );
+			$mode_input = $form.find( 'input[name=mode]' );
 			$cancel_link = $form.find( 'a.cancel' );
 
 			$nonce_input.val( prompt_subscribe_form_env.nonce );
 
 			$cancel_link.hide();
 			$prompts.filter( '.primary.subscribe' ).text( $widget.data( 'subscribePrompt' ) );
-			$prompts.filter( '.' + $submit_input.val() ).show();
+			$prompts.filter( '.' + $mode_input.val() ).show();
 
 			$show_unsubscribe_link.click( switch_to_unsubscribe );
 

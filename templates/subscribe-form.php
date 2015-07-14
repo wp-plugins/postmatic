@@ -5,7 +5,8 @@
  * @var array                $instance          The widget instance data
  * @var Prompt_Interface_Subscribable  $object         Object of subscription
  * @var object               $user              Logged in user or null
- * @var string               $action            'subscribe' or 'unsubscribe'
+ * @var string               $action            Label for the submit button
+ * @var string               $mode             'subscribe' or 'unsubscribe'
  * @var array                $defaults          Default form values
  * @var string               $loading_image_url
  * @var string               $unsubscribe_prompt
@@ -27,6 +28,8 @@
 
 		<input id="<?php echo $widget_id; ?>-action" name="action" type="hidden" value="<?php echo Prompt_Subscribing::SUBSCRIBE_ACTION; ?>" />
 
+		<input id="<?php echo $widget_id; ?>-mode" name="mode" type="hidden" value="<?php echo $mode; ?>" />
+
 		<input id="<?php echo $widget_id; ?>-type" name="object_type" type="hidden" value="<?php echo get_class( $object ); ?>" />
 
 		<input id="<?php echo $widget_id; ?>-object-id" name="object_id" type="hidden" value="<?php echo $object->id(); ?>" />
@@ -36,7 +39,7 @@
 			<input id="<?php echo $widget_id; ?>-topic" name="subscribe_topic" type="text" value="" />
 		</label>
 
-		<?php if ( 'unsubscribe' == $action ) : ?>
+		<?php if ( 'unsubscribe' == $mode ) : ?>
 			<div class="unsubscribe prompt">
 				<?php printf( __( 'You are already subscribed to %s.', 'Postmatic' ), $object->subscription_object_label() ); ?>
 			</div>
@@ -50,7 +53,7 @@
 
 		<?php if ( !is_user_logged_in() ) : ?>
 
-			<?php if ( $instance['collect_name'] and 'unsubscribe' != $action ) : ?>
+			<?php if ( $instance['collect_name'] and 'unsubscribe' != $mode ) : ?>
 				<input id="<?php echo $widget_id; ?>-name"
 					   name="subscribe_name"
 					   type="text"

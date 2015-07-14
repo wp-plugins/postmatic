@@ -498,10 +498,20 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 			$this->options,
 			$this->_overridden_options
 		);
-		if ( $subscribe_reloaded_import_tab->is_available() )
+
+		if ( $subscribe_reloaded_import_tab->is_available() or $this->is_importable_comments_plugin_active() )
 			$this->add_tab( $subscribe_reloaded_import_tab );
 
 		$this->add_tab( new Prompt_Admin_Support_Options_Tab( $this->options, $this->_overridden_options ) );
+	}
+
+	protected function is_importable_comments_plugin_active() {
+		// Check for Subscribe to Comments, StC Reloaded, or StC double opt-in
+		return (
+			class_exists( 'wp_subscribe_reloaded' ) or
+			class_exists( 'CWS_STC' ) or
+			class_exists( 'sg_subscribe' )
+		);
 	}
 
 	protected function add_notices() {

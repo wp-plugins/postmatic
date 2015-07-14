@@ -70,7 +70,23 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 							'Postmatic'
 						)
 					),
-			)
+			),
+			array(
+				'title' => __( 'Comment flood control', 'Postmatic' ),
+				'type' => 'text',
+				'name' => 'comment_flood_control_trigger_count',
+				'desc' => __( 'How many comments in one hour should it take to trigger the flood control? There is a mimimum of 3.', 'Postmatic' ) .
+					html( 'p',
+						sprintf(
+							__(
+								'Postmatic automatically pauses comment notifications on posts that go viral. Setting the trigger to be 6 comments per hour is good for most sites. You can read more about it <a href="%s" target="_blank">on our support site</a>.  ',
+								'Postmatic'
+							),
+							'http://docs.gopostmatic.com/article/143-what-happens-if-a-post-gets-a-gazillion-comments-do-i-get-a-gazillion-emails'
+						)
+					),
+				'extra' => array( 'size' => 3 ),
+			),
 		);
 
 		$this->override_entries( $table_entries );
@@ -106,6 +122,11 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 				'comment_opt_in_default',
 			)
 		);
+
+		$flood_trigger_count = $new_data['comment_flood_control_trigger_count'];
+		$flood_trigger_count = is_numeric( $flood_trigger_count ) ? absint( $flood_trigger_count ) : 6;
+		$flood_trigger_count = ( $flood_trigger_count < 3 ) ? 3 : $flood_trigger_count;
+		$valid_data['comment_flood_control_trigger_count'] = $flood_trigger_count;
 
 		return $valid_data;
 	}
