@@ -53,4 +53,15 @@ class Prompt_Factory {
 	public static function make_jetpack_import() {
 		return apply_filters( 'prompt/make_jetpack_import', Prompt_Admin_Jetpack_Import::make() );
 	}
+
+	/**
+	 * @since 1.4.0
+	 *
+	 * @param array|WP_Error $job_result
+	 * @param int $wait_seconds
+	 * @return Prompt_Rescheduler
+	 */
+	public static function make_rescheduler( $job_result, $wait_seconds ) {
+		return apply_filters( 'prompt/make_rescheduler', new Prompt_Rescheduler( $job_result, $wait_seconds ) );
+	}
 }

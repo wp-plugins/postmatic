@@ -66,7 +66,7 @@ wp_list_comments( array(
 <?php
 printf(
 	__(
-		'Please note: Your reply will be published publicly and immediately on %s.',
+		'Please note: Your reply will be published on %s.',
 		'Postmatic'
 	),
 	get_bloginfo( 'name' )
@@ -74,5 +74,3 @@ printf(
 ?>
 <?php endif; ?>
 
-
-<?php printf( __( 'To unsubscribe at any time visit %s', 'Postmatic' ), $object->subscription_url() ); ?>

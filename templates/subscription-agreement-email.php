@@ -60,7 +60,7 @@ $recipient = esc_html(
 	<li><?php _e( 'You will be invited to reply to these emails.', 'Postmatic' ); ?></li>
 	<li>
 		<strong>
-			<?php _e( 'Your reply to those emails will be immediately published to the web as a comment.', 'Postmatic' ); ?>
+			<?php _e( 'Your reply to those emails will be published to the web as a comment.', 'Postmatic' ); ?>
 		</strong>
 	</li>
 </ol>

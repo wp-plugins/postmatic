@@ -64,19 +64,12 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		if ( is_null( $this->notices ) )
 			$this->add_notices();
 
-		if ( ! $this->tabs )
-			$this->add_tabs();
-
 		foreach( $this->notices as $notice ) {
 			$notice->process_dismissal();
 		}
 
-		if ( isset( $_POST['tab'] ) and isset( $this->tabs[$_POST['tab']] ) ) {
-			$this->submitted_tab = $this->tabs[$_POST['tab']];
-			$this->submitted_tab->form_handler();
-			$this->reset_key();
+		if ( $this->process_tabs() )
 			return;
-		}
 
 		if ( !empty( $_POST['error_alert'] ) ) {
 
@@ -427,10 +420,14 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 	}
 
 	protected function site_matches( $url ) {
-		$schemeless_url = substr( $url, strpos( $url, ':' ) );
-		$ajax_url = admin_url( 'admin-ajax.php' );
-		$schemeless_ajax_url = substr( $ajax_url, strpos( $ajax_url, ':' ) );
-		return ( $schemeless_ajax_url == $schemeless_url );
+		$url_parts = parse_url( $url );
+
+		if ( !isset( $url_parts['host'] ) or !isset( $url_parts['path'] ) )
+			return false;
+
+		$ajax_url_parts = parse_url( admin_url( 'admin-ajax.php' ) );
+
+		return ( $url_parts['host'] === $ajax_url_parts['host'] and $url_parts['path'] === $ajax_url_parts['path'] );
 	}
 
 	protected function submit_errors() {
@@ -482,12 +479,50 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 		$this->key = $this->options->get( 'prompt_key' );
 	}
 
-	protected function add_tabs() {
+	/**
+	 * Create tabs and process any tab-submitted data.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return bool whether submitted tab data was processed
+	 */
+	protected function process_tabs() {
 
+		$did_updates = false;
+		$submitted_tab_slug = isset( $_POST['tab'] ) ? $_POST['tab'] : null;
+
+		// The options tab can influence which other tabs are created, so handle it first
+		$options_tab = new Prompt_Admin_Options_Options_Tab( $this->options, $this->_overridden_options );
+
+		if ( $options_tab->slug() === $submitted_tab_slug ) {
+			$this->submitted_tab = $options_tab;
+			$options_tab->form_handler();
+			$did_updates = true;
+		}
+
+		if ( !$this->tabs ) {
+			$this->add_tabs( $options_tab );
+		}
+
+		if ( !$did_updates and $submitted_tab_slug ) {
+			$this->submitted_tab = $this->tabs[$submitted_tab_slug];
+			$this->submitted_tab->form_handler();
+			$this->reset_key(); // in case a new key was saved
+			$did_updates = true;
+		}
+
+		return $did_updates;
+	}
+
+
+	/**
+	 * @param Prompt_Admin_Options_Options_Tab $options_tab
+	 */
+	protected function add_tabs( $options_tab ) {
 		$this->add_tab( new Prompt_Admin_Core_Options_Tab( $this->options, $this->_overridden_options ) );
 		$this->add_tab( new Prompt_Admin_Email_Options_Tab( $this->options, $this->_overridden_options ) );
 		$this->add_tab( new Prompt_Admin_Invite_Options_Tab( $this->options, $this->_overridden_options ) );
-		$this->add_tab( new Prompt_Admin_Options_Options_Tab( $this->options, $this->_overridden_options ) );
+		$this->add_tab( $options_tab );
 		if ( class_exists( 'Jetpack' ) )
 			$this->add_tab( new Prompt_Admin_Jetpack_Import_Options_Tab( $this->options, $this->_overridden_options ) );
 		if ( class_exists( 'WYSIJA' ) )
@@ -501,6 +536,12 @@ class Prompt_Admin_Options_Page extends scbAdminPage {
 
 		if ( $subscribe_reloaded_import_tab->is_available() or $this->is_importable_comments_plugin_active() )
 			$this->add_tab( $subscribe_reloaded_import_tab );
+
+		if ( Prompt_Core::$options->get( 'enable_optins' ) )
+			$this->add_tab( new Prompt_Admin_Optins_Options_Tab( $this->options, $this->_overridden_options ) );
+
+		if ( Prompt_Core::$options->get( 'enable_skimlinks' ) )
+			$this->add_tab( new Prompt_Admin_Skimlinks_Options_Tab( $this->options, $this->_overridden_options ) );
 
 		$this->add_tab( new Prompt_Admin_Support_Options_Tab( $this->options, $this->_overridden_options ) );
 	}

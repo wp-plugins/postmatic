@@ -46,7 +46,7 @@
 				<?php
 				printf(
 					__(
-						'<strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
+						'You\'re invited to comment on this post by replying to this email. If you do, it may be published immediately or held for moderation, depending on the comment policy of %s.',
 						'Postmatic'
 					),
 					get_bloginfo( 'name' )

@@ -1,3 +1,3 @@
 <?php
-$comment_header = true;
+$is_comment = true;
 include dirname( __FILE__ ) . '/html-email-wrapper.php';

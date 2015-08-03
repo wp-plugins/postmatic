@@ -11,13 +11,39 @@ class Prompt_Subscription_Mailing {
 	 * @param array $user_data
 	 * @param Prompt_Register_Subscribe_Command $resend_command
 	 */
-	public static function send_agreement( $object, $email_address, $user_data, $resend_command = null ) {
+	public static function send_agreement(
+		$object,
+		$email_address,
+		$user_data,
+		$resend_command = null,
+		$retry_wait_seconds = 60
+	) {
 
 		$user_data['user_email'] = $email_address;
 
 		$email = self::make_agreement_email( $object, $user_data, $resend_command );
 
-		Prompt_Factory::make_mailer()->send_one( $email );
+		$result = Prompt_Factory::make_mailer()->send_one( $email );
+
+		$rescheduler = Prompt_Factory::make_rescheduler( $result, $retry_wait_seconds );
+
+		if ( $rescheduler->found_temporary_error() ) {
+
+			$rescheduler->reschedule(
+				'prompt/subscription_mailing/send_agreement',
+				array( $object, $email_address, $user_data, $resend_command )
+			);
+
+			return;
+		}
+
+		if ( is_wp_error( $result ) ) {
+			Prompt_Logging::add_error(
+				Prompt_Enum_Error_Codes::OUTBOUND,
+				__( 'An email sending operation encountered a problem.', 'Postmatic' ),
+				compact( 'result', 'object', 'email' )
+			);
+		}
 
 	}
 
@@ -57,14 +83,14 @@ class Prompt_Subscription_Mailing {
 
 		$result = Prompt_Factory::make_mailer()->send_many( $emails );
 
-		$rescheduler = new Prompt_Rescheduler( $result, $retry_wait_seconds );
+		$rescheduler = Prompt_Factory::make_rescheduler( $result, $retry_wait_seconds );
 
 		if ( $rescheduler->found_temporary_error() ) {
 
 			self::set_delivered_chunk( $users_data, $chunk - 1 );
 
 			$rescheduler->reschedule(
-				'prompt/post_mailing/send_notifications',
+				'prompt/subscription_mailing/send_agreements',
 				array( $object, $users_data, $template_data, $chunk )
 			);
 
@@ -78,7 +104,7 @@ class Prompt_Subscription_Mailing {
 			Prompt_Logging::add_error(
 				Prompt_Enum_Error_Codes::OUTBOUND,
 				__( 'An email sending operation encountered a problem.', 'Postmatic' ),
-				compact( 'result' )
+				compact( 'result', 'object', 'users_data', 'template_data', 'chunk' )
 			);
 
 			return;

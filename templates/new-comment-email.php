@@ -54,7 +54,7 @@ $previous_index = count( $previous_comments );
 					<?php
 					printf(
 						__(
-							'<strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
+							'You\'re invited to respond by replying to this email. If you do, it may be published immediately or held for moderation, depending on the comment policy of %s.',
 							'Postmatic'
 						),
 						'<a href="' . get_permalink( $comment->comment_post_ID ) . '">' . get_the_title( $comment->comment_post_ID ) . '</a>'
@@ -109,7 +109,7 @@ $previous_index = count( $previous_comments );
 				<?php
 				printf(
 					__(
-						'<br /><strong>Please note</strong>: Your reply will be published publicly and immediately on %s.',
+						'<br /><strong>Please note</strong>: Your reply will be published πon %s.',
 						'Postmatic'
 					),
 					'<a href="' . get_permalink( $comment->comment_post_ID ) . '">' .

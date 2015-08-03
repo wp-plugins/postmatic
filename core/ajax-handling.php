@@ -245,7 +245,11 @@ class Prompt_Ajax_Handling {
 		} catch (Exception $e) {
 			wp_send_json_error( array( 'error' => $e->getMessage() ) );
 		}
-		
+
+		if ( empty( $lists['data'] ) ) {
+			wp_send_json_error( array( 'error' => __( 'We\'re sorry. None of your lists qualified. <a href="http://docs.gopostmatic.com/article/144-im-having-trouble-importing-my-mailchimp-lists">Click here for more information</a>', 'Postmatic' ) ) );
+		}
+
 		$list_options = '';
 		if( !empty( $lists['data'] ) ){
 			foreach ( $lists['data'] as $list ) {

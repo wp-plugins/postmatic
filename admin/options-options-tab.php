@@ -87,7 +87,24 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 					),
 				'extra' => array( 'size' => 3 ),
 			),
+			array(
+				'title' => __( 'Use awesome Postmatic optin forms (beta)', 'Postmatic' ),
+				'type' => 'checkbox',
+				'name' => 'enable_optins',
+				'desc' => __( 'Looking for something more than our widget? Try out the new optin system. It will enable a new tab up top.', 'Postmatic' ),
+			),
 		);
+
+		if ( in_array( Prompt_Enum_Message_Types::COMMENT_MODERATION, Prompt_Core::$options->get( 'enabled_message_types' ) ) ) {
+
+			$table_entries[] = array(
+				'title' => __( 'Enable Skimlinks support (beta)', 'Postmatic' ),
+				'type' => 'checkbox',
+				'name' => 'enable_skimlinks',
+				'desc' => __( 'Turn on the Skimlinks tab (look for it up top)', 'Postmatic' ),
+			);
+
+		}
 
 		$this->override_entries( $table_entries );
 
@@ -120,6 +137,8 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 				'no_post_email_default',
 				'excerpt_default',
 				'comment_opt_in_default',
+				'enable_optins',
+				'enable_skimlinks',
 			)
 		);
 

@@ -45,15 +45,9 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 
 	public function render() {
 
-		$email_header_image_src = array( '', 0, 0 );
-		if ( $this->options->get( 'email_header_image' ) ) {
-			$email_header_image_src = wp_get_attachment_image_src( $this->options->get( 'email_header_image' ), 'full' );
-		}
+		$email_header_image = new Prompt_Attachment_Image( $this->options->get( 'email_header_image' ) );
 
-		$site_icon_src = array( '', 0, 0 );
-		if ( $this->options->get( 'site_icon' ) ) {
-			$site_icon_src = wp_get_attachment_image_src( $this->options->get( 'site_icon' ), 'full' );
-		}
+		$site_icon = new Prompt_Attachment_Image( $this->options->get( 'site_icon' ) );
 
 		$rows = array();
 
@@ -91,9 +85,9 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 					html(
 						'img',
 						array(
-							'src' => $email_header_image_src[0],
-							'width' => $email_header_image_src[1] / 2,
-							'height' => $email_header_image_src[2] / 2,
+							'src' => $email_header_image->url(),
+							'width' => $email_header_image->width() / 2,
+							'height' => $email_header_image->height() / 2,
 							'class' => 'alignleft',
 						)
 					),
@@ -143,9 +137,9 @@ class Prompt_Admin_Email_Options_Tab extends Prompt_Admin_Options_Tab {
 					html(
 						'img',
 						array(
-							'src' => $site_icon_src[0],
-							'width' => $site_icon_src[1] / 2,
-							'height' => $site_icon_src[2] / 2,
+							'src' => $site_icon->url(),
+							'width' => $site_icon->width() / 2,
+							'height' => $site_icon->height() / 2,
 							'class' => 'alignleft',
 						)
 					),

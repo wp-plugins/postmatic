@@ -1,6 +1,6 @@
-=== Postmatic - Subscribe to comments with replies ===
-Contributors: vernal
-Tags: email, notification, notify, posts, subscribe, subscription, email, subscribe to comments, commenting, reply, email,  comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, mailchimp, mailgun, email comming, reply to email, email replies, engagement, invite, invitations, jetpack, subscribe2
+=== Postmatic - Post and comment subscriptions that invite you to hit reply ===
+Contributors: Postmatic
+Tags: email, notification, notify, posts, subscribe, subscription, email, subscribe to comments, commenting, reply, email, optins, popups, optin forms, opt-in, subscribe form, comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, mailchimp, mailgun, email comming, reply to email, email replies, engagement, invite, invitations, jetpack, subscribe2
 Requires at least: 3.9
 Tested up to: 4.2
 Stable tag: trunk
@@ -11,6 +11,11 @@ Postmatic lets your readers subscribe to comments or posts by email. And comment
 == Description ==
 
 [Read about how we are revolutionizing WordPress commenting on our site](http://gopostmatic.com)
+
+= Introducing Postmatic Optins - A lightweight, simple, and powerful way to convert visitors into subscribers =
+
+Our users were looking for better ways to invite their users to subscribe. So we built it! Read all about [Postmatic Optins on our blog](https://gopostmatic.com/2015/07/spotlight-on-1-4-day-one/).
+
 
 = Engage your readers at their own pace with 100% email-based commenting =
 
@@ -33,7 +38,8 @@ No browsers. Easy.
 [Visit gopostmatic.com to learn more](http://gopostmatic.com)
 
 = Key Features =
-		
+
+* Start building your subscriber list by reaching out to past commenters or using 35 different Optins including popups, top bars, sliders, and after-the-post.		
 * Posts are converted into fully responsive html emails on the fly. We support images, video, shortcodes, and oEmbed.
 * We handle email delivery through partnerships with Mailchimp and Rackspace. Lists with thousands of subscribers are no trouble atll.
 * Replies are posted as comments in as little as 6 seconds.
@@ -72,6 +78,18 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 10. Postmatic is 100% compatible with all your favorite user and commenting plugins because it is fully WordPress native.
 
 == Changelog ==
+
+= 1.4 =
+
+This release is kind of insane. There is so much to read about we broke it up into 5 different blog posts. [Here is a recap](https://gopostmatic.com/2015/08/spotlight-on-1-4-day-five-little-fixings-and-whats-ahead/).
+
+Namely this release is all about:
+
+- We decided to make our own Optin plugin. And stick it in Postmatic: [Introducing Postmatic Optins](https://gopostmatic.com/2015/07/spotlight-on-1-4-day-one/).
+- The first phase of _ways to monetize with Postmatic_ is in place: [Skimlinks integration brings monetization opportunities directly to the inbox](http://gopostmatic.com/2015/07/spotlight-on-1-4-day-two-its-time-to-start-monetizing/).
+- Social Warfare is an awesome social sharing tool. [And now it works in Postmatic](http://gopostmatic.com/2015/07/spotlight-on-1-4-day-three-integration-with-social-warfare/).
+- Oh and then we dropped the bomb which is [named Epoch](http://gopostmatic.com/2015/07/spotlight-on-1-4-day-four-introducing-epoch/). Support for that is in here as well.
+- Read about all the other little stuff [over here](https://gopostmatic.com/2015/08/spotlight-on-1-4-day-five-little-fixings-and-whats-ahead/).
 
 = 1.3.2 =
 

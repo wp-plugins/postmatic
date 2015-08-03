@@ -117,7 +117,7 @@ class Prompt_Post_Mailing {
 		}
 
 		if ( is_wp_error( $result ) ) {
-			$prompt_post->remove_sent_recipient_ids( $chunk_ids );
+			// As likely as not the mail was sent - don't remove recipients
 			Prompt_Logging::add_error(
 				Prompt_Enum_Error_Codes::OUTBOUND,
 				__( 'An email sending operation encountered a problem.', 'Postmatic' ),

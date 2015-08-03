@@ -17,6 +17,10 @@ class Prompt_Outbound_Handling {
 		if ( 'publish' == $old_status or 'publish' != $new_status )
 			return;
 
+		// There is no way to suppress mailing when restoring a trashed post, so we always do it
+		if ( 'trash' == $old_status )
+			return;
+
 		if ( defined( 'WP_IMPORTING' ) and WP_IMPORTING )
 			return;
 

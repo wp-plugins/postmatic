@@ -22,10 +22,10 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 		$instance = wp_parse_args( $instance, $instance_defaults );
 
-		$this->enqueue_widget_assets();
-
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		echo $args['before_widget'] . $args['before_title'] . $title . $args['after_title'];
+
+		$this->enqueue_widget_assets();
 
 		$container_attributes = array(
 			'class' => 'prompt-subscribe-widget-content',
@@ -99,9 +99,9 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 			'subscribe_email' => $commenter['comment_author_email'] ? $commenter['comment_author_email'] : '',
 		);
 
-		$user = wp_get_current_user();
-		if ( !$user->exists() )
-			$user = get_user_by( 'email', $defaults['subscribe_email'] );
+		$action = self::subscribe_action();
+
+		$user = is_user_logged_in() ? wp_get_current_user() : null;
 
 		if ( $user and $object->is_subscribed( $user->ID ) ) {
 			$mode = 'unsubscribe';
@@ -113,18 +113,14 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 		$loading_image_url = path_join( Prompt_Core::$url_path, 'media/ajax-loader.gif' );
 
-		$unsubscribe_prompt = self::unsubscribe_prompt();
-
 		$template_data = compact(
 			'widget_id',
 			'instance',
-			'user',
 			'object',
 			'mode',
 			'action',
 			'defaults',
-			'loading_image_url',
-			'unsubscribe_prompt'
+			'loading_image_url'
 		);
 
 		if ( is_null( $template_id ) )
@@ -230,11 +226,4 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 		);
 	}
 
-	protected static function unsubscribe_prompt() {
-
-		if ( is_user_logged_in() )
-			return '';
-
-		return html( 'h5', __( 'Want to unsubscribe?', 'Postmatic' ) ) . __( 'Confirm your email:', 'Postmatic' );
-	}
  }

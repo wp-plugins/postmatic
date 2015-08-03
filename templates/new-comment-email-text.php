@@ -29,7 +29,7 @@ echo Prompt_Html_To_Markdown::h2(
 <?php
 printf(
 	__(
-		'Please note: Your reply will be published publicly and immediately on %s.',
+		'You\'re invited to respond by replying to this email. If you do, it may be published immediately or held for moderation, depending on the comment policy of %s.',
 		'Postmatic'
 	),
 	get_the_title( $comment->comment_post_ID )

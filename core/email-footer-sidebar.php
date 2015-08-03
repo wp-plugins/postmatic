@@ -6,10 +6,10 @@ class Prompt_Email_Footer_Sidebar {
 
 	public static function register() {
 		register_sidebar( array(
-			'name' => 'Postmatic Emails Footer',
+			'name' => 'Postmatic Posts Footer',
 			'id' => self::SIDEBAR_ID,
 			'description' => __(
-				'These widgets will be included in the footer of Postmatic subscription emails. Need inspiration? Try our widgets directory at http://gopostmatic.com/widgets.',
+				'These widgets will be included below new posts which are sent via Postmatic. Need inspiration? Try our widgets directory at http://gopostmatic.com/widgets.',
 				'Postmatic'
 			),
 			'before_widget' => "<td valign='top'>",

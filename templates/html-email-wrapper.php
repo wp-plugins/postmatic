@@ -15,6 +15,7 @@
 * @var string           $site_icon_url
 * @var string           $unsubscribe_url
  */
+$is_comment = isset( $is_comment ) ? $is_comment : false;
 ?> 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -264,7 +265,7 @@ img.featured {
 
     ol li {list-style-type: decimal;}
 
-    blockquote { background:#f9f9f9;border:1px solid #eee;padding:5%;font-style: italic;margin: 15px 0 !important;}
+    blockquote { background:#f9f9f9;border:1px solid #eee;padding:15px;font-style: italic;margin: 15px 0 !important; clear: both !important;}
 
     .alert {background: #FFFEBA; padding: 2px; font-weight: normal;}
     .noforward { background: #fffeee; padding: 2px;}
@@ -304,20 +305,20 @@ img.featured {
     .widgets li, .widgets ul {list-style: none !important; margin-left: 0 !important; padding-left: 0 !important;}
     .alignright {float: right !important; margin: 0 0 10px 10px !important;}
 
-/*Sharedaddy by Jetpack*/
-.sd-content ul li {
+/*Sharedaddy by Jetpack and Juiz Social Share*/
+.sd-content ul li, ul.juiz_sps_links_list li {
   list-style: none;
   display: inline;
 }
 
 .sd-title { clear: both !important;}
 
-.content .sd-content ul li {
+.content .sd-content ul li, ul.juiz_sps_links_list li {
   margin: 0 5px 10px 0 !important;
   display: block;
   float: left;
 }
-.content .sd-content ul li a {
+.content .sd-content ul li a, ul.juiz_sps_links_list li a {
   color: #555 !important;
   font-size: 12px;
   padding: 5px 8px;
@@ -341,7 +342,7 @@ img.featured {
 .tiled-gallery-caption {font-size: 70% !important; padding-left: 5px !important;}
 .tiled-gallery img {margin: 1px !important;}
 
-.nc_socialPanel {display: none !important;}
+
 /*Beta styles*/
 
 .inverse td {padding: 4%;}
@@ -475,8 +476,87 @@ ul.dpe-flexible-posts li a img {
   text-decoration: none; 
 }
 
+/*Social warfare*/
+.nc_socialPanel {
+  margin: 25px 0;
+  height: 30px;
+  clear: both;
+}
 
-  .widgets-list-layout li {
+.nc_socialPanel .count {
+  display: none !important;
+}
+
+.nc_socialPanel .nc_tweetContainer {
+  float: left;
+  width: auto;
+  margin-right: 8px;
+}
+
+.nc_socialPanel a {
+  display: block;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  color: #ffffff !important;
+  background: #AAAAAA;
+    padding: 5px 15px !important;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 12px;
+
+}
+
+.nc_socialPanel a:hover {
+  background-color: #343434 !important;
+}
+
+.nc_tweetContainer.googlePlus a {
+  background: #DF4B37;
+}
+.nc_tweetContainer.twitter a {
+  background: #5FA8DC;
+}
+.nc_tweetContainer.fb a {
+  background: #3A589E;
+}
+.nc_pinterest {
+  display: none !important;
+}
+.nc_tweetContainer.linkedIn a {
+  background: #0D77B7;
+}
+
+a.sw_CTT {
+  display: block;
+  margin: 25px 0;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 115%;
+  letter-spacing: 1px;
+  line-height: 100%;
+  color: gray;
+  text-decoration: none !important;
+}
+
+a.sw_CTT span.sw-ctt-text {
+  color: gray;
+  font-style: italic;
+}
+
+a.sw_CTT span.sw-ctt-btn {
+  display: block;
+  text-align: right;
+  text-transform: uppercase;
+  font-size: 60%;
+  font-weight: bold;
+  letter-spacing: normal;
+}
+
+.widgets-list-layout li {
     clear: left !important;
   }
 
@@ -486,6 +566,10 @@ ul.dpe-flexible-posts li a img {
   float: left !important;
   margin: 0 10px 10px 0 !important;
 }
+
+/*Juiz social share*/
+.juiz_sps_maybe_hidden_text {display: none;}
+
 
 /*Mobile syles*/
     @media only screen and (max-width: 480px) {
@@ -583,7 +667,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
     </style>
     <!-- body -->
 
-   <?php if ( isset( $comment_header ) and $comment_header ) : ?>
+   <?php if ( $is_comment ) : ?>
        <table class="header wrap commentheader">
           <tr>
               <td class="brand" bgcolor="#FFFFFF">
@@ -593,7 +677,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
           </tr>
         </table>
 
-   <?php elseif ( !isset( $comment_header ) or !$comment_header ) : ?>
+   <?php elseif ( !$is_comment ) : ?>
 
        <table class="header wrap">
           <tr>
@@ -638,7 +722,11 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
       <div class="content widgets">
         <table><tr>
           <?php if ( Prompt_Enum_Email_Footer_Types::WIDGETS === $footer_type ) : ?>
-              <?php Prompt_Email_Footer_Sidebar::render(); ?>
+              <?php if ( $is_comment ) : ?>
+                  <?php Prompt_Comment_Email_Footer_Sidebar::render(); ?>
+              <?php elseif ( !$is_comment ) : ?>
+                  <?php Prompt_Email_Footer_Sidebar::render(); ?>
+              <?php endif; ?>
           <?php else : ?>
               <?php echo $footer_text; ?>
           <?php endif; ?>

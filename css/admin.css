@@ -161,7 +161,7 @@ input.regular-text {
   background: url(../media/ticket.png) no-repeat top center; }
 
 #prompt-settings-general {
-  background: url(http://postmatic.staging.wpengine.com/wp-content/uploads/2015/03/growth.png) bottom right no-repeat;
+  background: url(http://gopostmatic.com/wp-content/uploads/2015/03/growth.png) bottom right no-repeat;
   background-size: 100% !important; }
 
 ul.prompt-news {
@@ -305,3 +305,160 @@ div#manage-account a {
 .ui-tabs .ui-tabs-nav li a {
   font-size: 85% !important;
 }
+
+/*popup styling*/
+
+#prompt-settings-optin-options {
+  position:relative;
+  padding: 25px;
+}
+
+.optin-enable  {
+  width: 204px;
+  min-height: 200px;
+  text-align:center;
+  margin-bottom: 25px;
+
+}
+
+.optin-enable  input {
+  width: 204px;
+  height: 225px;
+  display: block;
+  margin-bottom: 15px;
+  background: #eee;
+  z-index:5;
+  position: relative;
+  border: 2px solid #fff;
+}
+
+.optin-enable  input:checked {
+}
+
+.optin-enable  input:checked:before {
+  color: white;
+  font-size: 200px;
+}
+
+#optin-select-popup input {
+  background: url(../media/optins/optin-popup.png) no-repeat;
+}
+#optin-select-bottom input {
+  background: url(../media/optins/optin-bottom.png) no-repeat;
+}
+#optin-select-topbar input {
+  background: url(../media/optins/optin-topbar.png) no-repeat;
+}
+#optin-select-inline input {
+  background: url(../media/optins/optin-inline.png) no-repeat;
+}
+
+.gutter {
+    padding: 15px 25px 25px 225px;
+    margin-bottom: 25px;
+    margin-top:-250px;
+    text-align: left;
+    width: auto;
+    font-size: 90%;
+}
+
+.gutter h1, .gutter h2, .gutter h3, .gutter h4 {
+  margin: 0 0 10px 0;
+  padding: 0;
+  color: #19B0CA;
+}
+
+.gutter h2 small {
+  display: block;
+  color: #ccc;
+}
+
+.gutter textarea {
+  width: 100%;
+  height: 50px;
+}
+
+#optin-select-popups {
+   
+}
+
+.col1 {
+  width: 45%;
+  float: left;
+  clear: left;
+}
+
+.col2 {
+  margin-left: 50%;
+}
+
+#popup-type {
+  margin-bottom: 10px;
+}
+
+#popup-type label, #bottom-type label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.theme-chooser {
+  clear: left;
+  padding-top: 25px;
+  height:125px;
+}
+
+.theme-chooser label {
+  text-align: center;
+  display: block;
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin-right: 10px;
+}
+
+.theme-chooser input {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+
+.theme-chooser input:checked {
+  border: 4px solid red;
+  color: white !important;
+}
+
+.theme-chooser input:checked:before {
+  background: transparent;
+}
+
+.theme-chooser h3 {
+  margin-bottom: 20px;
+  clear: left;
+}
+
+.theme-chooser input[value="light"] { background: #EEE; }
+.theme-chooser input[value="dark"] { background: #545454; }
+.theme-chooser input[value="orange"] { background: #EB593C; }
+.theme-chooser input[value="blue"] { background: RGB(44, 148, 242); }
+.theme-chooser input[value="green"] { background: RGB(146, 201, 39); }
+
+.optin-image {
+  clear: left;
+}
+
+.optin-image img {
+  width: 75px;
+  height: auto;
+  padding: 5px;
+  background: #ddd;
+}
+
+#inpost-ids {
+  display: none;
+}
+
+#optins-welcome, #skimlinks-welcome {
+  width: 90%;
+}
+
+.testmode {margin-top: 10px; color: blue;}

@@ -137,7 +137,7 @@ class Prompt_Comment_Form_Handling {
 			),
 			'&nbsp;',
 			html( 'span',
-				__( 'Participate in this conversation via e-mail', 'Postmatic' )
+				__( 'Participate in this conversation via email', 'Postmatic' )
 			)
 		);
 

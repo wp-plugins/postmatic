@@ -86,7 +86,12 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 			Prompt_Logging::add_error(
 				'register_subscribe_user_creation_failure',
 				__( 'Failed to create a new user from an agreement reply email.', 'Postmatic' ),
-				array( 'keys' => $this->keys, 'message' => $this->message, 'error' => $subscriber_id )
+				array(
+					'keys' => $this->keys,
+					'user_data' => $user_data,
+					'message' => $this->message,
+					'error' => $subscriber_id
+				)
 			);
 			return;
 		}

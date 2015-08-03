@@ -5,9 +5,9 @@ class Prompt_Email_Text_Cleaner {
 	public function strip( $text ) {
 		$from_address = preg_quote( Prompt_Email::default_from_email() );
 		$strip_patterns = array(
-			'/\n?[^\r\n]*' . date( 'Y' ) . '[^\r\n]*[\r\n]?[^\r\n]*:[\s\n\r]+.*/s', // google-style quoted mail intro
-			'/\n?[^\r\n]*' . date( 'Y' ) . '[^\r\n]*[\r\n]?[^\r\n]*: *$/s',         // partially stripped google quote intro
-			'/\n?[^\r\n]*\/' . date( 'y' ) . '[^\r\n]*[\r\n]?[^\r\n]*:[\s\n\r]+.*/s', // short year google-style quoted mail intro
+			'/\n?[^\r\n]*' . date( 'Y' ) . '[^\r\n]*[\r\n]{0,2}[^\r\n]*:[\s\n\r]+.*/s', // google-style quoted mail intro
+			'/\n?[^\r\n]*' . date( 'Y' ) . '[^\r\n]*[\r\n]{0,2}[^\r\n]*: *$/s',         // partially stripped google quote intro
+			'/\n?[^\r\n]*\/' . date( 'y' ) . '[^\r\n]*[\r\n]{0,2}[^\r\n]*:[\s\n\r]+.*/s', // short year google-style quoted mail intro
 			'/<a href="https:\/\/overview.mail.yahoo.com[^>]*>.*?<\/a>/',           // yahoo mobile "sent from"
 			'/[\r\n][-\*]+\s*[\r\n].*/s',                                           // dash/asterisk signature divider
 			'/[\r\n][_\* ]{8,}.*/s',                                                // underscore/asterisk signature divider

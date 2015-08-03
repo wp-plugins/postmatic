@@ -53,7 +53,7 @@ class Prompt_Mailer {
 		$email_data->outboundMessages = array();
 
 		foreach ( $emails as $email ) {
-			$email_data->outboundMessages[] = $this->make_prompt_message( $email );
+			$email_data->outboundMessages[] = $this->make_prompt_message( $email, $actions );
 		}
 
 		$request = array(
@@ -93,18 +93,23 @@ class Prompt_Mailer {
 	 * Format an email for the prompt outbound service.
 	 *
 	 * @param Prompt_Email $email
+	 * @param array $actions
 	 * @return array
 	 */
-	protected function make_prompt_message( Prompt_Email $email ) {
+	protected function make_prompt_message( Prompt_Email $email, array $actions  ) {
 
 		$message = array(
 			'to' => array( 'address' => $email->get_to_address(), 'name' => $email->get_to_name() ),
 			'from' => array( 'address' => $email->get_from_address(), 'name' => $email->get_from_name() ),
 			'subject' => $email->get_subject(),
-			'html_content' => $email->get_html(),
-			'text_content' => $email->get_text(),
 			'type' => $email->get_message_type(),
 		);
+
+		// If MS isn't sending or inlining, it doesn't need content
+		if ( in_array( 'send-email', $actions ) or in_array( 'inline-styles', $actions ) ) {
+			$message['html_content'] = $email->get_html();
+			$message['text_content'] = $email->get_text();
+		}
 
 		if ( $email->get_reply_address() )
 			$message['reply-to'] = array( 'address' => $email->get_reply_address(), 'name' => $email->get_reply_name() );

@@ -46,9 +46,12 @@ class Prompt_Api_Client implements Prompt_Interface_Http_Client {
 		if ( !isset( $request['timeout'] ) )
 			$request['timeout'] = 15;
 
+		$reply = call_user_func( $this->implementation, $url, $request );
 
+		if ( !is_wp_error( $reply ) and isset( $reply['response']['code'] ) and 400 == $reply['response']['code'] )
+			Prompt_Core::$options->set( 'upgrade_required', true );
 
-		return call_user_func( $this->implementation, $url, $request );
+		return $reply;
 	}
 
 	public function get( $endpoint, $request = array() ) {

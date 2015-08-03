@@ -3,6 +3,7 @@
 class Prompt_Admin_Notice_Handling {
 	protected static $dismiss_query_param = 'postmatic_dismiss_notice';
 	protected static $jetpack_conflict_notice = 'jetpack_conflict';
+	protected static $upgrade_notice = 'upgrade';
 
 	/**
 	 * Not using for jetpack conflicts, but might as well leave the bones.
@@ -25,22 +26,45 @@ class Prompt_Admin_Notice_Handling {
 	}
 
 	public static function display() {
-		self::display_jetpack_conflict();
+		self::maybe_display_jetpack_conflict();
+		self::maybe_display_upgrade();
 	}
 
 	protected static function valid_notices() {
-		return array( self::$jetpack_conflict_notice );
+		return array( self::$jetpack_conflict_notice, self::$upgrade_notice );
 	}
 
-	protected static function display_jetpack_conflict() {
+	protected static function maybe_display_upgrade() {
+
+		if ( ! current_user_can( 'update_plugins' ) )
+			return;
+
+		if ( ! Prompt_Core::$options->get( 'upgrade_required' ) )
+			return;
+
+		if ( self::is_dismissed( self::$upgrade_notice ) )
+			return;
+
+		$message = sprintf(
+			__(
+				'Please <a href="%s">update Postmatic</a> now to resume service. The current version is no longer supported. Thanks!',
+				'Postmatic'
+			),
+			admin_url( 'plugins.php?plugin_status=upgrade' )
+		);
+
+		echo scb_admin_notice( $message, 'error' );
+	}
+
+	protected static function maybe_display_jetpack_conflict() {
 
 		if ( !class_exists( 'Jetpack' ) or !current_user_can( 'manage_options' ) )
 			return;
 
-		if ( in_array( self::$jetpack_conflict_notice, Prompt_Core::$options->get( 'skip_notices' ) ) )
+		if ( self::is_dismissed( self::$jetpack_conflict_notice ) )
 			return;
 
-		$check_modules = array( 'subscriptions', 'comments', 'notes' );
+		$check_modules = array( 'subscriptions', 'comments' );
 
 		$conflicting_modules = array_filter( $check_modules, array( 'Jetpack', 'is_module_active' ) );
 
@@ -56,5 +80,9 @@ class Prompt_Admin_Notice_Handling {
 		);
 
 		echo scb_admin_notice( $message, 'error' );
+	}
+
+	protected static function is_dismissed( $notice ) {
+		return in_array( $notice, Prompt_Core::$options->get( 'skip_notices' ) );
 	}
 }

@@ -79,7 +79,12 @@ class Prompt_Core {
 			'custom_widget_templates' => array(),
 			'comment_opt_in_default' => false,
 			'comment_flood_control_trigger_count' => 6,
+			'upgrade_required' => false,
+			'enable_optins' => false,
+			'enable_skimlinks' => false,
+			'skimlinks_publisher_id' => '',
 		);
+		$default_options = array_merge( $default_options, Prompt_Optins::options_fields() );
 		self::$options = new scbOptions( 'prompt_options', __FILE__, $default_options );
 
 		/**
@@ -170,6 +175,9 @@ class Prompt_Core {
 		add_action( 'admin_init',       array( 'Prompt_Admin_Notice_Handling', 'dismiss' ) );
 		add_action( 'admin_notices',    array( 'Prompt_Admin_Notice_Handling', 'display' ) );
 
+		add_action( 'init', array( 'Prompt_Optins', 'maybe_load' ) );
+		add_action( 'wp_ajax_prompt_optins_content', array( 'Prompt_Optins', 'ajax_handler' ) );
+
 		add_filter( 'heartbeat_send', array( 'Prompt_Admin_Text_Heartbeat', 'filter_response' ) );
 
 		add_shortcode( 'postmatic_subscribe_widget', array( 'Prompt_Subscribe_Widget_Shortcode', 'render' ) );
@@ -183,6 +191,7 @@ class Prompt_Core {
 			return;
 
 		self::$options->set( 'last_version', self::version() );
+		self::$options->set( 'upgrade_required', false );
 
 		if ( self::$options->get( 'enable_collection' ) )
 			Prompt_Event_Handling::record_environment();
