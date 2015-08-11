@@ -118,6 +118,9 @@ class Prompt_Core {
 	 */
 	protected static function add_hooks() {
 
+		if ( defined( 'PROMPT_NO_OUTBOUND_EMAILS' ) and PROMPT_NO_OUTBOUND_EMAILS )
+			add_filter( 'prompt/outbound/emails', '__return_empty_array' );
+
 		register_deactivation_hook( self::$basename, array( 'Prompt_Event_Handling', 'record_deactivation' ) );
 		register_activation_hook( self::$basename, array( 'Prompt_Event_Handling', 'record_reactivation' ) );
 

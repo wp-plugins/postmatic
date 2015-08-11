@@ -112,6 +112,7 @@ class Prompt_Register_Subscribe_Command implements Prompt_Interface_Command {
 
 			$prompt_user->set_subscriber_origin( $origin );
 
+			do_action( 'prompt/register_subscribe_command/created_user', $prompt_user->get_wp_user() );
 		}
 
 		if ( !$subscribable_object->is_subscribed( $subscriber_id ) ){

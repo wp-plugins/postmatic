@@ -1,4 +1,4 @@
-=== Postmatic - Post and comment subscriptions that invite you to hit reply ===
+=== Postmatic - Post and comment subscriptions that invite you to hit reply. Now with Optins. ===
 Contributors: Postmatic
 Tags: email, notification, notify, posts, subscribe, subscription, email, subscribe to comments, commenting, reply, email, optins, popups, optin forms, opt-in, subscribe form, comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, mailchimp, mailgun, email comming, reply to email, email replies, engagement, invite, invitations, jetpack, subscribe2
 Requires at least: 3.9
@@ -10,7 +10,7 @@ Postmatic lets your readers subscribe to comments or posts by email. And comment
 
 == Description ==
 
-[Read about how we are revolutionizing WordPress commenting on our site](http://gopostmatic.com)
+[Read about how we are revolutionizing WordPress engagement on our site](http://gopostmatic.com)
 
 = Introducing Postmatic Optins - A lightweight, simple, and powerful way to convert visitors into subscribers =
 
@@ -76,8 +76,22 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 8. The invitation system is fantastic. Postmatic will send invitations to an imported list or let you choose from your existing community. Users can reply to the invitation to subscribe to your site.
 9. We're serious about privacy. Your data is yours, and always will be. Postmatic uses fully-native commenting. Just think of us as a magical email > WordPress gateway.
 10. Postmatic is 100% compatible with all your favorite user and commenting plugins because it is fully WordPress native.
+11. The popup optin can be configured based on time, page scroll, or after the user leaves a comment.
+12. The after-the-post optin displays above the comment area. Shown in Dark.
+13. The topbar optin shows across the top of your site on all posts and pages.
+14. The bottom slider optin invites users to subscribe with a collapsible animated window.
+15. The optin configuration screeen.
 
 == Changelog ==
+
+= 1.4.1 =
+
+- Fixed a bug which was keeping the new comment-based notification sidebar widgets from displaying. Sorry.
+- Fixed a bug which was showing the after-post Optin on not just posts but pages as well. No more.
+- Fixed timeout errors when trying to connect to grabicon.com to refresh the favicon.
+- Greater compatibility between Postmatic Optins and a larger variety of themes.
+- Improved Optin language and handling of already subscribed users.
+- The Optin description fields now support HTML!
 
 = 1.4 =
 

@@ -362,10 +362,20 @@ div#manage-account a {
     font-size: 90%;
 }
 
-.gutter h1, .gutter h2, .gutter h3, .gutter h4 {
+.gutter h1, .gutter h2, .gutter h3 {
   margin: 0 0 10px 0;
   padding: 0;
   color: #19B0CA;
+}
+
+.gutter h4 {
+  margin: 0 0 0 0;
+  padding: 0;
+  color: #19B0CA;
+}
+
+.gutter input.regular-text {
+  margin-bottom: 10px;
 }
 
 .gutter h2 small {
@@ -375,7 +385,7 @@ div#manage-account a {
 
 .gutter textarea {
   width: 100%;
-  height: 50px;
+  height: 110px;
 }
 
 #optin-select-popups {
@@ -459,6 +469,11 @@ div#manage-account a {
 
 #optins-welcome, #skimlinks-welcome {
   width: 90%;
+}
+
+#popup-options small, #bottom-title-desc small {
+  display: block;
+  color: gray;
 }
 
 .testmode {margin-top: 10px; color: blue;}

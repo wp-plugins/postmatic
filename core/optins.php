@@ -10,8 +10,6 @@ class Prompt_Optins extends Prompt_Core {
 	 */
 	private static $optins_options;
 
-	private static $instance;
-
 
 	/**
 	 * Load up the optins if needed
@@ -31,20 +29,20 @@ class Prompt_Optins extends Prompt_Core {
 	 */
 	static function add_hooks() {
 		$options = self::optins_options();
- 		add_action( 'wp_enqueue_scripts', array( self::init(), 'assets' ), 100 );
-		add_action( 'wp_footer', array( self::init(), 'footer_markup' ) );
+ 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'assets' ), 100 );
+		add_action( 'wp_footer', array( __CLASS__, 'footer_markup' ) );
 		if ( $options[ 'optins_topbar_enable' ] ) {
-			add_action( 'wp_head', array( self::init(), 'topbar_markup' ) );
-			add_action( 'wp_enqueue_scripts', array( self::init(), 'topbar_assets' ) );
+			add_action( 'wp_head', array( __CLASS__, 'topbar_markup' ) );
+			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'topbar_assets' ) );
 		}
 
 		if ( $options[ 'optins_inpost_enable' ] ) {
-			add_action( 'wp_head', array( self::init(), 'maybe_inpost' ) );
+			add_action( 'wp_head', array( __CLASS__, 'maybe_inpost' ) );
 		}
 
 		$types = self::determine_type();
 		if ( ! empty( $types ) ) {
-			add_action( 'wp_head', array( self::init(), 'print_css' ) );
+			add_action( 'wp_head', array( __CLASS__, 'print_css' ) );
 		}
 
 	}
@@ -244,14 +242,6 @@ class Prompt_Optins extends Prompt_Core {
 
 	}
 
-	private static function init() {
-		if ( is_null( self::$instance ) ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
-
 	/**
 	 * Possible trigger for bottom/popups
 	 *
@@ -344,16 +334,38 @@ class Prompt_Optins extends Prompt_Core {
 	/**
 	 * Maybe hook the content to add an optin to the bottom of a post
 	 *
-	 * @uses parse_request
 	 */
 	public static function maybe_inpost() {
-		if ( is_singular() ){
-			$options = self::optins_options();
-			global $post;
-			if ( 'all' == $options['optins_inpost_ids'] || ( is_object( $post ) && is_array( $options['optins_inpost_ids'] ) && in_array( $post->ID, $options['optins_inpost_ids'] ) ) ) {
-				add_filter( 'the_content', array( self::init(), 'content_filter' ) );
-			}
+		if ( self::should_add_inpost() ) {
+			add_filter( 'the_content', array( __CLASS__, 'content_filter' ) );
 		}
+	}
+
+	/**
+	 * Whether an optin should be added to content for the current query
+	 *
+	 * @return bool
+	 */
+	protected static function should_add_inpost() {
+		if ( ! is_single() ) {
+			return false;
+		}
+
+		$options = self::optins_options();
+
+		if ( 'all' == $options['optins_inpost_ids'] ) {
+			return true;
+		}
+
+		if ( ! is_array( $options['optins_inpost_ids'] ) ) {
+			return false;
+		}
+
+		if ( in_array( get_the_ID(), $options['optins_inpost_ids'] ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

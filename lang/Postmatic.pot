@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.4.0\n"
+"Email 1.4.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
-"plugin/1.4.0-20150803-1911\n"
-"POT-Creation-Date: 2015-08-03 19:11:43+00:00\n"
+"plugin/1.4.1-20150811-0302\n"
+"POT-Creation-Date: 2015-08-11 03:02:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -135,8 +135,8 @@ msgid ""
 "header area is 1440px wide."
 msgstr ""
 
-#: admin/email-options-tab.php:102 admin/optins-options-tab.php:165
-#: admin/optins-options-tab.php:291 admin/optins-options-tab.php:471
+#: admin/email-options-tab.php:102 admin/optins-options-tab.php:170
+#: admin/optins-options-tab.php:291 admin/optins-options-tab.php:469
 msgid "Change"
 msgstr ""
 
@@ -753,32 +753,34 @@ msgid ""
 "level users"
 msgstr ""
 
-#: admin/optins-options-tab.php:93
+#: admin/optins-options-tab.php:95
 msgid "After how many seconds would you like this popup to pop?"
 msgstr ""
 
-#: admin/optins-options-tab.php:105 admin/optins-options-tab.php:231
+#: admin/optins-options-tab.php:111 admin/optins-options-tab.php:239
 msgid "Add a headline and some welcoming text."
 msgstr ""
 
-#: admin/optins-options-tab.php:108 admin/optins-options-tab.php:234
+#: admin/optins-options-tab.php:112 admin/optins-options-tab.php:240
 msgid "Headline"
 msgstr ""
 
-#: admin/optins-options-tab.php:120 admin/optins-options-tab.php:246
-msgid "Text to display below headline"
+#: admin/optins-options-tab.php:122 admin/optins-options-tab.php:248
+msgid ""
+"Text to display below headline<small>Allowed HTML: a, strong, em, ul, ol, "
+"li, img, p, h2, h3, h4</small>"
 msgstr ""
 
-#: admin/optins-options-tab.php:134
+#: admin/optins-options-tab.php:139
 msgid "Choose a theme. This controls how the popup looks on your site."
 msgstr ""
 
-#: admin/optins-options-tab.php:147
+#: admin/optins-options-tab.php:152
 msgid "Choose an image to display on the left side of your popup."
 msgstr ""
 
-#: admin/optins-options-tab.php:150 admin/optins-options-tab.php:276
-#: admin/optins-options-tab.php:456
+#: admin/optins-options-tab.php:155 admin/optins-options-tab.php:276
+#: admin/optins-options-tab.php:454
 msgid ""
 "We haven't built our image chooser yet but have created 8 different icons "
 "for you to use (or you can upload your own). <a href=\"%s\" target=\"_blank"
@@ -787,16 +789,16 @@ msgid ""
 "<em>Postmatic</em>."
 msgstr ""
 
-#: admin/optins-options-tab.php:169 admin/optins-options-tab.php:295
-#: admin/optins-options-tab.php:475
+#: admin/optins-options-tab.php:174 admin/optins-options-tab.php:295
+#: admin/optins-options-tab.php:473
 msgid "Reset"
 msgstr ""
 
-#: admin/optins-options-tab.php:194
+#: admin/optins-options-tab.php:199
 msgid "Slide in from the bottom <small>(click to enable)</small>"
 msgstr ""
 
-#: admin/optins-options-tab.php:196
+#: admin/optins-options-tab.php:201
 msgid ""
 "A subtle slider that pops up from the bottom of the browser window. This "
 "popup can be triggered depending how long a user has been on the page, when "
@@ -804,11 +806,11 @@ msgid ""
 "comment if you are using <a href=\"http://gopostmatic.com/epoch\">Epoch</a>."
 msgstr ""
 
-#: admin/optins-options-tab.php:205
+#: admin/optins-options-tab.php:210
 msgid "When should this slider trigger?"
 msgstr ""
 
-#: admin/optins-options-tab.php:219
+#: admin/optins-options-tab.php:226
 msgid "After how many seconds would you like the slider to slide?"
 msgstr ""
 
@@ -850,29 +852,29 @@ msgid ""
 "on your site and invites users to subscribe. Classy, simple, and effective."
 msgstr ""
 
-#: admin/optins-options-tab.php:399
+#: admin/optins-options-tab.php:397
 msgid "Give the box a headline"
 msgstr ""
 
-#: admin/optins-options-tab.php:411
+#: admin/optins-options-tab.php:407
 msgid "Add some text inviting your users to subscribe"
 msgstr ""
 
-#: admin/optins-options-tab.php:434
+#: admin/optins-options-tab.php:432
 msgid ""
 "IDs (comma separated) of posts to show in. Or use \"all\" to use on all "
 "posts."
 msgstr ""
 
-#: admin/optins-options-tab.php:438
+#: admin/optins-options-tab.php:436
 msgid "Choose a theme. This controls how the form looks on your site."
 msgstr ""
 
-#: admin/optins-options-tab.php:450
+#: admin/optins-options-tab.php:448
 msgid "Choose an image to display on the left side of your form."
 msgstr ""
 
-#: admin/optins-options-tab.php:648
+#: admin/optins-options-tab.php:646
 msgid "Choose a popup background image"
 msgstr ""
 
@@ -919,7 +921,7 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: admin/options-options-tab.php:39 core/core.php:273
+#: admin/options-options-tab.php:39 core/core.php:276
 msgid "Postmatic Delivery"
 msgstr ""
 
@@ -997,7 +999,7 @@ msgstr ""
 msgid "Turn on the Skimlinks tab (look for it up top)"
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.4.0)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.4.1)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:46
 msgid "Postmatic"
@@ -1281,60 +1283,48 @@ msgid ""
 "\">WordPress Zero Spam</a>."
 msgstr ""
 
-#: core/ajax-handling.php:38 core/ajax-handling.php:58
-msgid "%s is not subscribed to %s."
+#: core/ajax-handling.php:42 templates/subscribe-form.php:53
+msgid "You are already subscribed to %s."
 msgstr ""
 
-#: core/ajax-handling.php:144 core/ajax-handling.php:396
+#: core/ajax-handling.php:133 core/ajax-handling.php:377
 msgid "You have unsubscribed."
 msgstr ""
 
-#: core/ajax-handling.php:189
+#: core/ajax-handling.php:178
 msgid "PREVIEW of %s"
 msgstr ""
 
-#: core/ajax-handling.php:201
+#: core/ajax-handling.php:190
 msgid "Preview email sent."
 msgstr ""
 
-#: core/ajax-handling.php:234
+#: core/ajax-handling.php:223
 msgid "An API Key is required"
 msgstr ""
 
-#: core/ajax-handling.php:250
+#: core/ajax-handling.php:239
 msgid ""
 "We're sorry. None of your lists qualified. <a href=\"http://docs.gopostmatic."
 "com/article/144-im-having-trouble-importing-my-mailchimp-lists\">Click here "
 "for more information</a>"
 msgstr ""
 
-#: core/ajax-handling.php:267
+#: core/ajax-handling.php:256
 msgid "Choose a list to import to Postmatic: "
 msgstr ""
 
-#: core/ajax-handling.php:338
+#: core/ajax-handling.php:327
 msgid "Sorry, that email address is not valid."
 msgstr ""
 
-#: core/ajax-handling.php:362
+#: core/ajax-handling.php:351
 msgid ""
 "Almost done - you'll receive an email with instructions to complete your "
 "subscription."
 msgstr ""
 
-#: core/ajax-handling.php:377
-msgid "Are you sure you want to unsubscribe %s?"
-msgstr ""
-
-#: core/ajax-handling.php:379
-msgid "Not you? Click here to start over"
-msgstr ""
-
-#: core/ajax-handling.php:381 core/comment-form-handling.php:167
-msgid "Unsubscribe"
-msgstr ""
-
-#: core/ajax-handling.php:410
+#: core/ajax-handling.php:391
 msgid ""
 "<strong>Confirmation email sent. Please check your email for further "
 "instructions.</strong>"
@@ -1395,25 +1385,29 @@ msgstr ""
 msgid "You are subscribed to new comments on this post."
 msgstr ""
 
-#: core/comment-mailer.php:71 core/comment-mailer.php:77
-#: core/comment-mailer.php:85 core/moderation-mailing.php:21
+#: core/comment-form-handling.php:167
+msgid "Unsubscribe"
+msgstr ""
+
+#: core/comment-mailer.php:72 core/comment-mailer.php:78
+#: core/comment-mailer.php:86 core/moderation-mailing.php:21
 msgid "Anonymous"
 msgstr ""
 
-#: core/comment-mailer.php:187 core/post-mailing.php:123
+#: core/comment-mailer.php:188 core/post-mailing.php:123
 #: core/subscription-mailing.php:43 core/subscription-mailing.php:106
 msgid "An email sending operation encountered a problem."
 msgstr ""
 
-#: core/comment-mailer.php:394
+#: core/comment-mailer.php:395
 msgid "%s replied to your comment on %s."
 msgstr ""
 
-#: core/comment-mailer.php:401
+#: core/comment-mailer.php:402
 msgid "%s replied to %s on %s"
 msgstr ""
 
-#: core/comment-mailer.php:408
+#: core/comment-mailer.php:409
 msgid "%s commented on %s"
 msgstr ""
 
@@ -1479,7 +1473,7 @@ msgstr ""
 msgid "Welcome!"
 msgstr ""
 
-#: core/core.php:293
+#: core/core.php:296
 msgid "Postmatic Text Version"
 msgstr ""
 
@@ -1514,7 +1508,7 @@ msgstr ""
 msgid "Unable to deliver a message of unknown type."
 msgstr ""
 
-#: core/mailer.php:82
+#: core/mailer.php:84
 msgid "An email sending operation behaved erratically and may have failed."
 msgstr ""
 
@@ -1546,31 +1540,31 @@ msgstr ""
 msgid "Green"
 msgstr ""
 
-#: core/optins.php:224
+#: core/optins.php:222
 msgid "Popup"
 msgstr ""
 
-#: core/optins.php:225
+#: core/optins.php:223
 msgid "Bottom of Page"
 msgstr ""
 
-#: core/optins.php:226
+#: core/optins.php:224
 msgid "Topbar"
 msgstr ""
 
-#: core/optins.php:227
+#: core/optins.php:225
 msgid "Bottom of Post"
 msgstr ""
 
-#: core/optins.php:262
+#: core/optins.php:252
 msgid "After a user submits a comment"
 msgstr ""
 
-#: core/optins.php:263
+#: core/optins.php:253
 msgid "After a set period of time."
 msgstr ""
 
-#: core/optins.php:264
+#: core/optins.php:254
 msgid "After the user scrolls to the bottom of the post or page."
 msgstr ""
 
@@ -1613,12 +1607,12 @@ msgstr ""
 msgid "Failed to create a new user from an agreement reply email."
 msgstr ""
 
-#: core/register-subscribe-command.php:151
-#: core/register-subscribe-command.php:162
+#: core/register-subscribe-command.php:152
+#: core/register-subscribe-command.php:163
 msgid "Received invalid metadata with a subscription agreement."
 msgstr ""
 
-#: core/register-subscribe-command.php:171
+#: core/register-subscribe-command.php:172
 msgid "Received no message with a subscription agreement."
 msgstr ""
 
@@ -1753,7 +1747,7 @@ msgid ""
 "Rejected an inbound request with an invalid signature. Could be bot activity."
 msgstr ""
 
-#: core/wp-mailer.php:98
+#: core/wp-mailer.php:100
 msgid ""
 "Failed sending an email locally. Did you know Postmatic can deliver email "
 "for you?"
@@ -2184,10 +2178,6 @@ msgstr ""
 
 #: templates/subscribe-form.php:47
 msgid "This field is intentionally empty"
-msgstr ""
-
-#: templates/subscribe-form.php:53
-msgid "You are already subscribed to %s."
 msgstr ""
 
 #: templates/subscribe-form.php:64

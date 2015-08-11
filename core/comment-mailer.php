@@ -55,6 +55,7 @@ class Prompt_Comment_Mailer {
 		// Turn off native comment notifications
 		add_filter( 'pre_option_comments_notify', create_function( '$a', 'return null;' ) );
 
+		$comment_id = $this->comment->comment_ID;
 		$comment_author = $this->comment_author_user();
 
 		$is_api_delivery = ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) );
@@ -146,7 +147,7 @@ class Prompt_Comment_Mailer {
 			$command = new Prompt_Comment_Command();
 			$command->set_post_id( $prompt_post->id() );
 			$command->set_user_id( $subscriber_id );
-			$command->set_parent_comment_id( $this->comment->comment_ID );
+			$command->set_parent_comment_id( $comment_id );
 
 			Prompt_Command_Handling::add_command_metadata( $command, $email );
 
@@ -172,7 +173,7 @@ class Prompt_Comment_Mailer {
 
 			$rescheduler->reschedule(
 				'prompt/comment_mailing/send_notifications',
-				array( $this->comment->comment_ID, implode( '', $chunk_ids ), null )
+				array( $comment_id, implode( '', $chunk_ids ), null )
 			);
 
 			return;
@@ -185,7 +186,7 @@ class Prompt_Comment_Mailer {
 			Prompt_Logging::add_error(
 				Prompt_Enum_Error_Codes::OUTBOUND,
 				__( 'An email sending operation encountered a problem.', 'Postmatic' ),
-				compact( 'response' )
+				compact( 'response', 'chunk_ids', 'comment_id' )
 			);
 
 			return;
@@ -196,7 +197,7 @@ class Prompt_Comment_Mailer {
 			wp_schedule_single_event(
 				time(),
 				'prompt/comment_mailing/send_notifications',
-				array( $this->comment->comment_ID, implode( '', $chunks[1] ) )
+				array( $comment_id, implode( '', $chunks[1] ) )
 			);
 
 		}

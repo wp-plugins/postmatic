@@ -88,45 +88,50 @@ class Prompt_Admin_Optins_Options_Tab extends Prompt_Admin_Options_Tab {
 					$values
 				)
 			),
-			html (
-				'h4 id="popup-time" class="col1"',
-				__( 'After how many seconds would you like this popup to pop?', 'Postmatic' ),
+			html( 
+				'div id="popup-time"',
+				html(
+					'h4 class="col1"',
+					__( 
+						'After how many seconds would you like this popup to pop?', 
+						'Postmatic' 
+					)
+				),
 				$this->input(
 					array(
 						'type' => 'number',
 						'name' => 'optins_popup_time',
+						'extra' => array( 'class' => 'col1' ),
 					),
 					$values
-
 				)
-			),
+			), 
 			html(
 				'div id="popup-title-text" class="col2"',
 				html( 'h3',  __( 'Add a headline and some welcoming text.', 'Postmatic' ) ),
-				html(
-					'h4',
-					__( 'Headline', 'Postmatic' ),
-					$this->input(
-						array(
-							'type' => 'text',
-							'name' => 'optins_popup_title',
-						),
-						$values
-	
-					)
+				html( 'h4', __( 'Headline', 'Postmatic' ) ),
+				$this->input(
+					array(
+						'type' => 'text',
+						'name' => 'optins_popup_title',
+					),
+					$values
 				),
 				html(
 					'h4',
-					__( 'Text to display below headline', 'Postmatic' ),
-					$this->input(
-						array(
-							'type' => 'textarea',
-							'label' => 'd',
-							'name' => 'optins_popup_desc',
-						),
-						$values
-	
+					__( 
+						'Text to display below headline<small>Allowed HTML: a, strong, em, ul, ol, li, img, p, h2, h3, h4</small>', 
+						'Postmatic'
 					)
+				),
+				$this->input(
+					array(
+						'type' => 'textarea',
+						'label' => 'd',
+						'name' => 'optins_popup_desc',
+					),
+					$values
+
 				)
 			),
 			html (
@@ -214,45 +219,40 @@ class Prompt_Admin_Optins_Options_Tab extends Prompt_Admin_Options_Tab {
 					$values
 				)
 			),
-			html (
-				'h4 id="bottom-time" class="col1"',
-				__( 'After how many seconds would you like the slider to slide?', 'Postmatic' ),
+			html( 
+				'div id="bottom-time"',
+				html (
+					'h4 class="col1"',
+					__( 'After how many seconds would you like the slider to slide?', 'Postmatic' )
+				),
 				$this->input(
 					array(
 						'type' => 'number',
 						'name' => 'optins_bottom_time',
+						'extra' => array( 'class' => 'col1' ),
 					),
 					$values
-
 				)
 			),
 			html(
 				'div id="bottom-title-desc" class="col2"',
 				html( 'h3',  __( 'Add a headline and some welcoming text.', 'Postmatic' ) ),
-				html(
-					'h4',
-					__( 'Headline', 'Postmatic' ),
-					$this->input(
-						array(
-							'type' => 'text',
-							'name' => 'optins_bottom_title',
-						),
-						$values
-	
-					)
+				html( 'h4', __( 'Headline', 'Postmatic' ) ),
+				$this->input(
+					array(
+						'type' => 'text',
+						'name' => 'optins_bottom_title',
+					),
+					$values
 				),
-				html(
-					'h4',
-					__( 'Text to display below headline', 'Postmatic' ),
-					$this->input(
-						array(
-							'type' => 'text',
-							'label' => 'd',
-							'name' => 'optins_bottom_desc',
-						),
-						$values
-	
-					)
+				html( 'h4', __( 'Text to display below headline<small>Allowed HTML: a, strong, em, ul, ol, li, img, p, h2, h3, h4</small>', 'Postmatic' ) ),
+				$this->input(
+					array(
+						'type' => 'textarea',
+						'label' => 'd',
+						'name' => 'optins_bottom_desc',
+					),
+					$values
 				)
 			),
 			html (
@@ -271,15 +271,15 @@ class Prompt_Admin_Optins_Options_Tab extends Prompt_Admin_Options_Tab {
 			html(
 				'div id="bottom-image" class="optin-image"',
 				html( 'h3',  __( 'Choose an image to display on the right side of your popup.', 'Postmatic' ) ),
-					html( 'p',  
-						sprintf( 
-							__( 
-								'We haven\'t built our image chooser yet but have created 8 different icons for you to use (or you can upload your own). <a href="%s" target="_blank">Download them here</a> and add the ones you like to your media library (below). In the future just search your media library for the word <em>Postmatic</em>.', 
-								'Postmatic' 
-							),
-							Prompt_Core::$url_path . '/media/optins/postmatic-optin-icons.zip'
-						)
-					),
+				html( 'p',  
+					sprintf( 
+						__( 
+							'We haven\'t built our image chooser yet but have created 8 different icons for you to use (or you can upload your own). <a href="%s" target="_blank">Download them here</a> and add the ones you like to your media library (below). In the future just search your media library for the word <em>Postmatic</em>.', 
+							'Postmatic' 
+						),
+						Prompt_Core::$url_path . '/media/optins/postmatic-optin-icons.zip'
+					)
+				),
 				html( 'img', array( 'src' => $bottom_image->url() ) )
 			),
 			$this->input(
@@ -394,30 +394,28 @@ class Prompt_Admin_Optins_Options_Tab extends Prompt_Admin_Options_Tab {
 				'div id="inpost-options" class="gutter"',
 				html(
 					'div id="inpost-title-desc"',
-					html(
-						'h4',
-						__( 'Give the box a headline', 'Postmatic' ),
-						$this->input(
-							array(
-								'type' => 'text',
-								'name' => 'optins_inpost_title',
-							),
-							$values
-		
-						)
+					html( 'h4', __( 'Give the box a headline', 'Postmatic' ) ),
+					$this->input(
+						array(
+							'type' => 'text',
+							'name' => 'optins_inpost_title',
+						),
+						$values
 					),
 					html(
 						'h4',
-						__( 'Add some text inviting your users to subscribe', 'Postmatic' ),
-						$this->input(
-							array(
-								'type' => 'textarea',
-								'label' => 'd',
-								'name' => 'optins_inpost_desc',
-							),
-							$values
-		
+						__( 
+							'Add some text inviting your users to subscribe', 
+							'Postmatic' 
 						)
+					),
+					$this->input(
+						array(
+							'type' => 'textarea',
+							'label' => 'd',
+							'name' => 'optins_inpost_desc',
+						),
+						$values
 					)
 				),
 				html(
@@ -558,7 +556,7 @@ class Prompt_Admin_Optins_Options_Tab extends Prompt_Admin_Options_Tab {
 
 			$field = "optins_{$type}_desc";
 			if ( isset( $new_data[ $field ] ) ) {
-				$valid_data[ $field ] = wp_strip_all_tags( $new_data[ $field ] );
+				$valid_data[ $field ] = balanceTags( strip_tags( $new_data[ $field ], '<a><strong><em><ul><ol><li><img><p><h2><h3><h4>' ) );
 			}
 
 			$field = "optins_{$type}_image";
@@ -678,6 +676,8 @@ class Prompt_Admin_Optins_Options_Tab extends Prompt_Admin_Options_Tab {
 							$( '#bottom-title-desc' ).hide();
 							$( '#bottom-options' ).hide();
 							$( '#optin-intro-bottom' ).show();
+							
+							
 						}
 					}
 
@@ -721,7 +721,7 @@ class Prompt_Admin_Optins_Options_Tab extends Prompt_Admin_Options_Tab {
 
 					//in post
 					function prompt_optins_admin_inpost() {
-						if ( 'checked' == $( '[name="optins_inpost_enable"' ).attr('checked') ) {
+						if ( 'checked' == $( '[name="optins_inpost_enable"]' ).attr('checked') ) {
 							$( '#inpost-options' ).show();
 							$( '#optin-intro-inpost' ).hide();
 							prompt_optins_admin_inpost_image();
@@ -746,7 +746,7 @@ class Prompt_Admin_Optins_Options_Tab extends Prompt_Admin_Options_Tab {
 
 					prompt_optins_admin_inpost();
 
-					$( '[name="optins_inpost_enable"' ).change( function()  {
+					$( '[name="optins_inpost_enable"]' ).change( function()  {
 						prompt_optins_admin_inpost();
 					});
 

@@ -121,7 +121,7 @@ class Prompt_Post_Mailing {
 			Prompt_Logging::add_error(
 				Prompt_Enum_Error_Codes::OUTBOUND,
 				__( 'An email sending operation encountered a problem.', 'Postmatic' ),
-				compact( 'result' )
+				array( 'result' => $result, 'chunk_ids' => $chunk_ids, 'post_id' => $post->ID )
 			);
 			return;
 		}

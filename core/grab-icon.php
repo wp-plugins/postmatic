@@ -49,7 +49,7 @@ class Prompt_Grab_Icon {
 
 		$file_info = array(
 			'name' => 'prompt-site-icon-' . $this->size . '.png',
-			'tmp_name' => download_url( $grab_url ),
+			'tmp_name' => download_url( $grab_url, 5 ),
 		);
 
 		if ( is_wp_error( $file_info['tmp_name'] ) )

@@ -124,6 +124,30 @@ class Prompt_Optins_Style {
 		background: linear-gradient(180deg, {{grad-start}} 35%, {{grad-end}} 85%) !important;
 		}
 		
+		#postmatic-widget-popup_calderaModal a {
+		color: {{type}} !important;
+		text-decoration: underline !important;
+		}
+		
+		#postmatic-widget-popup_calderaModal h2, #postmatic-widget-popup_calderaModal h3, #postmatic-widget-popup_calderaModal h4 {
+		color: {{accent}};
+		}
+		#postmatic-widget-popup_calderaModal h2 {
+		font-size: 140% !important;
+		}
+		
+		#postmatic-widget-popup_calderaModal h3 {
+		font-size: 125% !important;
+		}
+		
+		#postmatic-widget-popup_calderaModal h4 {
+		font-size: 110% !important;
+		}
+		
+		#postmatic-widget-popup_calderaModal ul, #postmatic-widget-popup_calderaModal ol {
+		margin-left: 45px;
+		}
+		
 		#postmatic-widget-popup_calderaModal .prompt-subscribe-widget-content {
 		display: block !important;
 		}
@@ -151,12 +175,14 @@ class Prompt_Optins_Style {
 		margin: 0 0 15px 175px !important;
 		font-size: 180% !important;
 		padding: 0 !important;
+		text-align: left !important;
 		}
 
 		#postmatic-widget-popup_calderaModal div.primary.prompt {
 		margin: 0 0 25px 175px !important;
 		font-size: 110% !important;
 		min-height: 130px !important;
+		line-height: normal !important;
 		}
 		
 		
@@ -176,11 +202,11 @@ class Prompt_Optins_Style {
 		font-weight: normal !important;
 		height: 34px !important;
 		width: 15% !important;
+		margin-top: 3px !important;;
 		}
 		
 		body.logged-in 	#postmatic-widget-popup_calderaModal input.submit {
 		margin-left: 175px !important;
-		margin-top: 25px !important;
 		}
 		
 		#postmatic-widget-popup_calderaModal input.prompt-subscribe-email,#postmatic-widget-popup_calderaModal input.prompt-subscribe-name {
@@ -198,18 +224,21 @@ class Prompt_Optins_Style {
 		border-width: 1px !important;
 		border-style: solid !important;
 		height: 35px !important;
+		float: left !important;
 		}
 		
 		#postmatic-widget-popup_calderaModal .message {
 		color: {{type}} !important;
 		font-size: 100% !important;
 		margin-left: 175px !important;
+		margin-bottom: 25px !important;
 		}
 		
 		#postmatic-widget-popup_calderaModal div.loading-indicator {
 		position: relative !important;
 		left: 270px !important;
 		width: 30px !important;
+		min-height: 0;
 		}
 		
 
@@ -236,6 +265,7 @@ class Prompt_Optins_Style {
 		#postmatic-widget-popup_calderaModal .unsubscribe {
 		margin-left: 175px !important;
 		color: {{type}} !important;
+		margin-bottom: 25px !important;
 		}
 		
 		@media only screen and (max-width : 550px) {
@@ -243,8 +273,8 @@ class Prompt_Optins_Style {
 		
 		#postmatic-widget-popup_calderaModal {
 		padding: 7% !important;
-		width:auto;
-		height: auto;
+		width:auto !important;
+		height: auto !important;
 		}
 		
 		
@@ -272,6 +302,7 @@ class Prompt_Optins_Style {
 		
 		#postmatic-widget-popup_calderaModal .message {
 		margin-left: 0 !important;
+		margin-bottom: 25px !important;
 		}
 		
 		#postmatic-widget-popup_calderaModal div.loading-indicator {
@@ -283,7 +314,7 @@ class Prompt_Optins_Style {
 		}
 		
 		.caldera-backdrop {
-		padding: 7%;
+		padding: 7% !important;
 		}
 		
 		#postmatic-widget-popup_calderaModal input.prompt-subscribe-email,#postmatic-widget-popup_calderaModal input.prompt-subscribe-name {
@@ -295,12 +326,13 @@ class Prompt_Optins_Style {
 		#postmatic-widget-popup_calderaModal input.submit {
 		height: auto !important;
 		font-size: 25px !important;
-		width: 100% !important;
+		width: 85% !important;
+		margin: 5% auto !important;
 		}
 		
 		body.logged-in 	#postmatic-widget-popup_calderaModal input.submit {
-		right: 0 !important;
-		position: relative !important;
+		right: 2% !important;
+		position: absolute !important;
 		}
 		
 		#postmatic-widget-popup_calderaModal .unsubscribe, #postmatic-widget-popup_calderaModal .message {
@@ -319,6 +351,31 @@ class Prompt_Optins_Style {
 		margin-bottom: 30px !important;
 		z-index: 100000 !important;
 			}
+			
+		#postmatic-optin-topbar-wrap a {
+		color: {{type}} !important;
+		text-decoration: underline !important;
+		}
+		
+		#postmatic-optin-topbar-wrap h2, #postmatic-optin-topbar-wrap h3, #postmatic-optin-topbar-wrap h4 {
+		color: {{accent}};
+		}
+		
+		#postmatic-optin-topbar-wrap h2 {
+		font-size: 140% !important;
+		}
+		
+		#postmatic-optin-topbar-wrap h3 {
+		font-size: 125% !important;
+		}
+		
+		#postmatic-optin-topbar-wrap h4 {
+		font-size: 110% !important;
+		}
+		
+		#postmatic-optin-topbar-wrap ul, #postmatic-optin-topbar-wrap ol {
+		margin-left: 45px;
+		}
 
 		.prompt-subscribe-widget-content {
 		display:inline-block !important;
@@ -335,6 +392,8 @@ class Prompt_Optins_Style {
 		color: {{type}} !important;
 		padding-right: 15px !important;
 		display: inline-block !important;
+		text-align: left !important;
+		font-weight: bold !important;
 		}
 		
 		#postmatic-optin-topbar div.subscribe {
@@ -351,9 +410,9 @@ class Prompt_Optins_Style {
 		border: none !important;
 		height: 24px !important;
 		background: {{button-background}} !important;
-		-webkit-border-radius: 2px !important;
-		-moz-border-radius: 2px !important;
-		border-radius: 2px !important;
+		-webkit-border-radius: 6px !important;
+		-moz-border-radius: 6px !important;
+		border-radius: 6px !important;
 		color: {{button-type}} !important;
 		font-weight: normal !important;
 		border-width:1px !important;
@@ -365,15 +424,15 @@ class Prompt_Optins_Style {
 		padding: 3px 7px !important;
 		text-align: left !important;
 		border: none !important;
-		height: 24px !important;
+		height: 22px !important;
 		background: #fff !important;
-		-webkit-border-radius: 2px !important;
-		-moz-border-radius: 2px !important;
-		border-radius: 2px !important;
-		margin-top: 3px !important;
+		-webkit-border-radius: 8px !important;
+		-moz-border-radius: 8px !important;
+		border-radius: 8px !important;
+		margin-top: 0 !important;
 		color: #343434 !important;
 		margin-left: 10px !important;
-		width: 200px !important;
+		width: 150px !important;
 		font-size: 80% !important;
 		border-color: {{border-color}} !important;
 		border-width: 1px !important;
@@ -386,7 +445,7 @@ class Prompt_Optins_Style {
 		
 		#postmatic-optin-topbar .error,#postmatic-optin-topbar .message {
 		color: {{type}} !important;
-		font-size: 80% !important;
+		font-size: 90% !important;
 		}
 		
 			
@@ -400,7 +459,7 @@ class Prompt_Optins_Style {
 		width:100% !important;
 		text-align:center !important;
 		color:#fff !important;
-		padding:7px !important;
+		padding:5px !important;
 		overflow:hidden !important;
 		height:40px !important;
 		z-index:1000 !important;
@@ -521,6 +580,37 @@ class Prompt_Optins_Style {
 		border-top-right-radius: 15px !important;
 		}
 		
+		#postmatic-widget-bottom_calderaModal a {
+		color: {{type}} !important;
+		text-decoration: underline !important;
+		}
+		
+		#postmatic-widget-bottom_calderaModal h2, #postmatic-widget-bottom_calderaModal h3, #postmatic-widget-bottom_calderaModal h4 {
+		color: {{accent}};
+		}
+		
+				
+		#postmatic-widget-bottom_calderaModal h2 {
+		font-size: 140% !important;
+		}
+		
+		#postmatic-widget-bottom_calderaModal h3 {
+		font-size: 125% !important;
+		}
+		
+		#postmatic-widget-bottom_calderaModal h4 {
+		font-size: 110% !important;
+		}
+		
+		
+		#postmatic-widget-bottom_calderaModal ul, #postmatic-widget-bottom_calderaModal ol {
+		margin-left: 45px;
+		}
+		
+		#postmatic-widget-bottom_calderaModal .caldera-modal-closer {
+		position: relative !important;
+		}
+		
 		#postmatic-widget-bottom_calderaModalTitle {
 		min-height: 50px !important;
 		font-weight:bold;
@@ -541,7 +631,7 @@ class Prompt_Optins_Style {
 		text-align: left !important;
 		background: url(<?php echo $background_image_url ?>) 95% center no-repeat !important;
 		background-size: 35px !important;
-		width: 100% !important;
+		width: 300px !important;
 		display:block !important;
 		}
 
@@ -562,7 +652,7 @@ class Prompt_Optins_Style {
 		}
 		
 		#postmatic-widget-bottom_calderaModal input.submit {
-		padding: 7px 15px !important;
+		padding: 7px 13px !important;
 		text-align: center !important;
 		border: 1px solid {{button-background}} !important;
 		background: {{button-background}} !important;
@@ -599,8 +689,7 @@ class Prompt_Optins_Style {
 		
 		
 		#postmatic-widget-bottom_calderaModal div.loading-indicator {
-		position: relative !important;
-		left: 105px !important;
+
 		}
 
 		@media only screen and (max-width : 550px) {
@@ -608,6 +697,7 @@ class Prompt_Optins_Style {
 		width: 100%  !important;
 		margin-right: 0 !important;
 		}
+
 		}
 	
 		<?php
@@ -637,7 +727,32 @@ class Prompt_Optins_Style {
 		border-top-left-radius: 15px !important;
 		border-bottom-right-radius: 15px !important;
 		min-height: 230px !important;
-
+		}
+		
+				
+		#postmatic-inpost-optin-widget a {
+		color: {{type}} !important;
+		text-decoration: underline !important;
+		}
+		
+		#postmatic-inpost-optin-widget h2, #postmatic-inpost-optin-widget h3, #postmatic-inpost-optin-widget h4 {
+		color: {{button-background}} !important;
+		}
+		
+		#postmatic-inpost-optin-widget h2 {
+		font-size: 140% !important;
+		}
+		
+		#postmatic-inpost-optin-widget h3 {
+		font-size: 125% !important;
+		}
+		
+		#postmatic-inpost-optin-widget h4 {
+		font-size: 110% !important;
+		}
+		
+		#postmatic-inpost-optin-widget ul, #postmatic-inpost-optin-widget ol {
+		margin-left: 25px !important;
 		}
 		
 		#postmatic-inpost-optin-widget div.widget_prompt_subscribe_widget {
@@ -657,6 +772,7 @@ class Prompt_Optins_Style {
 		margin: 0 0 15px 175px !important;
 		font-size: 180% !important;
 		padding: 0 !important;
+		text-align: left !important;
 		}
 
 		#postmatic-inpost-optin-widget div.primary.prompt {

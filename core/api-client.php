@@ -4,6 +4,8 @@
  * A client for Prompt web services.
  *
  * Decorates the native WordPress HTTP function wp_remote_request().
+ *
+ * @since 0.1.0
  */
 class Prompt_Api_Client implements Prompt_Interface_Http_Client {
 
@@ -19,7 +21,12 @@ class Prompt_Api_Client implements Prompt_Interface_Http_Client {
 	 * @param null $base_url            Optional base API URL. Defaults to https://api.gopostmatic.com/api/v1.
 	 * @param string $implementation    Optional decorator target. Defaults to wp_remote_request.
 	 */
-	public function __construct( $defaults = array(), $key = null, $base_url = null, $implementation = 'wp_remote_request' ) {
+	public function __construct(
+		$defaults = array(),
+		$key = null,
+		$base_url = null,
+		$implementation = 'wp_remote_request'
+	) {
 		$default_url = defined( 'PROMPT_API_URL' ) ? PROMPT_API_URL : 'https://app.gopostmatic.com/api/v1';
 		$this->key = $key ? $key : Prompt_Core::$options->get( 'prompt_key' );
 		$this->base_url = $base_url ? $base_url : $default_url;
@@ -27,6 +34,15 @@ class Prompt_Api_Client implements Prompt_Interface_Http_Client {
 		$this->implementation = $implementation;
 	}
 
+	/**
+	 * Make a method agnostic request
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $endpoint
+	 * @param array $request
+	 * @return mixed The implementation return value, a wp_remote_request() array by default.
+	 */
 	public function send( $endpoint, $request = array() ) {
 
 		$url = $this->make_url( $endpoint );
@@ -42,7 +58,6 @@ class Prompt_Api_Client implements Prompt_Interface_Http_Client {
 		if ( !isset( $request['headers']['X-Prompt-Core-Version'] ) )
 			$request['headers']['X-Prompt-Core-Version'] = Prompt_Core::version( $full = true );
 
-		// TODO: decrease timeout when traffic allows
 		if ( !isset( $request['timeout'] ) )
 			$request['timeout'] = 15;
 
@@ -54,11 +69,29 @@ class Prompt_Api_Client implements Prompt_Interface_Http_Client {
 		return $reply;
 	}
 
+	/**
+	 * Make a GET request to any endpoint
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $endpoint
+	 * @param array $request
+	 * @return mixed The implementation return value, a wp_remote_request() array by default.
+	 */
 	public function get( $endpoint, $request = array() ) {
 		$request['method'] = 'GET';
 		return $this->send( $endpoint, $request );
 	}
 
+	/**
+	 * Make a POST request to any endpoint
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $endpoint
+	 * @param array $request
+	 * @return mixed The implementation return value, a wp_remote_request() array by default.
+	 */
 	public function post( $endpoint, $request = array() ) {
 		$request['method'] = 'POST';
 
@@ -68,11 +101,29 @@ class Prompt_Api_Client implements Prompt_Interface_Http_Client {
 		return $this->send( $endpoint, $request );
 	}
 
+	/**
+	 * Make a HEAD request to any endpoint
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $endpoint
+	 * @param array $request
+	 * @return mixed The implementation return value, a wp_remote_request() array by default.
+	 */
 	public function head( $endpoint, $request = array() ) {
 		$request['method'] = 'HEAD';
 		return $this->send( $endpoint, $request );
 	}
 
+	/**
+	 * Make a PUT request to any endpoint
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $endpoint
+	 * @param array $request
+	 * @return mixed The implementation return value, a wp_remote_request() array by default.
+	 */
 	public function put( $endpoint, $request = array() ) {
 		$request['method'] = 'PUT';
 
@@ -82,11 +133,24 @@ class Prompt_Api_Client implements Prompt_Interface_Http_Client {
 		return $this->send( $endpoint, $request );
 	}
 
+	/**
+	 * Make a DELETE request to any endpoint
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $endpoint
+	 * @param array $request
+	 * @return mixed The implementation return value, a wp_remote_request() array by default.
+	 */
 	public function delete( $endpoint, $request = array() ) {
 		$request['method'] = 'DELETE';
 		return $this->send( $endpoint, $request );
 	}
 
+	/**
+	 * @param string $endpoint
+	 * @return string
+	 */
 	protected function make_url( $endpoint ) {
 		if ( empty( $endpoint ) or '/' == $endpoint[0] )
 			return $this->base_url . $endpoint;

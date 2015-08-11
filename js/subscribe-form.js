@@ -57,7 +57,7 @@ jQuery(
 
 				$nonce_input.val( prompt_subscribe_form_env.nonce );
 
-				$prompts.filter( '.primary.subscribe' ).text( $widget.data( 'subscribePrompt' ) );
+				$prompts.filter( '.primary.subscribe' ).html( $widget.data( 'subscribePrompt' ) );
 				$prompts.filter( '.' + $mode_input.val() ).show();
 
 				enable_placeholders();
@@ -162,7 +162,7 @@ jQuery(
 								var bottom_bottom_triggered = false;
 								$( window ).scroll(
 									function () {
-										if ( false == popup_bottom_triggered ) {
+										if ( false == bottom_bottom_triggered ) {
 											if ( near_bottom() ) {
 												bottom_bottom_triggered = true;
 												$( '<div>' ).calderaModal( options );

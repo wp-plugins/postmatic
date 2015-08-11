@@ -15,7 +15,7 @@
 * @var string           $site_icon_url
 * @var string           $unsubscribe_url
  */
-$is_comment = isset( $is_comment ) ? $is_comment : false;
+$is_comment = isset( $comment_header ) ? $comment_header : false;
 ?> 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
   <head>

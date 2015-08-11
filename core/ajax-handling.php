@@ -21,7 +21,6 @@ class Prompt_Ajax_Handling {
 		$object_type = sanitize_text_field( $_POST['object_type'] );
 		$email = isset( $_POST['subscribe_email'] ) ? sanitize_email( $_POST['subscribe_email'] ) : null;
 		$name = isset( $_POST['subscribe_name'] ) ? sanitize_text_field( $_POST['subscribe_name'] ) : null;
-		$confirm_unsubscribe = isset( $_POST['confirm_unsubscribe'] ) ? true : null;
 
 		/** @var Prompt_Interface_Subscribable $object */
 		$object = new $object_type( $object_id );
@@ -34,28 +33,18 @@ class Prompt_Ajax_Handling {
 			$found_by_email = (bool)$subscriber;
 		}
 
-		if ( !$subscriber and !$found_by_email and $confirm_unsubscribe ) {
-			printf( __( '%s is not subscribed to %s.', 'Postmatic' ), $email, $object->subscription_object_label() );
-			wp_die();
-		}
-
-		if ( !$found_by_email and $email and !$confirm_unsubscribe ) {
+		if ( !$found_by_email and $email ) {
 			echo self::verify_new_subscriber( $object, $email, $name );
 			wp_die();
 		}
 
-		if ( $object->is_subscribed( $subscriber->ID ) and $found_by_email and !$confirm_unsubscribe ) {
-			echo self::confirm_unsubscribe( $email );
+		if ( $object->is_subscribed( $subscriber->ID ) and $found_by_email ) {
+			printf( __( 'You are already subscribed to %s.', 'Postmatic' ), $object->subscription_object_label() );
 			wp_die();
 		}
 
 		if ( $object->is_subscribed( $subscriber->ID ) ) {
 			echo self::unsubscribe( $object, $subscriber, $found_by_email );
-			wp_die();
-		}
-
-		if ( $confirm_unsubscribe ) {
-			printf( __( '%s is not subscribed to %s.', 'Postmatic' ), $email, $object->subscription_object_label() );
 			wp_die();
 		}
 
@@ -371,14 +360,6 @@ class Prompt_Ajax_Handling {
 		 * @param array $user_data
 		 */
 		return apply_filters( 'prompt/ajax/subscription_verification_message', $message, $email, $user_data );
-	}
-
-	protected static function confirm_unsubscribe( $email ) {
-		return sprintf( __( 'Are you sure you want to unsubscribe %s?', 'Postmatic' ), $email ) .
-			'<br />' .
-			html( 'a href="."', html( 'small', __( 'Not you? Click here to start over', 'Postmatic' ) ) ) .
-			html( 'input', array( 'type' => 'hidden', 'name' => 'confirm_unsubscribe', 'value' => 'Unsubscribe', ) ) .
-			html( 'input', array( 'type' => 'submit', 'value' => __( 'Unsubscribe', 'Postmatic' ) ) );
 	}
 
 	/**

@@ -18,11 +18,14 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 	}
 
 	public function send_one( Prompt_Email $email ) {
+		$emails = apply_filters( 'prompt/outbound/emails', array( $email ) );
 
-		$results = new stdClass();
+		if ( empty( $emails ) )
+			return false;
 
-		if ( $email->get_metadata() )
-			$results = $this->prepare_one( $email );
+		$email = $emails[0];
+
+		$results = $this->prepare_one( $email );
 
 		if ( is_wp_error( $results ) )
 			return $results;
@@ -35,13 +38,12 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 	 * @return object|WP_Error
 	 */
 	public function send_many( array $emails ) {
+		$emails = apply_filters( 'prompt/outbound/emails', $emails );
+
 		if ( empty( $emails ) )
 			return false;
 
-		$results = new stdClass();
-
-		if ( $emails[0]->get_metadata() )
-			$results = $this->prepare_many( $emails );
+		$results = $this->prepare_many( $emails );
 
 		if ( is_wp_error( $results ) )
 			return $results;
@@ -117,9 +119,6 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 
 		$actions = $this->implied_actions( $emails );
 
-		// currently we only track replies locally
-		$actions = in_array( 'track-replies', $actions ) ? array( 'track-replies' ) : array();
-
 		$results = $this->prompt_outbound( $emails, $actions );
 
 		if ( is_wp_error( $results ) ) {
@@ -143,6 +142,30 @@ class Prompt_Wp_Mailer extends Prompt_Mailer {
 			require_once ABSPATH . WPINC . '/class-smtp.php';
 		}
 		return new PHPMailer( true );
+	}
+
+	/**
+	 * Get actions implied in emails.
+	 *
+	 * If any emails have metadata, 'track-replies' is included.
+	 *
+	 * @param Prompt_Email[] $emails
+	 * @return array implied actions
+	 */
+	protected function implied_actions( $emails ) {
+		$actions = array();
+
+		foreach ( $emails as $email ) {
+
+			if ( $email->get_metadata() and !in_array( 'track-replies', $actions ) )
+				$actions[] = 'track-replies';
+
+			if ( count( $actions ) == 1 )
+				break;
+
+		}
+
+		return $actions;
 	}
 
 }

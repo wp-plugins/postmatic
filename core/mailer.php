@@ -44,13 +44,15 @@ class Prompt_Mailer {
 	 */
 	protected function prompt_outbound( array $emails, array $actions ) {
 
+		if ( in_array( 'send-email', $actions ) )
+			$emails = apply_filters( 'prompt/outbound/emails', $emails );
+
 		$email_data = new stdClass();
+		$email_data->actions = $actions;
+		$email_data->outboundMessages = array();
 
 		if ( empty( $actions ) or empty( $emails ) )
 			return $email_data;
-
-		$email_data->actions = $actions;
-		$email_data->outboundMessages = array();
 
 		foreach ( $emails as $email ) {
 			$email_data->outboundMessages[] = $this->make_prompt_message( $email, $actions );
