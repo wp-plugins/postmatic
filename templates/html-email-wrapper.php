@@ -483,10 +483,6 @@ ul.dpe-flexible-posts li a img {
   clear: both;
 }
 
-.nc_socialPanel .count {
-  display: none !important;
-}
-
 .nc_socialPanel .nc_tweetContainer {
   float: left;
   width: auto;

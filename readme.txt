@@ -1,6 +1,6 @@
 === Postmatic - Post and comment subscriptions that invite you to hit reply. Now with Optins. ===
 Contributors: Postmatic
-Tags: email, notification, notify, posts, subscribe, subscription, email, subscribe to comments, commenting, reply, email, optins, popups, optin forms, opt-in, subscribe form, comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, mailchimp, mailgun, email comming, reply to email, email replies, engagement, invite, invitations, jetpack, subscribe2
+Tags: email, notification, notify, posts, subscribe, subscription, email, subscribe to comments, commenting, reply, email, optins, popups, optin forms, opt-in, subscribe form, comments, posts, reply, subscribe, mail, listserve, mailing, subscriptions, newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mandrill, mailchimp, mailgun, email comming, reply to email, email replies, engagement, invite, invitations, jetpack, subscribe2
 Requires at least: 3.9
 Tested up to: 4.2
 Stable tag: trunk
@@ -83,6 +83,11 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 15. The optin configuration screeen.
 
 == Changelog ==
+
+= 1.4.2 =
+
+- Just a quick release to fix a bug with favicons not refreshing as well as better button support for Social Warfare. More coming next week.
+
 
 = 1.4.1 =
 

@@ -85,6 +85,7 @@ class Prompt_Core {
 			'skimlinks_publisher_id' => '',
 		);
 		$default_options = array_merge( $default_options, Prompt_Optins::options_fields() );
+		self::prevent_options_errors();
 		self::$options = new scbOptions( 'prompt_options', __FILE__, $default_options );
 
 		/**
@@ -111,6 +112,17 @@ class Prompt_Core {
 		}
 
 		do_action( 'prompt/core_loaded' );
+	}
+
+	/**
+	 * Detect and prevent options default errors.
+	 *
+	 * It seems that defaults may not work on Windows, and cause errors.
+	 */
+	protected static function prevent_options_errors() {
+		if ( ! is_array( get_option( 'prompt_options', array() ) ) ) {
+			update_option( 'prompt_options', array() );
+		}
 	}
 
 	/**
@@ -320,11 +332,16 @@ class Prompt_Core {
 	public static function set_site_icon() {
 
 		$current_attachment_id = self::$options->get( 'site_icon' );
-		if ( $current_attachment_id )
+		if ( $current_attachment_id ) {
 			wp_delete_attachment( $current_attachment_id, $full_delete = true );
+		}
 
 		$icon = new Prompt_Grab_Icon();
-		self::$options->set( 'site_icon', $icon->get_attachment_id() );
+
+		// If the request failed, set to -1 to prevent retry loops
+		$attachment_id = $icon->get_attachment_id() ? $icon->get_attachment_id() : -1;
+
+		self::$options->set( 'site_icon', $attachment_id );
 	}
 
 	/**

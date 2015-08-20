@@ -109,7 +109,7 @@ $previous_index = count( $previous_comments );
 				<?php
 				printf(
 					__(
-						'<br /><strong>Please note</strong>: Your reply will be published πon %s.',
+						'<br /><strong>Please note</strong>: Your reply will be published on %s.',
 						'Postmatic'
 					),
 					'<a href="' . get_permalink( $comment->comment_post_ID ) . '">' .

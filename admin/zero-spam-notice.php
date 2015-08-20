@@ -22,10 +22,10 @@ class Prompt_Admin_Zero_Spam_Notice extends Prompt_Admin_Conditional_Notice {
 		return $this->render_message(
 			sprintf(
 				__(
-					'Did you know there is an excellent and free way to keep spam comments from ever getting submitted? We heartily recommend installing <a href="%s">WordPress Zero Spam</a>.',
+					'Did you know there is an excellent and free way to keep spam comments from ever getting submitted? We heartily recommend installing <a href="%s">GoodBye Captcha</a>.',
 					'Postmatic'
 				),
-				'https://wordpress.org/plugins/zero-spam/'
+				'https://wordpress.org/plugins/goodbye-captcha/'
 			)
 		);
 	}
