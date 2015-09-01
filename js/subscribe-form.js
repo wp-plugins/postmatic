@@ -155,7 +155,8 @@ jQuery(
 								width: "auto",
 								sticky: "bottom right",
 								title: optin.title,
-								"focus": true
+								"focus": true,
+								minimized: 7000
 							};
 
 							if ( 'bottom' == optin.trigger ) {
@@ -254,6 +255,20 @@ jQuery(
 			}
 
 			function near_bottom() {
+				if ( $( '#comments' ).length > 0 ) {
+					return near_comments();
+				}
+				return near_end();
+			}
+
+			function near_comments() {
+				var $window = $( window );
+				var doc_view_bottom = $window.scrollTop() + $window.height();
+				var comments_top = $( '#comments' ).offset().top;
+				return ( comments_top + 100 < doc_view_bottom );
+			}
+
+			function near_end() {
 				var window_height = $( window ).height();
 				var near_height = window_height * 0.15;
 				var bottom_trigger = $( document ).height() - window_height - near_height;

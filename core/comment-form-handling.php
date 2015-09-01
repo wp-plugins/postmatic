@@ -90,16 +90,11 @@ class Prompt_Comment_Form_Handling {
 	}
 
 	/**
-	 * Echo comment form content.
+	 * @since 1.5.0
 	 *
-	 * Called by the comment_form action.
-	 *
-	 * @param $post_id
+	 * @param int $post_id Optionally supply which post to subscribe to.
 	 */
-	public static function form_content( $post_id ) {
-
-		if ( !Prompt_Core::$options->get( 'prompt_key' ) or !Prompt_Core::$options->get( 'augment_comment_form' ) )
-			return;
+	public static function enqueue_assets( $post_id ) {
 
 		$script = new Prompt_Script( array(
 			'handle' => 'prompt-comment-form',
@@ -119,6 +114,37 @@ class Prompt_Comment_Form_Handling {
 			)
 		);
 
+	}
+
+	/**
+	 * @since 1.5.0
+	 *
+	 * @param array $handles
+	 * @return array
+	 */
+	public static function enqueue_epoch_assets( array $handles ) {
+
+		self::enqueue_assets( get_the_ID() );
+
+		$handles[] = 'prompt-comment-form';
+
+		return $handles;
+	}
+
+	/**
+	 * Echo comment form content.
+	 *
+	 * Called by the comment_form action.
+	 *
+	 * @param $post_id
+	 */
+	public static function form_content( $post_id ) {
+
+		if ( !Prompt_Core::$options->get( 'prompt_key' ) or !Prompt_Core::$options->get( 'augment_comment_form' ) )
+			return;
+
+		self::enqueue_assets( $post_id );
+
 		self::$prompt_post = new Prompt_Post( $post_id );
 
 		$current_user = Prompt_User_Handling::current_user();
@@ -136,9 +162,7 @@ class Prompt_Comment_Form_Handling {
 				)
 			),
 			'&nbsp;',
-			html( 'span',
-				__( 'Participate in this conversation via email', 'Postmatic' )
-			)
+			html( 'span', Prompt_Core::$options->get( 'comment_opt_in_text' ) )
 		);
 
 	}

@@ -40,35 +40,6 @@ printf(
 
 
 <?php endif; ?>
-<?php __( "First, there are some important things you should know:", 'Postmatic' ); ?>
-- <?php
-printf(
-	__(
-		"As a subscriber to %s, you'll receive new posts or comments directly to your inbox as soon as they are published.",
-		'Postmatic'
-	),
-	get_bloginfo( 'name' )
-);
-?>
-
-- <?php _e( 'You will be invited to reply to these emails.', 'Postmatic' ); ?>
-
-- <?php _e( 'Your reply to those emails will be immediately published to the web as a comment.', 'Postmatic' ); ?>
-
-
-<?php
-printf(
-	__(
-		"Please note that your email replies will be seen by anyone visiting the post on %s. That means your email replies are subject to the privacy policy and terms of service of %s. We just wanted to make sure you knew :)",
-		'Postmatic'
-	),
-	get_bloginfo( 'url' ),
-	get_bloginfo( 'name' )
-);
-?>
-
-
-<?php echo Prompt_Html_To_Markdown::h2( __( "Now it's time to confirm your subscription", 'Postmatic' ) ); ?>
 
 <?php
 _e(
@@ -76,9 +47,6 @@ _e(
 	'Postmatic'
 );
 ?>
-
-
-<?php _e( 'Thanks!', 'Postmatic' ); ?>
 
 
 <?php

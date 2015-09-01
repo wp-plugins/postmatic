@@ -78,6 +78,7 @@ class Prompt_Core {
 			'excerpt_default' => false,
 			'custom_widget_templates' => array(),
 			'comment_opt_in_default' => false,
+			'comment_opt_in_text' => __( 'Participate in this conversation via email', 'Postmatic' ),
 			'comment_flood_control_trigger_count' => 6,
 			'upgrade_required' => false,
 			'enable_optins' => false,
@@ -180,6 +181,7 @@ class Prompt_Core {
 		add_action( 'comment_form',         array( 'Prompt_Comment_Form_Handling', 'form_content' ) );
 		add_action( 'comment_post',         array( 'Prompt_Comment_Form_Handling', 'handle_form' ), 10, 2 );
 		add_action( 'comment_form_after',   array( 'Prompt_Comment_Form_Handling', 'after_form' ) );
+		add_filter( 'epoch_iframe_scripts', array( 'Prompt_Comment_Form_Handling', 'enqueue_epoch_assets' ) );
 
 		add_action( 'admin_enqueue_scripts',        array( 'Prompt_Admin_Users_Handling', 'enqueue_scripts' ) );
 		add_filter( 'manage_users_columns',         array( 'Prompt_Admin_Users_Handling', 'manage_users_columns' ) );

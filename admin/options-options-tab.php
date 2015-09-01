@@ -72,6 +72,13 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 					),
 			),
 			array(
+				'title' => __( 'Comment form opt-in text', 'Postmatic' ),
+				'type' => 'text',
+				'name' => 'comment_opt_in_text',
+				'desc' => __( 'This text is displayed by the checkbox on the comment form.', 'Postmatic' ),
+				'extra' => array( 'class' => 'regular-text last-submit' ),
+			),
+			array(
 				'title' => __( 'Comment flood control', 'Postmatic' ),
 				'type' => 'text',
 				'name' => 'comment_flood_control_trigger_count',
@@ -141,6 +148,10 @@ class Prompt_Admin_Options_Options_Tab extends Prompt_Admin_Options_Tab {
 				'enable_skimlinks',
 			)
 		);
+
+		if ( isset( $new_data['comment_opt_in_text'] ) ) {
+			$valid_data['comment_opt_in_text'] = sanitize_text_field( $new_data['comment_opt_in_text'] );
+		}
 
 		$flood_trigger_count = $new_data['comment_flood_control_trigger_count'];
 		$flood_trigger_count = is_numeric( $flood_trigger_count ) ? absint( $flood_trigger_count ) : 6;

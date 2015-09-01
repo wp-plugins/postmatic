@@ -213,12 +213,13 @@ textarea.prompt-custom-text {
   height: 10em; }
 
 .prompt-custom-text-upgrade {
-  background: #28B0C8;
+  background: #F7F7F7;
   padding: 10px;
-  color: #fff;
-  text-align: left; }
-  .prompt-custom-text-upgrade a {
-    color: #fff; }
+  margin:-10px;
+  color: black;
+  text-align: left; 
+  font-size: 85%;
+}
 
 #screenshots {
   width: 70%;

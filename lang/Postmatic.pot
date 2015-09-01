@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
 "Email 1.4.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
-"plugin/1.4.2-20150820-2011\n"
-"POT-Creation-Date: 2015-08-20 20:11:22+00:00\n"
+"plugin/1.4.2-20150901-0251\n"
+"POT-Creation-Date: 2015-09-01 02:51:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -921,7 +921,7 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: admin/options-options-tab.php:39 core/core.php:288
+#: admin/options-options-tab.php:39 core/core.php:290
 msgid "Postmatic Delivery"
 msgstr ""
 
@@ -964,16 +964,24 @@ msgid ""
 msgstr ""
 
 #: admin/options-options-tab.php:75
-msgid "Comment flood control"
+msgid "Comment form opt-in text"
 msgstr ""
 
 #: admin/options-options-tab.php:78
+msgid "This text is displayed by the checkbox on the comment form."
+msgstr ""
+
+#: admin/options-options-tab.php:82
+msgid "Comment flood control"
+msgstr ""
+
+#: admin/options-options-tab.php:85
 msgid ""
 "How many comments in one hour should it take to trigger the flood control? "
 "There is a mimimum of 3."
 msgstr ""
 
-#: admin/options-options-tab.php:81
+#: admin/options-options-tab.php:88
 msgid ""
 "Postmatic automatically pauses comment notifications on posts that go viral. "
 "Setting the trigger to be 6 comments per hour is good for most sites. You "
@@ -981,21 +989,21 @@ msgid ""
 "a>.  "
 msgstr ""
 
-#: admin/options-options-tab.php:91
+#: admin/options-options-tab.php:98
 msgid "Use awesome Postmatic optin forms (beta)"
 msgstr ""
 
-#: admin/options-options-tab.php:94
+#: admin/options-options-tab.php:101
 msgid ""
 "Looking for something more than our widget? Try out the new optin system. It "
 "will enable a new tab up top."
 msgstr ""
 
-#: admin/options-options-tab.php:101
+#: admin/options-options-tab.php:108
 msgid "Enable Skimlinks support (beta)"
 msgstr ""
 
-#: admin/options-options-tab.php:104
+#: admin/options-options-tab.php:111
 msgid "Turn on the Skimlinks tab (look for it up top)"
 msgstr ""
 
@@ -1377,15 +1385,11 @@ msgstr ""
 msgid "We're pausing comment notices for you."
 msgstr ""
 
-#: core/comment-form-handling.php:140
-msgid "Participate in this conversation via email"
-msgstr ""
-
-#: core/comment-form-handling.php:162
+#: core/comment-form-handling.php:186
 msgid "You are subscribed to new comments on this post."
 msgstr ""
 
-#: core/comment-form-handling.php:167
+#: core/comment-form-handling.php:191
 msgid "Unsubscribe"
 msgstr ""
 
@@ -1473,7 +1477,11 @@ msgstr ""
 msgid "Welcome!"
 msgstr ""
 
-#: core/core.php:308
+#: core/core.php:81
+msgid "Participate in this conversation via email"
+msgstr ""
+
+#: core/core.php:310
 msgid "Postmatic Text Version"
 msgstr ""
 
@@ -1782,8 +1790,9 @@ msgid ""
 msgstr ""
 
 #: templates/comment-flood-email-text.php:35
-#: templates/new-post-email-text.php:20 templates/new-post-email.php:34
-#: templates/subscribed-email-text.php:46 templates/subscribed-email.php:37
+#: templates/new-post-email-text.php:20 templates/new-post-email.php:33
+#: templates/new-post-email.php:55 templates/subscribed-email-text.php:46
+#: templates/subscribed-email.php:37
 msgid "View this post online"
 msgstr ""
 
@@ -1948,7 +1957,7 @@ msgid "There were %d comments previous to this. Here is this reply in context:"
 msgstr ""
 
 #: templates/comment-reply-email-text.php:88
-#: templates/comment-reply-email.php:132
+#: templates/comment-reply-email.php:130
 msgid ""
 "To no longer receive other comments or replies in this discussion reply with "
 "the word 'unsubscribe'."
@@ -1965,24 +1974,20 @@ msgid ""
 "reply in context:"
 msgstr ""
 
-#: templates/comment-reply-email.php:128
-msgid "Leave this conversation"
-msgstr ""
-
 #: templates/core-options-premium.php:13
 msgid "Manage your account"
 msgstr ""
 
-#: templates/html-email-wrapper.php:737
+#: templates/html-email-wrapper.php:746
 #: templates/html-local-email-wrapper.php:68
 msgid "Sent from %s."
 msgstr ""
 
-#: templates/html-email-wrapper.php:743
+#: templates/html-email-wrapper.php:752
 msgid "Delivered by <a href=\"%s\">Postmatic</a>."
 msgstr ""
 
-#: templates/html-email-wrapper.php:752
+#: templates/html-email-wrapper.php:761
 #: templates/html-local-email-wrapper.php:84
 msgid ""
 "To immediately stop receiving all posts and comments from %s you can <a href="
@@ -2063,7 +2068,7 @@ msgid ""
 "* subscribe *."
 msgstr ""
 
-#: templates/new-post-email-text.php:48 templates/new-post-email.php:73
+#: templates/new-post-email-text.php:48 templates/new-post-email.php:77
 msgid "Manage your subscription"
 msgstr ""
 
@@ -2071,39 +2076,39 @@ msgstr ""
 msgid "To unsubscribe to %s reply with the word * unsubscribe *."
 msgstr ""
 
-#: templates/new-post-email.php:44 templates/rejoined-email.php:38
+#: templates/new-post-email.php:43 templates/rejoined-email.php:38
 #: templates/subscribed-email.php:68
 msgid ""
 "Reply to this email to add a comment. Your email address will not be shown."
 msgstr ""
 
-#: templates/new-post-email.php:48 templates/subscribed-email.php:72
+#: templates/new-post-email.php:47 templates/subscribed-email.php:72
 msgid ""
 "You're invited to comment on this post by replying to this email. If you do, "
 "it may be published immediately or held for moderation, depending on the "
 "comment policy of %s."
 msgstr ""
 
-#: templates/new-post-email.php:62
+#: templates/new-post-email.php:66
 msgid "Get the latest comments and stay in the loop"
 msgstr ""
 
-#: templates/new-post-email.php:66
+#: templates/new-post-email.php:70
 msgid ""
 "To subscribe to comments on this post and receive a copy of the conversation "
 "so far reply with the word <strong>subscribe</strong>."
 msgstr ""
 
-#: templates/new-post-email.php:77
+#: templates/new-post-email.php:81
 msgid ""
 "To <strong>unsubscribe</strong> to %s reply with the word 'unsubscribe'."
 msgstr ""
 
-#: templates/new-post-email.php:86
+#: templates/new-post-email.php:90
 msgid "Comments on this post are closed"
 msgstr ""
 
-#: templates/new-post-email.php:88
+#: templates/new-post-email.php:92
 msgid "You can reply to this email to send a note directly to the post author."
 msgstr ""
 
@@ -2274,53 +2279,14 @@ msgid ""
 "verification but you did not reply correctly. Please read the following:"
 msgstr ""
 
-#: templates/subscription-agreement-email-text.php:43
-msgid "First, there are some important things you should know:"
-msgstr ""
-
-#: templates/subscription-agreement-email-text.php:46
-#: templates/subscription-agreement-email.php:52
-msgid ""
-"As a subscriber to %s, you'll receive new posts or comments directly to your "
-"inbox as soon as they are published."
-msgstr ""
-
-#: templates/subscription-agreement-email-text.php:54
-#: templates/subscription-agreement-email.php:60
-msgid "You will be invited to reply to these emails."
-msgstr ""
-
-#: templates/subscription-agreement-email-text.php:56
-msgid ""
-"Your reply to those emails will be immediately published to the web as a "
-"comment."
-msgstr ""
-
-#: templates/subscription-agreement-email-text.php:61
-#: templates/subscription-agreement-email.php:70
-msgid ""
-"Please note that your email replies will be seen by anyone visiting the post "
-"on %s. That means your email replies are subject to the privacy policy and "
-"terms of service of %s. We just wanted to make sure you knew :)"
-msgstr ""
-
-#: templates/subscription-agreement-email-text.php:71
-msgid "Now it's time to confirm your subscription"
-msgstr ""
-
-#: templates/subscription-agreement-email-text.php:74
+#: templates/subscription-agreement-email-text.php:45
 msgid ""
 "If you understand these guidelines and you're ready to complete your "
 "subscription, *please reply to this email with the word agree*."
 msgstr ""
 
-#: templates/subscription-agreement-email-text.php:81
-#: templates/subscription-agreement-email.php:104
-msgid "Thanks!"
-msgstr ""
-
-#: templates/subscription-agreement-email-text.php:86
-#: templates/subscription-agreement-email.php:95
+#: templates/subscription-agreement-email-text.php:54
+#: templates/subscription-agreement-email.php:62
 msgid ""
 "If you did not initiate this subscription please ignore this email or "
 "forward it to %s."
@@ -2330,23 +2296,10 @@ msgstr ""
 msgid "There’s one more step to finish your subscription to %s."
 msgstr ""
 
-#: templates/subscription-agreement-email.php:47
-msgid "First, there are some important things you should know"
-msgstr ""
-
-#: templates/subscription-agreement-email.php:63
-msgid "Your reply to those emails will be published to the web as a comment."
-msgstr ""
-
-#: templates/subscription-agreement-email.php:79
-msgid "Now it’s time to confirm your subscription"
-msgstr ""
-
-#: templates/subscription-agreement-email.php:82
+#: templates/subscription-agreement-email.php:49
 msgid ""
-"If you understand these guidelines and you’re ready to complete your "
-"subscription, please <strong class=\"alert\">reply to this email with the "
-"word agree</strong>."
+"<span class=\"alert\">To confirm your subscription, please reply to this "
+"email with the word <strong>agree</strong></span>."
 msgstr ""
 
 #: templates/text-email-wrapper.php:22

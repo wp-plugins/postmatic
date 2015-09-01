@@ -604,7 +604,7 @@ class Prompt_Optins_Style {
 		
 		
 		#postmatic-widget-bottom_calderaModal ul, #postmatic-widget-bottom_calderaModal ol {
-		margin-left: 45px;
+		margin-left: 45px !important;
 		}
 		
 		#postmatic-widget-bottom_calderaModal .caldera-modal-closer {
@@ -613,7 +613,11 @@ class Prompt_Optins_Style {
 		
 		#postmatic-widget-bottom_calderaModalTitle {
 		min-height: 50px !important;
-		font-weight:bold;
+		font-weight:bold !important;
+		background: url(<?php echo $background_image_url ?>) 5px center no-repeat !important;
+		background-size: 35px !important;
+		width: auto !important;
+		display:block !important;
 		}
 		
 		#postmatic-widget-bottom_calderaModal .unsubscribe.prompt {
@@ -624,15 +628,12 @@ class Prompt_Optins_Style {
 		}
 		
 		h3#postmatic-widget-bottom_calderaModalLable {
+		padding: 25px 20px 20px 50px !important;
 		color: {{type}} !important;
 		margin: 0 !important;
 		font-size: 110% !important;
-		padding: 25px 6% 20px 15px !important;
 		text-align: left !important;
-		background: url(<?php echo $background_image_url ?>) 95% center no-repeat !important;
-		background-size: 35px !important;
-		width: 300px !important;
-		display:block !important;
+		width: auto !important;
 		}
 
 		#postmatic-widget-bottom_calderaModal div.primary.prompt {

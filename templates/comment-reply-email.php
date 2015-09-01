@@ -125,8 +125,6 @@
 	</div>
 
 
-	<h4><?php _e( 'Leave this conversation', 'Postmatic' ); ?></h4>
-
 	<p>
 		<?php
 		_e(

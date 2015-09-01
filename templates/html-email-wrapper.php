@@ -305,20 +305,20 @@ img.featured {
     .widgets li, .widgets ul {list-style: none !important; margin-left: 0 !important; padding-left: 0 !important;}
     .alignright {float: right !important; margin: 0 0 10px 10px !important;}
 
-/*Sharedaddy by Jetpack and Juiz Social Share*/
-.sd-content ul li, ul.juiz_sps_links_list li {
+/*Sharedaddy by Jetpackm Juiz Social Share, Easy Social Share Buttons*/
+.sd-content ul li, ul.juiz_sps_links_list li, ul.essb_links_list {
   list-style: none;
   display: inline;
 }
 
 .sd-title { clear: both !important;}
 
-.content .sd-content ul li, ul.juiz_sps_links_list li {
+.content .sd-content ul li, ul.juiz_sps_links_list li, essb_links_list essb_hide_name li {
   margin: 0 5px 10px 0 !important;
   display: block;
   float: left;
 }
-.content .sd-content ul li a, ul.juiz_sps_links_list li a {
+.content .sd-content ul li a, ul.juiz_sps_links_list li a,essb_links_list essb_hide_name li a {
   color: #555 !important;
   font-size: 12px;
   padding: 5px 8px;
@@ -329,6 +329,10 @@ img.featured {
   background: #F8F8F8;
   text-decoration: none;
 
+}
+
+.abuse {
+  font-size: 85%;
 }
 #socialmedia-container div {
   float: left;
@@ -481,6 +485,10 @@ ul.dpe-flexible-posts li a img {
   margin: 25px 0;
   height: 30px;
   clear: both;
+}
+
+.nc_socialPanel .totes, .nc_socialPanel .sw_count {
+  display: none !important;
 }
 
 .nc_socialPanel .nc_tweetContainer {
@@ -636,6 +644,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .reply-prompt h3 small {display: block; font-size: 70% !important;}
 .reply-prompt p {margin-bottom: 0 !important;}
 .reply-promtp a {color: black;}
+.online-prompt {clear: both; margin-top: 10px; margin-bottom: 10px; margin-left: 40px;}
 .previous-comments {margin-bottom: 30px;}
 .previous-comment-3 {opacity: .4;}
 .previous-comment-2 {opacity: .6;}

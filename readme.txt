@@ -84,6 +84,17 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.4.3 =
+
+- We have radically simplified the subscription agreement email. Two lines. That's it.
+- Word nerds rejoice! You can now configured the _Participate in this conversation via email_ language that is placed on the comment form.
+- We've made it more obvious to reply to an email to leave your reply.
+- The end-of-post optin trigger now triggers at the actual end of post instead of the bottom of the page.
+- Fixed a bug that would cause the slide-in modal to misbehave when leaving a comment
+- Some more Social Warfare tweaks.
+- Updated Spanish translation by Patricia at mascositas.com. Thanks!
+- Added support for Easy Social Share Button. All set, Tim!
+
 = 1.4.2 =
 
 - Just a quick release to fix a bug with favicons not refreshing as well as better button support for Social Warfare. More coming next week.

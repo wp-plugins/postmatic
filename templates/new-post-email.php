@@ -30,8 +30,7 @@
 <div class="padded">
 <div id="the_content">
 	<?php $excerpt_only ? the_excerpt() : the_content(); ?>
-	<p id="button"><a href="<?php the_permalink(); ?>"
-	                  class="btn-secondary"><?php _e( 'View this post online', 'Postmatic' ); ?></a></p>
+	<p id="button"><a href="<?php the_permalink(); ?>" class="btn-secondary"><?php _e( 'View this post online', 'Postmatic' ); ?></a></p>
 </div>
 
 <?php if ( $will_strip_content ) : ?><hr /><?php endif; ?>
@@ -52,10 +51,15 @@
 					get_bloginfo( 'name' )
 				);
 				?>
+			<br />
+			&raquo; <a href="<?php the_permalink(); ?>"><?php _e( 'View this post online', 'Postmatic' ); ?></a>
 			</small>
 		</h3>
 	</div>
+	
 </div>
+
+
 
 	<div class="footnote padded gray">
 
