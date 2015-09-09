@@ -331,6 +331,67 @@ img.featured {
 
 }
 
+.sd-social-icon ul li span {
+  display: none !important;
+}
+
+.sharedaddy {
+  padding-bottom: 20px;
+}
+
+.sd-social-icon .sd-content ul li a {
+  width: 40px;
+  padding: 0;
+  height: 40px;
+  display: block;
+  border: none;
+}
+
+.sd-social-icon .sd-content ul li.share-email a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_em.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+.sd-social-icon .sd-content ul li.share-print a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_pr.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+.sd-social-icon .sd-content ul li.share-google-plus-1 a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_gp.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+.sd-social-icon .sd-content ul li.share-pinterest a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_pi.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+.sd-social-icon .sd-content ul li.share-reddit a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_re.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+.sd-social-icon .sd-content ul li.share-twitter a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_tw.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+.sd-social-icon .sd-content ul li.share-facebook a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_fb.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+.sd-social-icon .sd-content ul li.share-tumblr a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_tm.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+.sd-social-icon .sd-content ul li.share-linkedin a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_li.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+.sd-social-icon .sd-content ul li.share-pocket a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_po.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+.sd-social-icon .sd-content ul li.share-end a {
+  background: url(<?php echo Prompt_Core::$url_path . '/media/icons/jp_re.gif' ;?>) !important;
+  background-size: 100% !important;
+}
+
 .abuse {
   font-size: 85%;
 }
@@ -571,6 +632,15 @@ a.sw_CTT span.sw-ctt-btn {
   margin: 0 10px 10px 0 !important;
 }
 
+/*Darth vader*/
+.darth_vendor_container a {
+    display: block;
+    float: left;
+    width: 25%;
+    border: 1px solid #F6F6F6;
+    box-sizing: border-box;
+}
+
 /*Juiz social share*/
 .juiz_sps_maybe_hidden_text {display: none;}
 
@@ -621,6 +691,11 @@ a.sw_CTT span.sw-ctt-btn {
     .gallery-caption {width: auto !important; text-align: center;}
     #demo { float: none; width: auto; padding: 20px; margin: 20px 0;}
     #demo p, #demo h3, #demo h4 { margin: 5px 0;}
+    
+    .sd-social-icon .sd-content ul li a {
+      width: 20px;
+      height: 20px;
+      }
     }
 
 /*Comments Template*/

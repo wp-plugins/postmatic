@@ -52,9 +52,6 @@ class Prompt_Comment_Mailer {
 		// We will attempt to notifiy these IDs - setting sent early could help lock other processes out
 		$this->add_sent_recipient_ids( $chunk_ids );
 
-		// Turn off native comment notifications
-		add_filter( 'pre_option_comments_notify', create_function( '$a', 'return null;' ) );
-
 		$comment_id = $this->comment->comment_ID;
 		$comment_author = $this->comment_author_user();
 

@@ -79,6 +79,14 @@ class Prompt_Admin_Notice_Handling {
 			Prompt_Enum_Urls::JETPACK_HOWTO
 		);
 
+		$message .= html( 'a',
+			array(
+				'href' => esc_url( add_query_arg( self::$jetpack_conflict_notice, 'true' ) ),
+				'class' => 'button postmatic-dismiss'
+			),
+			__( 'Dismiss' )
+		);
+
 		echo scb_admin_notice( $message, 'error' );
 	}
 

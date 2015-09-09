@@ -152,6 +152,7 @@ class Prompt_Core {
 		add_action( 'wp_insert_comment',                array( 'Prompt_Outbound_Handling', 'action_wp_insert_comment' ), 10, 2 );
 		add_action( 'transition_comment_status',        array( 'Prompt_Outbound_Handling', 'action_transition_comment_status' ), 10, 3 );
 		add_filter( 'comment_moderation_recipients',    array( 'Prompt_Outbound_Handling', 'filter_comment_moderation_recipients' ), 10, 2 );
+		add_filter( 'comment_notification_recipients',  array( 'Prompt_Outbound_Handling', 'filter_comment_notification_recipients' ) );
 
 		add_action( 'prompt/post_mailing/send_notifications',      array( 'Prompt_Post_Mailing', 'send_notifications' ) );
 		add_action( 'prompt/comment_mailing/send_notifications',   array( 'Prompt_Comment_Mailing', 'send_notifications' ) );

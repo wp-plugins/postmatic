@@ -84,6 +84,14 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.4.4 =
+
+- Updated German Translation
+- Added nify new Jetpack sharing icons if you run Jetpack in icon mode
+- Removed the read post online button
+- Improvements to look and language on _content not available in your email client_ content.
+- Made sure authors get comment moderation emails even if they have unsubscribed from comments on a post.
+
 = 1.4.3 =
 
 - We have radically simplified the subscription agreement email. Two lines. That's it.

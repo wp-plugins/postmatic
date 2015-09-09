@@ -101,6 +101,25 @@ class Prompt_Outbound_Handling {
 		return array();
 	}
 
+	/**
+	 * Override native comment notifications.
+	 *
+	 * @since 1.4.4
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/comment_notification_recipients/
+	 *
+	 * @param array $addresses
+	 * @return array Empty array to short circuit native notifications.
+	 */
+	public static function filter_comment_notification_recipients( $addresses ) {
+
+		if ( Prompt_Core::$options->get( 'auto_subscribe_authors' ) ) {
+			// Posmatic will send its own notifications on the transition_comment_status hook
+			return array();
+		}
+
+		return $addresses;
+	}
 
 	/**
 	 * Whether to ignore a published post.

@@ -312,8 +312,10 @@ class Prompt_Subscription_Mailing {
 		 */
 		$template_data = apply_filters( $filter . '/template_data', $template_data );
 
-		if ( $latest_post )
-			setup_postdata( $GLOBALS['post'] = $latest_post );
+		if ( $latest_post ) {
+			$post_rendering_context = new Prompt_Post_Rendering_Context( $latest_post );
+			$post_rendering_context->setup();
+		}
 
 		$post_id = 0;
 		if ( $latest_post or is_a( $object, 'Prompt_Post' ) )
@@ -329,8 +331,9 @@ class Prompt_Subscription_Mailing {
 
 		self::render_email( $email, $text_template, $html_template, $template_data );
 
-		if ( $latest_post )
-			wp_reset_postdata();
+		if ( $latest_post ) {
+			$post_rendering_context->reset();
+		}
 
 		/**
 		 * Filter subscription notification email.

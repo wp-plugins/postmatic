@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.4.3\n"
+"Email 1.4.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
-"plugin/1.4.3-20150901-0300\n"
-"POT-Creation-Date: 2015-09-01 03:00:59+00:00\n"
+"plugin/1.4.4-20150909-1703\n"
+"POT-Creation-Date: 2015-09-09 17:03:38+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,7 +22,8 @@ msgid ""
 "your subscribers. <a href=\"%s\" target=\"_blank\">Learn more</a>."
 msgstr ""
 
-#: admin/conditional-notice.php:92 admin/options-page.php:259
+#: admin/conditional-notice.php:92 admin/notice-handling.php:87
+#: admin/options-page.php:259
 msgid "Dismiss"
 msgstr ""
 
@@ -921,7 +922,7 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: admin/options-options-tab.php:39 core/core.php:290
+#: admin/options-options-tab.php:39 core/core.php:291
 msgid "Postmatic Delivery"
 msgstr ""
 
@@ -1007,7 +1008,7 @@ msgstr ""
 msgid "Turn on the Skimlinks tab (look for it up top)"
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.4.3)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.4.4)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:46
 msgid "Postmatic"
@@ -1393,25 +1394,25 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: core/comment-mailer.php:72 core/comment-mailer.php:78
-#: core/comment-mailer.php:86 core/moderation-mailing.php:21
+#: core/comment-mailer.php:69 core/comment-mailer.php:75
+#: core/comment-mailer.php:83 core/moderation-mailing.php:21
 msgid "Anonymous"
 msgstr ""
 
-#: core/comment-mailer.php:188 core/post-mailing.php:123
+#: core/comment-mailer.php:185 core/post-mailing.php:123
 #: core/subscription-mailing.php:43 core/subscription-mailing.php:106
 msgid "An email sending operation encountered a problem."
 msgstr ""
 
-#: core/comment-mailer.php:395
+#: core/comment-mailer.php:392
 msgid "%s replied to your comment on %s."
 msgstr ""
 
-#: core/comment-mailer.php:402
+#: core/comment-mailer.php:399
 msgid "%s replied to %s on %s"
 msgstr ""
 
-#: core/comment-mailer.php:409
+#: core/comment-mailer.php:406
 msgid "%s commented on %s"
 msgstr ""
 
@@ -1481,7 +1482,7 @@ msgstr ""
 msgid "Participate in this conversation via email"
 msgstr ""
 
-#: core/core.php:310
+#: core/core.php:311
 msgid "Postmatic Text Version"
 msgstr ""
 
@@ -1676,7 +1677,7 @@ msgstr ""
 msgid "You're subscribed to %s"
 msgstr ""
 
-#: core/subscription-mailing.php:363
+#: core/subscription-mailing.php:366
 msgid "You've rejoined %s"
 msgstr ""
 
@@ -1790,8 +1791,8 @@ msgid ""
 msgstr ""
 
 #: templates/comment-flood-email-text.php:35
-#: templates/new-post-email-text.php:20 templates/new-post-email.php:33
-#: templates/new-post-email.php:55 templates/subscribed-email-text.php:46
+#: templates/new-post-email-text.php:20 templates/new-post-email.php:37
+#: templates/new-post-email.php:59 templates/subscribed-email-text.php:46
 #: templates/subscribed-email.php:37
 msgid "View this post online"
 msgstr ""
@@ -1978,16 +1979,16 @@ msgstr ""
 msgid "Manage your account"
 msgstr ""
 
-#: templates/html-email-wrapper.php:746
+#: templates/html-email-wrapper.php:821
 #: templates/html-local-email-wrapper.php:68
 msgid "Sent from %s."
 msgstr ""
 
-#: templates/html-email-wrapper.php:752
+#: templates/html-email-wrapper.php:827
 msgid "Delivered by <a href=\"%s\">Postmatic</a>."
 msgstr ""
 
-#: templates/html-email-wrapper.php:761
+#: templates/html-email-wrapper.php:836
 #: templates/html-local-email-wrapper.php:84
 msgid ""
 "To immediately stop receiving all posts and comments from %s you can <a href="
@@ -2068,7 +2069,7 @@ msgid ""
 "* subscribe *."
 msgstr ""
 
-#: templates/new-post-email-text.php:48 templates/new-post-email.php:77
+#: templates/new-post-email-text.php:48 templates/new-post-email.php:81
 msgid "Manage your subscription"
 msgstr ""
 
@@ -2076,39 +2077,39 @@ msgstr ""
 msgid "To unsubscribe to %s reply with the word * unsubscribe *."
 msgstr ""
 
-#: templates/new-post-email.php:43 templates/rejoined-email.php:38
+#: templates/new-post-email.php:47 templates/rejoined-email.php:38
 #: templates/subscribed-email.php:68
 msgid ""
 "Reply to this email to add a comment. Your email address will not be shown."
 msgstr ""
 
-#: templates/new-post-email.php:47 templates/subscribed-email.php:72
+#: templates/new-post-email.php:51 templates/subscribed-email.php:72
 msgid ""
 "You're invited to comment on this post by replying to this email. If you do, "
 "it may be published immediately or held for moderation, depending on the "
 "comment policy of %s."
 msgstr ""
 
-#: templates/new-post-email.php:66
+#: templates/new-post-email.php:70
 msgid "Get the latest comments and stay in the loop"
 msgstr ""
 
-#: templates/new-post-email.php:70
+#: templates/new-post-email.php:74
 msgid ""
 "To subscribe to comments on this post and receive a copy of the conversation "
 "so far reply with the word <strong>subscribe</strong>."
 msgstr ""
 
-#: templates/new-post-email.php:81
+#: templates/new-post-email.php:85
 msgid ""
 "To <strong>unsubscribe</strong> to %s reply with the word 'unsubscribe'."
 msgstr ""
 
-#: templates/new-post-email.php:90
+#: templates/new-post-email.php:94
 msgid "Comments on this post are closed"
 msgstr ""
 
-#: templates/new-post-email.php:92
+#: templates/new-post-email.php:96
 msgid "You can reply to this email to send a note directly to the post author."
 msgstr ""
 

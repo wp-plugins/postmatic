@@ -5,7 +5,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
 "plugin/1.4.2-20150820-2011\n"
 "POT-Creation-Date: 2015-08-25 18:28+0200\n"
-"PO-Revision-Date: 2015-08-26 08:30+0200\n"
+"PO-Revision-Date: 2015-09-06 08:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Achtung! Wir haben festgestellt, dass Akismet nicht aktiv ist. Akismet ist "
 "gratis und kommt mit Wordpress und stoppt den meisten Teil von Spam-"
-"Kommentaren. Bitte stelle sicher, dass Du ein ähnliches ProDukt im Einsatz "
+"Kommentaren. Bitte stelle sicher, dass Du ein ähnliches Produkt im Einsatz "
 "hast. <a href=\"%s\" target=\"_blank\">Mehr erfahren</a>."
 
 #: admin/conditional-notice.php:92 admin/options-page.php:259
@@ -151,8 +151,8 @@ msgid ""
 "uploaded image to support retina displays. The ideal width to fill the full "
 "header area is 1440px wide."
 msgstr ""
-"Wähle ein Header-Bild zum Senden der neuen Beiträge, von EinlaDungen und "
-"AnmelDungsbestätigungen. Dieses wird mit der Hälfte der Grösse des "
+"Wähle ein Header-Bild zum Senden der neuen Beiträge, von Einladungen und "
+"Anmeldungsbestätigungen. Dieses wird mit der Hälfte der Grösse des "
 "hinaufgeladenen Bilds für Retina-Support angezeigt. Die ideale Breite für "
 "den Header sind 1440 Pixel."
 
@@ -261,17 +261,17 @@ msgstr "Bereits eingeschrieben"
 #: admin/invite-options-tab.php:83
 msgid "Success. %d invite sent."
 msgid_plural "Success. %d invites sent."
-msgstr[0] "Erfolgreich. %d EinlaDung gesendet."
-msgstr[1] "Erfolgreich. %d EinlaDungen gesendet."
+msgstr[0] "Erfolgreich. %d Einladung gesendet."
+msgstr[1] "Erfolgreich. %d Einladungen gesendet."
 
 #: admin/invite-options-tab.php:88
 msgid "Something went wrong and these invites were not sent: "
 msgstr ""
-"Es ist ein Fehler aufgetreten und folgende EinlaDungen wurden nicht gesendet:"
+"Es ist ein Fehler aufgetreten und folgende Einladungen wurden nicht gesendet:"
 
 #: admin/invite-options-tab.php:97
 msgid "Send email invitations to subscribe to your site"
-msgstr "Versende Mail EinlaDungen um sich auf Deiner Seite ein zuschreiben."
+msgstr "Versende Mail Einladungen um sich auf Deiner Seite ein zuschreiben."
 
 #: admin/invite-options-tab.php:99
 msgid ""
@@ -295,7 +295,7 @@ msgid ""
 "This text will be placed at the top of invitation message. Make it as "
 "friendly and personalized as you can."
 msgstr ""
-"Dieser Text wird als Kopf einer jeden EinlaDung erscheinen. Stell sicher, "
+"Dieser Text wird als Kopf einer jeden Einladung erscheinen. Stell sicher, "
 "dass er so freundlich und perönlich ist wie nur möglich."
 
 #: admin/invite-options-tab.php:133
@@ -337,7 +337,7 @@ msgid ""
 "Send this invitation to people who have had an approved comment within the "
 "last"
 msgstr ""
-"Versende diese EinlaDung an Leute, die einen genehmigten Kommentar verfasst "
+"Versende diese Einladung an Leute, die einen genehmigten Kommentar verfasst "
 "haben in den letzten"
 
 #: admin/invite-options-tab.php:182
@@ -346,7 +346,7 @@ msgstr "Monaten."
 
 #: admin/invite-options-tab.php:193
 msgid "Send this invitation to people who have at least"
-msgstr "Versende diese EinlaDung an Leute die zumindest"
+msgstr "Versende diese Einladung an Leute die zumindest"
 
 #: admin/invite-options-tab.php:200
 msgid "approved comments."
@@ -354,7 +354,7 @@ msgstr "geprüfte Kommentare haben."
 
 #: admin/invite-options-tab.php:211
 msgid "Send this invitation to "
-msgstr "Diese EinlaDung schicken an"
+msgstr "Diese Einladung schicken an"
 
 #: admin/invite-options-tab.php:218
 msgid "users who are not subscribed."
@@ -377,7 +377,7 @@ msgid ""
 "Based on the above your invite will be sent to <span class=\"recipient-count"
 "\">0</span> people."
 msgstr ""
-"Nach obigen Angaben wird Deine EinlaDung an <span class=\"recipient-count"
+"Nach obigen Angaben wird Deine Einladung an <span class=\"recipient-count"
 "\">0</span> Leute gesendet."
 
 #: admin/invite-options-tab.php:244
@@ -385,13 +385,13 @@ msgid ""
 "Wow, that's a lot of invitations! This tool is currently limited to %d "
 "invites. You can contact support if you need to arrange more."
 msgstr ""
-"Wow, das sind eine Menge EinlaDungen! Dieses Werkzeug ist im Moment begrenzt "
-"auf %d EinlaDungen. Aber Du kannst Dich an unsere Support wenden, um noch "
+"Wow, das sind eine Menge Einladungen! Dieses Werkzeug ist im Moment begrenzt "
+"auf %d Einladungen. Aber Du kannst Dich an unsere Support wenden, um noch "
 "mehr versenden zu können."
 
 #: admin/invite-options-tab.php:264
 msgid "Send Invites"
-msgstr "Versende EinlaDungen"
+msgstr "Versende Einladungen"
 
 #: admin/invite-options-tab.php:269
 msgid "All"
@@ -595,7 +595,7 @@ msgid ""
 "unless the following two conditions are true:"
 msgstr ""
 "Wir haben sehr strikte Regeln betreffend Benutzer-Imports: <em>wir werden "
-"niemals eine AnmelDung zu einem Blog mit Postmatic erlauben, ohne "
+"niemals eine Anmeldung zu einem Blog mit Postmatic erlauben, ohne "
 "ausdrückliche Zustimmung</em> (wie z.Bsp. gekaufte und massenimportierte "
 "Abonnenten-Listen zum Spammen). Deshalb werden wir keine MailChimp-"
 "Abonnenten importieren, bis die folgenden zwei Bedingungen zutreffen:"
@@ -644,7 +644,7 @@ msgstr ""
 #: admin/mailchimp-import-options-tab.php:121
 #: admin/mailpoet-import-options-tab.php:122
 msgid "Preview and send the invitations"
-msgstr "Zeige eine Vorschau und versende die EinlaDungen"
+msgstr "Zeige eine Vorschau und versende die Einladungen"
 
 #: admin/mailchimp-import-options-tab.php:147
 msgid "MailChimp API Key: "
@@ -900,7 +900,7 @@ msgid ""
 "<strong>Enable test mode</strong>: Always trigger popup for Administrator-"
 "level users"
 msgstr ""
-"<strong>Test-MoDus aktivieren</strong>: Für Administratoren Popup immer "
+"<strong>Test-Modus aktivieren</strong>: Für Administratoren Popup immer "
 "auslösen"
 
 #: admin/optins-options-tab.php:95
@@ -998,13 +998,13 @@ msgid ""
 msgstr ""
 "Ein 50px-grosse Leiste spannt sich über den oberen Teil der Seite. Die "
 "Leiste ist permanent (d.h. sie scrollt nicht mit dem Inhalt) und eine "
-"unauffällige Erinnerung zur AnmelDung. <strong>Hinweis:</strong> "
+"unauffällige Erinnerung zur Anmeldung. <strong>Hinweis:</strong> "
 "funktioniert evtl. nicht in allen Themes, da es heikel ist. Am besten "
 "einfach ausprobieren."
 
 #: admin/optins-options-tab.php:331
 msgid "What message should be in the bar?"
-msgstr "Welche MelDung soll in der Leiste erscheinen?"
+msgstr "Welche Meldung soll in der Leiste erscheinen?"
 
 #: admin/optins-options-tab.php:345
 msgid "Choose a theme. This controls how the bar looks on your site"
@@ -1030,7 +1030,7 @@ msgstr "Der Box eine Schlagzeile geben"
 
 #: admin/optins-options-tab.php:407
 msgid "Add some text inviting your users to subscribe"
-msgstr "Einen EinlaDungs-Text für die einschreibenden Benutzer hinzufügen"
+msgstr "Einen Einladungs-Text für die einschreibenden Benutzer hinzufügen"
 
 #: admin/optins-options-tab.php:432
 msgid ""
@@ -1123,7 +1123,7 @@ msgstr ""
 
 #: admin/options-options-tab.php:51
 msgid "Default sending mode"
-msgstr "Standard-Sende-MoDus"
+msgstr "Standard-Sende-Modus"
 
 #: admin/options-options-tab.php:54
 msgid "Send only the excerpt instead of the full post content."
@@ -1322,19 +1322,19 @@ msgstr ""
 
 #: admin/subscribe-reloaded-import-options-tab.php:10
 msgid "Migrate Comment Subscriptions"
-msgstr "Migrieren von Kommentar-AnmelDungen"
+msgstr "Migrieren von Kommentar-Anmeldungen"
 
 #: admin/subscribe-reloaded-import-options-tab.php:22
 msgid "Migrate Comment subscriptions"
-msgstr "Migrieren von Kommentar-AnmelDungen"
+msgstr "Migrieren von Kommentar-Anmeldungen"
 
 #: admin/subscribe-reloaded-import-options-tab.php:24
 msgid ""
 "This utilitly will migrate comment subscriptions from Subscribe to Comments, "
 "Subscribe to Comments Reloaded, and Subscribe to Double-Opt-In Comments."
 msgstr ""
-"Dieses Tool migriert Kommentar-Einschreibungen von \"AnmelDung für Kommentare"
-"\", \"AnmelDung für Kommentare Reloaded\", und AnmelDungen für doppelte Opt-"
+"Dieses Tool migriert Kommentar-Einschreibungen von \"Anmeldung für Kommentare"
+"\", \"Anmeldung für Kommentare Reloaded\", und Anmeldungen für doppelte Opt-"
 "In-Kommentare."
 
 #: admin/subscribe-reloaded-import-options-tab.php:29
@@ -1343,7 +1343,7 @@ msgid ""
 "has finished you can disable your legacy subscription plugin."
 msgstr ""
 "Abonnenten werden direkt importiert (ohne Benachrichtigung). Ist der Import "
-"beendet, kann das \"Legacy AnmelDungs-Plugin\" deaktiviert werden."
+"beendet, kann das \"Legacy Anmeldungs-Plugin\" deaktiviert werden."
 
 #: admin/subscribe-reloaded-import-options-tab.php:33
 msgid "Important information before you get started:"
@@ -1356,7 +1356,7 @@ msgid ""
 "View <a href=\"%s\" target=\"_blank\">this support article</a> for more "
 "information."
 msgstr ""
-"Du musst AnmelDungen für Kommentare <strong>Reloaded</strong> benutzen, um "
+"Du musst Anmeldungen für Kommentare <strong>Reloaded</strong> benutzen, um "
 "das Migrations-Tool zu benutzen. Auf \"Reloaded\" upgraden, falls noch nicht "
 "geschehen. Siehe <a href=\"%s\" target=\"_blank\">diesen Artikel</a> für "
 "mehr Informationen."
@@ -1366,7 +1366,7 @@ msgid ""
 "If you would like to import from Subscribe To Comments Reloaded  please "
 "activate that plugin."
 msgstr ""
-"Wenn Du von AnmelDungen für Kommentare Reloaded importieren möchtest, "
+"Wenn Du von Anmeldungen für Kommentare Reloaded importieren möchtest, "
 "aktiviere dieses Plugin."
 
 #: admin/subscribe-reloaded-import-options-tab.php:77
@@ -1374,9 +1374,9 @@ msgid "We have migrated one subscription.<br />"
 msgid_plural ""
 "We have migrated %1$s subscriptions.<br /> You can disable Subscribe to "
 "Comments Reloaded at this time.<br />"
-msgstr[0] "Wir haben Deine AnmelDung migriert.<br />"
+msgstr[0] "Wir haben Deine Anmeldung migriert.<br />"
 msgstr[1] ""
-"Wir haben %1$s AnmelDungen migriert<br /> Du kannst diese AnmelDungen für "
+"Wir haben %1$s Anmeldungen migriert<br /> Du kannst diese Anmeldungen für "
 "Kommentare Reloaded deaktivieren.<br />"
 
 #: admin/subscribe-reloaded-import-options-tab.php:85
@@ -1385,13 +1385,13 @@ msgid ""
 msgid_plural ""
 "There were %2$s other subscriptions found but they had already been imported."
 msgstr[0] ""
-"Es wurde bereits eine andere AnmelDung gefunden, die importiert wurde"
+"Es wurde bereits eine andere Anmeldung gefunden, die importiert wurde"
 msgstr[1] ""
-"Es wurden bereits %2$s andere AnmelDungen gefunden, die importiert wurden."
+"Es wurden bereits %2$s andere Anmeldungen gefunden, die importiert wurden."
 
 #: admin/subscribe-reloaded-import-options-tab.php:133
 msgid "Import from Subscribe To Comments Reloaded"
-msgstr "Importieren von AnmelDungen für Kommentare Reloaded"
+msgstr "Importieren von Anmeldungen für Kommentare Reloaded"
 
 #: admin/support-options-tab.php:8 admin/support-options-tab.php:66
 msgid "Get Support"
@@ -1733,8 +1733,8 @@ msgid ""
 "hope it is welcome, but we promise we won't contact you again unless you "
 "respond."
 msgstr ""
-"Dies ist eine EinlaDung zur Einschreibung für Mail-Updates dieser Seite. Wir "
-"hoffen, diese EinlaDung ist willkommen. Wir versprechen, dass wir Dich nicht "
+"Dies ist eine Einladung zur Einschreibung für Mail-Updates dieser Seite. Wir "
+"hoffen, diese Einladung ist willkommen. Wir versprechen, dass wir Dich nicht "
 "noch einmal kontaktieren werden, wenn Du nicht antwortest."
 
 #: core/core.php:69 templates/core-options-beta.php:9
@@ -1865,7 +1865,7 @@ msgid ""
 "You have successfully subscribed and will receive an email when there is a "
 "new comment on <em>%s</em>."
 msgstr ""
-"Du hast Dich erfolgreich eingeschrieben und wirst Mails erhalten,wenn es "
+"Du hast Dich erfolgreich eingeschrieben und wirst Mails erhalten, wenn es "
 "neue Kommentare zu <em>%s</em> gibt."
 
 #: core/register-subscribe-command.php:39
@@ -1917,8 +1917,8 @@ msgid ""
 "You have successfully subscribed to %s and will receive new posts as soon as "
 "they are published."
 msgstr ""
-"Du hast Dich erfolgreich für %s eingeschrieben und wirst nun neue "
-"Beiträgeerhalten, sobald diese veröffentlicht werden."
+" Du hast Dich erfolgreich für %s eingeschrieben und wirst nun neue Beiträge "
+"erhalten, sobald diese veröffentlicht werden."
 
 #: core/subscribe-widget.php:8
 msgid "Get visitors subscribed to a user, post, or site with minimal fuss."
@@ -1932,7 +1932,7 @@ msgstr "Postmatic Registrierung"
 
 #: core/subscribe-widget.php:161
 msgid "Sorry, there was a problem reaching the server"
-msgstr "Entschuldigung, es gab ein Problem mit der VerbinDung zum Server."
+msgstr "Entschuldigung, es gab ein Problem mit der Verbindung zum Server."
 
 #: core/subscribe-widget.php:222
 msgid "Subscribe to %s:"
@@ -1993,7 +1993,7 @@ msgid ""
 "You have successfully subscribed and will receive posts by %s directly in "
 "your inbox."
 msgstr ""
-"Du hast Dich erfolgreich registriert und wirst nun Beiträge von %sdirekt in "
+"Du hast Dich erfolgreich registriert und wirst nun Beiträge von %s direkt in "
 "dein Postfach erhalten."
 
 #: core/user.php:153
@@ -2092,7 +2092,7 @@ msgid ""
 msgstr ""
 "Wenn Du wirklich aktuell bleiben willst, auf diese Mail mit dem Wort "
 "'rejoin' antworten. Wir senden dann eine Zusammenfassung und erneuern die "
-"AnmelDung."
+"Anmeldung."
 
 #: templates/comment-flood-email-text.php:35
 #: templates/new-post-email-text.php:20 templates/new-post-email.php:34
@@ -2115,7 +2115,7 @@ msgid ""
 msgstr ""
 "Du wirst keine neuen Kommentare für diesen Beitrag erhalten, bis Du auf "
 "dieses Mail mit dem Wort 'rejoin' antwortest. Wir senden dann eine "
-"Zusammenfassung und erneuern die AnmelDung."
+"Zusammenfassung und erneuern die Anmeldung."
 
 #: templates/comment-flood-email.php:43
 msgid "Continue the conversation online"
@@ -2537,7 +2537,7 @@ msgstr ""
 msgid ""
 "To unsubscribe at any time reply with the word <strong>unsubscribe</strong>."
 msgstr ""
-"Für die AbmelDung antwortest Du jederzeit mit dem Wort <strong>unsubscribe</"
+"Für die Abmeldung antwortest Du jederzeit mit dem Wort <strong>unsubscribe</"
 "strong>."
 
 #: templates/subscribe-form.php:47
@@ -2558,7 +2558,7 @@ msgstr "Titel"
 
 #: templates/subscribe-widget-settings.php:19
 msgid "Custom message above subscription fields, leave blank for default."
-msgstr "Angepasste MelDung über AnmelDungs-Feldern, leer lassen für Standard."
+msgstr "Angepasste Meldung über Anmeldungs-Feldern, leer lassen für Standard."
 
 #: templates/subscribe-widget-settings.php:20
 msgid "Description Text:"
@@ -2625,11 +2625,11 @@ msgstr "Möchtest Du wieder aktuell sein? Hier sind die letzten 30 Kommentare."
 #: templates/subscription-agreement-email-text.php:14
 #: templates/subscription-agreement-email.php:16
 msgid "An invitation from %s"
-msgstr "Eine EinlaDung von %s"
+msgstr "Eine Einladung von %s"
 
 #: templates/subscription-agreement-email-text.php:21
 msgid "There's one more step to finish your subscription to %s."
-msgstr "Nur noch ein weiterer Schritt zum Beenden der AnmelDung für %s."
+msgstr "Nur noch ein weiterer Schritt zum Beenden der Anmeldung für %s."
 
 #: templates/subscription-agreement-email-text.php:29
 #: templates/subscription-agreement-email.php:32
@@ -2686,7 +2686,7 @@ msgstr ""
 
 #: templates/subscription-agreement-email-text.php:71
 msgid "Now it's time to confirm your subscription"
-msgstr "Jetzt ist es Zeit, Deine AnmelDung zu bestätigen."
+msgstr "Jetzt ist es Zeit, Deine Anmeldung zu bestätigen."
 
 #: templates/subscription-agreement-email-text.php:74
 msgid ""
@@ -2694,7 +2694,7 @@ msgid ""
 "subscription, *please reply to this email with the word agree*."
 msgstr ""
 "Wenn Du diese Richtlinien verstehst und einverstanden und bereit bist mit "
-"der AnmelDung, *antworte auf dieses Mail mit dem Wort agree*."
+"der Anmeldung, *antworte auf dieses Mail mit dem Wort agree*."
 
 #: templates/subscription-agreement-email-text.php:81
 #: templates/subscription-agreement-email.php:104
@@ -2707,7 +2707,7 @@ msgid ""
 "If you did not initiate this subscription please ignore this email or "
 "forward it to %s."
 msgstr ""
-"Wenn diese AnmelDung nicht von Dir  getätigt wurde, ignoriere dieses Mail "
+"Wenn diese Anmeldung nicht von Dir  getätigt wurde, ignoriere dieses Mail "
 "oder leite es weiter an %s."
 
 #: templates/subscription-agreement-email.php:23
@@ -2768,7 +2768,7 @@ msgstr "Einstellungen"
 #. Plugin Name of the plugin/theme
 msgid "Postmatic - WordPress Subscriptions & Commenting by Email"
 msgstr ""
-"Postmatic - WordPress AnmelDungsverwaltung & Kommentieren mittels E-Mail"
+"Postmatic - WordPress Anmeldungsverwaltung & Kommentieren mittels E-Mail"
 
 #. Author URI of the plugin/theme
 msgid "http://gopostmatic.com/"

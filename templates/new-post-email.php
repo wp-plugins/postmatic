@@ -30,8 +30,12 @@
 <div class="padded">
 <div id="the_content">
 	<?php $excerpt_only ? the_excerpt() : the_content(); ?>
-	<p id="button"><a href="<?php the_permalink(); ?>" class="btn-secondary"><?php _e( 'View this post online', 'Postmatic' ); ?></a></p>
 </div>
+
+
+<?php if ( $excerpt_only ) : ?>
+	<p id="button"><a href="<?php the_permalink(); ?>" class="btn-secondary"><?php _e( 'View this post online', 'Postmatic' ); ?></a></p>
+<?php endif; ?>
 
 <?php if ( $will_strip_content ) : ?><hr /><?php endif; ?>
 

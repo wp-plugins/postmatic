@@ -478,3 +478,8 @@ div#manage-account a {
 }
 
 .testmode {margin-top: 10px; color: blue;}
+
+.postmatic-dismiss {
+  position:relative;
+  left: 10px;
+}
