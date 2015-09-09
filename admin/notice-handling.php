@@ -81,7 +81,7 @@ class Prompt_Admin_Notice_Handling {
 
 		$message .= html( 'a',
 			array(
-				'href' => esc_url( add_query_arg( self::$jetpack_conflict_notice, 'true' ) ),
+				'href' => esc_url( add_query_arg( self::$dismiss_query_param, self::$jetpack_conflict_notice ) ),
 				'class' => 'button postmatic-dismiss'
 			),
 			__( 'Dismiss' )
