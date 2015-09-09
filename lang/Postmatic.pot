@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.4.4\n"
+"Email 1.4.5\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
-"plugin/1.4.4-20150909-1915\n"
-"POT-Creation-Date: 2015-09-09 19:15:49+00:00\n"
+"plugin/1.4.5-20150909-1401\n"
+"POT-Creation-Date: 2015-09-09 21:01:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1008,13 +1008,13 @@ msgstr ""
 msgid "Turn on the Skimlinks tab (look for it up top)"
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.4.4)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.4.5)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:46
 msgid "Postmatic"
 msgstr ""
 
-#: admin/options-page.php:98 vendor/scribu/scb-framework/AdminPage.php:261
+#: admin/options-page.php:98
 msgid "Settings <strong>saved</strong>."
 msgstr ""
 
@@ -2327,10 +2327,6 @@ msgstr ""
 #: templates/unsubscribed-email-text.php:18
 #: templates/unsubscribed-email.php:18
 msgid "To re-subscribe visit:"
-msgstr ""
-
-#: vendor/scribu/scb-framework/AdminPage.php:519
-msgid "Settings"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

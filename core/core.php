@@ -137,7 +137,7 @@ class Prompt_Core {
 		register_deactivation_hook( self::$basename, array( 'Prompt_Event_Handling', 'record_deactivation' ) );
 		register_activation_hook( self::$basename, array( 'Prompt_Event_Handling', 'record_reactivation' ) );
 
-		add_action( 'init',         array( __CLASS__, 'ensure_site_icon' ) );
+		register_activation_hook( self::$basename, array( __CLASS__, 'ensure_site_icon' ) );
 		add_action( 'admin_init',   array( __CLASS__, 'detect_version_change' ) );
 
 		add_action( 'widgets_init', array( 'Prompt_Widget_Handling', 'register' ), 100 ); // Let theme load first
