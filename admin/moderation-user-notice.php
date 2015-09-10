@@ -14,20 +14,23 @@ class Prompt_Admin_Moderation_User_Notice extends Prompt_Admin_Conditional_Notic
 	 */
 	public function render() {
 
-		if ( ! get_option( 'moderation_notify' ) )
+		if ( ! get_option( 'moderation_notify' ) or ! current_user_can( 'manage_options' ) ) {
 			return '';
+		}
 
 		$enabled_message_types = Prompt_Core::$options->get( 'enabled_message_types' );
 
-		if ( !in_array( Prompt_Enum_Message_Types::COMMENT_MODERATION, $enabled_message_types ) )
+		if ( !in_array( Prompt_Enum_Message_Types::COMMENT_MODERATION, $enabled_message_types ) ) {
 			return '';
+		}
 
 		$admin_email = get_option( 'admin_email' );
 
 		$moderator = get_user_by( 'email', $admin_email );
 
-		if ( $moderator )
+		if ( $moderator ) {
 			return '';
+		}
 
 		return $this->render_message(
 			sprintf(

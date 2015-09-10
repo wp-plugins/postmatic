@@ -16,8 +16,13 @@ class Prompt_Admin_Local_Mail_Notice extends Prompt_Admin_Conditional_Notice {
 	 */
 	public function render() {
 
-		if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) )
+		if ( Prompt_Enum_Email_Transports::API == Prompt_Core::$options->get( 'email_transport' ) ) {
 			return '';
+		}
+
+		if ( !current_user_can( 'manage_options' ) ) {
+			return '';
+		}
 
 		$mail_result = wp_mail(
 			'null@email.gopostmatic.com',

@@ -18,11 +18,13 @@ class Prompt_Admin_Activate_Notice {
 	 */
 	public function maybe_display() {
 
-		if ( $this->key )
+		if ( $this->key or ! current_user_can( 'manage_options' ) ) {
 			return;
+		}
 
-		if ( $this->options_page->is_current_page() )
+		if ( $this->options_page->is_current_page() ) {
 			return;
+		}
 
 		$template = new Prompt_Template( 'activate-account-notice.php' );
 

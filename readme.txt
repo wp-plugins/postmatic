@@ -84,6 +84,10 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.4.6 =
+
+- Fixed an XSS vulnerability identified by [Chris Klosowski](http://kungfugrep.com)
+
 = 1.4.5 =
 
 - Cure duplicated site icons in the media library
@@ -376,3 +380,9 @@ Just a quick fix to address a couple of outstanding issues.
 - We've added an option to disable widgets in the footer and instead display definable text
 - Moved the advanced options to their own tab in the settings screen
 - Lots of little bugs squashed
+
+== Upgrade Notice ==
+
+= 1.4.6 =
+
+This version fixes a security related bug.  Upgrade immediately.

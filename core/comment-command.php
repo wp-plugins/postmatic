@@ -207,6 +207,8 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 
 		remove_all_actions( 'check_comment_flood' );
 
+		$comment_data = wp_filter_comment( $comment_data );
+
 		$comment_data['comment_approved'] = wp_allow_comment( $comment_data );
 
 		$comment_id = wp_insert_comment( $comment_data );

@@ -20,6 +20,10 @@ class Prompt_Admin_Widget_Notice extends Prompt_Admin_Conditional_Notice {
 	 */
 	public function render() {
 
+		if ( ! current_user_can( 'edit_theme_options' ) ) {
+			return '';
+		}
+
 		if ( $this->is_subscribe_widget_in_use() ) {
 			$this->dismiss();
 			return '';

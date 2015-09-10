@@ -16,8 +16,9 @@ class Prompt_Admin_Zero_Spam_Notice extends Prompt_Admin_Conditional_Notice {
 	 */
 	public function render() {
 
-		if ( is_plugin_active( 'zero-spam/zero-spam.php' ) )
+		if ( is_plugin_active( 'zero-spam/zero-spam.php' ) or ! current_user_can( 'update_plugins' ) ) {
 			return '';
+		}
 
 		return $this->render_message(
 			sprintf(
