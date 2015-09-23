@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.4.6\n"
+"Email 1.4.7\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
-"plugin/1.4.6-20150910-1953\n"
-"POT-Creation-Date: 2015-09-10 19:53:26+00:00\n"
+"plugin/1.4.7-20150923-0306\n"
+"POT-Creation-Date: 2015-09-23 03:06:59+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1008,7 +1008,7 @@ msgstr ""
 msgid "Turn on the Skimlinks tab (look for it up top)"
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.4.6)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.4.7)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:46
 msgid "Postmatic"
@@ -1979,16 +1979,16 @@ msgstr ""
 msgid "Manage your account"
 msgstr ""
 
-#: templates/html-email-wrapper.php:821
+#: templates/html-email-wrapper.php:823
 #: templates/html-local-email-wrapper.php:68
 msgid "Sent from %s."
 msgstr ""
 
-#: templates/html-email-wrapper.php:827
+#: templates/html-email-wrapper.php:829
 msgid "Delivered by <a href=\"%s\">Postmatic</a>."
 msgstr ""
 
-#: templates/html-email-wrapper.php:836
+#: templates/html-email-wrapper.php:838
 #: templates/html-local-email-wrapper.php:84
 msgid ""
 "To immediately stop receiving all posts and comments from %s you can <a href="

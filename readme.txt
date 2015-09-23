@@ -84,6 +84,14 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.4.7 =
+
+- Added support for our new comment moderation plugin: [Crowd Control](http://wordpress.org/plugins/crowd-control). 
+- Fixed the Spanish translation. Jason overrwrote it in 1.4.6. He's a doofus sometimes.
+- Better support for Easy Share Social Buttons. Try now, Tim.
+- Postmatic is now even smarter. If it tries to publish a duplicate comment to your site it won't freeze up and get comment constipation like it used to.
+- Added a new hook that's going to mean some serious fun for other plugin developers that want to get funky in your inbox. Blog post coming.
+
 = 1.4.6 =
 
 - Fixed an XSS vulnerability identified by [Chris Klosowski](http://kungfugrep.com)

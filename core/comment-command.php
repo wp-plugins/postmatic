@@ -209,7 +209,7 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 
 		$comment_data = wp_filter_comment( $comment_data );
 
-		$comment_data['comment_approved'] = wp_allow_comment( $comment_data );
+		$comment_data['comment_approved'] = $this->approve_comment( $comment_data );
 
 		$comment_id = wp_insert_comment( $comment_data );
 
@@ -218,6 +218,12 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 
 	}
 
+	/**
+	 * Our own duplicate check that does not die on failure.
+	 *
+	 * @param $text
+	 * @return bool
+	 */
 	protected function comment_exists( $text ) {
 		$exists = false;
 		$check_comments = get_comments( array(
@@ -229,6 +235,62 @@ class Prompt_Comment_Command implements Prompt_Interface_Command {
 				$exists = true;
 		}
 		return $exists;
+	}
+
+	/**
+	 * Similar to wp_approve_comment(), but does not check for duplicates or die on failure.
+	 *
+	 * @since 1.4.7
+	 *
+	 * @param $commentdata
+	 * @return int 1 for approved, 0 for not approved, 'spam' for spam
+	 */
+	protected function approve_comment( $commentdata ) {
+
+		$user = get_user_by( 'id', $this->user_id );
+		$post = get_post( $this->post_id );
+
+		if ( isset( $user ) && ( $commentdata['user_id'] == $post->post_author || $user->has_cap( 'moderate_comments' ) ) ) {
+			// The author and the admins get respect.
+			$approved = 1;
+		} else {
+			// Everyone else's comments will be checked.
+			if ( check_comment(
+				$commentdata['comment_author'],
+				$commentdata['comment_author_email'],
+				$commentdata['comment_author_url'],
+				$commentdata['comment_content'],
+				$commentdata['comment_author_IP'],
+				$commentdata['comment_agent'],
+				$commentdata['comment_type']
+			) ) {
+				$approved = 1;
+			} else {
+				$approved = 0;
+			}
+
+			if ( wp_blacklist_check(
+				$commentdata['comment_author'],
+				$commentdata['comment_author_email'],
+				$commentdata['comment_author_url'],
+				$commentdata['comment_content'],
+				$commentdata['comment_author_IP'],
+				$commentdata['comment_agent']
+			) ) {
+				$approved = 'spam';
+			}
+		}
+
+		/**
+		 * Filter a comment's approval status before it is set.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param bool|string $approved The approval status. Accepts 1, 0, or 'spam'.
+		 * @param array $commentdata Comment data.
+		 */
+		$approved = apply_filters( 'pre_comment_approved', $approved, $commentdata );
+		return $approved;
 	}
 
 }

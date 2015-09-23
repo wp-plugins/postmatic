@@ -306,19 +306,19 @@ img.featured {
     .alignright {float: right !important; margin: 0 0 10px 10px !important;}
 
 /*Sharedaddy by Jetpackm Juiz Social Share, Easy Social Share Buttons*/
-.sd-content ul li, ul.juiz_sps_links_list li, ul.essb_links_list {
+.sd-content ul li, ul.juiz_sps_links_list li, ul.essb_links_list li {
   list-style: none;
   display: inline;
 }
 
 .sd-title { clear: both !important;}
 
-.content .sd-content ul li, ul.juiz_sps_links_list li, essb_links_list essb_hide_name li {
+.content .sd-content ul li, ul.juiz_sps_links_list li, .essb_links_list  li {
   margin: 0 5px 10px 0 !important;
   display: block;
   float: left;
 }
-.content .sd-content ul li a, ul.juiz_sps_links_list li a,essb_links_list essb_hide_name li a {
+.content .sd-content ul li a, ul.juiz_sps_links_list li a, .essb_links_list li a {
   color: #555 !important;
   font-size: 12px;
   padding: 5px 8px;
@@ -636,7 +636,7 @@ a.sw_CTT span.sw-ctt-btn {
 .darth_vendor_container a {
     display: block;
     float: left;
-    width: 25%;
+    width: 50%;
     border: 1px solid #F6F6F6;
     box-sizing: border-box;
 }
@@ -644,6 +644,7 @@ a.sw_CTT span.sw-ctt-btn {
 /*Juiz social share*/
 .juiz_sps_maybe_hidden_text {display: none;}
 
+.pmcc-comments-report-link {display: none !important;}
 
 /*Mobile syles*/
     @media only screen and (max-width: 480px) {
@@ -744,6 +745,7 @@ img.avatar {width: 48px !important; height: 48px !important; max-height: 48px !i
 .context h4 {margin-bottom: 10px;}
 .context img {float: left; margin-right: 15px; padding: 0px; border: 1px solid #ddd; margin-bottom: 25px;}
 
+<?php do_action( 'prompt/html_email/print_styles' ); ?>
     </style>
     <!-- body -->
 
