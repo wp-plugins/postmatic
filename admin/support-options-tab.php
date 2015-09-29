@@ -39,6 +39,7 @@ class Prompt_Admin_Support_Options_Tab extends Prompt_Admin_Options_Tab {
 
 	public function render() {
 		$content = html( 'h2', __( 'Support, News, and Documentation', 'Postmatic' ) );
+		$content = html( 'h3', __( 'The fastest way to documentation and filing a support ticket is to use the little question mark icon found in the lower-right hand corner of this screen.', 'Postmatic' ) );
 
 		$content .= html( 'div id="postmatic-documentation" class="widget"',
 			html( 'h3', __( 'Documentation', 'Postmatic' ) ),

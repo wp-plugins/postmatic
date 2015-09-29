@@ -133,6 +133,10 @@ class Prompt_Subscribe_Widget extends WP_Widget {
 
 	protected function enqueue_widget_assets() {
 
+		if ( wp_script_is( 'prompt-subscribe-form' ) ) {
+			return;
+		}
+
 		wp_enqueue_style(
 			'prompt-subscribe-form',
 			path_join( Prompt_Core::$url_path, 'css/subscribe-form.css' ),

@@ -60,14 +60,16 @@ class Prompt_Image_Post_Rendering_Modifier extends Prompt_Post_Rendering_Modifie
 		if ( empty( $this->featured_image_src[0] ) )
 			return $content;
 
-		$url = $this->featured_image_src[0];
+		$url_parts = parse_url( $this->featured_image_src[0] );
 
-		$last_hyphen_pos = strrpos( $url, '-');
+		$basename = basename( $url_parts['path'] );
 
-		$match = $last_hyphen_pos ? substr( $url, 0, $last_hyphen_pos ) : $url;
+		$last_hyphen_pos = strrpos( $basename, '-');
+
+		$match = $last_hyphen_pos ? substr( $basename, 0, $last_hyphen_pos ) : $basename;
 
 		return preg_replace(
-			'/<img[^>]*src=["\']' . preg_quote( $match, '/' ) . '[^>]*>/',
+			'/<img[^>]*src=["\'][^"\']*' . preg_quote( $match, '/' ) . '[^>]*>/',
 			'',
 			$content
 		);

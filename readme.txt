@@ -84,6 +84,14 @@ Find a few hundred more answers at our [big FAQ](http://gopostmatic.com/faq/).
 
 == Changelog ==
 
+= 1.4.8 =
+
+- Get realtime access to our documentation and support team from right inside Postmatic. Look for the help icon in the lower right hand corner of Settings > Postmatic.
+- We did more work in making sure your featured image is not repeated twice. So long as your featured image and your leadin image use the same filename you'll be safe.
+- The popup optin that is supposed to pop after the user leaves a comment now does so in iframe mode as well when running Epoch.
+- The after-the-comment popup now has a timer set to a convenient 3 seconds. It's no so spazzy. 
+- Comment moderation notices from Crowd Control will now come through Postmatic... where you can take action right from your inbox. 
+
 = 1.4.7 =
 
 - Added support for our new comment moderation plugin: [Crowd Control](http://wordpress.org/plugins/crowd-control). 

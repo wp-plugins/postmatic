@@ -151,6 +151,7 @@ class Prompt_Core {
 		add_action( 'transition_post_status',           array( 'Prompt_Outbound_Handling', 'action_transition_post_status' ), 10, 3 );
 		add_action( 'wp_insert_comment',                array( 'Prompt_Outbound_Handling', 'action_wp_insert_comment' ), 10, 2 );
 		add_action( 'transition_comment_status',        array( 'Prompt_Outbound_Handling', 'action_transition_comment_status' ), 10, 3 );
+		add_action( 'comment_approved_to_unapproved',   array( 'Prompt_Outbound_Handling', 'action_comment_approved_to_unapproved' ) );
 		add_filter( 'comment_moderation_recipients',    array( 'Prompt_Outbound_Handling', 'filter_comment_moderation_recipients' ), 10, 2 );
 		add_filter( 'comment_notification_recipients',  array( 'Prompt_Outbound_Handling', 'filter_comment_notification_recipients' ) );
 

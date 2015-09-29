@@ -16,10 +16,11 @@ class Prompt_Comment_Mailer {
 
 		$this->retry_wait_seconds = $retry_wait_seconds;
 
-		if ( $flood_controller )
+		if ( $flood_controller ) {
 			$this->flood_controller = $flood_controller;
-		else
+		} else {
 			$this->flood_controller = new Prompt_Comment_Flood_Controller( $comment );
+		}
 
 	}
 
@@ -30,12 +31,17 @@ class Prompt_Comment_Mailer {
 	 */
 	public function send_notifications() {
 
+		if ( empty( $this->comment->comment_content ) ) {
+			return;
+		}
+
 		$unsent_ids = array_diff( $this->flood_controlled_recipient_ids(), $this->sent_recipient_ids() );
 
 		$chunks = array_chunk( $unsent_ids, 25 );
 
-		if ( empty( $chunks[0] ) )
+		if ( empty( $chunks[0] ) ) {
 			return;
+		}
 
 		$chunk_ids = $chunks[0];
 
@@ -46,8 +52,9 @@ class Prompt_Comment_Mailer {
 		 * @param object $comment
 		 * @param array $recipient_ids
 		 */
-		if ( !apply_filters( 'prompt/send_comment_notifications', true, $this->comment, $chunk_ids ) )
+		if ( !apply_filters( 'prompt/send_comment_notifications', true, $this->comment, $chunk_ids ) ) {
 			return;
+		}
 
 		// We will attempt to notifiy these IDs - setting sent early could help lock other processes out
 		$this->add_sent_recipient_ids( $chunk_ids );

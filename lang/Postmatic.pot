@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Postmatic - WordPress Subscriptions & Commenting by "
-"Email 1.4.7\n"
+"Email 1.4.8\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/"
-"plugin/1.4.7-20150923-0306\n"
-"POT-Creation-Date: 2015-09-23 03:06:59+00:00\n"
+"plugin/1.4.8-20150928-2146\n"
+"POT-Creation-Date: 2015-09-29 04:46:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -922,7 +922,7 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: admin/options-options-tab.php:39 core/core.php:291
+#: admin/options-options-tab.php:39 core/core.php:292
 msgid "Postmatic Delivery"
 msgstr ""
 
@@ -1008,13 +1008,13 @@ msgstr ""
 msgid "Turn on the Skimlinks tab (look for it up top)"
 msgstr ""
 
-#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.4.7)  #-#-#-#-#
+#. #-#-#-#-#  Postmatic.pot (Postmatic - WordPress Subscriptions & Commenting by Email 1.4.8)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/options-page.php:46
 msgid "Postmatic"
 msgstr ""
 
-#: admin/options-page.php:98 vendor/scribu/scb-framework/AdminPage.php:261
+#: admin/options-page.php:98
 msgid "Settings <strong>saved</strong>."
 msgstr ""
 
@@ -1165,7 +1165,7 @@ msgstr[1] ""
 msgid "Import from Subscribe To Comments Reloaded"
 msgstr ""
 
-#: admin/support-options-tab.php:8 admin/support-options-tab.php:66
+#: admin/support-options-tab.php:8 admin/support-options-tab.php:67
 msgid "Get Support"
 msgstr ""
 
@@ -1185,48 +1185,55 @@ msgstr ""
 msgid "Support, News, and Documentation"
 msgstr ""
 
-#: admin/support-options-tab.php:44
-msgid "Documentation"
+#: admin/support-options-tab.php:42
+msgid ""
+"The fastest way to documentation and filing a support ticket is to use the "
+"little question mark icon found in the lower-right hand corner of this "
+"screen."
 msgstr ""
 
 #: admin/support-options-tab.php:45
+msgid "Documentation"
+msgstr ""
+
+#: admin/support-options-tab.php:46
 msgid "Find answers to the most common questions and ask your own."
 msgstr ""
 
-#: admin/support-options-tab.php:49
+#: admin/support-options-tab.php:50
 msgid "Find Answers"
 msgstr ""
 
-#: admin/support-options-tab.php:55
+#: admin/support-options-tab.php:56
 msgid "Widget Directory"
 msgstr ""
 
-#: admin/support-options-tab.php:56
+#: admin/support-options-tab.php:57
 msgid ""
 "We've hand curated dozen of widgets. Get the most out of your email template."
 msgstr ""
 
-#: admin/support-options-tab.php:60
+#: admin/support-options-tab.php:61
 msgid "Research Widgets"
 msgstr ""
 
-#: admin/support-options-tab.php:67
+#: admin/support-options-tab.php:68
 msgid "Let us know if something isn't right. We'll fix it right away."
 msgstr ""
 
-#: admin/support-options-tab.php:71
+#: admin/support-options-tab.php:72
 msgid "Submit a Ticket"
 msgstr ""
 
-#: admin/support-options-tab.php:76
+#: admin/support-options-tab.php:77
 msgid "The Latest Postmatic News:"
 msgstr ""
 
-#: admin/support-options-tab.php:80
+#: admin/support-options-tab.php:81
 msgid "Advanced: Send Diagnostic Info to Support"
 msgstr ""
 
-#: admin/support-options-tab.php:91
+#: admin/support-options-tab.php:92
 msgid "No news available at the moment."
 msgstr ""
 
@@ -1394,25 +1401,25 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: core/comment-mailer.php:69 core/comment-mailer.php:75
-#: core/comment-mailer.php:83 core/moderation-mailing.php:21
+#: core/comment-mailer.php:76 core/comment-mailer.php:82
+#: core/comment-mailer.php:90 core/moderation-mailing.php:21
 msgid "Anonymous"
 msgstr ""
 
-#: core/comment-mailer.php:185 core/post-mailing.php:123
+#: core/comment-mailer.php:192 core/post-mailing.php:123
 #: core/subscription-mailing.php:43 core/subscription-mailing.php:106
 msgid "An email sending operation encountered a problem."
 msgstr ""
 
-#: core/comment-mailer.php:392
+#: core/comment-mailer.php:399
 msgid "%s replied to your comment on %s."
 msgstr ""
 
-#: core/comment-mailer.php:399
+#: core/comment-mailer.php:406
 msgid "%s replied to %s on %s"
 msgstr ""
 
-#: core/comment-mailer.php:406
+#: core/comment-mailer.php:413
 msgid "%s commented on %s"
 msgstr ""
 
@@ -1482,7 +1489,7 @@ msgstr ""
 msgid "Participate in this conversation via email"
 msgstr ""
 
-#: core/core.php:311
+#: core/core.php:312
 msgid "Postmatic Text Version"
 msgstr ""
 
@@ -1649,15 +1656,15 @@ msgstr ""
 msgid "Postmatic Subscribe"
 msgstr ""
 
-#: core/subscribe-widget.php:161
+#: core/subscribe-widget.php:165
 msgid "Sorry, there was a problem reaching the server"
 msgstr ""
 
-#: core/subscribe-widget.php:222
+#: core/subscribe-widget.php:226
 msgid "Subscribe to %s:"
 msgstr ""
 
-#: core/subscribe-widget.php:225
+#: core/subscribe-widget.php:229
 msgid "Enter your email to subscribe to %s:"
 msgstr ""
 
@@ -2327,10 +2334,6 @@ msgstr ""
 #: templates/unsubscribed-email-text.php:18
 #: templates/unsubscribed-email.php:18
 msgid "To re-subscribe visit:"
-msgstr ""
-
-#: vendor/scribu/scb-framework/AdminPage.php:519
-msgid "Settings"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

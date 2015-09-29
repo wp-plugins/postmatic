@@ -15,6 +15,10 @@ jQuery( function( $ ) {
 
 	$unsubscribe_button.on( 'click', unsubscribe );
 
+	if ( window.parent ) {
+		$( '#commentform' ).submit( notify_parent_of_submit )
+	}
+
 	function unsubscribe( e ) {
 		e.preventDefault();
 
@@ -54,4 +58,14 @@ jQuery( function( $ ) {
 		$submit_area.before( $subscribe_area );
 	}
 
+	function notify_parent_of_submit() {
+
+		var subscribe_form_env = window.parent.prompt_subscribe_form_env;
+
+		if ( ! subscribe_form_env || ! subscribe_form_env.popup_optin ) {
+			return;
+		}
+
+		setTimeout( subscribe_form_env.popup_optin, 3000 );
+	}
 } );

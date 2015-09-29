@@ -220,13 +220,18 @@ jQuery(
 									}
 								);
 							} else if ( 'comment' == optin.trigger ) {
-								$( '#commentform' ).submit(
-									function () {
-										will_see( optin );
-										popup = $( '<div>' ).calderaModal( options );
-										shake_popup( popup );
+								// Export this function so child frames can call it
+								prompt_subscribe_form_env.popup_optin = function() {
+									if ( has_seen( optin ) ) {
+										return;
 									}
-								);
+									will_see( optin );
+									popup = $( '<div>' ).calderaModal( options );
+									shake_popup( popup );
+								};
+								$( '#commentform' ).submit( function() {
+									setTimeout( prompt_subscribe_form_env.popup_optin, 3000 );
+								} );
 							} else {
 								setTimeout(
 									function () {
@@ -246,6 +251,9 @@ jQuery(
 			}
 
 			function has_seen( optin ) {
+				if ( optin.admin_test ) {
+					return false;
+				}
 				var pattern = new RegExp( 'prompt_optin_' + optin.type + '=[^;]*' );
 				return document.cookie.match( pattern );
 			}
